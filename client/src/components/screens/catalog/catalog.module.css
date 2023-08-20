@@ -1,0 +1,175 @@
+.contentBlock{
+  width: 86%;
+  margin: 8rem auto 5rem;
+  box-sizing: border-box;
+}
+.imgBlock {
+  padding: 30%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+}
+.imgBlock img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: 1s;
+}
+.imgBlock img:hover {
+  transform: scale(1.1);
+}
+.carsBlock{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
+}
+.carsBlock li{
+  width: 23%;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 2.5rem;
+}
+.infoBlock{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.infoBlock span{
+  box-sizing: border-box;
+  padding: 0.5rem;
+  color: #575757;
+  border: 1px solid #575757;
+  border-radius: 3px;
+  margin: 1rem 0 0;
+}
+/* Buttons */
+.change{
+  padding: 0.5rem 1rem;
+  border: 1px solid #a20201;
+  background: transparent;
+  color: #a20201;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 300;
+  font-family: Raleway,sans-serif;
+  text-transform: uppercase;
+  transition: 1s;
+  margin-top: 1rem;
+}
+.change:hover{
+  border: 1px solid #a20201;
+  background: #a20201;
+  color: #fff;
+}
+.delete{
+  padding: 0.5rem 1rem;
+  border: 1px solid #a20201;
+  background: #a20201;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 300;
+  font-family: Raleway,sans-serif;
+  text-transform: uppercase;
+  transition: 1s;
+  margin-top: 1rem;
+}
+.delete:hover{
+  border: 1px solid #600302;
+  background: #600302;
+  color: #fff;
+}
+/* Single Car*/
+.twoColumn{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.side{
+  width: 48%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-self: flex-start;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+.side img{
+  width: 100%;
+}
+.sideInfo{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #a20201;
+  padding: 0 0 1rem;
+  box-sizing: border-box;
+}
+.sideInfo p.listItem{
+  width: 40%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background: #f3f3f3;
+  box-sizing: border-box;
+  padding: 0.5rem;
+}
+.sideInfo p.listDesription{
+  width: 60%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 300;
+  box-sizing: border-box;
+  padding: 0.5rem;
+}
+p.price{
+  color: #a20101;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  width: 30%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0.5rem;
+}
+h3.carDescription{
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #a20201;
+  text-transform: uppercase;
+  text-align: justify;
+  margin-bottom: 1rem;
+  border-top: 1px solid #a20201;
+}
+
+@media screen and (max-width: 768px) {
+  .carsBlock li{
+    width: 48%;
+  }
+  .side{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 425px) {
+  .carsBlock li{
+    width: 100%;
+  }
+}
