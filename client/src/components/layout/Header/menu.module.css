@@ -1,0 +1,36 @@
+.nav{
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+  box-sizing: border-box;
+  padding: 0 6%;
+  background: #000;
+  box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+}
+.menuLink{
+  font-family: 'Raleway', sans-serif;
+  text-transform: uppercase;
+}
+.menuLink:after {
+  content: '';
+  display: block;
+  height: 1px; 
+  background: #a20101; 
+  width: 0; 
+  margin: 0 auto 0; 
+  transition: 1s; 
+}
+.menuLink:hover:after {
+  width: 100%; 
+  transition: ease-out 1s; 
+}
+.phone{
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.2rem;
+}
+.active{
+  color:blue;
+}
