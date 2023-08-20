@@ -1,0 +1,145 @@
+.main{
+  width: 100%;
+}
+.advantage{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.advantageItem{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 23%;
+}
+.advantageItem img{
+  width: 50px;
+  height: 50px;
+  margin-top: 2rem;
+  border: 1px solid #a20201;
+  border-radius: 50%;
+  padding: 1rem;
+  background: #fff;
+  transition: 1s;
+}
+.advantageItem img:hover{
+  background: #dfdfdf;
+}
+.advantageItem p{
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-top: 2rem;
+}
+.request{
+  background-image: url(request.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.request h2{
+  color: #fff;
+}
+
+.imgBlock {
+  padding: 25%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.imgBlock img {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  transition: 1s;
+  margin: 0 auto;
+}
+
+.grey{
+  background: #f3f3f3;
+}
+
+/* Welcome */
+.header {
+  background-image: url(header.jpg);
+  background-size: cover;
+  color: #fff;
+  padding: 130px 0 60px 0;
+  font-size: 18px;
+}
+.container{
+  width: 84%;
+  margin: auto;
+}
+.headerTitle{
+  font-family: 'Raleway', sans-serif;
+  color: #fff;
+  text-align: justify;
+  font-weight: bold;
+  font-weight: 2.7rem;
+}
+.formHeader{
+  width: 30%;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.formHeader input{
+  width: 100%;
+  background: #fff;
+  border: 1px solid #a20101;
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.28);
+}
+.formHeader button{
+  width: 50%;
+  background: #a20101;
+  border: 1px solid #a20101;
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.28);
+}
+.formHeader button:hover{
+  width: 50%;
+  background: transparent;
+  border: 1px solid #a20101;
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.28);
+}
+/* Queestions*/
+.phone{
+  display: flex;
+  justify-content: center;
+  font-family: Raleway,sans-serif;
+  font-size: 1.2rem;
+  align-items: center;
+}
+.phone img{
+  width: 40px;
+}
+.phone a{
+  font-size: 2rem;
+  font-weight: bold;
+}
+@media screen and (max-width: 768px) {
+  .advantageItem{
+    width: 48%;
+  }
+  .formHeader{
+    width: 45%;
+  }
+}
+@media screen and (max-width: 425px) {
+  .advantageItem{
+    width: 100%;
+  }
+  .formHeader{
+    width: 100%;
+  }
+}
