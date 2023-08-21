@@ -1,7 +1,7 @@
 import { UserAuth, UserAuthId } from './types/user.types';
 
 export const loadUsers = async (): Promise<UserAuth[]> => {
-  const res = await fetch('http://localhost:4000/api/users', {
+  const res = await fetch(process.env.URL + '/api/users', {
     credentials: 'include',
   });
   const data = await res.json();
@@ -9,7 +9,7 @@ export const loadUsers = async (): Promise<UserAuth[]> => {
 };
 
 export const editStatus = async (id: UserAuthId): Promise<UserAuth> => {
-  const res = await fetch(`http://localhost:4000/api/admins/${id}`, {
+  const res = await fetch(process.env.URL + `/api/admins/${id}`, {
     method: 'PUT',
     credentials: 'include',
   });
