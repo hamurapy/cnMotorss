@@ -1,7 +1,6 @@
 import { Car } from '@/components/screens/catalog/catalog.types';
 import Homepage from '@/components/screens/home/HomePage'
 import Layout from '@/app/layout';
-import { NextPageContext } from 'next'
 
 export default function Home({ cars } : { cars: Car[] }):JSX.Element {
   return (
@@ -11,9 +10,12 @@ export default function Home({ cars } : { cars: Car[] }):JSX.Element {
   );
 }
 
-Home.getInitialProps = async (ctx: NextPageContext) => {
-  const res = await fetch('http://localhost:4000/api/cars')
+export async function getStaticProps() {
+  const res = await fetch(process.env.URL + '/api/cars')
   const cars = await res.json()
-  return { cars: cars }
+  return {
+    props: {
+      cars,
+    },
+  }
 }
- 
