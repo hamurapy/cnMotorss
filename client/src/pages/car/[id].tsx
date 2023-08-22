@@ -5,7 +5,7 @@ import { Car } from '@/components/screens/catalog/catalog.types';
 import styles from '@/components/screens/catalog/catalog.module.css'
 
 export const getStaticPaths = async () => {
-  const res = await fetch(process.env.URL + '/api/cars')
+  const res = await fetch('http://localhost:4000/api/cars')
   const cars = await res.json()
 
   const paths = cars.map((car: { id: any; }) => {
@@ -21,7 +21,7 @@ export const getStaticPaths = async () => {
 
 export async function getStaticProps(context: { params: { id: number; }; }) {
   const id = context.params.id
-  const res = await fetch(process.env.URL + `/api/cars/${id}`)
+  const res = await fetch(`http://localhost:4000/api/cars/${id}`)
   const cars = await res.json()
   return {
     props: {

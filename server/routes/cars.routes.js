@@ -14,6 +14,8 @@ router.route('/').get(async (req, res) => {
   try {
     const cars = await Car.findAll({
       order: [['createdAt', 'DESC']],
+      raw: true,
+      include: [{ model: PhotoCar, attributes: ['img'] }],
     });
     res.json(cars);
   } catch (error) {
@@ -92,7 +94,7 @@ router.post('/', upload.array('img'), async (req, res) => {
           carId: car.id,
           img: file,
         },
-        { transaction: t }
+        { transaction: t },
       );
     }
 
@@ -106,66 +108,3 @@ router.post('/', upload.array('img'), async (req, res) => {
 });
 
 module.exports = router;
-
-// router.post('/', upload.array('img'), async (req, res) => {
-//   const t = await sequelize.transaction(); // Начало транзакции
-
-//   try {
-//     const {
-//       brand,
-//       model,
-//       engine,
-//       year,
-//       mileage,
-//       power,
-//       price,
-//       driveUnit,
-//       transmission,
-//       description,
-//     } = req.body;
-
-//     // Создание записи машины
-//     const car = await Car.create(
-//       {
-//         brand,
-//         model,
-//         engine,
-//         year,
-//         mileage,
-//         power,
-//         price,
-//         driveUnit,
-//         transmission,
-//         description,
-//       },
-//       { transaction: t } // Указываем транзакцию
-//     );
-
-//     // Загруженные фотографии из multer
-//     const imgFiles = req.files;
-//     const carPhotos = [];
-
-//     // Проход по каждой загруженной фотографии
-//     imgFiles.forEach(async (file) => {
-//       // Здесь вы можете выполнить сохранение файла и получить URL
-//       // ...
-//       // Создание записи в таблице CarPhoto и привязка к машине
-//       const carPhoto = await PhotoCar.create(
-//         {
-//           carId: car.id, // Привязываем к созданной машине
-//           url: file., // Замените на фактический URL фотографии
-//         },
-//         { transaction: t }// Указываем транзакцию
-//       );
-
-//       carPhotos.push(carPhoto);
-//     });
-
-//     await t.commit(); // Подтверждение транзакции
-//     res.status(201).json(car);
-//   } catch (error) {
-//     await t.rollback(); // Откат транзакции в случае ошибки
-//     console.error(error);
-//     res.status(500).json({ error: 'Failed to create car.' });
-//   }
-// });

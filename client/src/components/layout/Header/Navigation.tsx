@@ -63,7 +63,7 @@ const settings = [  {
 function Navigation() {
   const dispatch = useAppDispatch();
 
-  const { user } = useSelector((store: RootState) => store.auth);
+  const {user} = useSelector((store: RootState) => store.auth);
   const router = useRouter()
 
   useEffect(() => {

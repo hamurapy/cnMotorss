@@ -24,7 +24,7 @@ app.use('/api/cars', carRouter);
 
 const PORT = process.env.PORT || 4000;
 
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../frontend/build/index.html')));
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../client/src/pages/_app.tsx')));
 
 app
   .listen(PORT)

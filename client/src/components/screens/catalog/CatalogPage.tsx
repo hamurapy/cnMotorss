@@ -7,7 +7,6 @@ import Link from "next/link"
 import { RootState } from "@/store";
 
 export default function CatalogPage({ cars }: {cars: Car[]}) {
-
   const { admin } = useSelector((store: RootState) => store.auth.user);
 
   
@@ -20,7 +19,7 @@ export default function CatalogPage({ cars }: {cars: Car[]}) {
             <Link href={`/car/${car.id}`}>
             <div className={styles.imgBlock}>
               <Image
-					      src={`/cars/img/car${car.id}.jpeg`}
+					      src={car['PhotoCars.img']}
                 alt={`${car.brand} ${car.model}`}
                 priority={true}
                 width={0}

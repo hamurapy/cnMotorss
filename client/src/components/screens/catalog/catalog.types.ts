@@ -1,13 +1,14 @@
 export type Car = {
   id: number
+  'PhotoCars.img': string
   img: string
   brand: string
   model: string
-  year: number
-  mileage: number
+  year: string
+  mileage: string
   engine: string
-  power: number
-  price: number
+  power: string
+  price: string
   driveUnit: string
   transmission: string
   description: string
