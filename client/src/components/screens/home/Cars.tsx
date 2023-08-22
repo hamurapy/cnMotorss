@@ -14,7 +14,7 @@ function Cars({ cars}: {cars: Car[]}):JSX.Element {
             <Link href={`/car/${car.id}`}>
             <div className={styles.imgBlock}>
               <Image
-					      src={`/cars/img/car${car.id}.jpeg`}
+					      src={car['PhotoCars.img']}
                 alt={`${car.brand} ${car.model}`}
                 priority={true}
                 width={0}
