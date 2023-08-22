@@ -5,23 +5,15 @@ module.exports = {
   async up(queryInterface) {
     const usersData = [
       {
-        id: 1,
-        name: 'Vova',
+        name: 'admin',
         email: 'vova@mail.ru',
-        password: await bcrypt.hash('test', 8),
+        password: await bcrypt.hash('123', 8),
         admin: true,
-      },
-      {
-        id: 2,
-        name: 'Jul',
-        email: 'jul@mail.ru',
-        password: await bcrypt.hash('test', 8),
-        admin: false,
       },
     ];
 
-    const rawPassword = process.env.DEMO_PASSWORD || 'test_password';
-    const saltRounds = Number(process.env.SALT_ROUNDS) || 10;
+    const rawPassword = process.env.DEMO_PASSWORD || 'testt';
+    const saltRounds = Number(process.env.SALT_ROUNDS) || 8;
     const hashedPassword = await bcrypt.hash(rawPassword, saltRounds);
 
     const users = usersData.map((user) => ({
