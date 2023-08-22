@@ -6,12 +6,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   Car.init(
     {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: DataTypes.INTEGER,
-      },
       img: {
         type: DataTypes.TEXT,
         allowNull: false,

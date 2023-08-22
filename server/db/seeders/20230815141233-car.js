@@ -1,11 +1,8 @@
-const { Car } = require('../models');
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    await Car.bulkCreate([
+  async up(queryInterface) {
+    const carsData = [
       {
-        id: 1,
         img: '/img/car1.jpeg',
         brand: 'toyota',
         model: 'landcruser',
@@ -19,7 +16,6 @@ module.exports = {
         description: 'cool ta4ka',
       },
       {
-        id: 2,
         img: '/img/car2.jpeg',
         brand: 'UAZ',
         model: 'uazik',
@@ -33,7 +29,6 @@ module.exports = {
         description: 'top ta4ka',
       },
       {
-        id: 3,
         img: '/img/car3.jpeg',
         brand: 'volvo',
         model: 'cx70',
@@ -47,7 +42,6 @@ module.exports = {
         description: 'strogaya ta4ka',
       },
       {
-        id: 4,
         img: '/img/car4.jpeg',
         brand: 'bmw',
         model: '5',
@@ -61,7 +55,6 @@ module.exports = {
         description: 'unveliveble ta4ka',
       },
       {
-        id: 5,
         img: '/img/car5.jpeg',
         brand: 'lada',
         model: 'vesta',
@@ -75,7 +68,6 @@ module.exports = {
         description: 'dream',
       },
       {
-        id: 6,
         img: '/img/car6.jpeg',
         brand: 'toyota',
         model: 'landcruser',
@@ -89,7 +81,6 @@ module.exports = {
         description: 'cool ta4ka',
       },
       {
-        id: 7,
         img: '/img/car7.jpeg',
         brand: 'UAZ',
         model: 'uazik',
@@ -103,7 +94,6 @@ module.exports = {
         description: 'top ta4ka',
       },
       {
-        id: 8,
         img: '/img/car8.jpeg',
         brand: 'volvo',
         model: 'cx70',
@@ -117,7 +107,6 @@ module.exports = {
         description: 'strogaya ta4ka',
       },
       {
-        id: 9,
         img: '/img/car9.jpeg',
         brand: 'bmw',
         model: '5',
@@ -131,7 +120,6 @@ module.exports = {
         description: 'unveliveble ta4ka',
       },
       {
-        id: 10,
         img: '/img/car10.jpeg',
         brand: 'lada',
         model: 'vesta',
@@ -145,7 +133,6 @@ module.exports = {
         description: 'dream',
       },
       {
-        id: 11,
         img: '/img/car11.jpeg',
         brand: 'bmw',
         model: '5',
@@ -159,7 +146,6 @@ module.exports = {
         description: 'unveliveble ta4ka',
       },
       {
-        id: 12,
         img: '/img/car12.jpeg',
         brand: 'lada',
         model: 'vesta',
@@ -172,10 +158,16 @@ module.exports = {
         transmission: 'transmissiya',
         description: 'dream',
       },
-    ]);
+    ];
+    const cars = carsData.map((car) => ({
+      ...car,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }));
+    await queryInterface.bulkInsert('Cars', cars);
   },
 
   async down(queryInterface) {
-    await Car.destroy({ truncate: { cascade: true } });
+    await queryInterface.bulkDelete('Cars');
   },
 };
