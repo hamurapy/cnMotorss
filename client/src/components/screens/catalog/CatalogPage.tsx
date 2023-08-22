@@ -1,10 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import { Car } from "./catalog.types"
 import Image from 'next/image'
+import { useSelector } from 'react-redux';
 import styles from './catalog.module.css'
 import Link from "next/link"
+import { RootState } from "@/store";
 
 export default function CatalogPage({ cars }: {cars: Car[]}) {
+
+  const { admin } = useSelector((store: RootState) => store.auth.user);
+
   
   return (
     <div className={styles.contentBlock}>
@@ -29,10 +34,10 @@ export default function CatalogPage({ cars }: {cars: Car[]}) {
               <span>{car.model}</span>
             </div>
             </Link>
-            <div className={styles.infoBlock}>
+           { admin && <div className={styles.infoBlock}>
               <button className={styles.change}>Изменить</button>
               <button className={styles.delete}>Удалить</button>
-            </div>
+            </div> }
           </li>
         ))}
       </ul>

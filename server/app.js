@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 // const path = require('path');
-// const cors = require('cors');
+const cors = require('cors');
 const config = require('./config/config');
 
 const app = express();
@@ -11,14 +11,14 @@ const usersRoute = require('./routes/users.route');
 const carRouter = require('./routes/cars.routes');
 
 config(app);
-// const corsOptions = {
-//   origin: ['http://localhost:3000'],
-//   credentials: true,
-// };
+const corsOptions = {
+  origin: ['http://localhost:3000'],
+  credentials: true,
+};
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
-app.use('/api/', authRoute);
+app.use('/api/auth', authRoute);
 app.use('/api/users', usersRoute);
 app.use('/api/cars', carRouter);
 

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '@/store';
+import { useRouter } from 'next/router'
 import { login } from './auth.slice';
 import Image from 'next/image';
 import styles from '@/components/screens/auth/auth.module.css'
@@ -9,6 +10,7 @@ function LoginPage(): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useAppDispatch();
+  const router = useRouter()
 
   const { user, error } = useSelector((store: RootState) => store.auth);
 
@@ -16,6 +18,12 @@ function LoginPage(): JSX.Element {
     e.preventDefault();
     dispatch(login({ email, password }));
   };
+
+  useEffect(() => {
+    if ('email' in user) {
+      router.push('/')
+    }
+  }, [user]);
 
   return (
     <div className={styles.contentBlock}>

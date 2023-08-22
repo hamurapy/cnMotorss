@@ -18,6 +18,7 @@ import { RootState, useAppDispatch } from '@/store';
 import { useSelector } from 'react-redux';
 import { check, logout } from '@/components/screens/auth/auth.slice';
 import styles from './menu.module.css'
+import { useRouter } from 'next/router'
 
 
 const pages = [
@@ -57,16 +58,13 @@ const settings = [  {
   link: '/login',
   title: 'Вход',
 },
-{
-  id: 4,
-  link: '/logout',
-  title: 'Выйти',
-},];
+];
 
 function Navigation() {
   const dispatch = useAppDispatch();
 
   const { user } = useSelector((store: RootState) => store.auth);
+  const router = useRouter()
 
   useEffect(() => {
     dispatch(check());
@@ -74,6 +72,7 @@ function Navigation() {
 
   const handleLogout = (): void => {
     dispatch(logout());
+    router.push('/')
   };
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -185,6 +184,7 @@ function Navigation() {
                   <Link href={setting.link}>{setting.title}</Link>
                 </MenuItem>
               ))}
+              <button onClick={handleLogout}>Выйти</button>
             </Menu>
           </Box>
         </Toolbar>
