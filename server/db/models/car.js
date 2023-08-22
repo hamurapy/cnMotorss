@@ -2,14 +2,12 @@ const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Car extends Model {
-    static associate() {}
+    static associate({ PhotoCar }) {
+      this.hasMany(PhotoCar, { foreignKey: 'carId' });
+    }
   }
   Car.init(
     {
-      img: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
       brand: {
         type: DataTypes.TEXT,
         allowNull: false,
@@ -19,11 +17,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       year: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       mileage: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       engine: {
@@ -31,11 +29,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       power: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       price: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       driveUnit: {
