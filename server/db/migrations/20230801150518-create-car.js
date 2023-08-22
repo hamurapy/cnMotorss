@@ -8,10 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      img: {
-        type: Sequelize.TEXT,
-        allowNull: false,
-      },
       brand: {
         type: Sequelize.TEXT,
         allowNull: false,
@@ -21,11 +17,11 @@ module.exports = {
         allowNull: false,
       },
       year: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.TEXT,
         allowNull: false,
       },
       mileage: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.TEXT,
         allowNull: false,
       },
       engine: {
@@ -33,11 +29,11 @@ module.exports = {
         allowNull: false,
       },
       power: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.TEXT,
         allowNull: false,
       },
       price: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.TEXT,
         allowNull: false,
       },
       driveUnit: {

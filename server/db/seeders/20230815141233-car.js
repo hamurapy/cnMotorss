@@ -6,7 +6,6 @@ module.exports = {
     await Car.bulkCreate([
       {
         id: 1,
-        img: '/img/car1.jpeg',
         brand: 'toyota',
         model: 'landcruser',
         engine: 'disel',
@@ -20,7 +19,6 @@ module.exports = {
       },
       {
         id: 2,
-        img: '/img/car2.jpeg',
         brand: 'UAZ',
         model: 'uazik',
         engine: 'disel',
@@ -34,7 +32,6 @@ module.exports = {
       },
       {
         id: 3,
-        img: '/img/car3.jpeg',
         brand: 'volvo',
         model: 'cx70',
         engine: 'benz',
@@ -48,7 +45,6 @@ module.exports = {
       },
       {
         id: 4,
-        img: '/img/car4.jpeg',
         brand: 'bmw',
         model: '5',
         engine: 'gaz',
@@ -62,7 +58,6 @@ module.exports = {
       },
       {
         id: 5,
-        img: '/img/car5.jpeg',
         brand: 'lada',
         model: 'vesta',
         engine: 'benz',

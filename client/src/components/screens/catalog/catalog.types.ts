@@ -13,3 +13,11 @@ export type Car = {
   description: string
 }
 
+export type CarWithOutId = Omit<Car, 'id'>;
+
+export type CarsState = {
+  cars: Car[];
+  error: string | undefined;
+};
+
+export type CarId = Car['id'];
