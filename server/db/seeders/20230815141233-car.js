@@ -3,7 +3,6 @@ module.exports = {
   async up(queryInterface) {
     const carsData = [
       {
-        img: '/img/car1.jpeg',
         brand: 'toyota',
         model: 'landcruser',
         engine: 'disel',
@@ -16,7 +15,6 @@ module.exports = {
         description: 'cool ta4ka',
       },
       {
-        img: '/img/car2.jpeg',
         brand: 'UAZ',
         model: 'uazik',
         engine: 'disel',
@@ -29,7 +27,6 @@ module.exports = {
         description: 'top ta4ka',
       },
       {
-        img: '/img/car3.jpeg',
         brand: 'volvo',
         model: 'cx70',
         engine: 'benz',
@@ -42,7 +39,6 @@ module.exports = {
         description: 'strogaya ta4ka',
       },
       {
-        img: '/img/car4.jpeg',
         brand: 'bmw',
         model: '5',
         engine: 'gaz',
@@ -55,7 +51,6 @@ module.exports = {
         description: 'unveliveble ta4ka',
       },
       {
-        img: '/img/car5.jpeg',
         brand: 'lada',
         model: 'vesta',
         engine: 'benz',
@@ -68,7 +63,6 @@ module.exports = {
         description: 'dream',
       },
       {
-        img: '/img/car6.jpeg',
         brand: 'toyota',
         model: 'landcruser',
         engine: 'disel',
@@ -81,7 +75,6 @@ module.exports = {
         description: 'cool ta4ka',
       },
       {
-        img: '/img/car7.jpeg',
         brand: 'UAZ',
         model: 'uazik',
         engine: 'disel',
@@ -94,7 +87,6 @@ module.exports = {
         description: 'top ta4ka',
       },
       {
-        img: '/img/car8.jpeg',
         brand: 'volvo',
         model: 'cx70',
         engine: 'benz',
@@ -107,7 +99,6 @@ module.exports = {
         description: 'strogaya ta4ka',
       },
       {
-        img: '/img/car9.jpeg',
         brand: 'bmw',
         model: '5',
         engine: 'gaz',
@@ -120,7 +111,6 @@ module.exports = {
         description: 'unveliveble ta4ka',
       },
       {
-        img: '/img/car10.jpeg',
         brand: 'lada',
         model: 'vesta',
         engine: 'benz',
@@ -133,7 +123,6 @@ module.exports = {
         description: 'dream',
       },
       {
-        img: '/img/car11.jpeg',
         brand: 'bmw',
         model: '5',
         engine: 'gaz',
@@ -146,7 +135,6 @@ module.exports = {
         description: 'unveliveble ta4ka',
       },
       {
-        img: '/img/car12.jpeg',
         brand: 'lada',
         model: 'vesta',
         engine: 'benz',

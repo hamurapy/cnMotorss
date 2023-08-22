@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
-// const path = require('path');
 const cors = require('cors');
+const path = require('path');
 const config = require('./config/config');
 
 const app = express();
@@ -24,9 +24,7 @@ app.use('/api/cars', carRouter);
 
 const PORT = process.env.PORT || 4000;
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
-// });
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../frontend/build/index.html')));
 
 app
   .listen(PORT)
