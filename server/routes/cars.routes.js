@@ -1,7 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const router = require('express').Router();
 const multer = require('multer');
-const { Car } = require('../db/models');
+require('regenerator-runtime/runtime');
+const { sequelize } = require('../db/models');
+const { Car, PhotoCar } = require('../db/models');
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
@@ -40,6 +42,7 @@ router.delete('/:carId', async (req, res) => {
 });
 
 router.post('/', upload.array('img'), async (req, res) => {
+  const t = await sequelize.transaction(); // Начало транзакции
   try {
     const {
       brand,
@@ -54,38 +57,115 @@ router.post('/', upload.array('img'), async (req, res) => {
       description,
     } = req.body;
 
-    // const imgFiles = req.files;
-    // console.log(imgFiles);
-    // const arrImg = await Promise.all(
-    //   imgFiles.map(async (file) => {
-    //     try {
-    //       const uploadedFile = await fileUploadMiddleware(file);
-    //       return uploadedFile;
-    //     } catch (error) {
-    //       return { error: error.message };
-    //     }
-    //   }),
-    // );
+    const imgFiles = req.files;
 
-    const car = await Car.create({
-      brand,
-      model,
-      engine,
-      year,
-      mileage,
-      power,
-      price,
-      driveUnit,
-      transmission,
-      description,
-      // img: arrImg[0],
-    });
+    const arrImg = await Promise.all(
+      imgFiles.map(async (file) => {
+        try {
+          const uploadedFile = await fileUploadMiddleware(file);
+          return uploadedFile;
+        } catch (error) {
+          return { error: error.message };
+        }
+      }),
+    );
 
+    const car = await Car.create(
+      {
+        brand,
+        model,
+        engine,
+        year,
+        mileage,
+        power,
+        price,
+        driveUnit,
+        transmission,
+        description,
+      },
+      { transaction: t },
+    );
+
+    for (const file of arrImg) {
+      await PhotoCar.create(
+        {
+          carId: car.id,
+          img: file,
+        },
+        { transaction: t }
+      );
+    }
+
+    await t.commit();
     res.status(201).json(car);
   } catch (error) {
+    await t.rollback();
     console.error(error);
     res.status(500).json({ error: 'Failed to create car.' });
   }
 });
 
 module.exports = router;
+
+// router.post('/', upload.array('img'), async (req, res) => {
+//   const t = await sequelize.transaction(); // Начало транзакции
+
+//   try {
+//     const {
+//       brand,
+//       model,
+//       engine,
+//       year,
+//       mileage,
+//       power,
+//       price,
+//       driveUnit,
+//       transmission,
+//       description,
+//     } = req.body;
+
+//     // Создание записи машины
+//     const car = await Car.create(
+//       {
+//         brand,
+//         model,
+//         engine,
+//         year,
+//         mileage,
+//         power,
+//         price,
+//         driveUnit,
+//         transmission,
+//         description,
+//       },
+//       { transaction: t } // Указываем транзакцию
+//     );
+
+//     // Загруженные фотографии из multer
+//     const imgFiles = req.files;
+//     const carPhotos = [];
+
+//     // Проход по каждой загруженной фотографии
+//     imgFiles.forEach(async (file) => {
+//       // Здесь вы можете выполнить сохранение файла и получить URL
+//       // ...
+//       // Создание записи в таблице CarPhoto и привязка к машине
+//       const carPhoto = await PhotoCar.create(
+//         {
+//           carId: car.id, // Привязываем к созданной машине
+//           url: file., // Замените на фактический URL фотографии
+//         },
+//         { transaction: t }// Указываем транзакцию
+//       );
+
+//       carPhotos.push(carPhoto);
+//     });
+
+//     await t.commit(); // Подтверждение транзакции
+//     res.status(201).json(car);
+//   } catch (error) {
+//     await t.rollback(); // Откат транзакции в случае ошибки
+//     console.error(error);
+//     res.status(500).json({ error: 'Failed to create car.' });
+//   }
+// });

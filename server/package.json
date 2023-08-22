@@ -20,7 +20,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "nodemon": "^3.0.1"
   },
-
   "dependencies": {
     "@babel/core": "^7.22.10",
     "@babel/preset-env": "^7.22.10",
@@ -39,6 +38,7 @@
     "pg-hstore": "^2.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "regenerator-runtime": "^0.14.0",
     "sequelize": "^6.32.1",
     "sequelize-cli": "^6.6.1",
     "session-file-store": "^1.5.0"
