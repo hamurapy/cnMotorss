@@ -6,129 +6,78 @@ import Image from 'next/image'
 import 'swiper/css';
 import styles from './home.module.css'
 
+const carslogos = [
+  {
+    id: 1,
+    logo: '/logo/carlogo1.png'
+  },
+  {
+    id: 2,
+    logo: '/logo/carlogo2.png'
+  },
+  {
+    id: 3,
+    logo: '/logo/carlogo3.png'
+  },
+  {
+    id: 4,
+    logo: '/logo/carlogo4.png'
+  },
+  {
+    id: 5,
+    logo: '/logo/carlogo5.png'
+  },
+  {
+    id: 6,
+    logo: '/logo/carlogo6.png'
+  },
+  {
+    id: 7,
+    logo: '/logo/carlogo7.png'
+  },
+  {
+    id: 8,
+    logo: '/logo/carlogo8.png'
+  },
+  {
+    id: 8,
+    logo: '/logo/carlogo9.png'
+  },
+  {
+    id: 8,
+    logo: '/logo/carlogo10.png'
+  },
+  {
+    id: 8,
+    logo: '/logo/carlogo11.png'
+  },
+  {
+    id: 8,
+    logo: '/logo/carlogo12.png'
+  },
+  {
+    id: 8,
+    logo: '/logo/carlogo13.png'
+  },
+];
 export default function logoSlider() {
   return (
-    <>
     <section className={styles.grey}>
-      <Swiper
-        slidesPerView={6}
-        spaceBetween={40}
-        loop
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
-        breakpoints={{
-          320: {
-            slidesPerView: 2,
-            spaceBetween: 0,
-          },
-          375: {
-            slidesPerView: 2,
-            spaceBetween: 0,
-          },
-          425: {
-            slidesPerView: 2,
-            spaceBetween: 0,
-          },
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 0,
-          },
-          768: {
-            slidesPerView: 3,
-            spaceBetween: 0,
-          },
-          1024: {
-            slidesPerView: 6,
-            spaceBetween: 0,
-          },
-        }}
-        modules={[Autoplay]}
-        className="logoSwiper"
-      >
-        <SwiperSlide>
-          <div className={styles.imgBlock}>
+      <div className={styles.logoSlider}>
+        <div className={styles.logoTrack}>
+          {carslogos.map((carlogo) => {
+            return (
+            <div key={carlogo.id} className={styles.logoItem}>
             <Image
-					    src="/logo/carlogo1.png"
+					    src={carlogo.logo}
               alt="logo"
-              width={100}
-              height={100}
-				    />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className={styles.imgBlock}>
-            <Image
-					    src="/logo/carlogo2.png"
-              alt="logo"
-              width={100}
-              height={100}
-				    />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className={styles.imgBlock}>
-            <Image
-					    src="/logo/carlogo3.png"
-              alt="logo"
-              width={100}
-              height={100}
-				    />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className={styles.imgBlock}>
-            <Image
-					    src="/logo/carlogo4.png"
-              alt="logo"
-              width={100}
-              height={100}
-				    />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className={styles.imgBlock}>
-            <Image
-					    src="/logo/carlogo5.png"
-              alt="logo"
-              width={100}
-              height={100}
-				    />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className={styles.imgBlock}>
-            <Image
-					    src="/logo/carlogo6.png"
-              alt="logo"
-              width={100}
-              height={100}
-				    />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className={styles.imgBlock}>
-            <Image
-					    src="/logo/carlogo7.png"
-              alt="logo"
-              width={100}
-              height={100}
-				    />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className={styles.imgBlock}>
-            <Image
-					    src="/logo/carlogo8.png"
-              alt="logo"
-              width={100}
-              height={100}
-				    />
-          </div>
-        </SwiperSlide>
-      </Swiper>
-      </section>
-    </>
+              width={150}
+              height={150}
+            />
+            </div>
+            )})}
+        </div>
+      </div>
+    </section>
   );
 }

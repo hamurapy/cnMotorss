@@ -12,14 +12,13 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Logo from '../Logo';
-import Image from 'next/image';
 import Link from 'next/link';
 import { RootState, useAppDispatch } from '@/store';
 import { useSelector } from 'react-redux';
 import { check, logout } from '@/components/screens/auth/auth.slice';
-import styles from './menu.module.css'
 import { useRouter } from 'next/router'
-
+import styles from './menu.module.css'
+import PhoneIcon from '../PhoneIcon';
 
 const pages = [
   {
@@ -43,27 +42,11 @@ const pages = [
     title: 'Контакты',
   },
 ];
-const settings = [  {
-  id: 1,
-  link: '/account',
-  title: 'Личный кабинет',
-},
-{
-  id: 2,
-  link: '/registration',
-  title: 'Регистрация',
-},
-{
-  id: 3,
-  link: '/login',
-  title: 'Вход',
-},
-];
 
 function Navigation() {
   const dispatch = useAppDispatch();
 
-  const {user} = useSelector((store: RootState) => store.auth);
+  const { admin } = useSelector((store: RootState) => store.auth.user);
   const router = useRouter()
 
   useEffect(() => {
@@ -95,19 +78,15 @@ function Navigation() {
 
   return (
     <div className={styles.nav}>
-    <AppBar position="static">
+      <AppBar position="static">
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Logo/>
+          <Toolbar disableGutters>
+          <div className={styles.logoBlock}>
+            <Logo />
+          </div>
           <div className={styles.phone}>
-            <Image
-					    src="/phone.svg"
-					    width={25}
-              height={25}
-					    alt="Продажа авто с пробегом"
-					    draggable={false}
-				    />
-            <Link href="tel: +79215555578">+7 (921) 555-55-78</Link>
+            <PhoneIcon/>
+            <Link className={styles.phoneLink} href="tel: +79215555578">+7 (921) 555-55-78</Link>
           </div>
           <Box sx={{ justifyContent: 'flex-end', flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -152,41 +131,40 @@ function Navigation() {
                 </MenuItem>
               ))}
             </Box> 
-            {'id' in user ? (
-        <div style={{color: 'white'}}>{user.name}{user.email}</div>
-      ) : (
-        <div style={{color: 'white'}}>121</div>
-      )}
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Личный кабинет">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="CN" src="/favicon.png" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-              >
-              {settings.map((setting) => (
-                <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
-                  <Link href={setting.link}>{setting.title}</Link>
-                </MenuItem>
-              ))}
-              <button onClick={handleLogout}>Выйти</button>
-            </Menu>
-          </Box>
+            {admin ? (
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Личный кабинет">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="CN" src="/favicon.png" />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  <MenuItem>
+                    <Link className={styles.accountBtn} href="/account">Личный кабинет</Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <button className={styles.accountBtn} onClick={handleLogout}>Выйти</button>
+                  </MenuItem>
+                </Menu>
+              </Box>
+            ) : (
+            <></>
+            )}
         </Toolbar>
       </Container>
       </AppBar>

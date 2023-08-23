@@ -15,7 +15,7 @@ function Questions():JSX.Element {
 					    alt="Продажа авто с пробегом"
 					    draggable={false}
 				    />
-            <Link href="tel: +79215555578">+7 (921) 555-55-78</Link>
+            <Link className={styles.phoneLink} href="tel: +79215555578">+7 (921) 555-55-78</Link>
           </div>
     </section>
   )
