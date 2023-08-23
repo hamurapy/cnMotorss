@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -18,19 +17,15 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+// Обработка статических ресурсов
+app.use(express.static(path.join(__dirname, 'img')));
+
 app.use('/api/auth', authRoute);
 app.use('/api/users', usersRoute);
 app.use('/api/cars', carRouter);
 
 const PORT = process.env.PORT || 4000;
 
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../client/src/pages/_app.tsx')));
-
-app
-  .listen(PORT)
-  .on('listening', () => {
-    console.log(`Server's listening port ${PORT}`);
-  })
-  .on('error', (error) => {
-    console.log(`Connecting error: ${error.message}`);
-  });
+app.listen(PORT, () => {
+  console.log(`Server's listening on port ${PORT}`);
+});

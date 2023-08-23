@@ -1,7 +1,5 @@
 export type Car = {
   id: number
-  'PhotoCars.img': string
-  img: string
   brand: string
   model: string
   year: string
@@ -12,6 +10,7 @@ export type Car = {
   driveUnit: string
   transmission: string
   description: string
+  photos: { img: string }[];
 }
 
 export type CarWithOutId = Omit<Car, 'id'>;
