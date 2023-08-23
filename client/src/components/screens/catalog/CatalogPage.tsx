@@ -19,7 +19,7 @@ export default function CatalogPage({ cars }: {cars: Car[]}) {
             <Link href={`/car/${car.id}`}>
             <div className={styles.imgBlock}>
               <Image
-					      src={car['PhotoCars.img']}
+					      src={`http://localhost:4000${car.photos[0].img}`}
                 alt={`${car.brand} ${car.model}`}
                 priority={true}
                 width={0}

@@ -15,9 +15,33 @@ router.route('/').get(async (req, res) => {
     const cars = await Car.findAll({
       order: [['createdAt', 'DESC']],
       raw: true,
-      include: [{ model: PhotoCar, attributes: ['img'] }],
     });
-    res.json(cars);
+    const carIds = cars.map((car) => car.id);
+    const photos = await PhotoCar.findAll({
+      where: {
+        carId: carIds,
+      },
+      attributes: ['carId', 'img'],
+      group: ['carId', 'PhotoCar.id'],
+    });
+    const carsWithPhotos = cars.map((car) => {
+      const carPhotos = photos.filter((photo) => photo.carId === car.id);
+      return {
+        id: car.id,
+        brand: car.brand,
+        model: car.model,
+        year: car.year,
+        mileage: car.mileage,
+        engine: car.engine,
+        power: car.power,
+        price: car.price,
+        driveUnit: car.driveUnit,
+        transmission: car.transmission,
+        description: car.description,
+        photos: carPhotos.map((photo) => ({ img: photo.img })),
+      };
+    });
+    res.json(carsWithPhotos);
   } catch (error) {
     res.json({ error: error.message });
   }
