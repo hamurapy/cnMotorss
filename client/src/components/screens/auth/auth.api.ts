@@ -1,7 +1,6 @@
 import { AuthApiError, PayloadAuth, UserAuth } from './types/user.types';
 
 export const requestLogin = async (user: UserAuth): Promise<UserAuth> => {
-  console.log(process.env.URL)
   const response = await fetch('http://localhost:4000/api/auth/login', {
     method: 'POST',
     credentials: 'include',

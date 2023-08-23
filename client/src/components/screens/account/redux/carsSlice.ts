@@ -12,7 +12,9 @@ export const addCar = createAsyncThunk('add/car', (car: FormData) =>
   api.addCarFetch(car)
 );
 
-
+export const updateCar = createAsyncThunk('update/car', (car: FormData) =>
+  api.updateCarFetch(car)
+);
 
 const carsSlice = createSlice({
   name: 'cars',
@@ -26,6 +28,13 @@ const carsSlice = createSlice({
       .addCase(addCar.rejected, (state, action) => {
         state.error = action.error.message;
       })
+      .addCase(updateCar.fulfilled, (state, action) => {
+        state.cars = state.cars.map((car) =>
+        car.id === action.payload.id ? action.payload : car);
+      })
+      .addCase(updateCar.rejected, (state, action) => {
+        state.error = action.error.message;
+      });
       
   },
 });
