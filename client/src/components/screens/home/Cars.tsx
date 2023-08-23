@@ -5,6 +5,8 @@ import styles from '@/components/screens/catalog/catalog.module.css'
 import { Car } from '../catalog/catalog.types';
 
 function Cars({ cars}: {cars: Car[]}):JSX.Element {
+  console.log(cars);
+  
   return (
     <section>
       <h2>Каталог</h2>
@@ -14,7 +16,7 @@ function Cars({ cars}: {cars: Car[]}):JSX.Element {
             <Link href={`/car/${car.id}`}>
             <div className={styles.imgBlock}>
               <Image
-					      src={car['PhotoCars.img']}
+					      src={`http://localhost:4000${car.photos[0].img}`}
                 alt={`${car.brand} ${car.model}`}
                 priority={true}
                 width={0}

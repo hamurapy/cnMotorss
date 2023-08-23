@@ -13,6 +13,7 @@ export default function Home({ cars } : { cars: Car[] }):JSX.Element {
 export async function getStaticProps() {
   const res = await fetch('http://localhost:4000/api/cars')
   const cars = await res.json()
+  
   return {
     props: {
       cars,
