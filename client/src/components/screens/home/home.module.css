@@ -13,6 +13,7 @@
   align-items: center;
   justify-content: center;
   width: 23%;
+  margin-bottom: 2rem;
 }
 .advantageItem img{
   width: 50px;
@@ -74,7 +75,7 @@
   font-size: 18px;
 }
 .container{
-  width: 84%;
+  width: 83%;
   margin: auto;
 }
 .headerTitle{
@@ -85,7 +86,7 @@
   font-weight: 2.7rem;
 }
 .formHeader{
-  width: 30%;
+  width: 35%;
   background: transparent;
   border: 0;
   padding: 0;
@@ -99,6 +100,7 @@
   background: #fff;
   border: 1px solid #a20101;
   box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.28);
+  box-sizing: border-box;
 }
 .formHeader button{
   width: 50%;
@@ -121,18 +123,69 @@
   align-items: center;
 }
 .phone img{
-  width: 40px;
+  width: 25px;
+  margin-right: 1rem;
 }
 .phone a{
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: bold;
+}
+/* Slider */
+.logoItem img {
+  width: 150px;
+  animation: scroll 120s linear infinite;
+  margin: 0 3em;
+}
+.logoTrack {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.logoSlider {
+  width: 100%;
+  box-sizing: border-box;
+}
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translatex(-1000%);
+  }
+}
+.icon{
+  width: 50px;
+  border: 1px solid #a20101;
+  border-radius: 50%;
+  padding: 1rem;
+  background: #fff;
+  transition: 1s;
+}
+.icon:hover{
+  background: #a20101;
+}
+.filled{
+  fill: #a20101;
+  transition: 1s;
+}
+.icon:hover .filled{
+  fill: #ffffff;
+}
+.phoneLink{
+  font-family: 'Inter', sans-serif;
+}
+@media screen and (max-width: 1024px) {
+  .container{
+    width: 95%;
+  }
 }
 @media screen and (max-width: 768px) {
   .advantageItem{
     width: 48%;
   }
   .formHeader{
-    width: 45%;
+    width: 50%;
   }
 }
 @media screen and (max-width: 425px) {

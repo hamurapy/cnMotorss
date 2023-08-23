@@ -1,5 +1,5 @@
 .contentBlock{
-  width: 86%;
+  width: 83%;
   margin: 8rem auto 5rem;
   box-sizing: border-box;
 }
@@ -42,7 +42,6 @@
   font-size: 1rem;
   font-weight: 300;
   font-family: Raleway,sans-serif;
-  text-transform: uppercase;
   padding: 0.5rem;
   border: 1px solid #a4a4a4;
   background: transparent;
@@ -54,7 +53,6 @@
   font-size: 1rem;
   font-weight: 300;
   font-family: Raleway,sans-serif;
-  text-transform: uppercase;
   padding: 0.5rem;
   border: 1px solid #a4a4a4;
   background: transparent;
@@ -99,7 +97,10 @@ h3.aboutTitle{
   text-align: justify;
   margin-bottom: 1rem;
 }
-
+.phoneLink{
+  font-family: 'Inter', sans-serif;
+  padding-top: 2px;
+}
 @media screen and (max-width: 768px) {
   .side{
     width: 100%;

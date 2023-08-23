@@ -7,8 +7,8 @@ const Logo: FC = () => {
 		<Link href="/">
 				<Image
 					src="/logo.svg"
-					width={250}
-					height={100}
+					width={200}
+					height={50}
 					alt="Продажа авто с пробегом"
 					draggable={false}
 					priority={true}
