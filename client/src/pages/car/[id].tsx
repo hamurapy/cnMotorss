@@ -3,6 +3,7 @@ import Layout from '@/app/layout';
 import Image from 'next/image';
 import { Car } from '@/components/screens/catalog/catalog.types';
 import styles from '@/components/screens/catalog/catalog.module.css'
+import UpdateFormCar from '@/components/screens/account/UpdateFormCar'
 
 export const getStaticPaths = async () => {
   const res = await fetch('http://localhost:4000/api/cars')
@@ -31,6 +32,7 @@ export async function getStaticProps(context: { params: { id: number; }; }) {
 }
 
 export default function CarPage({car}:{car: Car}):JSX.Element {
+  
     return (
       <Layout title={car.brand} description={''} keywords={''}>
         <div className={styles.contentBlock}>
@@ -38,7 +40,7 @@ export default function CarPage({car}:{car: Car}):JSX.Element {
           <div className={styles.twoColumn}>
             <div className={styles.side}>
               <Image
-					      src={`/cars/img/car${car.id}.jpeg`}
+					      src={`http://localhost:4000${car.photos[0].img}`}
                 alt={`${car.brand} ${car.model}`}
                 width={0}
                 height={0}
@@ -89,6 +91,7 @@ export default function CarPage({car}:{car: Car}):JSX.Element {
           <h3 className={styles.carDescription}>Description:</h3>
           <p>{car?.description}</p>
         </div>
+        {car && <UpdateFormCar key={car?.id} car={car} />}
       </Layout>
     )
   }

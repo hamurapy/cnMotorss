@@ -11,7 +11,7 @@ function FormAddCar(): JSX.Element {
     register,
     handleSubmit,
     formState: { errors },
-    // reset,
+    reset,
   } = useForm<CarWithOutId>();
 
   const onSubmit: SubmitHandler<CarWithOutId> = (data) => {
@@ -32,10 +32,9 @@ function FormAddCar(): JSX.Element {
     formData.append('transmission', data.transmission);
     formData.append('description', data.description);
 
-    console.log(Array.from(formData));
 
     dispatch(addCar(formData));
-    // reset();
+    reset();
   };
 
   return (
@@ -45,76 +44,66 @@ function FormAddCar(): JSX.Element {
           Brand
           <input {...register('brand', { required: true })} />
         </label>
-        <div>{errors.brand && <p>Заполните все поля!</p>}</div>
         <label className="form__label">
           Model
           <input {...register('model', { required: true })} />
         </label>
-        <div>{errors.model && <p>Заполните все поля!</p>}</div>
         <label className="form__label">
           Engine
           <select
             {...register('engine', { required: true })}
           >
                <option value="">Выберите вариант</option>
-             <option value="вариант1">Бензиновый</option>
-                <option value="вариант2">Дизельный</option>
-                <option value="вариант3">Электрический</option>
-                <option value="вариант4">Гибридный</option>
-                <option value="вариант5">Турбодизельный</option>
+             <option value="Бензиновый">Бензиновый</option>
+                <option value="Дизельный">Дизельный</option>
+                <option value="Электрический">Электрический</option>
+                <option value="Гибридный">Гибридный</option>
+                <option value="Турбодизельный">Турбодизельный</option>
           </select>
         </label>
-        <div>{errors.engine && <p>Заполните все поля!</p>}</div>
         <label className="form__label">
           Year
           <input {...register('year', { required: true })} />
         </label>
-        <div>{errors.year && <p>Заполните все поля!</p>}</div>
         <label className="form__label">
           Mileage
           <input {...register('mileage', { required: true })} />
         </label>
-        <div>{errors.mileage && <p>Заполните все поля!</p>}</div>
         <label className="form__label">
           Power
           <input {...register('power', { required: true })} />
         </label>
-        <div>{errors.power && <p>Заполните все поля!</p>}</div>
         <label className="form__label">
           Drive unit
           <select
             {...register('driveUnit', { required: true })}
           >
                <option value="">Выберите вариант</option>
-             <option value="вариант1">Передний</option>
-                <option value="вариант2">Задний</option>
-                <option value="вариант3">Полный</option>
-                <option value="вариант4">Постоянный полный</option>
+             <option value="Передний">Передний</option>
+                <option value="Задний">Задний</option>
+                <option value="Полный">Полный</option>
+                <option value="Постоянный полный">Постоянный полный</option>
           </select>
         </label>
-        <div>{errors.driveUnit && <p>Заполните все поля!</p>}</div>
         <label className="form__label">
           Transmission
           <select
             {...register('transmission', { required: true })}
           >
             <option value="">Выберите вариант</option>
-            <option value="вариант1">Механическая</option>
-            <option value="вариант2">Автоматическая</option>
-            <option value="вариант3">Роботизированная</option>
+            <option value="Механическая">Механическая</option>
+            <option value="Автоматическая">Автоматическая</option>
+            <option value="Роботизированная">Роботизированная</option>
           </select>
         </label>
-        <div>{errors.transmission && <p>Заполните все поля!</p>}</div>
         <label className="form__label">
           Price
           <input {...register('price', { required: true })} />
         </label>
-        <div>{errors.price && <p>Заполните все поля!</p>}</div>
         <label className="form__label">
           Description
           <input {...register('description', { required: true })} />
         </label>
-        <div>{errors.description && <p>Заполните все поля!</p>}</div>
         <label className="form__label">
           Image
           <input
