@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Car } from '@/components/screens/catalog/catalog.types';
 import styles from '@/components/screens/catalog/catalog.module.css'
 import UpdateFormCar from '@/components/screens/account/UpdateFormCar'
+import SingleCarSlider from '@/components/screens/catalog/SingleCarSlider';
 
 export const getStaticPaths = async () => {
   const res = await fetch('http://localhost:4000/api/cars')
@@ -39,7 +40,7 @@ export default function CarPage({car}:{car: Car}):JSX.Element {
           <h1>{car.brand} {car.model}</h1>
           <div className={styles.twoColumn}>
             <div className={styles.side}>
-              <Image
+              {/* <Image
 					      src={`http://localhost:4000${car.photos[0].img}`}
                 alt={`${car.brand} ${car.model}`}
                 width={0}
@@ -47,48 +48,45 @@ export default function CarPage({car}:{car: Car}):JSX.Element {
                 sizes="100vw"
                 style={{ width: '100%', height: 'auto' }}
                 priority={true}
-				      />
+				      /> */}
+              <SingleCarSlider photos={car.photos}/>
             </div>
             <div className={styles.side}>
               <div className={styles.sideInfo}>
-                <p className={styles.listItem}>Brand:</p>
+                <p className={styles.listItem}>Марка:</p>
                 <p className={styles.listDesription}>{car?.brand}</p>
               </div>
               <div className={styles.sideInfo}>
-                <p className={styles.listItem}>Model:</p>
+                <p className={styles.listItem}>Модель:</p>
                 <p className={styles.listDesription}>{car?.model}</p>
               </div>
               <div className={styles.sideInfo}>
-                <p className={styles.listItem}>Year:</p>
+                <p className={styles.listItem}>Год выпуска:</p>
                 <p className={styles.listDesription}>{car?.year}</p>
               </div>
               <div className={styles.sideInfo}>
-                <p className={styles.listItem}>Engine:</p>
-                <p className={styles.listDesription}>{car?.engine}</p>
+                <p className={styles.listItem}>Двигатель:</p>
+                <p className={styles.listDesription}>{car?.power} л.с./{car?.engine}</p>
               </div>
               <div className={styles.sideInfo}>
-                <p className={styles.listItem}>Power:</p>
-                <p className={styles.listDesription}>{car?.power}</p>
-              </div>
-              <div className={styles.sideInfo}>
-                <p className={styles.listItem}>Transmission:</p>
+                <p className={styles.listItem}>Привод:</p>
                 <p className={styles.listDesription}>{car?.transmission}</p>
               </div>
               <div className={styles.sideInfo}>
-                <p className={styles.listItem}>Mileage:</p>
-                <p className={styles.listDesription}>{car?.mileage}</p>
+                <p className={styles.listItem}>Пробег:</p>
+                <p className={styles.listDesription}>{car?.mileage} км</p>
               </div>
               <div className={styles.sideInfo}>
-                <p className={styles.listItem}>Drive Unit:</p>
+                <p className={styles.listItem}>Коробка:</p>
                 <p className={styles.listDesription}>{car?.driveUnit}</p>
               </div>
               <div className={styles.sideInfo}>
-                <p className={styles.price}>Price:</p>
+                <p className={styles.price}>Цена:</p>
                 <p className={styles.listDesription}>{car?.price}</p>
               </div>
             </div>
           </div>
-          <h3 className={styles.carDescription}>Description:</h3>
+          <h3 className={styles.carDescription}>Описание:</h3>
           <p>{car?.description}</p>
         </div>
         {car && <UpdateFormCar key={car?.id} car={car} />}

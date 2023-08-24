@@ -22,34 +22,71 @@
   transform: scale(1.1);
 }
 .carsBlock{
+  width: 75%;
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
   list-style: none;
 }
 .carsBlock li{
-  width: 23%;
+  width: 100%;
   box-sizing: border-box;
-  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
   padding: 1rem;
-  border-radius: 5px;
-  margin-bottom: 2.5rem;
+  margin-bottom: 0.5rem;
+  background: #fff;
+  border-radius: 8px 8px 0px 0px;
+  border-bottom: 1px solid #e1e1e1;
+  box-shadow: none;
+  transition: 1s;
+  position: relative;
+  z-index: 1;
+}
+.carsBlock li:hover{
+  border-radius: 8px;
+  border-bottom: 1px solid #fff;
+  box-shadow: 0 5px 20px 0 #0000001a;
+  position: relative;
+  z-index: 3;
+}
+.photoBlock{
+  width: 30%;
+  float: left;
+  box-sizing: border-box;
+  margin-right: 1.5rem;
 }
 .infoBlock{
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  align-items: center;
 }
-.infoBlock span{
+.infoBlock span.model{
+  box-sizing: border-box;
+  color: #000;
+  border-radius: 3px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  transition: 1s;
+}
+.carsBlock li:hover .infoBlock span.model{
+  color: #a20201;
+}
+.infoBlock span.price{
   box-sizing: border-box;
   padding: 0.5rem;
-  color: #575757;
-  border: 1px solid #575757;
+  color: #000;
   border-radius: 3px;
-  margin: 1rem 0 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  transition: 1s;
+}
+.infoItems{
+  display: flex;
+  flex-direction: column;
+}
+.infoItems span{
+  color: #00000075;
+  margin-top: 0.3rem;
 }
 /* Buttons */
 .change{
@@ -159,7 +196,43 @@ h3.carDescription{
   margin-bottom: 1rem;
   border-top: 1px solid #a20201;
 }
-
+/* Filter */
+.catalogBlock{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.filter{
+  width: 75%;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-sizing: border-box;
+  box-shadow: 0 3px 14px #0000001f;
+}
+.filter select{
+  width: 100%;
+  color: #00000080;
+  border-color: #0000001f;
+  background-color: #fff;
+  padding: 0.5rem;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: 300;
+  font-family: 'Raleway', sans-serif;
+  outline: none;
+  transition: 1s;
+}
+.filter select:hover{
+  border-color: #a202017d;
+}
+.filter select:focus{
+  outline: none;
+}
+.filter select:active{
+  outline: none;
+}
 @media screen and (max-width: 768px) {
   .carsBlock li{
     width: 48%;
