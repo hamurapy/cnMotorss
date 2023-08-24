@@ -10,8 +10,12 @@ export type Car = {
   driveUnit: string
   transmission: string
   description: string
-  photos: { img: string }[];
+  photos: {
+    img: string
+  }[];
 }
+
+export type CarPhotos = Pick<Car, 'photos'>['photos'];
 
 export type CarWithOutId = Omit<Car, 'id'>;
 
