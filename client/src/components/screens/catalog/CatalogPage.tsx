@@ -13,16 +13,40 @@ export default function CatalogPage({ cars }: {cars: Car[]}) {
   const brands = Array.from(new Set(cars.map((car) => car.brand)));
   const [brandFilter, setBrandFilter] = useState('');
   const [modelFilter, setModelFilter] = useState('');
-  const [yearFilter, setYearFilter] = useState('');
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+  const [minYear, setMinYear] = useState('');
+  const [maxYear, setMaxYear] = useState('');
+  const [searchClicked, setSearchClicked] = useState(false);
   
   const filteredModels = cars
     .filter((car) => car.brand === brandFilter)
     .map((car) => car.model);
+
+    const handleMinPriceChange = (e: any) => {
+      setMinPrice(e.target.value);
+    };
+    
+    const handleMaxPriceChange = (e: any) => {
+      setMaxPrice(e.target.value);
+    };
+
+    const handleMinYearChange = (e: any) => {
+      setMinYear(e.target.value);
+    };
+    
+    const handleMaxYearChange = (e: any) => {
+      setMaxYear(e.target.value);
+    };
+
+    const handleFindClick = () => {
+      setSearchClicked(true);
+    };
     
     const handleBrandChange = (e: any) => {
       const selectedBrand = e.target.value;
       setBrandFilter(selectedBrand);
-      setModelFilter('');
+      setModelFilter('');  
     };
     
     const handleModelChange = (e: any) => {
@@ -34,16 +58,30 @@ export default function CatalogPage({ cars }: {cars: Car[]}) {
       }
     };
 
-  const filteredCars = cars.filter((car) => {
-    if (brandFilter && car.brand !== brandFilter) {
-      return false;
-    }
-    if (modelFilter && car.model !== modelFilter) {
-      return false;
-    }
-    return true;
-  });
-  console.log(filteredModels);
+    const filteredCars = cars.filter((car) => {
+      if (!searchClicked) {
+        return true;
+      }
+      if (brandFilter && car.brand !== brandFilter) {
+        return false;
+      }
+      if (modelFilter && car.model !== modelFilter) {
+        return false;
+      }
+      if (minPrice && parseFloat(car.price) < parseFloat(minPrice)) {
+        return false;
+      }
+      if (maxPrice && parseFloat(car.price) > parseFloat(maxPrice)) {
+        return false;
+      }
+      if (minYear && parseInt(car.year) < parseInt(minYear)) {
+        return false;
+      }
+      if (maxYear && parseInt(car.year) > parseInt(maxYear)) {
+        return false;
+      }
+      return true;
+    });
   
 
   
@@ -81,6 +119,37 @@ export default function CatalogPage({ cars }: {cars: Car[]}) {
     ))}
         </select>
       </div>
+      <label htmlFor="min-price-filter">Минимальная цена:</label>
+<input
+  id="min-price-filter"
+  type="number"
+  value={minPrice}
+  onChange={handleMinPriceChange}
+/>
+
+<label htmlFor="max-price-filter">Максимальная цена:</label>
+<input
+  id="max-price-filter"
+  type="number"
+  value={maxPrice}
+  onChange={handleMaxPriceChange}
+/>
+<label htmlFor="min-year-filter">Минимальный год:</label>
+<input
+  id="min-year-filter"
+  type="number"
+  value={minYear}
+  onChange={handleMinYearChange}
+/>
+
+<label htmlFor="max-year-filter">Максимальный год:</label>
+<input
+  id="max-year-filter"
+  type="number"
+  value={maxYear}
+  onChange={handleMaxYearChange}
+/>
+<button onClick={handleFindClick}>Find</button>
       <ul className={styles.carsBlock}>
         {filteredCars.map((car) => (
           <li key={car.id}>
