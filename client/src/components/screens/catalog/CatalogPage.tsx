@@ -1,14 +1,35 @@
 /* eslint-disable @next/next/no-img-element */
+import React, { useEffect } from 'react';
 import { Car } from "./catalog.types"
 import Image from 'next/image'
 import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../../../store';
 import styles from './catalog.module.css'
 import Link from "next/link"
+import { deleteCar } from '../account/redux/carsSlice';
 import { RootState } from "@/store";
 import { useState } from "react";
 
 export default function CatalogPage({ cars }: {cars: Car[]}) {
   const { admin } = useSelector((store: RootState) => store.auth.user);
+  const dispatch = useAppDispatch();
+
+  const delCar = (carId): void => {
+    dispatch(deleteCar(Number(carId)));
+    // window.location.reload()
+  };
+  // useEffect(() => {
+  //   async function getStaticProps() {
+  //     const res = await fetch('http://localhost:4000/api/cars')
+  //     const cars = await res.json()
+  //     return {
+  //       props: {
+  //         cars,
+  //       },
+  //     }
+  //   }
+  // }, [cars]);
+
 
   const brands = Array.from(new Set(cars.map((car) => car.brand)));
   const [brandFilter, setBrandFilter] = useState('');
@@ -44,9 +65,7 @@ export default function CatalogPage({ cars }: {cars: Car[]}) {
     return true;
   });
   console.log(filteredModels);
-  
 
-  
   return (
     <div className={styles.contentBlock}>
       <h1>Каталог</h1>
@@ -101,9 +120,9 @@ export default function CatalogPage({ cars }: {cars: Car[]}) {
               <span>{car.model}</span>
             </div>
             </Link>
-           { admin && <div className={styles.infoBlock}>
+           { 1 && <div className={styles.infoBlock}>
               <button className={styles.change}>Изменить</button>
-              <button className={styles.delete}>Удалить</button>
+              <button className={styles.delete} onClick={()=>delCar(car.id)} >Удалить</button>
             </div> }
           </li>
         ))}

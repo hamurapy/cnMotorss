@@ -16,6 +16,10 @@ export const updateCar = createAsyncThunk('update/car', (car: FormData) =>
   api.updateCarFetch(car)
 );
 
+export const deleteCar = createAsyncThunk('delete/car', (car: CarId) =>
+  api.deleteCarFetch(car)
+);
+
 const carsSlice = createSlice({
   name: 'cars',
   initialState,
@@ -34,8 +38,13 @@ const carsSlice = createSlice({
       })
       .addCase(updateCar.rejected, (state, action) => {
         state.error = action.error.message;
-      });
-      
+      })
+      .addCase(deleteCar.fulfilled, (state, action) => {
+        state.cars = state.cars.filter((car) => car.id !== action.payload);
+      })
+      .addCase(deleteCar.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
   },
 });
 
