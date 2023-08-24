@@ -18,7 +18,7 @@ export const updateCarFetch = async (obj: FormData): Promise<Car> => {
   };
 
   export const deleteCarFetch = async (id: CarId): Promise<number> => {
-    const res = await fetch(`/api/cars/${id}`, {
+    const res = await fetch(`http://localhost:4000/api/cars/${id}`, {
       method: 'DELETE',
     });
     return res.json();
