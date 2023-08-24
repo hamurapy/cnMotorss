@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './contact.module.css'
+import PhoneIcon from '@/components/layout/PhoneIcon';
 
 function ContactPage():JSX.Element {
   return (
@@ -28,16 +29,10 @@ function ContactPage():JSX.Element {
         <input type='text' placeholder='Ваш телефон'/>
         <textarea placeholder='Ваше сообщениие'/>
         <button>Отправить</button>
-      </form>
-        <div className={styles.phone}>
-            <Image
-					    src="/phone-black.svg"
-					    width={25}
-              height={25}
-					    alt="Продажа авто с пробегом"
-					    draggable={false}
-				    />
-            <Link href="tel: +79215555578">+7 (921) 555-55-78</Link>
+        </form>
+          <div className={styles.phone}>
+            <PhoneIcon/>
+            <Link className={styles.phoneLink} href="tel: +79215555578">+7 (921) 555-55-78</Link>
           </div>
         </div>
       </div>

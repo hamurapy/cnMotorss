@@ -20,11 +20,12 @@ const Meta: FC<PropsWithChildren<IMeta>>  = ({title, description, keywords}) =>{
         </>
       ): (
         <meta name="robots" content="noindex, nofollow" />
-      )}
-     <meta name="keywords"  content={keywords} />
-     <link rel="icon" href="/favicon.png" />
-     <meta http-equiv="cache-control" content="public" />
-     <meta name="robots" content="all" />
+        )}
+        
+    <meta name="keywords"  content={keywords} />
+    <link rel="icon" href="/favicon.png" />
+    <meta http-equiv="cache-control" content="public" />
+    <meta name="robots" content="all" />
     </Head>
     </>
   )
