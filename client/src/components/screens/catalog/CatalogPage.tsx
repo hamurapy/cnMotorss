@@ -8,7 +8,10 @@ import { RootState } from "@/store";
 
 export default function CatalogPage({ cars }: {cars: Car[]}) {
   const { admin } = useSelector((store: RootState) => store.auth.user);
-
+  const delCar = (carId): void => {
+    
+    dispatch(deleteCar(Number(carId)));
+  };
   
   return (
     <div className={styles.contentBlock}>
@@ -35,7 +38,7 @@ export default function CatalogPage({ cars }: {cars: Car[]}) {
             </Link>
            { admin && <div className={styles.infoBlock}>
               <button className={styles.change}>Изменить</button>
-              <button className={styles.delete}>Удалить</button>
+              <button className={styles.delete} onClick={()=>delCar(car.id)} >Удалить</button>
             </div> }
           </li>
         ))}
