@@ -24,11 +24,14 @@ export default function UpdateCar({ car }: { car: Car }): JSX.Element {
     }
     formDataObj.append('brand', formData.brand);
     formDataObj.append('model', formData.model);
+    formDataObj.append('color', formData.color);
+    formDataObj.append('liters', formData.liters.toString());
+    formDataObj.append('wheel', formData.wheel);
     formDataObj.append('engine', formData.engine);
-    formDataObj.append('year', formData.year);
-    formDataObj.append('mileage', formData.mileage);
-    formDataObj.append('power', formData.power);
-    formDataObj.append('price', formData.price);
+    formDataObj.append('year', formData.year.toString());
+    formDataObj.append('mileage', formData.mileage.toString());
+    formDataObj.append('power', formData.power.toString());
+    formDataObj.append('price', formData.price.toString());
     formDataObj.append('driveUnit', formData.driveUnit);
     formDataObj.append('transmission', formData.transmission);
     formDataObj.append('description', formData.description);
@@ -71,6 +74,61 @@ console.log(formDataObj);
           <div>
             <input {...register('mileage')} />
             <label htmlFor="mileage">пробег</label>
+          </div>
+          <div>
+            <input {...register('color')} />
+            <label htmlFor="color">цвет</label>
+          </div>
+          <div>
+          <select
+                {...register('liters')}
+              >
+                <option value="">Выберите вариант</option>
+                <option value="0.2">0.2 л</option> 
+                <option value="0.3">0.3 л</option> 
+                <option value="0.4">0.4 л</option> 
+                <option value="0.5">0.5 л</option> 
+                <option value="0.6">0.6 л</option> 
+                <option value="0.7">0.7 л</option> 
+                <option value="0.8">0.8 л</option> 
+                <option value="0.9">0.9 л</option> 
+                <option value="1.0">1.0 л</option> 
+                <option value="1.1">1.1 л</option> 
+                <option value="1.2">1.2 л</option> 
+                <option value="1.3">1.3 л</option> 
+                <option value="1.4">1.4 л</option> 
+                <option value="1.5">1.5 л</option> 
+                <option value="1.6">1.6 л</option> 
+                <option value="1.7">1.7 л</option> 
+                <option value="1.8">1.8 л</option> 
+                <option value="1.9">1.9 л</option> 
+                <option value="2.0">2.0 л</option> 
+                <option value="2.1">2.1 л</option> 
+                <option value="2.2">2.2 л</option> 
+                <option value="2.3">2.3 л</option> 
+                <option value="2.4">2.4 л</option> 
+                <option value="2.5">2.5 л</option> 
+                <option value="2.6">2.6 л</option> 
+                <option value="2.7">2.7 л</option> 
+                <option value="2.8">2.8 л</option> 
+                <option value="2.9">2.9 л</option> 
+                <option value="3.0">3.0 л</option> 
+                <option value="3.5">3.5 л</option> 
+                <option value="4.0">4.0 л</option>
+                <option value="4.5">4.5 л</option>
+                <option value="5.0">5.0 л</option>
+                <option value="5.5">5.5 л</option>
+                <option value="6.0">6.0 л</option>
+                <option value="7.0">7.0 л</option>
+                <option value="8.0">8.0 л</option>
+                <option value="9.0">9.0 л</option>
+                <option value="10.0">10.0 л</option>
+              </select>
+            <label htmlFor="liters">объем л</label>
+          </div>
+          <div>
+            <input {...register('wheel')} />
+            <label htmlFor="wheel">руль</label>
           </div>
           <div>
           <select

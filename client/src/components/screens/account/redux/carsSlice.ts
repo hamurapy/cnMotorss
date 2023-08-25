@@ -7,7 +7,6 @@ const initialState: CarsState = {
   error: 'error',
 };
 
-
 export const addCar = createAsyncThunk('add/car', (car: FormData) =>
   api.addCarFetch(car)
 );
