@@ -4,17 +4,17 @@
 .advantage{
   display: flex;
   justify-content: space-between;
-  align-items: center;
   flex-wrap: wrap;
+  margin-top: 4rem;
 }
 .advantageItem{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   width: 23%;
   margin-bottom: 2rem;
 }
+
 .advantageItem img{
   width: 50px;
   height: 50px;
@@ -45,6 +45,7 @@
 }
 .grey{
   background: #f3f3f3;
+  padding: 6rem 0;
 }
 
 /* Welcome */
@@ -154,12 +155,13 @@
   }
 }
 .icon{
-  width: 50px;
+  width: 80px;
   border: 1px solid #a20101;
-  border-radius: 50%;
-  padding: 1rem;
+  border-radius: 8px;
+  padding: 0.9rem;
   background: #fff;
   transition: 1s;
+  box-sizing: border-box;
 }
 .icon:hover{
   background: #a20101;
@@ -245,12 +247,18 @@
   .formHeader{
     width: 50%;
   }
+  .carsBlock li{
+    width: 48%;
+  }
 }
 @media screen and (max-width: 425px) {
   .advantageItem{
     width: 100%;
   }
   .formHeader{
+    width: 100%;
+  }
+  .carsBlock li{
     width: 100%;
   }
 }
