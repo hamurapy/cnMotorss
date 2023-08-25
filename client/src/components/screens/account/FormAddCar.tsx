@@ -1,8 +1,9 @@
-import React from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { CarWithOutId } from '../catalog/catalog.types';
-import { useAppDispatch } from '../../../store';
-import { addCar } from './redux/carsSlice';
+import React from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { CarWithOutId } from "../catalog/catalog.types";
+import { useAppDispatch } from "../../../store";
+import { addCar } from "./redux/carsSlice";
+import styles from "./account.module.css";
 
 function FormAddCar(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -18,7 +19,7 @@ function FormAddCar(): JSX.Element {
     const formData = new FormData();
 
     Object.keys(data.img).forEach((key: any) => {
-      formData.append('img', data.img[key]);
+      formData.append("img", data.img[key]);
     });
 
     formData.append('brand', data.brand);
@@ -35,17 +36,17 @@ function FormAddCar(): JSX.Element {
     formData.append('transmission', data.transmission);
     formData.append('description', data.description);
 
-
     dispatch(addCar(formData));
     reset();
   };
 
   return (
-    <div>
-      <form className="form__container" onSubmit={handleSubmit(onSubmit)}>
+    <>
+      <h3 className={styles.accountTitle}>Добавить авто</h3>
+      <form className={styles.accountForm} onSubmit={handleSubmit(onSubmit)}>
         <label className="form__label">
           Brand
-          <input {...register('brand', { required: true })} />
+          <input {...register("brand", { required: true })} />
         </label>
         <label className="form__label">
           Color
@@ -104,50 +105,44 @@ function FormAddCar(): JSX.Element {
         </label>
         <label className="form__label">
           Model
-          <input {...register('model', { required: true })} />
+          <input {...register("model", { required: true })} />
         </label>
         <label className="form__label">
           Engine
-          <select
-            {...register('engine', { required: true })}
-          >
-               <option value="">Выберите вариант</option>
-             <option value="Бензиновый">Бензиновый</option>
-                <option value="Дизельный">Дизельный</option>
-                <option value="Электрический">Электрический</option>
-                <option value="Гибридный">Гибридный</option>
-                <option value="Турбодизельный">Турбодизельный</option>
+          <select {...register("engine", { required: true })}>
+            <option value="">Выберите вариант</option>
+            <option value="Бензиновый">Бензиновый</option>
+            <option value="Дизельный">Дизельный</option>
+            <option value="Электрический">Электрический</option>
+            <option value="Гибридный">Гибридный</option>
+            <option value="Турбодизельный">Турбодизельный</option>
           </select>
         </label>
         <label className="form__label">
           Year
-          <input {...register('year', { required: true })} />
+          <input {...register("year", { required: true })} />
         </label>
         <label className="form__label">
           Mileage
-          <input {...register('mileage', { required: true })} />
+          <input {...register("mileage", { required: true })} />
         </label>
         <label className="form__label">
           Power
-          <input {...register('power', { required: true })} />
+          <input {...register("power", { required: true })} />
         </label>
         <label className="form__label">
           Drive unit
-          <select
-            {...register('driveUnit', { required: true })}
-          >
-               <option value="">Выберите вариант</option>
-             <option value="Передний">Передний</option>
-                <option value="Задний">Задний</option>
-                <option value="Полный">Полный</option>
-                <option value="Постоянный полный">Постоянный полный</option>
+          <select {...register("driveUnit", { required: true })}>
+            <option value="">Выберите вариант</option>
+            <option value="Передний">Передний</option>
+            <option value="Задний">Задний</option>
+            <option value="Полный">Полный</option>
+            <option value="Постоянный полный">Постоянный полный</option>
           </select>
         </label>
         <label className="form__label">
           Transmission
-          <select
-            {...register('transmission', { required: true })}
-          >
+          <select {...register("transmission", { required: true })}>
             <option value="">Выберите вариант</option>
             <option value="Механическая">Механическая</option>
             <option value="Автоматическая">Автоматическая</option>
@@ -156,23 +151,25 @@ function FormAddCar(): JSX.Element {
         </label>
         <label className="form__label">
           Price
-          <input {...register('price', { required: true })} />
+          <input {...register("price", { required: true })} />
         </label>
         <label className="form__label">
           Description
-          <input {...register('description', { required: true })} />
+          <input {...register("description", { required: true })} />
         </label>
         <label className="form__label">
           Image
           <input
             type="file"
-            {...register('img', { required: true })}
+            {...register("img", { required: true })}
             multiple
           />
         </label>
-        <button type="submit">Добавить Ta4чку</button>
+        <div className={styles.btnPosition}>
+          <button type="submit">Добавить авто</button>
+        </div>
       </form>
-    </div>
+    </>
   );
 }
 

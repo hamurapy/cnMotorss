@@ -47,7 +47,7 @@
 }
 .contactForm input{
   width: 100%;
-  color: #00000080;
+  color: #1e1e1e;
   border-color: #0000001f;
   background-color: #fff;
   padding: 0.5rem;
@@ -71,7 +71,7 @@
 }
 .contactForm textarea{
   width: 100%;
-  color: #00000080;
+  color: #1e1e1e;
   border-color: #0000001f;
   background-color: #fff;
   padding: 0.5rem;
@@ -118,10 +118,10 @@
 }
 .contactBlock p{ 
   font-size: 1.2rem;
-  color: #00000080;
+  color: #1e1e1e;
   font-weight: 300;
   font-family: 'Raleway', sans-serif;
-  margin-bottom: 2rem;
+  margin: 2rem 0;
 }
 .phone{
   display: flex;
@@ -139,12 +139,12 @@ p.sideText{
   text-align: justify;
   line-height: 1.5;
   margin-bottom: 1rem;
-  color: #00000075;
+  color: #1e1e1e;
 }
 .phoneLink{
   font-family: 'Inter', sans-serif;
   padding-top: 2px;
-  color: #00000080;
+  color: #1e1e1e;
 }
 @media screen and (max-width: 1024px) {
   .contentBlock{

@@ -41,15 +41,6 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
         </h1>
         <div className={styles.twoColumn}>
           <div className={styles.side}>
-            {/* <Image
-					      src={`http://localhost:4000${car.photos[0].img}`}
-                alt={`${car.brand} ${car.model}`}
-                width={0}
-                height={0}
-                sizes="100vw"
-                style={{ width: '100%', height: 'auto' }}
-                priority={true}
-				      /> */}
             <SingleCarSlider photos={car.photos} />
           </div>
           <div className={styles.side}>

@@ -1,13 +1,19 @@
-import React from 'react'
-import Layout from '@/app/layout'
-import AccountPage from '@/components/screens/account/AccountPage'
+import React, { useEffect } from "react";
+import AccountPage from "@/components/screens/account/AccountPage";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
+import { useRouter } from "next/router";
 
-function Account():JSX.Element {
-  return (
-    <Layout title={'Личный кабинет'} description={''} keywords={''}>
-    <AccountPage/>
-    </Layout>
-  )
+function Account(): JSX.Element {
+  const { admin } = useSelector((store: RootState) => store.auth.user);
+  const router = useRouter();
+  // useEffect(() => {
+  //   if (!admin) {
+  //     router.replace("/");
+  //   }
+  // }, [admin, router]);
+
+  return <>{admin && <AccountPage />}</>;
 }
 
-export default Account
+export default Account;
