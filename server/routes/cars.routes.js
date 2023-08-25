@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const router = require('express').Router();
 const multer = require('multer');
+const { Op } = require('sequelize');
 require('regenerator-runtime/runtime');
 const { sequelize } = require('../db/models');
 const { Car, PhotoCar } = require('../db/models');
@@ -11,12 +12,58 @@ const upload = multer({ storage });
 const fileUploadMiddleware = require('../middleware/fileuploadMiddleware');
 
 router.route('/').get(async (req, res) => {
+  console.log(req.query);
+
   try {
+    const {
+      priceFrom, priceTo, yearFrom, yearTo, brand, model,
+    } = req.query;
+    const filters = {};
+
+    if (priceFrom && priceTo) {
+      filters.price = {
+        [Op.between]: [priceFrom, priceTo],
+      };
+    } else if (priceFrom) {
+      filters.price = {
+        [Op.gte]: priceFrom,
+      };
+    } else if (priceTo) {
+      filters.price = {
+        [Op.lte]: priceTo,
+      };
+    }
+
+    if (yearFrom && yearTo) {
+      filters.year = {
+        [Op.between]: [yearFrom, yearTo],
+      };
+    } else if (yearFrom) {
+      filters.year = {
+        [Op.gte]: yearFrom,
+      };
+    } else if (yearTo) {
+      filters.year = {
+        [Op.lte]: yearTo,
+      };
+    }
+
+    if (brand) {
+      filters.brand = brand;
+    }
+
+    if (model) {
+      filters.model = model;
+    }
+
     const cars = await Car.findAll({
+      where: filters,
       order: [['createdAt', 'DESC']],
       raw: true,
     });
+
     const carIds = cars.map((car) => car.id);
+
     const photos = await PhotoCar.findAll({
       where: {
         carId: carIds,
@@ -24,6 +71,7 @@ router.route('/').get(async (req, res) => {
       attributes: ['carId', 'img'],
       group: ['carId', 'PhotoCar.id'],
     });
+
     const carsWithPhotos = cars.map((car) => {
       const carPhotos = photos.filter((photo) => photo.carId === car.id);
       return {
@@ -32,6 +80,9 @@ router.route('/').get(async (req, res) => {
         model: car.model,
         year: car.year,
         mileage: car.mileage,
+        color: car.color,
+        liters: car.liters,
+        wheel: car.wheel,
         engine: car.engine,
         power: car.power,
         price: car.price,
@@ -41,6 +92,7 @@ router.route('/').get(async (req, res) => {
         photos: carPhotos.map((photo) => ({ img: photo.img })),
       };
     });
+
     res.json(carsWithPhotos);
   } catch (error) {
     res.json({ error: error.message });
@@ -87,11 +139,14 @@ router.delete('/:carId', async (req, res) => {
 });
 
 router.post('/', upload.array('img'), async (req, res) => {
-  const t = await sequelize.transaction(); // Начало транзакции
+  const t = await sequelize.transaction();
   try {
     const {
       brand,
       model,
+      color,
+      liters,
+      wheel,
       engine,
       year,
       mileage,
@@ -119,6 +174,9 @@ router.post('/', upload.array('img'), async (req, res) => {
       {
         brand,
         model,
+        color,
+        liters,
+        wheel,
         engine,
         year,
         mileage,
@@ -155,6 +213,9 @@ router.put('/:carId', upload.array('img'), async (req, res) => {
   const {
     brand,
     model,
+    color,
+    liters,
+    wheel,
     engine,
     year,
     mileage,
@@ -171,6 +232,9 @@ router.put('/:carId', upload.array('img'), async (req, res) => {
       {
         brand,
         model,
+        color,
+        liters,
+        wheel,
         engine,
         year,
         mileage,

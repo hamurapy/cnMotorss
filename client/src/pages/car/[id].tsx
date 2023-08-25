@@ -55,24 +55,24 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
           <div className={styles.side}>
             <div className={styles.sideInfo}>
               <p className={styles.listName}>Марка:</p>
-              <p className={styles.listDesription}>{car?.brand}</p>
+              <p className={styles.listDesription}>{car.brand}</p>
             </div>
             <div className={styles.sideInfo}>
               <p className={styles.listName}>Модель:</p>
-              <p className={styles.listDesription}>{car?.model}</p>
+              <p className={styles.listDesription}>{car.model}</p>
             </div>
             <div className={styles.sideInfo}>
               <p className={styles.listName}>Год выпуска:</p>
-              <p className={styles.listDesription}>{car?.year}</p>
+              <p className={styles.listDesription}>{car.year}</p>
             </div>
             <div className={styles.sideInfo}>
               <p className={styles.listName}>Цвет:</p>
-              <p className={styles.listDesription}>Синий</p>
+              <p className={styles.listDesription}>{car.color}</p>
             </div>
             <div className={styles.sideInfo}>
               <p className={styles.listName}>Двигатель:</p>
               <p className={styles.listDesription}>
-                2.0 л/{car?.power} л.с./{car?.engine}
+                {car.liters} л/{car.power} л.с./{car.engine}
               </p>
             </div>
             <div className={styles.sideInfo}>
@@ -81,26 +81,26 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
             </div>
             <div className={styles.sideInfo}>
               <p className={styles.listName}>Руль:</p>
-              <p className={styles.listDesription}>Левый</p>
+              <p className={styles.listDesription}>{car.wheel}</p>
             </div>
             <div className={styles.sideInfo}>
               <p className={styles.listName}>Пробег:</p>
-              <p className={styles.listDesription}>{car?.mileage} км</p>
+              <p className={styles.listDesription}>{car.mileage} км</p>
             </div>
             <div className={styles.sideInfo}>
               <p className={styles.listName}>Коробка:</p>
-              <p className={styles.listDesription}>{car?.driveUnit}</p>
+              <p className={styles.listDesription}>{car.driveUnit}</p>
             </div>
             <div className={styles.sideInfo}>
               <p className={styles.price}>Цена:</p>
-              <p className={styles.listDesription}>{car?.price}</p>
+              <p className={styles.listDesription}>{car.price}</p>
             </div>
           </div>
         </div>
         {car.description ? (
           <>
             <h3 className={styles.carDescription}>Описание:</h3>
-            <p>{car?.description}</p>
+            <p>{car.description}</p>
           </>
         ) : (
           <></>

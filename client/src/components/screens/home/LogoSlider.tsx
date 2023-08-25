@@ -36,27 +36,27 @@ const carslogos = [
     logo: '/logo/carlogo7.png'
   },
   {
-    id: 8,
+    id: 9,
     logo: '/logo/carlogo8.png'
   },
   {
-    id: 8,
+    id: 10,
     logo: '/logo/carlogo9.png'
   },
   {
-    id: 8,
+    id: 11,
     logo: '/logo/carlogo10.png'
   },
   {
-    id: 8,
+    id: 12,
     logo: '/logo/carlogo11.png'
   },
   {
-    id: 8,
+    id: 13,
     logo: '/logo/carlogo12.png'
   },
   {
-    id: 8,
+    id: 14,
     logo: '/logo/carlogo13.png'
   },
 ];
