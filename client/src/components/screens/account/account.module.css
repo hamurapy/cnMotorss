@@ -1,5 +1,131 @@
 .contentBlock{
-  width: 86%;
-  margin: 8rem auto 5rem;
+  width: 100%;
+  padding: 1rem 5rem;
   box-sizing: border-box;
+}
+.accountTitle{
+  font-size: 1.5rem; 
+  color: #5a5a5a;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+.accountTitle:after {
+  content: '';
+  display: block;
+  height: 1px; 
+  background: #a20101; 
+  width: 100px; 
+  margin: 10px 0; 
+  transition: 1s; 
+}
+.accountTitle:hover:after {
+  width: 200px; 
+  transition: ease-out 1s; 
+}
+.accountForm{
+  width: 100%;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-sizing: border-box;
+  box-shadow: 0 3px 14px #0000001f;
+  text-align: right;
+  background: #fff;
+  border: 0;
+}
+.accountForm select{
+  width: 48%;
+  color: #1e1e1e;
+  border-color: #0000001f;
+  background-color: #fff;
+  padding: 0.5rem;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: 300;
+  font-family: 'Raleway', sans-serif;
+  outline: none;
+  transition: 1s;
+  margin: 0.5rem 0;
+}
+.accountForm select:hover{
+  border-color: #a202017d;
+}
+.accountForm select:focus{
+  outline: none;
+}
+.accountForm select:active{
+  outline: none;
+}
+.accountForm input{
+  width: 100%;
+  color: #1e1e1e;
+  border-color: #0000001f;
+  background-color: #fff;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+  font-family: 'Raleway', sans-serif;
+  outline: none;
+  transition: 1s;
+  position: relative;
+}
+.accountForm input:hover{
+  border-color: #a202017d;
+}
+.accountForm input:focus{
+  outline: none;
+}
+.accountForm input:active{
+  outline: none;
+}
+.btnPosition{
+  width:100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.accountForm button, .editBtn{
+  width: auto;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #a20201;
+  background: #a20201;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: 300;
+  font-family: 'Raleway', sans-serif;
+  transition: 1s;
+  margin: 1rem 0;
+}
+.accountForm button:hover, .editBtn:hover{
+  width: auto;
+  background: #660101;
+  border: 1px solid #660101;
+}
+.smallForm{
+  width: 30%;
+}
+@media screen and (max-width: 1024px) {
+  .contentBlock{
+    padding: 1rem 1rem;
+  }
+  .smallForm{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .contentBlock{
+    padding: 1rem 1rem;
+  }
+  .smallForm{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 540px) {
+  .contentBlock{
+    padding: 1rem 1rem;
+  }
+  .smallForm{
+    width: 100%;
+  }
 }

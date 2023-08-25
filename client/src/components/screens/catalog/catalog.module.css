@@ -251,7 +251,7 @@ h3.carDescription{
 }
 .filter select{
   width: 48%;
-  color: #00000080;
+  color: #1e1e1e;
   border-color: #0000001f;
   background-color: #fff;
   padding: 0.5rem;
@@ -274,7 +274,7 @@ h3.carDescription{
 }
 .filter input{
   width: 50%;
-  color: #00000080;
+  color: #1e1e1e;
   border-color: #0000001f;
   background-color: #fff;
   padding: 0.5rem;
@@ -316,7 +316,7 @@ h3.carDescription{
   background: #a20201;
   color: #fff;
   border-radius: 5px;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 300;
   font-family: 'Raleway', sans-serif;
   transition: 1s;

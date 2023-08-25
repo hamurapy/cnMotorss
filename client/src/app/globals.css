@@ -168,12 +168,37 @@ form button:hover{
 .carSwiper .swiper-pagination-bullet-active{
   background: #fff;
 }
+.singleCarSwiper{
+  width: 100%;
+}
+.singleCarSwiper .swiper-button-prev, .singleCarSwiper .swiper-button-next{
+  color: #fff;
+}
+.singleCarSwiper .swiper-pagination-bullet-active{
+  background: #fff;
+}
+.css-k008qs{
+  width: 100%;
+}
+.css-zxtyt4-MuiPaper-root-MuiAppBar-root{
+  z-index: 99999 !important;
+  width: 100% !important;
+}
+.css-1o5pq7n{
+  width: 15%;
+}
 @media screen and (max-width: 1024px) {
   header{
     width: 100% !important;
   }
   section {
     padding: 6rem 2rem;
+  }
+  .css-k008qs{
+    width: 100%;
+  }
+  .css-1o5pq7n{
+    width: 23%;
   }
 }
 @media screen and (max-width: 820px){
@@ -182,6 +207,12 @@ form button:hover{
   }
   .css-2uchni {
     width: 3%;
+  }
+  .css-k008qs{
+    width: 100%;
+  }
+  .css-1o5pq7n{
+    width: 23%;
   }
 }
 @media screen and (max-width: 768px) {
@@ -194,10 +225,25 @@ form button:hover{
   .css-1ovggvf{
     width: 3%;
   }
+  .css-k008qs{
+    width: 100%;
+  }
+  .css-1o5pq7n{
+    width: 30%;
+  }
 }
 @media screen and (max-width: 540px) {
   .MuiToolbar-root {
     height: 100px;
+  }
+  .css-k008qs{
+    width: 100%;
+  }
+  .css-1v5u2yv{
+    width: 100%;
+  }
+  .css-1o5pq7n{
+    width: 0;
   }
 }
 @media screen and (max-width: 425px) {
@@ -215,5 +261,11 @@ form button:hover{
   }
   section {
     padding: 4rem 1rem;
+  }
+  .css-k008qs{
+    width: 100%;
+  }
+  .css-1o5pq7n{
+    width: 0;
   }
 }
