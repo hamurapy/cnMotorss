@@ -2,11 +2,14 @@ export type Car = {
   id: number
   brand: string
   model: string
-  year: string
-  mileage: string
+  year: number
+  mileage: number
+  color: string
+  liters: number
+  wheel: string
   engine: string
-  power: string
-  price: string
+  power: number
+  price: number
   driveUnit: string
   transmission: string
   description: string

@@ -9,7 +9,6 @@ export const addCarFetch = async (obj: FormData): Promise<Car> => {
 };
 
 export const updateCarFetch = async (obj: FormData): Promise<Car> => {
-  
     const res = await fetch(`http://localhost:4000/api/cars/${obj.get('id')}`, {
       method: 'PUT',
         body: obj,
