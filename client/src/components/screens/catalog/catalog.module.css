@@ -1,7 +1,21 @@
 .contentBlock{
-  width: 83%;
+  width: 60%;
   margin: 8rem auto 5rem;
   box-sizing: border-box;
+}
+.singlePhoto{
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+.singlePhotoimg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: 1s;
 }
 .imgBlock {
   padding: 30%;
@@ -22,31 +36,42 @@
   transform: scale(1.1);
 }
 .carsBlock{
-  width: 75%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   list-style: none;
 }
-.carsBlock li{
+.listItem{
   width: 100%;
   box-sizing: border-box;
   padding: 1rem;
   margin-bottom: 0.5rem;
   background: #fff;
-  border-radius: 8px 8px 0px 0px;
-  border-bottom: 1px solid #e1e1e1;
+  border-radius: 8px;
   box-shadow: none;
   transition: 1s;
   position: relative;
   z-index: 1;
 }
-.carsBlock li:hover{
-  border-radius: 8px;
-  border-bottom: 1px solid #fff;
+.listItem:before{
+  position: absolute;
+  top: 0;
+  right: 16px;
+  left: 16px;
+  display: block;
+  height: 1px;
+  content: " ";
+  opacity: 1;
+  border-top: 1px solid #0000001a;
+}
+.listItem:hover{
   box-shadow: 0 5px 20px 0 #0000001a;
   position: relative;
   z-index: 3;
+}
+.listItem:hover+.listItem:before,.listItem:hover.listItem:before {
+  opacity: 0;
 }
 .photoBlock{
   width: 30%;
@@ -125,6 +150,13 @@
   background: #600302;
   color: #fff;
 }
+.china{
+  color: #00000075;
+  width: 96%;
+  margin: 0.5rem 0;
+  font-size: 0.8rem;
+  text-align: right;
+}
 /* Single Car*/
 .twoColumn{
   width: 100%;
@@ -151,30 +183,29 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid #a20201;
-  padding: 0 0 1rem;
+  padding: 0 0 0.5rem;
   box-sizing: border-box;
 }
-.sideInfo p.listItem{
-  width: 40%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  font-size: 1.1rem;
-  font-weight: bold;
-  background: #f3f3f3;
-  box-sizing: border-box;
-  padding: 0.5rem;
-}
-.sideInfo p.listDesription{
-  width: 60%;
+.sideInfo p.listName{
+  width: 30%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   font-size: 1.1rem;
   font-weight: 300;
   box-sizing: border-box;
-  padding: 0.5rem;
+  padding: 0 0 0.5rem;
+  color: #00000080;
+}
+.sideInfo p.listDesription{
+  width: 70%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 300;
+  box-sizing: border-box;
+  padding: 0 0 0.5rem;
 }
 p.price{
   color: #a20101;
@@ -185,16 +216,15 @@ p.price{
   justify-content: flex-start;
   align-items: center;
   box-sizing: border-box;
-  padding: 0.5rem;
+  padding: 0 0 0.5rem;
 }
 h3.carDescription{
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   font-weight: 300;
-  color: #a20201;
-  text-transform: uppercase;
+  color: #00000080;
   text-align: justify;
   margin-bottom: 1rem;
-  border-top: 1px solid #a20201;
+  border-top: 1px solid #00000080;
 }
 /* Filter */
 .catalogBlock{
@@ -204,15 +234,23 @@ h3.carDescription{
   align-items: center;
 }
 .filter{
-  width: 75%;
+  width: 100%;
   padding: 2rem;
   border-radius: 8px;
   margin-bottom: 2rem;
   box-sizing: border-box;
   box-shadow: 0 3px 14px #0000001f;
+  text-align: right;
+}
+.brand{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 }
 .filter select{
-  width: 100%;
+  width: 48%;
   color: #00000080;
   border-color: #0000001f;
   background-color: #fff;
@@ -223,6 +261,7 @@ h3.carDescription{
   font-family: 'Raleway', sans-serif;
   outline: none;
   transition: 1s;
+  margin: 0.5rem 0;
 }
 .filter select:hover{
   border-color: #a202017d;
@@ -233,16 +272,78 @@ h3.carDescription{
 .filter select:active{
   outline: none;
 }
-@media screen and (max-width: 768px) {
-  .carsBlock li{
-    width: 48%;
+.filter input{
+  width: 50%;
+  color: #00000080;
+  border-color: #0000001f;
+  background-color: #fff;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+  font-family: 'Raleway', sans-serif;
+  outline: none;
+  transition: 1s;
+  position: relative;
+}
+.filter input:hover{
+  border-color: #a202017d;
+}
+.filter input:focus{
+  outline: none;
+}
+.filter input:active{
+  outline: none;
+}
+.inputLeft{
+  border-radius: 5px 0 0 5px;
+}
+.inputLeft:hover{
+  border-radius: 5px 0 0 5px;
+  z-index: 2;
+}
+.inputRight{
+  border-radius: 0 5px 5px 0;
+  margin-left: -1px;
+}
+.filterOptions{
+  display: flex;
+  width: 48%;
+  flex-wrap: nowrap;
+}
+.filter button{
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #a20201;
+  background: #a20201;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 300;
+  font-family: 'Raleway', sans-serif;
+  transition: 1s;
+  margin: 1rem 0;
+}
+.filter button:hover{
+  background: #660101;
+  border: 1px solid #660101;
+}
+@media screen and (max-width: 1024px) {
+  .contentBlock{
+    width: 80%;
   }
+}
+@media screen and (max-width: 768px) {
   .side{
     width: 100%;
+  }
+  .contentBlock{
+    width: 96%;
   }
 }
 @media screen and (max-width: 425px) {
   .carsBlock li{
+    width: 100%;
+  }
+  .filter select, .filterOptions{
     width: 100%;
   }
 }

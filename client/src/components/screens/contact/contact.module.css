@@ -1,7 +1,15 @@
 .contentBlock{
-  width: 83%;
+  width: 60%;
   margin: 8rem auto 5rem;
   box-sizing: border-box;
+}
+.aboutBlock{
+  width: 60%;
+  margin: 0 auto 5rem;
+  box-sizing: border-box;
+}
+.aboutPhoto{
+  margin-top: 0rem;
 }
 .twoColumn{
   width: 100%;
@@ -25,53 +33,95 @@
   width: 100%;
   height: auto;
 }
-.side form{
+.contactForm{
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 5%;
+  padding: 2rem;
+  border-radius: 8px;
+  margin: 0;
   box-sizing: border-box;
-  background: #000;
-  margin: 2rem auto;
-  border: 1px solid #a20201;
+  box-shadow: 0 3px 14px #0000001f;
+  border: 0;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
 }
-.side form input{
-  width: 29%;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 300;
-  font-family: Raleway,sans-serif;
-  padding: 0.5rem;
-  border: 1px solid #a4a4a4;
-  background: transparent;
-  border-radius: 5px;
-}
-.side form textarea{
+.contactForm input{
   width: 100%;
-  color: #fff;
+  color: #00000080;
+  border-color: #0000001f;
+  background-color: #fff;
+  padding: 0.5rem;
   font-size: 1rem;
   font-weight: 300;
-  font-family: Raleway,sans-serif;
-  padding: 0.5rem;
-  border: 1px solid #a4a4a4;
-  background: transparent;
   border-radius: 5px;
-  margin: 1rem 0;
+  font-family: 'Raleway', sans-serif;
+  outline: none;
+  transition: 1s;
+  position: relative;
+  margin: 0.5rem 0;
 }
-.side form button{
+.contactForm input:hover{
+  border-color: #a202017d;
+}
+.contactForm input:focus{
+  outline: none;
+}
+.contactForm input:active{
+  outline: none;
+}
+.contactForm textarea{
+  width: 100%;
+  color: #00000080;
+  border-color: #0000001f;
+  background-color: #fff;
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-weight: 300;
+  border-radius: 5px;
+  font-family: 'Raleway', sans-serif;
+  outline: none;
+  transition: 1s;
+  position: relative;
+  margin: 0.5rem 0;
+}
+.contactForm textarea:hover{
+  border-color: #a202017d;
+}
+.contactForm textarea:focus{
+  outline: none;
+}
+.contactForm textarea:active{
+  outline: none;
+}
+.btnPosition{
+  width:100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.contactForm button{
   border: 1px solid #a20201;
   background: #a20201;
   border-radius: 5px;
   transition: 1s;
   padding: 0.5rem;
 }
-.side form button:hover{
-  border: 1px solid #a20201;
-  background: transparent;
-  border-radius: 5px;
-  transition: 1s;
-  padding: 0.5rem;
+.contactForm button:hover{
+  background: #660101;
+  border: 1px solid #660101;
+}
+.contactBlock{
+  border-right: 1px solid #0000001a;
+  border-bottom: 0px solid #0000001a;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2rem 2rem 0;
+}
+.contactBlock p{ 
+  font-size: 1.2rem;
+  color: #00000080;
+  font-weight: 300;
+  font-family: 'Raleway', sans-serif;
+  margin-bottom: 2rem;
 }
 .phone{
   display: flex;
@@ -88,26 +138,43 @@ p.sideText{
   font-family: 'Raleway', sans-serif;
   text-align: justify;
   line-height: 1.5;
-}
-h3.aboutTitle{
-  font-size: 1.5rem;
-  font-weight: 300;
-  color: #a20201;
-  text-transform: uppercase;
-  text-align: justify;
   margin-bottom: 1rem;
+  color: #00000075;
 }
 .phoneLink{
   font-family: 'Inter', sans-serif;
   padding-top: 2px;
+  color: #00000080;
+}
+@media screen and (max-width: 1024px) {
+  .contentBlock{
+    width: 80%;
+  }
 }
 @media screen and (max-width: 768px) {
   .side{
     width: 100%;
   }
+  .aboutPhoto{
+    margin-top: 2rem;
+  }
+  .aboutBlock{
+    width: 96%;
+  }
+  .contentBlock{
+    width: 96%;
+  }
+  .contactBlock{
+    border-right: 0px solid #0000001a;
+    border-bottom: 1px solid #0000001a;
+    padding: 2rem;
+  }
 } 
 @media screen and (max-width: 425px) {
   .side form input{
     width: 100%;
+  }
+  .aboutPhoto{
+    margin-top: 6rem;
   }
 }
