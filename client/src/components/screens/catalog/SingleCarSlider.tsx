@@ -7,6 +7,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { CarPhotos } from "./catalog.types";
 import FsLightbox from "fslightbox-react";
+import styles from "@/components/screens/catalog/catalog.module.css";
 
 function SingleCarSlider({ photos }: { photos: CarPhotos }): JSX.Element {
   const [toggler, setToggler] = useState(false);
@@ -16,6 +17,7 @@ function SingleCarSlider({ photos }: { photos: CarPhotos }): JSX.Element {
       key={index}
       src={`http://localhost:4000${photo.img}`}
       alt=""
+      // layout="fill"
       width={0}
       height={0}
       sizes="100vw"
@@ -38,16 +40,18 @@ function SingleCarSlider({ photos }: { photos: CarPhotos }): JSX.Element {
       >
         {photos.map((photo, index) => (
           <SwiperSlide key={index}>
-            <Image
-              onClick={() => setToggler(!toggler)}
-              src={`http://localhost:4000${photo.img}`}
-              alt=""
-              width={0}
-              height={0}
-              sizes="100vw"
-              style={{ width: "100%", height: "auto" }}
-              priority={true}
-            />
+            <div className={styles.imgBlock}>
+              <Image
+                onClick={() => setToggler(!toggler)}
+                src={`http://localhost:4000${photo.img}`}
+                alt=""
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{ width: "100%", height: "60vh" }}
+                priority={true}
+              />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>

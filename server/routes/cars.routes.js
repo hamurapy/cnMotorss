@@ -12,8 +12,6 @@ const upload = multer({ storage });
 const fileUploadMiddleware = require('../middleware/fileuploadMiddleware');
 
 router.route('/').get(async (req, res) => {
-  console.log(req.query);
-
   try {
     const {
       priceFrom, priceTo, yearFrom, yearTo, brand, model, engine,

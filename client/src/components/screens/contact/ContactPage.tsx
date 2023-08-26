@@ -1,12 +1,12 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import styles from "./contact.module.css";
 import PhoneIcon from "@/components/layout/PhoneIcon";
+import styles from "./contact.module.css";
 
 function ContactPage(): JSX.Element {
   return (
-    <div className={styles.contentBlock}>
+    <div className="contentBlock">
       <h1>Контакты</h1>
       <div className={styles.twoColumn}>
         <div className={styles.side}>
@@ -37,7 +37,7 @@ function ContactPage(): JSX.Element {
             <input type="text" placeholder="Ваш E-mail" />
             <input type="text" placeholder="Ваш телефон" />
             <textarea placeholder="Ваше сообщениие" />
-            <div className={styles.btnPosition}>
+            <div className="btnPosition">
               <button>Отправить</button>
             </div>
           </form>

@@ -23,9 +23,9 @@ import Logo from "@/components/layout/Logo";
 import { useAppDispatch } from "@/store";
 import { useRouter } from "next/router";
 import { logout } from "../auth/auth.slice";
-import styles from "./account.module.css";
 import AccountInfo from "./AccountInfo";
-import FormAddCar from "./FormAddCar";
+import AddCar from "./AddCar";
+import UpdateCar from "./UpdateCar";
 
 const drawerWidth = 240;
 
@@ -188,13 +188,11 @@ function AccountPage(props: Props): JSX.Element {
         }}
       >
         <Toolbar />
-        <div className={styles.contentBlock}>
-          {activeTab === 1 && <AccountInfo />}
-          {activeTab === 2 && "222"}
-          {activeTab === 3 && "333"}
-          {activeTab === 4 && <FormAddCar />}
-          {activeTab === 5 && "555"}
-        </div>
+        {activeTab === 1 && <AccountInfo />}
+        {activeTab === 2 && "222"}
+        {activeTab === 3 && "333"}
+        {activeTab === 4 && <AddCar />}
+        {activeTab === 5 && <UpdateCar />}
       </Box>
     </Box>
   );

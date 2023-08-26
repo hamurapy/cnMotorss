@@ -1,62 +1,30 @@
-.contentBlock{
-  width: 86%;
-  margin: 8rem auto 5rem;
-  box-sizing: border-box;
-}
 .adminBlock{
   width: 100%;
   text-align: center;
 }
 .adminBlock img{
   width: 100px;
-  margin: auto;
+  margin: 0 auto 2rem;
 }
 .adminBlock form{
   width: 30%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 2%;
-  box-sizing: border-box;
-  background: #000;
-  margin: 2% auto;
-  border: 1px solid #a20201;
-}
-.adminBlock form input{
-  width: 100%;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 300;
-  font-family: Raleway,sans-serif;
-  text-transform: none;
-  margin: 1rem 0;
-  padding: 0.5rem;
-  border: 1px solid #a4a4a4;
-  background: transparent;
-  border-radius: 5px;
-  outline: none;
-}
-.adminBlock form input:focus{
-  outline: none;
-  background: transparent;
-  color: #fff;
-}
-.adminBlock form button{
-  border: 1px solid #a20201;
-  background: #a20201;
-  border-radius: 5px;
-  transition: 1s;
-  padding: 0.5rem;
-  width: 100%;
-  margin: 1rem 0;
-}
-.adminBlock form button:hover{
-  border: 1px solid #a20201;
-  background: transparent;
-  width: 100%;
+  margin: auto;
 }
 .error{
   width: 100%;
   text-align: center;
   color: #a20201;
+}
+@media screen and (max-width: 768px) {
+  .adminBlock form{
+    width: 50%;
+  }
+  .adminBlock form input{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 425px) {
+  .adminBlock form{
+    width: 100%;
+  }
 }
