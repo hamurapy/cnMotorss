@@ -5,7 +5,7 @@ import styles from '@/components/screens/catalog/catalog.module.css'
 import { Car } from '../catalog/catalog.types';
 
 function Cars({ cars}: {cars: Car[]}):JSX.Element {
-  
+  console.log(cars);
   return (
     <section>
       <h2>Каталог</h2>

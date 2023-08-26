@@ -10,10 +10,26 @@ const upload = multer({ storage });
 
 const fileUploadMiddleware = require('../middleware/fileuploadMiddleware');
 
-router.route('/').get(async (req, res) => {
+router.route('/ss').get(async (req, res) => {
   try {
     const cars = await Car.findAll({
+      attributes: ['id'],
+      raw: true,
+    });
+    const carIds = cars.map((car) => car.id);
+    res.json(carIds);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch car ids.' });
+  }
+});
+
+router.route('/').get(async (req, res) => {
+  try {
+    const { startIndex, endIndex } = req.query; // Извлекаем параметры из запроса
+    const cars = await Car.findAll({
       order: [['createdAt', 'DESC']],
+      offset: startIndex,
+      limit: endIndex - startIndex,
       raw: true,
     });
     const carIds = cars.map((car) => car.id);
@@ -68,7 +84,6 @@ router.route('/:id').get(async (req, res) => {
       ...car,
       photos: photos.map((photo) => ({ img: photo.img })),
     };
-
     return res.json(carWithPhotos);
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -170,6 +185,7 @@ router.put('/:carId', upload.array('img'), async (req, res) => {
     const car = await Car.update(
       {
         brand,
+        
         model,
         engine,
         year,
@@ -209,5 +225,6 @@ router.put('/:carId', upload.array('img'), async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
 
 module.exports = router;
