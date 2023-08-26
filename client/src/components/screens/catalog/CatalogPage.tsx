@@ -1,35 +1,43 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect } from "react";
-import { Car, CarId } from "./catalog.types";
-import Image from "next/image";
-import { useSelector } from "react-redux";
-import { useAppDispatch } from "../../../store";
-import styles from "./catalog.module.css";
-import Link from "next/link";
-import { deleteCar } from "../account/redux/carsSlice";
-import { RootState } from "@/store";
-import { useState } from "react";
+
+import React, { useEffect, useState } from 'react';
+import { Car, CarId } from "./catalog.types"
+import Image from 'next/image'
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../../../store';
+import styles from './catalog.module.css'
+import Link from "next/link"
+import { deleteCar } from '../account/redux/carsSlice';
+import { RootState } from "@/store";       
 import CarSlider from "../home/CarSlider";
 
 export default function CatalogPage({ cars }: { cars: Car[] }) {
+  
   const { admin } = useSelector((store: RootState) => store.auth.user);
   const dispatch = useAppDispatch();
+  const itemsPerPage = 3; // Количество машин на странице
+
+  const initialCars = cars; // Сохраняем параметр в другой переменной
+  const [currentPage, setCurrentPage] = useState(1);
+  const [displayedCars, setDisplayedCars] = useState(initialCars.slice(0, itemsPerPage)); 
+
+  const handlePageChange = async (page: number) => {
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    
+    // Отправляем запрос на сервер для получения машин на указанной странице
+    const res = await fetch(`http://localhost:4000/api/cars?startIndex=${startIndex}&endIndex=${endIndex}`);
+    const newCars = await res.json();
+    
+    setDisplayedCars(newCars); 
+    setCurrentPage(page);
+  };
 
   const delCar = (carId: CarId): void => {
     dispatch(deleteCar(Number(carId)));
     // window.location.reload()
   };
-  // useEffect(() => {
-  //   async function getStaticProps() {
-  //     const res = await fetch('http://localhost:4000/api/cars')
-  //     const cars = await res.json()
-  //     return {
-  //       props: {
-  //         cars,
-  //       },
-  //     }
-  //   }
-  // }, [cars]);
+
 
   const brands = Array.from(new Set(cars.map((car) => car.brand)));
   const [carsFilter, setCarsFilter] = useState(cars);
@@ -288,7 +296,7 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
           * Цены на сайте указаны в национальной валюте Китая
         </p>
         <ul className={styles.carsBlock}>
-          {carsFilter.map((car) => (
+          {displayedCars.map((car) => (
             <li className={styles.listItem} key={car.id}>
               <Link href={`/car/${car.id}`}>
                 <div className={styles.cardBlock}>
@@ -311,21 +319,20 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
                   </div>
                 </div>
               </Link>
-              {/* {admin && (
-                <div className={styles.infoBlock}>
-                  <button className={styles.change}>Изменить</button>
-                  <button
-                    className={styles.delete}
-                    onClick={() => delCar(car.id)}
-                  >
-                    Удалить
-                  </button>
-                </div>
-              )} */}
+              
             </li>
           ))}
+          <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+          Предыдущая
+        </button>
+        <span>Страница {currentPage}</span>
+        <button onClick={() => handlePageChange(currentPage + 1)} disabled={cars.length === 0}>
+          Следующая
+        </button>
         </ul>
+
       </div>
     </div>
   );
 }
+

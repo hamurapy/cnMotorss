@@ -9,6 +9,7 @@ module.exports = {
         email: 'vova@mail.ru',
         password: await bcrypt.hash('123', 8),
         admin: true,
+        number: '79123456789',
       },
     ];
 

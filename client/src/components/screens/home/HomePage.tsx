@@ -7,7 +7,9 @@ import Welcome from './Welcome'
 import Questions from './Questions'
 import { Car } from '../catalog/catalog.types'
 
+
 function Homepage({ cars}: {cars: Car[]}): JSX.Element {
+  
   return (
     <>
     <Welcome/>

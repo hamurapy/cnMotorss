@@ -6,17 +6,18 @@ import UpdateFormCar from "@/components/screens/account/UpdateCar";
 import SingleCarSlider from "@/components/screens/catalog/SingleCarSlider";
 
 export const getStaticPaths = async () => {
-  const res = await fetch("http://localhost:4000/api/cars");
-  const cars = await res.json();
+  const res = await fetch('http://localhost:4000/api/cars/ss'); 
+  const carIds = await res.json();
 
-  const paths = cars.map((car: { id: any }) => {
+  const paths = carIds.map((id: any) => { 
     return {
-      params: { id: car.id.toString() },
+      params:  {id: id.toString()}
     };
   });
+
   return {
     paths,
-    fallback: false,
+    fallback: false
   };
 };
 
