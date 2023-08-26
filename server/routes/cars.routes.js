@@ -16,7 +16,8 @@ router.route('/').get(async (req, res) => {
 
   try {
     const {
-      priceFrom, priceTo, yearFrom, yearTo, brand, model,
+      priceFrom, priceTo, yearFrom, yearTo, brand, model, engine,
+      transmission, driveUnit, litersFrom, litersTo, mileageFrom, mileageTo,
     } = req.query;
     const filters = {};
 
@@ -46,6 +47,46 @@ router.route('/').get(async (req, res) => {
       filters.year = {
         [Op.lte]: yearTo,
       };
+    }
+
+    if (mileageFrom && mileageTo) {
+      filters.mileage = {
+        [Op.between]: [mileageFrom, mileageTo],
+      };
+    } else if (mileageFrom) {
+      filters.mileage = {
+        [Op.gte]: mileageFrom,
+      };
+    } else if (mileageTo) {
+      filters.mileage = {
+        [Op.lte]: mileageTo,
+      };
+    }
+
+    if (litersFrom && litersTo) {
+      filters.liters = {
+        [Op.between]: [litersFrom, litersTo],
+      };
+    } else if (litersFrom) {
+      filters.liters = {
+        [Op.gte]: litersFrom,
+      };
+    } else if (litersTo) {
+      filters.liters = {
+        [Op.lte]: litersTo,
+      };
+    }
+
+    if (driveUnit) {
+      filters.driveUnit = driveUnit;
+    }
+
+    if (transmission) {
+      filters.transmission = transmission;
+    }
+
+    if (engine) {
+      filters.engine = engine;
     }
 
     if (brand) {
@@ -189,15 +230,13 @@ router.post('/', upload.array('img'), async (req, res) => {
       { transaction: t },
     );
 
-    for (const file of arrImg) {
-      await PhotoCar.create(
-        {
-          carId: car.id,
-          img: file,
-        },
-        { transaction: t },
-      );
-    }
+    await Promise.all(arrImg.map(async (file) => PhotoCar.create(
+      {
+        carId: car.id,
+        img: file,
+      },
+      { transaction: t },
+    )));
 
     await t.commit();
     res.status(201).json(car);
@@ -258,7 +297,7 @@ router.put('/:carId', upload.array('img'), async (req, res) => {
       }),
     );
 
-    for (const file of arrImg) {
+    const promises = arrImg.map(async (file) => {
       await PhotoCar.create(
         {
           carId: car.id,
@@ -266,7 +305,9 @@ router.put('/:carId', upload.array('img'), async (req, res) => {
         },
         { transaction: t },
       );
-    }
+    });
+
+    await Promise.all(promises);
 
     res.status(200).json(car);
   } catch (error) {

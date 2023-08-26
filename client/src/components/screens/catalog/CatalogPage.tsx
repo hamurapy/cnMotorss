@@ -14,7 +14,6 @@ import CarSlider from "../home/CarSlider";
 export default function CatalogPage({ cars }: { cars: Car[] }) {
   const { admin } = useSelector((store: RootState) => store.auth.user);
   const dispatch = useAppDispatch();
-
   
   const delCar = (carId: CarId): void => {
     dispatch(deleteCar(Number(carId)));
@@ -33,18 +32,26 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
   // }, [cars]);
   
   const brands = Array.from(new Set(cars.map((car) => car.brand)));
-  const [carsFilter, setCarsFilter] = useState([])
+  const [carsFilter, setCarsFilter] = useState(cars)
   const [brandFilter, setBrandFilter] = useState("");
   const [modelFilter, setModelFilter] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [minYear, setMinYear] = useState("");
   const [maxYear, setMaxYear] = useState("");
+  const [engineFilter, setEngineFilter] = useState("");
+  const [transmission, setTransmission] = useState("");
+  const [driveUnit, setDriveUnit] = useState("");
+  const [minLiters, setMinLiters] = useState("");
+  const [maxLiters, setMaxLiters] = useState("");
+  const [minMileage, setMinMileage] = useState("");
+  const [maxMileage, setMaxMileage] = useState("");
+
   
   
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await fetch(`http://localhost:4000/api/cars?priceFrom=${minPrice}&priceTo=${maxPrice}&yearFrom=${minYear}&yearTo=${maxYear}&brand=${brandFilter}&model=${modelFilter}`)
+    const res = await fetch(`http://localhost:4000/api/cars?priceFrom=${minPrice}&priceTo=${maxPrice}&yearFrom=${minYear}&yearTo=${maxYear}&brand=${brandFilter}&model=${modelFilter}&engine=${engineFilter}&transmission=${transmission}&driveUnit=${driveUnit}&litersFrom=${minLiters}&litersTo=${maxLiters}&mileageFrom=${minMileage}&mileageTo=${maxMileage}`)
     const data = await res.json();
     setCarsFilter(data);
   };
@@ -69,10 +76,34 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
     setMaxYear(e.target.value);
   };
   
-  // const handleFindClick = () => {
-    //   setSearchClicked(true);
-    // };
-    
+  const handleEngineFilterChange = (e: any) => {
+    setEngineFilter(e.target.value);
+  };
+
+  const handleTransmissionChange = (e: any) => {
+    setTransmission(e.target.value);
+  };
+
+  const handleDriveUnitChange = (e: any) => {
+    setDriveUnit(e.target.value);
+  };
+
+  const handleMinLitersChange = (e: any) => {
+    setMinLiters(e.target.value);
+  };
+
+  const handleMaxLitersChange = (e: any) => {
+    setMaxLiters(e.target.value);
+  };
+
+  const handleMinMileageChange = (e: any) => {
+    setMinMileage(e.target.value);
+  };
+
+  const handleMaxMileageChange = (e: any) => {
+    setMaxMileage(e.target.value);
+  };
+
     const handleBrandChange = (e: any) => {
       const selectedBrand = e.target.value;
       setBrandFilter(selectedBrand);
@@ -87,31 +118,8 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
       setModelFilter(selectedModel);
     }
   };
-  
-  // const filteredCars = cars.filter((car) => {
-    //   if (brandFilter && car.brand !== brandFilter) {
-      //     return false;
-      //   }
-      //   if (modelFilter && car.model !== modelFilter) {
-        //     return false;
-        //   }
-        //   if (minPrice && parseFloat(car.price) < parseFloat(minPrice)) {
-          //     return false;
-          //   }
-          //   if (maxPrice && parseFloat(car.price) > parseFloat(maxPrice)) {
-            //     return false;
-            //   }
-            //   if (minYear && parseInt(car.year) < parseInt(minYear)) {
-              //     return false;
-              //   }
-              //   if (maxYear && parseInt(car.year) > parseInt(maxYear)) {
-                //     return false;
-                //   }
-                //   return true;
-                // });
-                
-                console.log(carsFilter, 1111111111111111111);
-                return (
+  console.log(carsFilter, 1111111111111111111);
+        return (
                   <div className={styles.contentBlock}>
       <h1>Каталог</h1>
       <div className={styles.catalogBlock}>
@@ -129,6 +137,39 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
                   {brand}
                 </option>
               ))}
+            </select>
+            <select
+              id="engine-filter"
+              value={engineFilter}
+              onChange={handleEngineFilterChange}
+            >
+              <option value="">Двигатель</option>
+              <option value="Бензин">Бензин</option>
+              <option value="Дизель">Дизель</option>
+              <option value="Гибрид">Гибрид</option>
+              <option value="Электрический">Электрический</option>
+              <option value="Турбодизельный">Турбодизельный</option>
+            </select>
+            <select
+              id="transmission-filter"
+              value={transmission}
+              onChange={handleTransmissionChange}
+            >
+              <option value="">Коробка</option>
+              <option value="Автомат">Автомат</option>
+              <option value="Механика">Механика</option>
+              <option value="Робот">Робот</option>
+            </select>
+            <select
+              id="driveUnit-filter"
+              value={driveUnit}
+              onChange={handleDriveUnitChange}
+            >
+              <option value="">Привод</option>
+              <option value="Передний">Передний</option>
+              <option value="Задний">Задний</option>
+              <option value="Полный">Полный</option>
+              <option value="Постоянный полный">Постоянный полный</option>
             </select>
             <select
               id="model-filter"
@@ -186,6 +227,54 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
                 onChange={handleMaxYearChange}
               />
             </div>
+              <select
+              id="min-liters-filter"
+              value={minLiters}
+              onChange={handleMinLitersChange}
+            >
+              <option value="">Литры от</option>
+              {[
+      0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6,
+      1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.5,
+      4.0, 4.5, 5.0, 5.5, 6.0, 7.0, 8.0, 9.0, 10.0,
+    ].map((value) => (
+      <option key={value} value={value}>
+        {value} л
+      </option>
+    ))}
+            </select>
+            <select
+              id="max-liters-filter"
+              value={maxLiters}
+              onChange={handleMaxLitersChange}
+            >
+              <option value="">до</option>
+              {[
+      0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6,
+      1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.5,
+      4.0, 4.5, 5.0, 5.5, 6.0, 7.0, 8.0, 9.0, 10.0,
+    ].map((value) => (
+      <option key={value} value={value}>
+        {value} л
+      </option>
+    ))}
+            </select>
+                          <input
+                id="min-mileage-filter"
+                className={styles.inputLeft}
+                placeholder="Пробег от"
+                type="number"
+                value={minMileage}
+                onChange={handleMinMileageChange}
+              />
+              <input
+                id="max-mileage-filter"
+                className={styles.inputRight}
+                placeholder="до"
+                type="number"
+                value={maxMileage}
+                onChange={handleMaxMileageChange}
+              />
           </div>
           <button type="submit">Показать предложения</button>
         </div>

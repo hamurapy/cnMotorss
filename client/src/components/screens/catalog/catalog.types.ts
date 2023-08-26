@@ -20,7 +20,7 @@ export type Car = {
 
 export type CarPhotos = Pick<Car, 'photos'>['photos'];
 
-export type CarWithOutId = Omit<Car, 'id'>;
+export type CarWithOutId = Omit<Car, 'id'> & {img: string;};
 
 export type CarsState = {
   cars: Car[];
