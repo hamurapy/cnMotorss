@@ -13,7 +13,7 @@ function AccountInfo(): JSX.Element {
   };
   return (
     <>
-      <h3 className={styles.accountTitle}>Аккаунт</h3>
+      <h3>Аккаунт</h3>
       <div>{user.name}</div>
       <div>{user.email}</div>
       <button className={styles.editBtn} type="button" onClick={handleOpen}>
@@ -21,11 +21,11 @@ function AccountInfo(): JSX.Element {
       </button>
       {modal && (
         <div className={styles.smallForm}>
-          <form className={styles.accountForm}>
+          <form>
             <input type="text" placeholder="Имя" />
             <input type="email" placeholder="Email" />
             <input type="password" placeholder="Пароль" />
-            <div className={styles.btnPosition}>
+            <div className="btnPosition">
               <button type="submit">Изменить</button>
             </div>
           </form>

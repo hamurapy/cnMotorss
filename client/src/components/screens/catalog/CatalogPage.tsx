@@ -15,7 +15,6 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
   const { admin } = useSelector((store: RootState) => store.auth.user);
   const dispatch = useAppDispatch();
 
-  
   const delCar = (carId: CarId): void => {
     dispatch(deleteCar(Number(carId)));
     // window.location.reload()
@@ -25,98 +24,98 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
   //     const res = await fetch('http://localhost:4000/api/cars')
   //     const cars = await res.json()
   //     return {
-    //       props: {
-      //         cars,
-      //       },
+  //       props: {
+  //         cars,
+  //       },
   //     }
   //   }
   // }, [cars]);
-  
+
   const brands = Array.from(new Set(cars.map((car) => car.brand)));
-  const [carsFilter, setCarsFilter] = useState([])
+  const [carsFilter, setCarsFilter] = useState([]);
   const [brandFilter, setBrandFilter] = useState("");
   const [modelFilter, setModelFilter] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [minYear, setMinYear] = useState("");
   const [maxYear, setMaxYear] = useState("");
-  
-  
+
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await fetch(`http://localhost:4000/api/cars?priceFrom=${minPrice}&priceTo=${maxPrice}&yearFrom=${minYear}&yearTo=${maxYear}&brand=${brandFilter}&model=${modelFilter}`)
+    const res = await fetch(
+      `http://localhost:4000/api/cars?priceFrom=${minPrice}&priceTo=${maxPrice}&yearFrom=${minYear}&yearTo=${maxYear}&brand=${brandFilter}&model=${modelFilter}`
+    );
     const data = await res.json();
     setCarsFilter(data);
   };
-  
+
   const filteredModels = cars
-  .filter((car) => car.brand === brandFilter)
+    .filter((car) => car.brand === brandFilter)
     .map((car) => car.model);
-    
-    const handleMinPriceChange = (e: any) => {
-      setMinPrice(e.target.value);
-    };
+
+  const handleMinPriceChange = (e: any) => {
+    setMinPrice(e.target.value);
+  };
 
   const handleMaxPriceChange = (e: any) => {
     setMaxPrice(e.target.value);
   };
-  
+
   const handleMinYearChange = (e: any) => {
     setMinYear(e.target.value);
   };
-  
+
   const handleMaxYearChange = (e: any) => {
     setMaxYear(e.target.value);
   };
-  
+
   // const handleFindClick = () => {
-    //   setSearchClicked(true);
-    // };
-    
-    const handleBrandChange = (e: any) => {
-      const selectedBrand = e.target.value;
-      setBrandFilter(selectedBrand);
-      setModelFilter("");
-    };
-    
-    const handleModelChange = (e: any) => {
-      const selectedModel = e.target.value;
+  //   setSearchClicked(true);
+  // };
+
+  const handleBrandChange = (e: any) => {
+    const selectedBrand = e.target.value;
+    setBrandFilter(selectedBrand);
+    setModelFilter("");
+  };
+
+  const handleModelChange = (e: any) => {
+    const selectedModel = e.target.value;
     if (brandFilter && selectedModel === "") {
       setModelFilter("");
     } else {
       setModelFilter(selectedModel);
     }
   };
-  
+
   // const filteredCars = cars.filter((car) => {
-    //   if (brandFilter && car.brand !== brandFilter) {
-      //     return false;
-      //   }
-      //   if (modelFilter && car.model !== modelFilter) {
-        //     return false;
-        //   }
-        //   if (minPrice && parseFloat(car.price) < parseFloat(minPrice)) {
-          //     return false;
-          //   }
-          //   if (maxPrice && parseFloat(car.price) > parseFloat(maxPrice)) {
-            //     return false;
-            //   }
-            //   if (minYear && parseInt(car.year) < parseInt(minYear)) {
-              //     return false;
-              //   }
-              //   if (maxYear && parseInt(car.year) > parseInt(maxYear)) {
-                //     return false;
-                //   }
-                //   return true;
-                // });
-                
-                console.log(carsFilter, 1111111111111111111);
-                return (
-                  <div className={styles.contentBlock}>
+  //   if (brandFilter && car.brand !== brandFilter) {
+  //     return false;
+  //   }
+  //   if (modelFilter && car.model !== modelFilter) {
+  //     return false;
+  //   }
+  //   if (minPrice && parseFloat(car.price) < parseFloat(minPrice)) {
+  //     return false;
+  //   }
+  //   if (maxPrice && parseFloat(car.price) > parseFloat(maxPrice)) {
+  //     return false;
+  //   }
+  //   if (minYear && parseInt(car.year) < parseInt(minYear)) {
+  //     return false;
+  //   }
+  //   if (maxYear && parseInt(car.year) > parseInt(maxYear)) {
+  //     return false;
+  //   }
+  //   return true;
+  // });
+
+  console.log(carsFilter, 1111111111111111111);
+  return (
+    <div className="contentBlock">
       <h1>Каталог</h1>
       <div className={styles.catalogBlock}>
-            <form onSubmit={handleSearch}>
-        <div className={styles.filter}>
+        <form onSubmit={handleSearch}>
           <div className={styles.brand}>
             <select
               id="brand-filter"
@@ -187,8 +186,9 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
               />
             </div>
           </div>
-          <button type="submit">Показать предложения</button>
-        </div>
+          <div className="btnPosition">
+            <button type="submit">Показать предложения</button>
+          </div>
         </form>
         <p className={styles.china}>
           * Цены на сайте указаны в национальной валюте Китая
@@ -197,26 +197,27 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
           {carsFilter.map((car) => (
             <li className={styles.listItem} key={car.id}>
               <Link href={`/car/${car.id}`}>
-                <div className={styles.photoBlock}>
-                  <CarSlider photos={car.photos} />{" "}
-                </div>
-                <div className={styles.infoBlock}>
-                  <span className={styles.model}>
-                    {car.brand} {car.model}
-                  </span>
-                  <span className={styles.price}>{car.price} ₽</span>
-                </div>
-                <div className={styles.infoItems}>
-                  <span>{car.year}</span>
-                  <span>{car.mileage} км</span>
-                  <span>
-                    {car.liters} л/{car.power} л.с./{car.engine}
-                  </span>
-                  <span>{car.driveUnit}</span>
-                  <span>{car.transmission}</span>
+                <div className={styles.cardBlock}>
+                  <div className={styles.photoBlock}>
+                    <CarSlider photos={car.photos} />{" "}
+                  </div>
+                  <div className={styles.infoBlock}>
+                    <div className={styles.model}>
+                      {car.brand} {car.model}
+                    </div>
+                    <div className={styles.price}>{car.price} ₽</div>
+                    <div className={styles.year}>{car.year}</div>
+                    <span className={styles.leftItem}>
+                      {car.liters} л/{car.power} л.с./{car.engine}
+                    </span>
+                    <span className={styles.centerItem}>{car.driveUnit}</span>
+                    <span className={styles.mileage}>{car.mileage} км</span>
+                    <span className={styles.leftItem}>{car.transmission}</span>
+                    <span className={styles.centerItem}>{car.color}</span>
+                  </div>
                 </div>
               </Link>
-              {admin && (
+              {/* {admin && (
                 <div className={styles.infoBlock}>
                   <button className={styles.change}>Изменить</button>
                   <button
@@ -226,7 +227,7 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
                     Удалить
                   </button>
                 </div>
-              )}
+              )} */}
             </li>
           ))}
         </ul>
