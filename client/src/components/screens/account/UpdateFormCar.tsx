@@ -24,11 +24,14 @@ export default function UpdateCar({ car }: { car: Car }): JSX.Element {
     }
     formDataObj.append('brand', formData.brand);
     formDataObj.append('model', formData.model);
+    formDataObj.append('color', formData.color);
+    formDataObj.append('liters', formData.liters.toString());
+    formDataObj.append('wheel', formData.wheel);
     formDataObj.append('engine', formData.engine);
-    formDataObj.append('year', formData.year);
-    formDataObj.append('mileage', formData.mileage);
-    formDataObj.append('power', formData.power);
-    formDataObj.append('price', formData.price);
+    formDataObj.append('year', formData.year.toString());
+    formDataObj.append('mileage', formData.mileage.toString());
+    formDataObj.append('power', formData.power.toString());
+    formDataObj.append('price', formData.price.toString());
     formDataObj.append('driveUnit', formData.driveUnit);
     formDataObj.append('transmission', formData.transmission);
     formDataObj.append('description', formData.description);
@@ -71,6 +74,31 @@ console.log(formDataObj);
           <div>
             <input {...register('mileage')} />
             <label htmlFor="mileage">пробег</label>
+          </div>
+          <div>
+            <input {...register('color')} />
+            <label htmlFor="color">цвет</label>
+          </div>
+          <div>
+          <select
+                {...register('liters')}
+              >
+                <option value="">Выберите вариант</option>
+                {[
+      0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6,
+      1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.5,
+      4.0, 4.5, 5.0, 5.5, 6.0, 7.0, 8.0, 9.0, 10.0,
+    ].map((value) => (
+      <option key={value} value={value}>
+        {value} л
+      </option>
+    ))}
+              </select>
+            <label htmlFor="liters">объем л</label>
+          </div>
+          <div>
+            <input {...register('wheel')} />
+            <label htmlFor="wheel">руль</label>
           </div>
           <div>
           <select

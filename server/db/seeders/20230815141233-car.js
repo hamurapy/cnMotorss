@@ -5,6 +5,9 @@ module.exports = {
       {
         brand: 'toyota',
         model: 'landcruser',
+        color: 'красный',
+        liters: 0.3,
+        wheel: 'правый',
         engine: 'disel',
         year: 1972,
         mileage: 400_000,
@@ -17,6 +20,9 @@ module.exports = {
       {
         brand: 'UAZ',
         model: 'uazik',
+        color: 'красный',
+        liters: 0.2,
+        wheel: 'правый',
         engine: 'disel',
         year: 2000,
         mileage: 10_000,
@@ -29,6 +35,9 @@ module.exports = {
       {
         brand: 'volvo',
         model: 'cx70',
+        color: 'красный',
+        liters: 2,
+        wheel: 'правый',
         engine: 'benz',
         year: 2012,
         mileage: 100_000,
@@ -41,6 +50,9 @@ module.exports = {
       {
         brand: 'bmw',
         model: '5',
+        color: 'красный',
+        liters: 2.2,
+        wheel: 'правый',
         engine: 'gaz',
         year: 2025,
         mileage: 0,
@@ -53,6 +65,9 @@ module.exports = {
       {
         brand: 'lada',
         model: 'vesta',
+        color: 'красный',
+        liters: 0.2,
+        wheel: 'правый',
         engine: 'benz',
         year: 2017,
         mileage: 50_000,
@@ -65,6 +80,9 @@ module.exports = {
       {
         brand: 'toyota',
         model: 'landcruser',
+        color: 'синий',
+        liters: 10,
+        wheel: 'левый',
         engine: 'disel',
         year: 1972,
         mileage: 400_000,
@@ -77,6 +95,9 @@ module.exports = {
       {
         brand: 'UAZ',
         model: 'uazik',
+        color: 'красный',
+        liters: 0.8,
+        wheel: 'левый',
         engine: 'disel',
         year: 2000,
         mileage: 10_000,
@@ -89,6 +110,9 @@ module.exports = {
       {
         brand: 'volvo',
         model: 'cx70',
+        color: 'красный',
+        liters: 0.2,
+        wheel: 'правый',
         engine: 'benz',
         year: 2012,
         mileage: 100_000,
@@ -101,6 +125,9 @@ module.exports = {
       {
         brand: 'bmw',
         model: '5',
+        color: 'зеленый',
+        liters: 6,
+        wheel: 'правый',
         engine: 'gaz',
         year: 2025,
         mileage: 0,
@@ -113,6 +140,9 @@ module.exports = {
       {
         brand: 'lada',
         model: 'vesta',
+        color: 'красный',
+        liters: 8,
+        wheel: 'левый',
         engine: 'benz',
         year: 2017,
         mileage: 50_000,
@@ -125,6 +155,9 @@ module.exports = {
       {
         brand: 'bmw',
         model: '5',
+        color: 'красный',
+        liters: 7,
+        wheel: 'правый',
         engine: 'gaz',
         year: 2025,
         mileage: 0,
@@ -137,6 +170,9 @@ module.exports = {
       {
         brand: 'lada',
         model: 'vesta',
+        color: 'красный',
+        liters: 2,
+        wheel: 'левый',
         engine: 'benz',
         year: 2017,
         mileage: 50_000,

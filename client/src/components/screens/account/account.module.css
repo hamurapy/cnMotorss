@@ -1,5 +1,84 @@
-.contentBlock{
-  width: 86%;
-  margin: 8rem auto 5rem;
-  box-sizing: border-box;
+/* Account Info Section */
+.smallForm{
+  width: 30%;
+}
+.editBtn{
+  width: auto;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid var(--light-red-color);
+  background: var(--light-red-color);
+  color: var(--main-bg-color);
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: 300;
+  font-family: var(--font);
+  transition: 1s;
+  margin: 1rem 0;
+}
+.editBtn:hover{
+  width: auto;
+  background: var(--dark-red-color);
+  border: 1px solid var(--dark-red-color);
+}
+/* Add Car Section */
+.accountForm p{
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+.lineForm {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.lineForm input, .lineForm select{
+  width: 24%;
+  color: var(--text-color);
+}
+.lineForm input::-webkit-input-placeholder{
+  color: var(--text-color);
+}
+.lineForm input::-moz-placeholder{
+  color: var(--text-color);
+}
+.lineForm input:-moz-placeholder{
+  color: var(--text-color);
+}
+.lineForm input:-ms-input-placeholder{
+  color: var(--text-color);
+}
+input.inputFile::-webkit-file-upload-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--light-red-color);
+  background: var(--light-red-color);
+  color: var(--main-bg-color);
+  margin-right: 10px;
+  outline: none;
+  border-radius: 5px;
+  transition: 1s;
+}
+input.inputFile::-webkit-file-upload-button:hover {
+  background: var(--dark-red-color);
+  border: 1px solid var(--dark-red-color);
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 1024px) {
+  .smallForm{
+    width: 100%;
+  }
+  .lineForm input, .lineForm select{
+    width: 49%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .smallForm, input.inputFile{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 540px) {
+  .smallForm, .lineForm input, .lineForm select, input.inputFile{
+    width: 100%;
+  }
 }

@@ -17,10 +17,22 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       year: {
-        type: DataTypes.TEXT,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       mileage: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      color: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      liters: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+      },
+      wheel: {
         type: DataTypes.TEXT,
         allowNull: false,
       },
@@ -29,11 +41,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       power: {
-        type: DataTypes.TEXT,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       price: {
-        type: DataTypes.TEXT,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       driveUnit: {

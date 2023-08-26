@@ -1,32 +1,40 @@
-import React from 'react'
-import Image from 'next/image';
-import styles from '@/components/screens/contact/contact.module.css'
+import React from "react";
+import Image from "next/image";
 
-function About():JSX.Element {
+function About(): JSX.Element {
   return (
-    <div className={styles.contentBlock}>
-    <h1>О нас</h1>
-      <div className={styles.twoColumn}>
-        <div className={styles.side}>
-          <Image
-					    src="/about.jpg"
-					    alt="Продажа авто с пробегом"
-					    draggable={false}
-              width={0}
-              height={0}
-              sizes="100vw"
-              style={{ width: '100%', height: 'auto' }}
-              priority={true}
-				    />
-        </div>
-        <div className={styles.side}>
-          <h3 className={styles.aboutTitle}>Продажа Авто с пробегом</h3>
-          <p className={styles.sideText}>Всем клиентам мы предлагаем купить авто с пробегом на самых привлекательных условиях. Представленные в автоцентрах кроссоверы, седаны, коммерческий транспорт прекрасно адаптированы под российские условия эксплуатации и имеют прозрачную историю.</p>
-          <p className={styles.sideText}>Компетентные менеджеры ознакомят со всеми транспортными средствами, которые вас заинтересовали и имеются в наличии. Какие бы вы ни ставили перед собой цели – покупка авто с пробегом станет для вас выгодным вложением средств.</p>
-        </div>
+    <>
+      <Image
+        className="carPhoto"
+        src="/about-bg.png"
+        alt="Продажа авто с пробегом"
+        draggable={false}
+        width={0}
+        height={0}
+        sizes="100vw"
+        style={{ width: "100%", height: "auto" }}
+        priority={true}
+      />
+      <div className="contentBlock" style={{ margin: "0 auto 5rem" }}>
+        <h1>Авто с пробегом с собственных стоянок в Китае</h1>
+        <p>
+          У нас вы можете приобрести любой представленный на сайте автомобиль,
+          узнать его состояние и полную историю.
+        </p>
+        <p>
+          Наша компания уже более 10 лет ведет деятельность на рынке Китая, и
+          благодаря многолетнему опыту, вы получаете лучший результат в
+          кратчайшие сроки.
+        </p>
+        <p>Мы работаем строго по договору и в установленные сроки.</p>
+        <p>
+          Наши менеджеры ознакомят со всеми транспортными средствами, которые
+          вас заинтересуют и помогут рассчитать конечную стоимость автомобиля в
+          России.
+        </p>
       </div>
-    </div>
-  )
+    </>
+  );
 }
 
-export default About
+export default About;

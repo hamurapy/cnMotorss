@@ -7,6 +7,10 @@ const initialState: CarsState = {
   error: 'error',
 };
 
+export const loadCars = createAsyncThunk('load/loadCars', async () => {
+  const cars = await api.loadCars();
+  return cars;
+});
 
 export const addCar = createAsyncThunk('add/car', (car: FormData) =>
   api.addCarFetch(car)
@@ -26,6 +30,9 @@ const carsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(loadCars.fulfilled, (state, action) => {
+        state.cars = action.payload;
+      })
       .addCase(addCar.fulfilled, (state, action) => {
         state.cars.push(action.payload);
       })

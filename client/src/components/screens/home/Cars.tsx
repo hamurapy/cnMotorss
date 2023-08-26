@@ -1,40 +1,39 @@
-import React from 'react'
-import Link from 'next/link';
-import Image from 'next/image'
-import styles from '@/components/screens/catalog/catalog.module.css'
-import { Car } from '../catalog/catalog.types';
+import React from "react";
+import Link from "next/link";
+import styles from "./home.module.css";
+import { Car } from "../catalog/catalog.types";
+import CarSlider from "./CarSlider";
 
-function Cars({ cars}: {cars: Car[]}):JSX.Element {
-  console.log(cars);
+
+function Cars({ cars }: { cars: Car[] }): JSX.Element {
   return (
     <section>
       <h2>Каталог</h2>
       <ul className={styles.carsBlock}>
-        {cars.map((car) => (
-          <li key={car.id}>
-            <Link href={`/car/${car.id}`}>
-            <div className={styles.imgBlock}>
-              <Image
-					      src={`http://localhost:4000${car.photos[0].img}`}
-                alt={`${car.brand} ${car.model}`}
-                priority={true}
-                width={0}
-                height={0}
-                layout="fill"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-				      />
-            </div>
-            <div className={styles.infoBlock}>
-              <span>{car.brand}</span>
-              <span>{car.model}</span>
-            </div>
-            </Link>
-          </li>
-        )).slice(0, 8)}
+        {cars
+          .map((car) => (
+            <li key={car.id}>
+              <Link href={`/car/${car.id}`}>
+                <CarSlider photos={car.photos} />
+                <div className={styles.infoBlock}>
+                  <span className={styles.price}>{car.price} ₽</span>
+                  <span className={styles.model}>
+                    {car.brand} {car.model}
+                  </span>
+                  <span className={styles.items}>
+                    {car.year}/{car.mileage} км
+                  </span>
+                </div>
+              </Link>
+            </li>
+          ))
+          .slice(0, 8)}
       </ul>
-      <Link className="btnLink" href="/catalog">Весь каталог</Link>
+      <Link className={styles.btnLink} href="/catalog">
+        Весь каталог
+      </Link>
     </section>
-  )
+  );
 }
 
-export default Cars
+export default Cars;

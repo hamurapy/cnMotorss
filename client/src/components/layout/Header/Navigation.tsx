@@ -1,54 +1,53 @@
-'use client';
-import React, { useState, useEffect  } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import Logo from '../Logo';
-import Link from 'next/link';
-import { RootState, useAppDispatch } from '@/store';
-import { useSelector } from 'react-redux';
-import { check, logout } from '@/components/screens/auth/auth.slice';
-import { useRouter } from 'next/router'
-import styles from './menu.module.css'
-import PhoneIcon from '../PhoneIcon';
+"use client";
+import React, { useState, useEffect } from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import Logo from "../Logo";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { RootState, useAppDispatch } from "@/store";
+import { useSelector } from "react-redux";
+import { check, logout } from "@/components/screens/auth/auth.slice";
+import styles from "./menu.module.css";
+import PhoneIcon from "../PhoneIcon";
 
 const pages = [
   {
     id: 1,
-    link: '/',
-    title: 'Главная',
+    link: "/",
+    title: "Главная",
   },
   {
     id: 2,
-    link: '/catalog',
-    title: 'Каталог',
+    link: "/catalog",
+    title: "Каталог",
   },
   {
     id: 3,
-    link: '/about',
-    title: 'О нас',
+    link: "/about",
+    title: "О нас",
   },
   {
     id: 4,
-    link: '/contact',
-    title: 'Контакты',
+    link: "/contact",
+    title: "Контакты",
   },
 ];
 function Navigation() {
   const { phoneNumber } = useSelector((store) => store);
   // console.log(phoneNumber);
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const { admin } = useSelector((store: RootState) => store.auth.user);
-  const router = useRouter()
 
 
   useEffect(() => {
@@ -57,7 +56,11 @@ function Navigation() {
 
   const handleLogout = (): void => {
     dispatch(logout());
-    router.push('/')
+    router.push("/");
+  };
+
+  const isActive = (href) => {
+    return router.pathname === href ? "active" : "";
   };
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -81,58 +84,84 @@ function Navigation() {
   return (
     <div className={styles.nav}>
       <AppBar position="static">
-      <Container maxWidth="xl">
+        <Container maxWidth="xl">
           <Toolbar disableGutters>
-          <div className={styles.logoBlock}>
-            <Logo />
-          </div>
-          <div className={styles.phone}>
-            <PhoneIcon/>
-            <Link className={styles.phoneLink} href="tel: +79215555578">+7 (921) 555-55-78</Link>
-          </div>
-          <Box sx={{ justifyContent: 'flex-end', flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton> 
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+            <div className={styles.logoBlock}>
+              <Logo />
+            </div>
+            <div className={styles.phone}>
+              <PhoneIcon />
+              <Link className={styles.phoneLink} href="tel: +79215555578">
+                +7 (921) 555-55-78
+              </Link>
+            </div>
+            <Box
               sx={{
-                display: { xs: 'block', md: 'none' },
+                justifyContent: "flex-end",
+                flexGrow: 1,
+                display: { xs: "flex", md: "none" },
+              }}
+            >
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: "block", md: "none" },
+                }}
+              >
+                {pages.map((page) => (
+                  <MenuItem
+                    key={page.id}
+                    onClick={handleCloseNavMenu}
+                    className={isActive(page.link)}
+                  >
+                    <Link className={styles.menuLink} href={page.link}>
+                      {page.title}
+                    </Link>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+            <Box
+              sx={{
+                justifyContent: "flex-end",
+                flexGrow: 1,
+                display: { xs: "none", md: "flex" },
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page.id} onClick={handleCloseNavMenu}>
-                  <Link className={styles.menuLink} href={page.link}>{page.title}</Link>
+                <MenuItem
+                  key={page.id}
+                  onClick={handleCloseNavMenu}
+                  className={isActive(page.link)}
+                >
+                  <Link className={styles.menuLink} href={page.link}>
+                    {page.title}
+                  </Link>
                 </MenuItem>
               ))}
-            </Menu>
-          </Box>
-          <Box sx={{ justifyContent: 'flex-end', flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-             {pages.map((page) => (
-                <MenuItem key={page.id} onClick={handleCloseNavMenu}>
-                  <Link className={styles.menuLink} href={page.link}>{page.title}</Link>
-                </MenuItem>
-              ))}
-            </Box> 
+            </Box>
             {admin ? (
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Личный кабинет">
@@ -141,34 +170,41 @@ function Navigation() {
                   </IconButton>
                 </Tooltip>
                 <Menu
-                  sx={{ mt: '45px' }}
+                  sx={{ mt: "45px" }}
                   id="menu-appbar"
                   anchorEl={anchorElUser}
                   anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
+                    vertical: "top",
+                    horizontal: "right",
                   }}
                   keepMounted
                   transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
+                    vertical: "top",
+                    horizontal: "right",
                   }}
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
                   <MenuItem>
-                    <Link className={styles.accountBtn} href="/account">Личный кабинет</Link>
+                    <Link className={styles.accountBtn} href="/account">
+                      Личный кабинет
+                    </Link>
                   </MenuItem>
                   <MenuItem>
-                    <button className={styles.accountBtn} onClick={handleLogout}>Выйти</button>
+                    <button
+                      className={styles.accountBtn}
+                      onClick={handleLogout}
+                    >
+                      Выйти
+                    </button>
                   </MenuItem>
                 </Menu>
               </Box>
             ) : (
-            <></>
+              <></>
             )}
-        </Toolbar>
-      </Container>
+          </Toolbar>
+        </Container>
       </AppBar>
     </div>
   );

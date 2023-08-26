@@ -17,10 +17,22 @@ module.exports = {
         allowNull: false,
       },
       year: {
-        type: Sequelize.TEXT,
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       mileage: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      color: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+      liters: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+      },
+      wheel: {
         type: Sequelize.TEXT,
         allowNull: false,
       },
@@ -29,11 +41,11 @@ module.exports = {
         allowNull: false,
       },
       power: {
-        type: Sequelize.TEXT,
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       price: {
-        type: Sequelize.TEXT,
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       driveUnit: {

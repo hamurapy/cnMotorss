@@ -1,93 +1,146 @@
-.contentBlock{
-  width: 83%;
-  margin: 8rem auto 5rem;
-  box-sizing: border-box;
+.catalogBlock {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
-.imgBlock {
-  padding: 30%;
-  position: relative;
-  overflow: hidden;
-  border-radius: 3px;
+.china {
+  width: 96%;
+  color: var(--item-color);
+  margin: 0.5rem 0;
+  font-size: 0.8rem;
+  text-align: right;
 }
-.imgBlock img {
-  position: absolute;
-  top: 0;
-  left: 0;
+/* Filter */
+.brand {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
-  transition: 1s;
-}
-.imgBlock img:hover {
-  transform: scale(1.1);
-}
-.carsBlock{
   display: flex;
   justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
+}
+.brand select {
+  width: 48%;
+}
+.filter input {
+  width: 50%;
+}
+.inputLeft {
+  border-radius: 5px 0 0 5px;
+}
+.inputLeft:hover {
+  z-index: 2;
+}
+.inputRight {
+  border-radius: 0 5px 5px 0;
+  margin-left: -1px;
+}
+.filterOptions {
+  width: 48%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+/* Cards */
+.carsBlock {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   list-style: none;
 }
-.carsBlock li{
-  width: 23%;
+.listItem {
+  width: 100%;
   box-sizing: border-box;
-  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
   padding: 1rem;
-  border-radius: 5px;
-  margin-bottom: 2.5rem;
+  margin-bottom: 0.5rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: none;
+  transition: 1s;
+  position: relative;
+  z-index: 1;
 }
-.infoBlock{
+.listItem:before {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  left: 16px;
+  display: block;
+  height: 1px;
+  content: " ";
+  opacity: 1;
+  border-top: var(--input-border);
+}
+.listItem:hover {
+  position: relative;
+  box-shadow: 0 5px 20px 0 var(--shadow);
+  z-index: 3;
+}
+.listItem:hover+.listItem:before,.listItem:hover.listItem:before {
+  opacity: 0;
+}
+.cardBlock {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
 }
-.infoBlock span{
+
+/* Photo */
+.photoBlock {
+  width: 30%;
   box-sizing: border-box;
-  padding: 0.5rem;
-  color: #575757;
-  border: 1px solid #575757;
-  border-radius: 3px;
-  margin: 1rem 0 0;
+  margin-right: 1.5rem;
 }
-/* Buttons */
-.change{
-  padding: 0.5rem 1rem;
-  border: 1px solid #a20201;
-  background: transparent;
-  color: #a20201;
-  border-radius: 5px;
-  font-size: 1rem;
+
+/* Model, Price, Year */
+.infoBlock {
+  width: 65%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.model{
+  width: 50%;
+  color: var(--text-color);
+  font-size: var(--font-size);
+  font-weight: 600;
+}
+.carsBlock li:hover .model{
+  color: var(--light-red-color);
+}
+.price{
+  width: 30%;
+  color: var(--text-color);
+  font-size: var(--font-size);
+  font-weight: 600;
+}
+.year{
+  width: 20%;
+  color: var(--text-color);
+  font-size: var(--font-size);
   font-weight: 300;
-  font-family: Raleway,sans-serif;
-  text-transform: uppercase;
-  transition: 1s;
-  margin-top: 1rem;
+  text-align: right;
 }
-.change:hover{
-  border: 1px solid #a20201;
-  background: #a20201;
-  color: #fff;
+
+/* Items */
+.leftItem{
+  width: 50%;
+  color: var(--item-color);
+  font-size: 1.1rem;
 }
-.delete{
-  padding: 0.5rem 1rem;
-  border: 1px solid #a20201;
-  background: #a20201;
-  color: #fff;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: 300;
-  font-family: Raleway,sans-serif;
-  text-transform: uppercase;
-  transition: 1s;
-  margin-top: 1rem;
+.centerItem{
+  width: 30%;
+  color: var(--item-color);
+  font-size: 1.1rem;
 }
-.delete:hover{
-  border: 1px solid #600302;
-  background: #600302;
-  color: #fff;
+.mileage{
+  width: 20%;
+  color: var(--item-color);
+  font-size: 1.1rem;
+  text-align: right;
 }
+
 /* Single Car*/
 .twoColumn{
   width: 100%;
@@ -96,80 +149,80 @@
   align-items: center;
   flex-wrap: wrap;
 }
-.side{
-  width: 48%;
-  text-align: center;
+.sidePhoto{
+  width: 54%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-self: flex-start;
-  font-family: 'Raleway', sans-serif;
-  font-size: 1.2rem;
+  font-family: var(--font);
+  font-size: var(--font-size);
   margin-bottom: 1rem;
 }
-.side img{
-  width: 100%;
+.imgBlock {
+  padding: 40%;
+  position: relative;
+  overflow: hidden;
+}
+.imgBlock img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  transition: 1s;
+}
+.side{
+  width: 42%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-self: flex-start;
+  font-family: var(--font);
+  font-size: var(--font-size);
+  margin-bottom: 1rem;
 }
 .sideInfo{
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  border-top: 1px solid #a20201;
-  padding: 0 0 1rem;
   box-sizing: border-box;
 }
-.sideInfo p.listItem{
-  width: 40%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  font-size: 1.1rem;
-  font-weight: bold;
-  background: #f3f3f3;
-  box-sizing: border-box;
-  padding: 0.5rem;
+.sideInfo p, .description{
+  margin-bottom: 0.8rem;
 }
-.sideInfo p.listDesription{
-  width: 60%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  font-size: 1.1rem;
-  font-weight: 300;
-  box-sizing: border-box;
-  padding: 0.5rem;
-}
-p.price{
-  color: #a20101;
-  text-transform: uppercase;
-  font-size: 1.5rem;
+.sideInfo p.listName{
   width: 30%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 0.5rem;
+  color: var(--item-color);
 }
-h3.carDescription{
-  font-size: 1.5rem;
-  font-weight: 300;
-  color: #a20201;
+p.carPrice{
+  width: 30%;
+  color: var(--light-red-color);
   text-transform: uppercase;
+  font-size: 1.5rem;
+}
+p.carDescription{
+  font-size: var(--font-size);
+  font-weight: 300;
+  color: var(--item-color);
   text-align: justify;
   margin-bottom: 1rem;
-  border-top: 1px solid #a20201;
+  border-top: 1px solid var(--shadow);
 }
-
+/* Mobile */
 @media screen and (max-width: 768px) {
-  .carsBlock li{
-    width: 48%;
-  }
-  .side{
+  .side, .sidePhoto{
     width: 100%;
   }
 }
-@media screen and (max-width: 425px) {
-  .carsBlock li{
+@media screen and (max-width: 540px) {
+  .carsBlock li, .filter select, .filterOptions{
     width: 100%;
   }
+  .photoBlock, .infoBlock{
+    width: 100%;
+    margin: 0;
+  }
+  .price{
+    width: 50%;
+    text-align: right;
+  } 
 }

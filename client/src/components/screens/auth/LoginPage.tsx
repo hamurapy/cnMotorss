@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from '@/store';
-import { useRouter } from 'next/router'
-import { login } from './auth.slice';
-import Image from 'next/image';
-import styles from '@/components/screens/auth/auth.module.css'
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState, useAppDispatch } from "@/store";
+import { useRouter } from "next/router";
+import { login } from "./auth.slice";
+import Image from "next/image";
+import styles from "@/components/screens/auth/auth.module.css";
 
 function LoginPage(): JSX.Element {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const dispatch = useAppDispatch();
-  const router = useRouter()
+  const router = useRouter();
 
   const { user, error } = useSelector((store: RootState) => store.auth);
 
@@ -20,40 +20,46 @@ function LoginPage(): JSX.Element {
   };
 
   useEffect(() => {
-    if ('email' in user) {
-      router.push('/')
+    if ("email" in user) {
+      router.push("/");
     }
   }, [user]);
 
   return (
-    <div className={styles.contentBlock}>
-    <h1>Вход</h1>
-    <div className={styles.adminBlock}>
-      <Image
-				src="/favicon.png"
-				alt="Продажа авто с пробегом"
-				draggable={false}
-        width={100}
-        height={100}
-			/>
-      <form onSubmit={loginSubmit}>
-        <input
-          id="email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder='email'
+    <div className="contentBlock">
+      <h1>Вход</h1>
+      <div className={styles.adminBlock}>
+        <Image
+          src="/favicon.png"
+          alt="Продажа авто с пробегом"
+          draggable={false}
+          width={100}
+          height={100}
         />
-        <input
-          id="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder='Пароль'
-        />
-        <button type="submit">Войти</button>
-      </form>
-        {error && <div className={styles.error} style={{ display: 'block'}}>{error}</div>}
+        <form onSubmit={loginSubmit}>
+          <input
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="email"
+          />
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Пароль"
+          />
+          <div className="btnPosition">
+            <button type="submit">Войти</button>
+          </div>
+        </form>
+        {error && (
+          <div className={styles.error} style={{ display: "block" }}>
+            {error}
+          </div>
+        )}
       </div>
     </div>
   );

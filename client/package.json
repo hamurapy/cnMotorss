@@ -20,13 +20,19 @@
     "@types/react-dom": "18.2.7",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
+    "fslightbox-react": "^1.7.6",
     "next": "13.4.19",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.45.4",
     "react-redux": "^8.1.2",
+    "react-scroll": "^1.8.9",
     "redux": "^4.2.1",
     "swiper": "^10.2.0",
     "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "@types/fslightbox-react": "^1.7.3",
+    "@types/react-scroll": "^1.8.7"
   }
 }
