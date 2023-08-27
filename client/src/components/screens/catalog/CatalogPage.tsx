@@ -58,11 +58,11 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const res = await fetch(
-      `http://localhost:4000/api/cars?priceFrom=${minPrice}&priceTo=${maxPrice}&yearFrom=${minYear}&yearTo=${maxYear}&brand=${brandFilter}&model=${modelFilter}&engine=${engineFilter}&transmission=${transmission}&driveUnit=${driveUnit}&litersFrom=${minLiters}&litersTo=${maxLiters}&mileageFrom=${minMileage}&mileageTo=${maxMileage}`
+      `http://localhost:4000/api/cars/filter?priceFrom=${minPrice}&priceTo=${maxPrice}&yearFrom=${minYear}&yearTo=${maxYear}&brand=${brandFilter}&model=${modelFilter}&engine=${engineFilter}&transmission=${transmission}&driveUnit=${driveUnit}&litersFrom=${minLiters}&litersTo=${maxLiters}&mileageFrom=${minMileage}&mileageTo=${maxMileage}`
     );
 
     const data = await res.json();
-    setCarsFilter(data);
+    setDisplayedCars(data);
   };
 
   const filteredModels = cars
