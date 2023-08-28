@@ -3,6 +3,6 @@ export type Phone = {
 }
 
 export type PhonesState = {
-    phoneNumber:string
+  phones:Phone[]
   error: string | undefined;
 }
