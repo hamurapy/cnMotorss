@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { Car, CarId } from "./catalog.types";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../store";
@@ -9,14 +9,19 @@ import CarSlider from "../home/CarSlider";
 import styles from "./catalog.module.css";
 import classNames from "classnames";
 import CloseIcon from "@mui/icons-material/Close";
-import Image from 'next/image';
-import { useRouter } from 'next/router';
+import Image from "next/image";
+import { useRouter } from "next/router";
 
-
-export default function CatalogPage({ cars,carsBrandAndModel }: { cars: Car[],carsBrandAndModel: Car[] }) {
+export default function CatalogPage({
+  cars,
+  carsBrandAndModel,
+}: {
+  cars: Car[];
+  carsBrandAndModel: Car[];
+}) {
   const { admin } = useSelector((store: RootState) => store.auth.user);
   const dispatch = useAppDispatch();
-  const itemsPerPage = 20;//--------поменять
+  const itemsPerPage = 20; //--------поменять
   const router = useRouter();
   const initialPage = parseInt(router.query.page as string) || 1;
 
@@ -34,7 +39,9 @@ export default function CatalogPage({ cars,carsBrandAndModel }: { cars: Car[],ca
   const [maxMileage, setMaxMileage] = useState("");
   const [brandFilter, setBrandFilter] = useState(""); // Add this line
   const [modelFilter, setModelFilter] = useState(""); // Add this line
-  const [displayedCars, setDisplayedCars] = useState(cars.slice(0, itemsPerPage)); 
+  const [displayedCars, setDisplayedCars] = useState(
+    cars.slice(0, itemsPerPage)
+  );
 
   const [minMileageText, setMinMileageText] = useState("");
   const [minMileageBtn, setMinMileageBtn] = useState(false);
@@ -50,6 +57,7 @@ export default function CatalogPage({ cars,carsBrandAndModel }: { cars: Car[],ca
     const res = await fetch(
       `http://localhost:4000/api/cars?priceFrom=${minPrice}&priceTo=${maxPrice}&yearFrom=${minYear}&yearTo=${maxYear}&brand=${brandFilter}&model=${modelFilter}&engine=${engineFilter}&transmission=${transmission}&driveUnit=${driveUnit}&litersFrom=${minLiters}&litersTo=${maxLiters}&mileageFrom=${minMileage}&mileageTo=${maxMileage}`
     );
+  };
 
   useEffect(() => {
     if (router.query.page) {
@@ -63,10 +71,16 @@ export default function CatalogPage({ cars,carsBrandAndModel }: { cars: Car[],ca
   };
 
   const totalPages = Math.ceil(carsBrandAndModel.length / itemsPerPage);
-  const pageButtonsToShow = 5; 
-  const pageButtonStart = Math.max(currentPage - Math.floor(pageButtonsToShow / 2), 1);
-  const pageButtonEnd = Math.min(pageButtonStart + pageButtonsToShow - 1, totalPages);
-  
+  const pageButtonsToShow = 5;
+  const pageButtonStart = Math.max(
+    currentPage - Math.floor(pageButtonsToShow / 2),
+    1
+  );
+  const pageButtonEnd = Math.min(
+    pageButtonStart + pageButtonsToShow - 1,
+    totalPages
+  );
+
   const fetchCars = async (startIndex: number, endIndex: number) => {
     const res = await fetch(
       `http://localhost:4000/api/cars/filter?priceFrom=${minPrice}&priceTo=${maxPrice}&yearFrom=${minYear}&yearTo=${maxYear}&brand=${brandFilter}&model=${modelFilter}&engine=${engineFilter}&transmission=${transmission}&driveUnit=${driveUnit}&litersFrom=${minLiters}&litersTo=${maxLiters}&mileageFrom=${minMileage}&mileageTo=${maxMileage}&startIndex=${startIndex}&endIndex=${endIndex}`
@@ -81,17 +95,20 @@ export default function CatalogPage({ cars,carsBrandAndModel }: { cars: Car[],ca
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const res = await fetchCars(startIndex, endIndex);
-    setDisplayedCars(res); 
+    setDisplayedCars(res);
     setCurrentPage(page);
     router.push(`/catalog?page=${page}`);
   };
 
-  const handleSearchAndPageChange = async (e: React.FormEvent<HTMLFormElement>, page: number) => {
+  const handleSearchAndPageChange = async (
+    e: React.FormEvent<HTMLFormElement>,
+    page: number
+  ) => {
     e.preventDefault();
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const res = await fetchCars(startIndex, endIndex);
-    setDisplayedCars(res); 
+    setDisplayedCars(res);
     setCurrentPage(page);
     router.push(`/catalog?page=${page}`);
   };
@@ -202,7 +219,7 @@ export default function CatalogPage({ cars,carsBrandAndModel }: { cars: Car[],ca
   for (let year = startYear; year <= currentYear; year++) {
     years.push(year);
   }
- 
+
   const brands = Array.from(new Set(carsBrandAndModel.map((car) => car.brand)));
   const filteredModels = carsBrandAndModel
     .filter((car) => car.brand === brandFilter)
@@ -493,37 +510,41 @@ export default function CatalogPage({ cars,carsBrandAndModel }: { cars: Car[],ca
                   </div>
                 </div>
               </Link>
-              
             </li>
           ))}
         </ul>
         <div className={styles.pagination}>
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Предыдущая
-        </button>
-        {Array.from({ length: pageButtonEnd - pageButtonStart + 1 }, (_, index) => {
-          const pageNumber = index + pageButtonStart;
-          return (
-            <button
-              key={pageNumber}
-              onClick={() => handlePageChange(pageNumber)}
-              className={pageNumber === currentPage ? styles.activePage : ""}
-            >
-              {pageNumber}
-            </button>
-          );
-        })}
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          Следующая
-        </button>
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Предыдущая
+          </button>
+          {Array.from(
+            { length: pageButtonEnd - pageButtonStart + 1 },
+            (_, index) => {
+              const pageNumber = index + pageButtonStart;
+              return (
+                <button
+                  key={pageNumber}
+                  onClick={() => handlePageChange(pageNumber)}
+                  className={
+                    pageNumber === currentPage ? styles.activePage : ""
+                  }
+                >
+                  {pageNumber}
+                </button>
+              );
+            }
+          )}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Следующая
+          </button>
+        </div>
       </div>
     </div>
-    </div>
-  )
+  );
 }
