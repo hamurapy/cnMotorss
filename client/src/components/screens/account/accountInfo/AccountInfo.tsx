@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import styles from "./account.module.css";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
-import Registration from "@/pages/registration";
+import styles from "./accountInfo.module.css";
 
 function AccountInfo(): JSX.Element {
   const [modal, setModal] = useState(false);

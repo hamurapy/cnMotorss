@@ -125,7 +125,7 @@ form {
   box-sizing: border-box;
   box-shadow: var(--box-shadow);
 }
-input, textarea, select {
+input, textarea {
   position: relative;
   width: 100%;
   background-color: var(--main-bg-color);
@@ -140,6 +140,53 @@ input, textarea, select {
   outline: none;
   box-sizing: border-box;
   transition: 1s;
+  outline: 0;
+}
+select {
+  position: relative;
+  width: 100%;
+  background-color: var(--main-bg-color);
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  font-family: var(--font);
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--text-color);
+  border-radius: 5px;
+  border: var(--input-border); 
+  outline: none;
+  box-sizing: border-box;
+  transition: 1s;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: url(arrow.png) no-repeat right 5px center / 11px auto;
+  outline: 0;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+  color: #1e1e1e;
+}
+::placeholder { /* WebKit browsers */
+  color: #1e1e1e;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+  color: #1e1e1e;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #1e1e1e;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: #1e1e1e;
+  opacity: 1;
+}
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: #1e1e1e;
+  opacity: 1;
 }
 input:hover, textarea:hover, select:hover{
   border: var(--input-border-hover);
@@ -150,12 +197,29 @@ input:focus, textarea:focus, select:focus {
 input:active, textarea:active, select:active{
   outline: none;
 }
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+input[type="number"]:hover,
+input[type="number"]:focus {
+  -moz-appearance: number-input;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .btnPosition{
   width:100%;
   display: flex;
   justify-content: flex-end;
 }
-form button{
+button{
   border: 1px solid var(--light-red-color);
   background: var(--light-red-color);
   border-radius: 5px;
@@ -168,7 +232,7 @@ form button{
   transition: 1s;
   cursor: pointer;
 }
-form button:hover{
+button:hover{
   background: var(--dark-red-color);
   border: 1px solid var(--dark-red-color);
 }
@@ -198,13 +262,16 @@ form button:hover{
   bottom: 0.7rem;
   right: 4rem;
   cursor: pointer;
+  z-index: 9999;
 }
 #scrollBtn svg{
   width: 50px;
   height: 50px;
+  background: var(--light-red-color);
+  border-radius: 8px;
 }
-#scrollBtn .top{
-  fill: var(--light-red-color);
+#scrollBtn svg path{
+  fill: var(--main-bg-color);
   transition: 1s;
 }
 .novisible{
@@ -231,7 +298,6 @@ form button:hover{
   width: 100%; 
   margin: 0 auto 0; 
 }
-
 /* Mobile Styles */
 @media screen and (max-width: 1024px) {
   .contentBlock{

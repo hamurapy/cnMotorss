@@ -22,10 +22,10 @@ import Typography from "@mui/material/Typography";
 import Logo from "@/components/layout/Logo";
 import { useAppDispatch } from "@/store";
 import { useRouter } from "next/router";
-import { logout } from "../auth/auth.slice";
-import AccountInfo from "./AccountInfo";
-import AddCar from "./AddCar";
-import UpdateCar from "./UpdateCar";
+import { logout } from "../../auth/auth.slice";
+import AccountInfo from "../accountInfo/AccountInfo";
+import AddCar from "../addCar/AddCar";
+import UpdateCar from "../updateCar/UpdateCar";
 
 const drawerWidth = 240;
 

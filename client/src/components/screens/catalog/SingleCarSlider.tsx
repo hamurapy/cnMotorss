@@ -16,7 +16,7 @@ function SingleCarSlider({ photos }: { photos: CarPhotos }): JSX.Element {
     <Image
       key={index}
       src={`http://localhost:4000${photo.img}`}
-      alt=""
+      alt="Car"
       // layout="fill"
       width={0}
       height={0}
@@ -44,7 +44,7 @@ function SingleCarSlider({ photos }: { photos: CarPhotos }): JSX.Element {
               <Image
                 onClick={() => setToggler(!toggler)}
                 src={`http://localhost:4000${photo.img}`}
-                alt=""
+                alt="Car"
                 width={0}
                 height={0}
                 sizes="100vw"

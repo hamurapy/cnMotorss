@@ -157,7 +157,7 @@
   align-items: center;
   margin-bottom: 2rem;
 }
-.advantageItem img{
+.advantageItem svg{
   width: 50px;
   height: 50px;
   margin-top: 2rem;
@@ -167,23 +167,14 @@
   background: var(--main-bg-color);
   transition: 1s;
 }
-.icon{
-  width: 80px;
-  border: 1px solid var(--light-red-color);
-  border-radius: 8px;
-  padding: 0.9rem;
-  background: var(--main-bg-color);
-  transition: 1s;
-  box-sizing: border-box;
-}
-.icon:hover{
-  background: var(--light-red-color);
-}
-.filled{
+.advantageItem svg path, .advantageItem svg circle{
   fill: var(--light-red-color);
   transition: 1s;
 }
-.icon:hover .filled{
+.advantageItem:hover svg{
+  background: var(--light-red-color);
+}
+.advantageItem:hover svg path, .advantageItem:hover svg circle{
   fill: var(--main-bg-color);
 }
 
@@ -224,9 +215,8 @@
   font-size: var(--font-size);
   align-items: center;
 }
-.phone img{
-  width: 25px;
-  margin-right: 1rem;
+.phone svg path{
+  fill: var(--light-red-color);
 }
 .phone a{
   font-size: 1.8rem;

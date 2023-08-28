@@ -1,15 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect } from "react";
 import { Car, CarId } from "./catalog.types";
-import Image from "next/image";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../store";
-import styles from "./catalog.module.css";
 import Link from "next/link";
-import { deleteCar } from "../account/redux/carsSlice";
+import { deleteCar } from "../account/types/cars.slice";
 import { RootState } from "@/store";
 import { useState } from "react";
 import CarSlider from "../home/CarSlider";
+import styles from "./catalog.module.css";
+import classNames from "classnames";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function CatalogPage({ cars }: { cars: Car[] }) {
   const { admin } = useSelector((store: RootState) => store.auth.user);
@@ -47,6 +48,16 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
   const [minMileage, setMinMileage] = useState("");
   const [maxMileage, setMaxMileage] = useState("");
 
+  const [minMileageText, setMinMileageText] = useState("");
+  const [minMileageBtn, setMinMileageBtn] = useState(false);
+  const [maxMileageText, setMaxMileageText] = useState("");
+  const [maxMileageBtn, setMaxMileageBtn] = useState(false);
+
+  const [minPriceText, setMinPriceText] = useState("");
+  const [minPriceBtn, setMinPriceBtn] = useState(false);
+  const [maxPriceText, setMaxPriceText] = useState("");
+  const [maxPriceBtn, setMaxPriceBtn] = useState(false);
+
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const res = await fetch(
@@ -60,14 +71,6 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
   const filteredModels = cars
     .filter((car) => car.brand === brandFilter)
     .map((car) => car.model);
-
-  const handleMinPriceChange = (e: any) => {
-    setMinPrice(e.target.value);
-  };
-
-  const handleMaxPriceChange = (e: any) => {
-    setMaxPrice(e.target.value);
-  };
 
   const handleMinYearChange = (e: any) => {
     setMinYear(e.target.value);
@@ -97,12 +100,60 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
     setMaxLiters(e.target.value);
   };
 
-  const handleMinMileageChange = (e: any) => {
+  const handleMinMileageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMinMileage(e.target.value);
+    setMinMileageText(e.target.value + " км");
+    if (e.target.value !== "") {
+      setMinMileageBtn(true);
+    }
+  };
+
+  const clearMinMileage = () => {
+    setMinMileage("");
+    setMinMileageText("");
+    setMinMileageBtn(false);
   };
 
   const handleMaxMileageChange = (e: any) => {
     setMaxMileage(e.target.value);
+    setMaxMileageText(e.target.value + " км");
+    if (e.target.value !== "") {
+      setMaxMileageBtn(true);
+    }
+  };
+
+  const clearMaxMileage = () => {
+    setMaxMileage("");
+    setMaxMileageText("");
+    setMaxMileageBtn(false);
+  };
+
+  const handleMinPriceChange = (e: any) => {
+    setMinPrice(e.target.value);
+    setMinPriceText(e.target.value + " ₽");
+    if (e.target.value !== "") {
+      setMinPriceBtn(true);
+    }
+  };
+
+  const clearMinPrice = () => {
+    setMinPrice("");
+    setMinPriceText("");
+    setMinPriceBtn(false);
+  };
+
+  const handleMaxPriceChange = (e: any) => {
+    setMaxPrice(e.target.value);
+    setMaxPriceText(e.target.value + " ₽");
+    if (e.target.value !== "") {
+      setMaxPriceBtn(true);
+    }
+  };
+
+  const clearMaxPrice = () => {
+    setMaxPrice("");
+    setMaxPriceText("");
+    setMaxPriceBtn(false);
   };
 
   const handleBrandChange = (e: any) => {
@@ -121,7 +172,13 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
     }
   };
 
-  console.log(carsFilter, 1111111111111111111);
+  const startYear = 1927;
+  const currentYear = new Date().getFullYear();
+  const years = [];
+  for (let year = startYear; year <= currentYear; year++) {
+    years.push(year);
+  }
+  // console.log(carsFilter, 1111111111111111111);
   return (
     <div className="contentBlock">
       <h1>Каталог</h1>
@@ -141,39 +198,6 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
               ))}
             </select>
             <select
-              id="engine-filter"
-              value={engineFilter}
-              onChange={handleEngineFilterChange}
-            >
-              <option value="">Двигатель</option>
-              <option value="Бензин">Бензин</option>
-              <option value="Дизель">Дизель</option>
-              <option value="Гибрид">Гибрид</option>
-              <option value="Электрический">Электрический</option>
-              <option value="Турбодизельный">Турбодизельный</option>
-            </select>
-            <select
-              id="transmission-filter"
-              value={transmission}
-              onChange={handleTransmissionChange}
-            >
-              <option value="">Коробка</option>
-              <option value="Автомат">Автомат</option>
-              <option value="Механика">Механика</option>
-              <option value="Робот">Робот</option>
-            </select>
-            <select
-              id="driveUnit-filter"
-              value={driveUnit}
-              onChange={handleDriveUnitChange}
-            >
-              <option value="">Привод</option>
-              <option value="Передний">Передний</option>
-              <option value="Задний">Задний</option>
-              <option value="Полный">Полный</option>
-              <option value="Постоянный полный">Постоянный полный</option>
-            </select>
-            <select
               id="model-filter"
               value={modelFilter}
               onChange={handleModelChange}
@@ -191,97 +215,208 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
                   </option>
                 ))}
             </select>
+            <select
+              id="transmission-filter"
+              value={transmission}
+              onChange={handleTransmissionChange}
+            >
+              <option value="">Коробка</option>
+              <option value="Автомат">Автомат</option>
+              <option value="Механика">Механика</option>
+              <option value="Робот">Робот</option>
+            </select>
+          </div>
+
+          <div className={styles.brand}>
+            <select
+              id="engine-filter"
+              value={engineFilter}
+              onChange={handleEngineFilterChange}
+            >
+              <option value="">Двигатель</option>
+              <option value="Бензин">Бензин</option>
+              <option value="Дизель">Дизель</option>
+              <option value="Гибрид">Гибрид</option>
+              <option value="Электрический">Электрический</option>
+              <option value="Турбодизельный">Турбодизельный</option>
+            </select>
+            <select
+              id="driveUnit-filter"
+              value={driveUnit}
+              onChange={handleDriveUnitChange}
+            >
+              <option value="">Привод</option>
+              <option value="Передний">Передний</option>
+              <option value="Задний">Задний</option>
+              <option value="Полный">Полный</option>
+              <option value="Постоянный полный">Постоянный полный</option>
+            </select>
+            <div className={styles.filterOptions}>
+              <select
+                id="min-liters-filter"
+                className={styles.inputLeft}
+                value={minLiters}
+                onChange={handleMinLitersChange}
+              >
+                <option value="">Объем от, л</option>
+                {[
+                  0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3,
+                  1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5,
+                  2.6, 2.7, 2.8, 2.9, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 7.0,
+                  8.0, 9.0, 10.0,
+                ].map((value) => (
+                  <option key={value} value={value}>
+                    {value} л
+                  </option>
+                ))}
+              </select>
+              <select
+                id="max-liters-filter"
+                value={maxLiters}
+                className={styles.inputRight}
+                onChange={handleMaxLitersChange}
+              >
+                <option value="">до</option>
+                {[
+                  0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3,
+                  1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5,
+                  2.6, 2.7, 2.8, 2.9, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 7.0,
+                  8.0, 9.0, 10.0,
+                ].map((value) => (
+                  <option key={value} value={value}>
+                    {value} л
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
           <div className={styles.brand}>
             <div className={styles.filterOptions}>
-              <input
-                className={styles.inputLeft}
-                id="min-price-filter"
-                placeholder="Цена от"
-                type="number"
-                value={minPrice}
-                onChange={handleMinPriceChange}
-              />
-              <input
-                id="max-price-filter"
-                className={styles.inputRight}
-                placeholder="до"
-                type="number"
-                value={maxPrice}
-                onChange={handleMaxPriceChange}
-              />
-            </div>
-            <div className={styles.filterOptions}>
-              <input
+              <select
                 id="min-year-filter"
                 className={styles.inputLeft}
-                placeholder="Год от"
-                type="number"
                 value={minYear}
                 onChange={handleMinYearChange}
-              />
-              <input
+              >
+                <option value="">Год от</option>
+                {years
+                  .map((value) => (
+                    <option key={value} value={value}>
+                      {value}
+                    </option>
+                  ))
+                  .reverse()}
+              </select>
+              <select
                 id="max-year-filter"
                 className={styles.inputRight}
-                placeholder="до"
-                type="number"
                 value={maxYear}
                 onChange={handleMaxYearChange}
-              />
+              >
+                <option value="">до</option>
+                {years
+                  .map((value) => (
+                    <option key={value} value={value}>
+                      {value}
+                    </option>
+                  ))
+                  .reverse()}
+              </select>
             </div>
-            <select
-              id="min-liters-filter"
-              value={minLiters}
-              onChange={handleMinLitersChange}
-            >
-              <option value="">Литры от</option>
-              {[
-                0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4,
-                1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7,
-                2.8, 2.9, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 7.0, 8.0, 9.0,
-                10.0,
-              ].map((value) => (
-                <option key={value} value={value}>
-                  {value} л
-                </option>
-              ))}
-            </select>
-            <select
-              id="max-liters-filter"
-              value={maxLiters}
-              onChange={handleMaxLitersChange}
-            >
-              <option value="">до</option>
-              {[
-                0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4,
-                1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7,
-                2.8, 2.9, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 7.0, 8.0, 9.0,
-                10.0,
-              ].map((value) => (
-                <option key={value} value={value}>
-                  {value} л
-                </option>
-              ))}
-            </select>
-            <input
-              id="min-mileage-filter"
-              className={styles.inputLeft}
-              placeholder="Пробег от"
-              type="number"
-              value={minMileage}
-              onChange={handleMinMileageChange}
-            />
-            <input
-              id="max-mileage-filter"
-              className={styles.inputRight}
-              placeholder="до"
-              type="number"
-              value={maxMileage}
-              onChange={handleMaxMileageChange}
-            />
+            <div className={styles.filterOptions}>
+              <div className={styles.filterLeft}>
+                <input
+                  type="text"
+                  value={minMileageText}
+                  className={styles.coverTop}
+                  readOnly
+                />
+                <input
+                  id="min-mileage-filter"
+                  className={styles.coverBottom}
+                  placeholder="Пробег от, км"
+                  type="number"
+                  value={minMileage}
+                  onChange={handleMinMileageChange}
+                />
+                {minMileageBtn && (
+                  <div className={styles.clear}>
+                    <CloseIcon onClick={clearMinMileage} />
+                  </div>
+                )}
+              </div>
+              <div className={styles.filterRight}>
+                <input
+                  type="text"
+                  value={maxMileageText}
+                  className={styles.coverTop}
+                  readOnly
+                />
+                <input
+                  id="max-mileage-filter"
+                  className={styles.coverBottom}
+                  placeholder="до"
+                  type="number"
+                  value={maxMileage}
+                  onChange={handleMaxMileageChange}
+                />
+                {maxMileageBtn && (
+                  <div className={styles.clear}>
+                    <CloseIcon onClick={clearMaxMileage} />
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className={styles.filterOptions}>
+              <div className={styles.filterLeft}>
+                <input
+                  type="text"
+                  value={minPriceText}
+                  className={styles.coverTop}
+                  readOnly
+                />
+                <input
+                  className={styles.coverBottom}
+                  id="min-price-filter"
+                  placeholder="Цена от, ₽"
+                  type="number"
+                  value={minPrice}
+                  onChange={handleMinPriceChange}
+                />
+                {minPriceBtn && (
+                  <div className={styles.clear}>
+                    <CloseIcon onClick={clearMinPrice} />
+                  </div>
+                )}
+              </div>
+              <div className={styles.filterRight}>
+                <input
+                  type="text"
+                  value={maxPriceText}
+                  className={styles.coverTop}
+                  readOnly
+                />
+                <input
+                  id="max-price-filter"
+                  className={styles.coverBottom}
+                  placeholder="до"
+                  type="number"
+                  value={maxPrice}
+                  onChange={handleMaxPriceChange}
+                />
+                {maxPriceBtn && (
+                  <div className={styles.clear}>
+                    <CloseIcon onClick={clearMaxPrice} />
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
           <div className="btnPosition">
-            <button type="submit">Показать предложения</button>
+            <button className={styles.filterBtn} type="submit">
+              Показать предложения
+            </button>
           </div>
         </form>
         <p className={styles.china}>
@@ -301,13 +436,31 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
                     </div>
                     <div className={styles.price}>{car.price} ₽</div>
                     <div className={styles.year}>{car.year}</div>
-                    <span className={styles.leftItem}>
+                    <div className={classNames(styles.leftItem, styles.engine)}>
                       {car.liters} л/{car.power} л.с./{car.engine}
-                    </span>
-                    <span className={styles.centerItem}>{car.driveUnit}</span>
-                    <span className={styles.mileage}>{car.mileage} км</span>
-                    <span className={styles.leftItem}>{car.transmission}</span>
-                    <span className={styles.centerItem}>{car.color}</span>
+                    </div>
+                    <div
+                      className={classNames(
+                        styles.centerItem,
+                        styles.driveUnit
+                      )}
+                    >
+                      {car.driveUnit}
+                    </div>
+                    <div className={styles.mileage}>{car.mileage} км</div>
+                    <div
+                      className={classNames(
+                        styles.leftItem,
+                        styles.transmission
+                      )}
+                    >
+                      {car.transmission}
+                    </div>
+                    <div
+                      className={classNames(styles.centerItem, styles.color)}
+                    >
+                      {car.color}
+                    </div>
                   </div>
                 </div>
               </Link>

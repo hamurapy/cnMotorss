@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { Car, CarId, CarsState } from '../../catalog/catalog.types';
-import * as api from './api';
+import * as api from './api.cars';
 
 const initialState: CarsState = {
   cars: [],

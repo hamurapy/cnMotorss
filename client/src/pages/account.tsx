@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import AccountPage from "@/components/screens/account/AccountPage";
+import AccountPage from "@/components/screens/account/accountPage/AccountPage";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { useRouter } from "next/router";

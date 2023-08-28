@@ -7,7 +7,7 @@
 .china {
   width: 96%;
   color: var(--item-color);
-  margin: 0.5rem 0;
+  margin: 1rem 0 0.5rem;
   font-size: 0.8rem;
   text-align: right;
 }
@@ -20,27 +20,69 @@
   flex-wrap: wrap;
 }
 .brand select {
-  width: 48%;
+  width: 32%;
 }
-.filter input {
+.filterOptions .inputLeft {
   width: 50%;
-}
-.inputLeft {
   border-radius: 5px 0 0 5px;
 }
-.inputLeft:hover {
+.filterOptions .inputLeft:hover {
   z-index: 2;
 }
-.inputRight {
+.filterOptions .inputRight {
+  width: 50%;
   border-radius: 0 5px 5px 0;
   margin-left: -1px;
 }
 .filterOptions {
-  width: 48%;
+  width: 32%;
   display: flex;
   flex-wrap: nowrap;
 }
-
+.filterLeft, .filterRight{
+  width: 50%;
+  position: relative;
+  height: 58px;
+}
+.coverTop{
+  width: 100%;
+  pointer-events: none;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.coverBottom{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.clear{
+  position: absolute;
+  top: 18px;
+  right: 3px;
+  z-index: 3;
+  cursor: pointer;
+}
+.clear svg path{
+  fill:#474747;
+}
+.filterLeft .coverTop, .filterLeft .coverBottom{ 
+  border-radius: 5px 0 0 5px;
+}
+.filterRight .coverTop, .filterRight .coverBottom{ 
+  border-radius: 0 5px 5px 0; margin-left: -1px;
+}
+.filterLeft:hover,  .filterRight:hover{
+  z-index: 10;
+}
+.filterBtn{
+  width: 32%;
+  margin: 0.7rem 0 0.5rem;
+}
 /* Cards */
 .carsBlock {
   width: 100%;
@@ -97,6 +139,7 @@
   width: 65%;
   display: flex;
   justify-content: flex-start;
+  align-content: flex-start;
   flex-wrap: wrap;
   margin-bottom: 1rem;
 }
@@ -105,6 +148,7 @@
   color: var(--text-color);
   font-size: var(--font-size);
   font-weight: 600;
+  margin-bottom: 1rem;
 }
 .carsBlock li:hover .model{
   color: var(--light-red-color);
@@ -114,13 +158,14 @@
   color: var(--text-color);
   font-size: var(--font-size);
   font-weight: 600;
+  margin-bottom: 1rem;
 }
 .year{
   width: 20%;
   color: var(--text-color);
   font-size: var(--font-size);
-  font-weight: 300;
   text-align: right;
+  margin-bottom: 1rem;
 }
 
 /* Items */
@@ -141,7 +186,7 @@
   text-align: right;
 }
 
-/* Single Car*/
+/* Single Car */
 .twoColumn{
   width: 100%;
   display: flex;
@@ -183,21 +228,31 @@
 }
 .sideInfo{
   display: flex;
-  align-items: center;
+  box-sizing: border-box;
+}
+.sideInfo .listIcon{
+  width: 50px;
+  margin-right: 1rem;
+  padding-top: 5px;
   box-sizing: border-box;
 }
 .sideInfo p, .description{
   margin-bottom: 0.8rem;
 }
 .sideInfo p.listName{
-  width: 30%;
+  width: 100%;
+  font-size: 1rem;
   color: var(--item-color);
+  margin-bottom: 0;
+}
+.sideInfo p{
+  width: 100%;
+  font-size: 1.1rem;
 }
 p.carPrice{
   width: 30%;
   color: var(--light-red-color);
-  text-transform: uppercase;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 p.carDescription{
   font-size: var(--font-size);
@@ -207,6 +262,7 @@ p.carDescription{
   margin-bottom: 1rem;
   border-top: 1px solid var(--shadow);
 }
+
 /* Mobile */
 @media screen and (max-width: 768px) {
   .side, .sidePhoto{
@@ -214,7 +270,7 @@ p.carDescription{
   }
 }
 @media screen and (max-width: 540px) {
-  .carsBlock li, .filter select, .filterOptions{
+  .carsBlock li, .filter select, .filterOptions, .brand select, .filterBtn {
     width: 100%;
   }
   .photoBlock, .infoBlock{
@@ -225,4 +281,40 @@ p.carDescription{
     width: 50%;
     text-align: right;
   } 
+  .model, .price{
+    order: -1;
+  }
+  .engine{
+    order: 1;
+    width: 70%;
+  }
+  .year{
+    order: 2;
+    color: var(--item-color);
+    font-size: 1.1rem;
+    width: 30%;
+    margin-bottom: 0;
+  }
+  .transmission{
+    order: 3;
+    width: 70%;
+  }
+  .mileage{
+    order: 4;
+    width: 30%;
+  }
+  .driveUnit{
+    order: 5;
+    width: 70%;
+  }
+  .color{
+    order: 6;
+    width: 30%;
+    text-align: right;
+  }
+}
+@media screen and (max-width: 320px) {
+  .engine, .year, .transmission, .mileage, .driveUnit, .color{
+    width: 50%;
+  }
 }
