@@ -4,7 +4,7 @@ module.exports = {
   async up(queryInterface) {
     const phoneData = [
       {
-        number: '79123456789',
+        phoneNumber: '79123456789',
       },
     ];
 
