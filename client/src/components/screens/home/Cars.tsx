@@ -4,6 +4,7 @@ import styles from "./home.module.css";
 import { Car } from "../catalog/catalog.types";
 import CarSlider from "./CarSlider";
 
+
 function Cars({ cars }: { cars: Car[] }): JSX.Element {
   return (
     <section>
