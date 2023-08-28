@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import styles from "./home.module.css";
 
 function Questions(): JSX.Element {
@@ -8,13 +8,7 @@ function Questions(): JSX.Element {
     <section>
       <h2>Появились вопросы? Звоните не откладывая!</h2>
       <div className={styles.phone}>
-        <Image
-          src="/phone-red.svg"
-          width={40}
-          height={40}
-          alt="Продажа авто с пробегом"
-          draggable={false}
-        />
+        <LocalPhoneIcon sx={{ fontSize: 40 }} />
         <Link href="tel: +79215555578">+7 (921) 555-55-78</Link>
       </div>
     </section>

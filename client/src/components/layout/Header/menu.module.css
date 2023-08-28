@@ -29,6 +29,9 @@
   font-size: var(--font-size);
   width: 33%;
 }
+.phone svg path{
+  fill: var(--light-red-color);
+}
 .logoBlock{
   width: 33%;
 }
@@ -37,18 +40,19 @@
   font-family: var(--font);
   background: transparent;
   padding: 0.5em;
+  margin: 0;
   border: 0;
   font-size: 1rem;
   font-weight: 300;
+  color: #000;
+}
+.accountBtn:hover{
+  background: transparent;
+  border: 0;
+  color: #000;
 }
 .phoneLink{
   font-family: var(--font);
-}
-.phoneIconSvg{
-  width: 30px;
-}
-.phoneIcon{
-  fill:var(--light-red-color);
 }
 
 @media screen and (max-width: 1280px) {

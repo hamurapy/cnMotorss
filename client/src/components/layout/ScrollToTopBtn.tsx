@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { animateScroll as scroll } from "react-scroll";
-import ToTopIcon from "./ToTopIcon";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 const ScrollToTopBtn = () => {
   const [showButton, setShowButton] = useState(false);
@@ -24,7 +24,7 @@ const ScrollToTopBtn = () => {
       className={showButton ? "visible" : "novisible"}
       onClick={handleClick}
     >
-      <ToTopIcon />
+      <KeyboardArrowUpIcon />
     </div>
   );
 };

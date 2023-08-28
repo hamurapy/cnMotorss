@@ -21,7 +21,7 @@ function LoginPage(): JSX.Element {
 
   useEffect(() => {
     if ("email" in user) {
-      router.push("/");
+      router.push("/account");
     }
   }, [user]);
 

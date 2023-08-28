@@ -36,8 +36,8 @@
   font-family: var(--font);
   font-size: var(--font-size);
 }
-.phone img{
-  width: 25px;
+.phone svg path{
+  fill: var(--light-red-color);
 }
 .phoneLink{
   font-family: var(--font);

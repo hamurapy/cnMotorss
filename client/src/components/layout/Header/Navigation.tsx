@@ -4,6 +4,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
@@ -17,7 +18,6 @@ import { RootState, useAppDispatch } from "@/store";
 import { useSelector } from "react-redux";
 import { check, logout } from "@/components/screens/auth/auth.slice";
 import styles from "./menu.module.css";
-import PhoneIcon from "../PhoneIcon";
 
 const pages = [
   {
@@ -90,7 +90,7 @@ function Navigation() {
               <Logo />
             </div>
             <div className={styles.phone}>
-              <PhoneIcon />
+              <LocalPhoneIcon sx={{ fontSize: 30 }} />
               <Link className={styles.phoneLink} href="tel: +79215555578">
                 +7 (921) 555-55-78
               </Link>

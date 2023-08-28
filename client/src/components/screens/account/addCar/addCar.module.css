@@ -1,25 +1,3 @@
-/* Account Info Section */
-.smallForm{
-  width: 30%;
-}
-.editBtn{
-  width: auto;
-  padding: 0.5rem 1.5rem;
-  border: 1px solid var(--light-red-color);
-  background: var(--light-red-color);
-  color: var(--main-bg-color);
-  border-radius: 5px;
-  font-size: 1.2rem;
-  font-weight: 300;
-  font-family: var(--font);
-  transition: 1s;
-  margin: 1rem 0;
-}
-.editBtn:hover{
-  width: auto;
-  background: var(--dark-red-color);
-  border: 1px solid var(--dark-red-color);
-}
 /* Add Car Section */
 .accountForm p{
   margin-bottom: 0.5rem;
@@ -32,8 +10,20 @@
   flex-wrap: wrap;
   align-items: center;
 }
-.lineForm input, .lineForm select{
+.imageOption{
+  width: 100%;
+}
+.formOption{
   width: 24%;
+}
+.formOption label, .imageOption label{
+  font-weight: 300;
+  color: var(--item-color);
+  font-size: 1rem;
+  text-align: justify;
+}
+.lineForm input, .lineForm select{
+  width: 100%;
   color: var(--text-color);
 }
 .lineForm input::-webkit-input-placeholder{
@@ -62,23 +52,51 @@ input.inputFile::-webkit-file-upload-button:hover {
   background: var(--dark-red-color);
   border: 1px solid var(--dark-red-color);
 }
+.coverInput{
+  width: 100%;
+  position: relative;
+  height: 58px;
+}
+.coverInput .coverTop{
+  width: 100%;
+  pointer-events: none;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.coverInput .coverBottom{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.coverInput .clear{
+  position: absolute;
+  top: 18px;
+  right: 3px;
+  z-index: 3;
+  cursor: pointer;
+}
+.coverInput .clear svg path{
+  fill:#474747;
+}
 
 /* Mobile Styles */
 @media screen and (max-width: 1024px) {
-  .smallForm{
-    width: 100%;
-  }
-  .lineForm input, .lineForm select{
+  .formOption{
     width: 49%;
   }
 }
 @media screen and (max-width: 768px) {
-  .smallForm, input.inputFile{
+  input.inputFile{
     width: 100%;
   }
 }
 @media screen and (max-width: 540px) {
-  .smallForm, .lineForm input, .lineForm select, input.inputFile{
+  .formOption{
     width: 100%;
   }
 }
