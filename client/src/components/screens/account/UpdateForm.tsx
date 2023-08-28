@@ -92,45 +92,15 @@ function UpdateForm({ car }: { car: Car }): JSX.Element {
                 <option value="" disabled selected hidden>
                   Объем л
                 </option>
-                <option value="0.2">0.2 л</option>
-                <option value="0.3">0.3 л</option>
-                <option value="0.4">0.4 л</option>
-                <option value="0.5">0.5 л</option>
-                <option value="0.6">0.6 л</option>
-                <option value="0.7">0.7 л</option>
-                <option value="0.8">0.8 л</option>
-                <option value="0.9">0.9 л</option>
-                <option value="1.0">1.0 л</option>
-                <option value="1.1">1.1 л</option>
-                <option value="1.2">1.2 л</option>
-                <option value="1.3">1.3 л</option>
-                <option value="1.4">1.4 л</option>
-                <option value="1.5">1.5 л</option>
-                <option value="1.6">1.6 л</option>
-                <option value="1.7">1.7 л</option>
-                <option value="1.8">1.8 л</option>
-                <option value="1.9">1.9 л</option>
-                <option value="2.0">2.0 л</option>
-                <option value="2.1">2.1 л</option>
-                <option value="2.2">2.2 л</option>
-                <option value="2.3">2.3 л</option>
-                <option value="2.4">2.4 л</option>
-                <option value="2.5">2.5 л</option>
-                <option value="2.6">2.6 л</option>
-                <option value="2.7">2.7 л</option>
-                <option value="2.8">2.8 л</option>
-                <option value="2.9">2.9 л</option>
-                <option value="3.0">3.0 л</option>
-                <option value="3.5">3.5 л</option>
-                <option value="4.0">4.0 л</option>
-                <option value="4.5">4.5 л</option>
-                <option value="5.0">5.0 л</option>
-                <option value="5.5">5.5 л</option>
-                <option value="6.0">6.0 л</option>
-                <option value="7.0">7.0 л</option>
-                <option value="8.0">8.0 л</option>
-                <option value="9.0">9.0 л</option>
-                <option value="10.0">10.0 л</option>
+                {[
+      0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6,
+      1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.5,
+      4.0, 4.5, 5.0, 5.5, 6.0, 7.0, 8.0, 9.0, 10.0,
+    ].map((value) => (
+      <option key={value} value={value}>
+        {value} л
+      </option>
+    ))}
               </select>
               <select {...register("engine")}>
                 <option value="" disabled selected hidden>

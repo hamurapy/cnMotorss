@@ -1,14 +1,19 @@
-import { RootState } from '@/store';
-import React from 'react'
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { Phone } from './type';
+import { RootState, useAppDispatch } from '@/store';
+import { loadPhones } from '../account/redux/api';
 
-function PhoneNumber() {
-    const { phoneNumber } = useSelector((store: RootState) => store.phoneNumber)
-    console.log(phoneNumber,2131231312321312);
-    
+export default function PhoneList() {
+  const dispatch = useAppDispatch();
+  const phones = useSelector((state: RootState) => state.phone.phones);
+console.log(phones);
+
   return (
-    <p>{phoneNumber}</p>
-  )
-}
-
-export default PhoneNumber
+    <div>
+      {phones.map((phone) => (
+        <p key={phone.phoneNumber}>{phone.phoneNumber}</p>
+      ))}
+    </div>
+  );
+};

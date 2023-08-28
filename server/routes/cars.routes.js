@@ -338,7 +338,6 @@ router.put('/:carId', upload.array('img'), async (req, res) => {
     const car = await Car.update(
       {
         brand,
-        
         model,
         color,
         liters,
@@ -383,6 +382,5 @@ router.put('/:carId', upload.array('img'), async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
 
 module.exports = router;

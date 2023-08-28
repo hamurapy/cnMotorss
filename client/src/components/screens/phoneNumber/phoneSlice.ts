@@ -1,15 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { Phone, PhonesState } from './type';
+import * as api from '../account/redux/api';
 
 const initialState: PhonesState = {
-    phoneNumber: '',
+    phones: [],
     error: 'error',
   };
   
-  export const loadPhone = createAsyncThunk('phone/load', () =>
-  async (): Promise<Phone[]> => {
-    const res = await fetch('http://localhost:4000/api/phone');
-    return res.json();
+  export const loadPhone = createAsyncThunk('phone/load', async () => {
+    const phones = await api.loadPhones()
+    return phones
   }
 );
 
@@ -19,12 +19,9 @@ const phoneSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
       builder
-        .addCase(loadPhone.fulfilled, (state, action) => {
-            state.phoneNumber = action.payload;
-        })
-        .addCase(loadPhone.rejected, (state, action) => {
-          state.error = action.error.message;
-        })
+      .addCase(loadPhone.fulfilled, (state, action) => {
+        state.phones = action.payload;
+      })
     },
   });
   

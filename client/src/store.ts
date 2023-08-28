@@ -10,7 +10,7 @@ const store = configureStore({
     auth: authReducer,
     user: userReducer,
     cars: carsSlice,
-    phoneNumber: phoneSlice,
+    phone: phoneSlice,
   },
 });
 
