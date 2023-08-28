@@ -1,9 +1,13 @@
+import { RootState } from '@/store';
 import React from 'react'
+import { useSelector } from 'react-redux';
 
 function PhoneNumber() {
-    const { phoneNumber } = useAppSelector((store) => store.phoneNumber);
+    const { phoneNumber } = useSelector((store: RootState) => store.phoneNumber)
+    console.log(phoneNumber,2131231312321312);
+    
   return (
-    <p>{phone}</p>
+    <p>{phoneNumber}</p>
   )
 }
 

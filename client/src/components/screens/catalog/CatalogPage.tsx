@@ -1,48 +1,23 @@
-/* eslint-disable @next/next/no-img-element */
-
 import React, { useEffect, useState } from 'react';
-import { Car, CarId } from "./catalog.types"
-import Image from 'next/image'
+import { Car, CarId } from "./catalog.types";
+import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../../store';
-import styles from './catalog.module.css'
-import Link from "next/link"
+import styles from './catalog.module.css';
+import Link from "next/link";
 import { deleteCar } from '../account/redux/carsSlice';
 import { RootState } from "@/store";       
 import CarSlider from "../home/CarSlider";
+import { useRouter } from 'next/router';
 
-export default function CatalogPage({ cars }: { cars: Car[] }) {
-  
+export default function CatalogPage({ cars,carsBrandAndModel }: { cars: Car[],carsBrandAndModel: Car[] }) {
   const { admin } = useSelector((store: RootState) => store.auth.user);
   const dispatch = useAppDispatch();
-  const itemsPerPage = 3; // Количество машин на странице
+  const itemsPerPage = 20;//--------поменять
+  const router = useRouter();
+  const initialPage = parseInt(router.query.page as string) || 1;
 
-  const initialCars = cars; // Сохраняем параметр в другой переменной
-  const [currentPage, setCurrentPage] = useState(1);
-  const [displayedCars, setDisplayedCars] = useState(initialCars.slice(0, itemsPerPage)); 
-
-  const handlePageChange = async (page: number) => {
-    const startIndex = (page - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    
-    // Отправляем запрос на сервер для получения машин на указанной странице
-    const res = await fetch(`http://localhost:4000/api/cars?startIndex=${startIndex}&endIndex=${endIndex}`);
-    const newCars = await res.json();
-    
-    setDisplayedCars(newCars); 
-    setCurrentPage(page);
-  };
-
-  const delCar = (carId: CarId): void => {
-    dispatch(deleteCar(Number(carId)));
-    // window.location.reload()
-  };
-
-
-  const brands = Array.from(new Set(cars.map((car) => car.brand)));
-  const [carsFilter, setCarsFilter] = useState(cars);
-  const [brandFilter, setBrandFilter] = useState("");
-  const [modelFilter, setModelFilter] = useState("");
+  const [currentPage, setCurrentPage] = useState(initialPage);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [minYear, setMinYear] = useState("");
@@ -54,20 +29,54 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
   const [maxLiters, setMaxLiters] = useState("");
   const [minMileage, setMinMileage] = useState("");
   const [maxMileage, setMaxMileage] = useState("");
+  const [brandFilter, setBrandFilter] = useState(""); // Add this line
+  const [modelFilter, setModelFilter] = useState(""); // Add this line
+  const [displayedCars, setDisplayedCars] = useState(cars.slice(0, itemsPerPage)); 
 
-  const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const res = await fetch(
-      `http://localhost:4000/api/cars?priceFrom=${minPrice}&priceTo=${maxPrice}&yearFrom=${minYear}&yearTo=${maxYear}&brand=${brandFilter}&model=${modelFilter}&engine=${engineFilter}&transmission=${transmission}&driveUnit=${driveUnit}&litersFrom=${minLiters}&litersTo=${maxLiters}&mileageFrom=${minMileage}&mileageTo=${maxMileage}`
-    );
+  useEffect(() => {
+    if (router.query.page) {
+      const newPage = parseInt(router.query.page as string);
+      setCurrentPage(newPage);
+    }
+  }, [router.query.page]);
 
-    const data = await res.json();
-    setCarsFilter(data);
+  const handleGoToCarDetails = (carId: string) => {
+    router.push(`/car/${carId}?page=${currentPage}`);
   };
 
-  const filteredModels = cars
-    .filter((car) => car.brand === brandFilter)
-    .map((car) => car.model);
+  const totalPages = Math.ceil(carsBrandAndModel.length / itemsPerPage);
+  const pageButtonsToShow = 5; 
+  const pageButtonStart = Math.max(currentPage - Math.floor(pageButtonsToShow / 2), 1);
+  const pageButtonEnd = Math.min(pageButtonStart + pageButtonsToShow - 1, totalPages);
+  
+  const fetchCars = async (startIndex: number, endIndex: number) => {
+    const res = await fetch(
+      `http://localhost:4000/api/cars/filter?priceFrom=${minPrice}&priceTo=${maxPrice}&yearFrom=${minYear}&yearTo=${maxYear}&brand=${brandFilter}&model=${modelFilter}&engine=${engineFilter}&transmission=${transmission}&driveUnit=${driveUnit}&litersFrom=${minLiters}&litersTo=${maxLiters}&mileageFrom=${minMileage}&mileageTo=${maxMileage}&startIndex=${startIndex}&endIndex=${endIndex}`
+    );
+    return res.json();
+  };
+
+  const handlePageChange = async (page: number) => {
+    if (page < 1 || page > totalPages) {
+      return;
+    }
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const res = await fetchCars(startIndex, endIndex);
+    setDisplayedCars(res); 
+    setCurrentPage(page);
+    router.push(`/catalog?page=${page}`);
+  };
+
+  const handleSearchAndPageChange = async (e: React.FormEvent<HTMLFormElement>, page: number) => {
+    e.preventDefault();
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const res = await fetchCars(startIndex, endIndex);
+    setDisplayedCars(res); 
+    setCurrentPage(page);
+    router.push(`/catalog?page=${page}`);
+  };
 
   const handleMinPriceChange = (e: any) => {
     setMinPrice(e.target.value);
@@ -129,12 +138,16 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
     }
   };
 
-  console.log(carsFilter, 1111111111111111111);
+  const brands = Array.from(new Set(carsBrandAndModel.map((car) => car.brand)));
+  const filteredModels = carsBrandAndModel
+    .filter((car) => car.brand === brandFilter)
+    .map((car) => car.model);
+
   return (
     <div className="contentBlock">
       <h1>Каталог</h1>
       <div className={styles.catalogBlock}>
-        <form onSubmit={handleSearch}>
+        <form onSubmit={(e) => handleSearchAndPageChange(e, 1)}>
           <div className={styles.brand}>
             <select
               id="brand-filter"
@@ -298,7 +311,7 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
         <ul className={styles.carsBlock}>
           {displayedCars.map((car) => (
             <li className={styles.listItem} key={car.id}>
-              <Link href={`/car/${car.id}`}>
+              <Link href={`/car/${car.id}?page=${currentPage}`}>
                 <div className={styles.cardBlock}>
                   <div className={styles.photoBlock}>
                     <CarSlider photos={car.photos} />{" "}
@@ -322,17 +335,34 @@ export default function CatalogPage({ cars }: { cars: Car[] }) {
               
             </li>
           ))}
-          <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+        </ul>
+        <div className={styles.pagination}>
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
           Предыдущая
         </button>
-        <span>Страница {currentPage}</span>
-        <button onClick={() => handlePageChange(currentPage + 1)} disabled={cars.length === 0}>
+        {Array.from({ length: pageButtonEnd - pageButtonStart + 1 }, (_, index) => {
+          const pageNumber = index + pageButtonStart;
+          return (
+            <button
+              key={pageNumber}
+              onClick={() => handlePageChange(pageNumber)}
+              className={pageNumber === currentPage ? styles.activePage : ""}
+            >
+              {pageNumber}
+            </button>
+          );
+        })}
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
           Следующая
         </button>
-        </ul>
-
       </div>
     </div>
-  );
-}
-
+    </div>
+  )
+      }

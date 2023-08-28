@@ -3,27 +3,29 @@ import Layout from '@/app/layout';
 import CatalogPage from '@/components/screens/catalog/CatalogPage';
 import { Car } from '@/components/screens/catalog/catalog.types';
 
-function Catalog({ cars }: { cars: Car[] }): JSX.Element {
-
-  return (
-    <Layout title={'Каталог'} description={''} keywords={''}>
-      <CatalogPage cars={cars} />
-    </Layout>
-  );
-}
-
-export default Catalog;
-
 export async function getStaticProps() {
   const startIndex = 0;
-  const endIndex = 20;
+  const endIndex = 20; //---------поменять
 
   const res = await fetch(`http://localhost:4000/api/cars?startIndex=${startIndex}&endIndex=${endIndex}`);
-  const cars = await res.json();
+  
+  const data = await res.json();
+  const carsWithPhotos = data.carsWithPhotos;
+  const carsBrandAndModel = data.carsBrandAndModel;
   
   return {
     props: {
-      cars,
+      carsWithPhotos,
+      carsBrandAndModel
     },
   };
+}
+
+export default function Catalog({ carsWithPhotos, carsBrandAndModel }: { carsWithPhotos: Car[], carsBrandAndModel: Car[] }): JSX.Element {
+
+  return (
+    <Layout title={'Каталог'} description={''} keywords={''}>
+      <CatalogPage cars={carsWithPhotos} carsBrandAndModel={carsBrandAndModel} />
+    </Layout>
+  );
 }

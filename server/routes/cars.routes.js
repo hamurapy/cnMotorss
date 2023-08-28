@@ -24,13 +24,13 @@ router.route('/ss').get(async (req, res) => {
   }
 });
 
-router.route('/').get(async (req, res) => {
+router.route('/filter').get(async (req, res) => {
   try {
-
     const {
       priceFrom, priceTo, yearFrom, yearTo, brand, model, engine,
-      transmission, driveUnit, litersFrom, litersTo, mileageFrom, mileageTo, startIndex, endIndex
+      transmission, driveUnit, litersFrom, litersTo, mileageFrom, mileageTo, startIndex, endIndex,
     } = req.query;
+    console.log(req.query);
     const filters = {};
 
     if (priceFrom && priceTo) {
@@ -108,13 +108,64 @@ router.route('/').get(async (req, res) => {
     if (model) {
       filters.model = model;
     }
-
-
     const cars = await Car.findAll({
       where: filters,
+      offset: startIndex,
+      limit: endIndex - startIndex,
+      order: [['createdAt', 'DESC']],
+      raw: true,
+    });
+    console.log(cars, '<<<<<<<<<<<<<<<<<<<<');
+    const carIds = cars.map((car) => car.id);
+
+    const photos = await PhotoCar.findAll({
+      where: {
+        carId: carIds,
+      },
+      attributes: ['carId', 'img'],
+      group: ['carId', 'PhotoCar.id'],
+    });
+
+    const carsWithPhotos = cars.map((car) => {
+      const carPhotos = photos.filter((photo) => photo.carId === car.id);
+      return {
+        id: car.id,
+        brand: car.brand,
+        model: car.model,
+        year: car.year,
+        mileage: car.mileage,
+        color: car.color,
+        liters: car.liters,
+        wheel: car.wheel,
+        engine: car.engine,
+        power: car.power,
+        price: car.price,
+        driveUnit: car.driveUnit,
+        transmission: car.transmission,
+        description: car.description,
+        photos: carPhotos.map((photo) => ({ img: photo.img })),
+      };
+    });
+    console.log(carsWithPhotos);
+    res.json(carsWithPhotos);
+  } catch (error) {
+    res.json({ error: error.message });
+  }
+});
+
+router.route('/').get(async (req, res) => {
+  try {
+    const { startIndex, endIndex } = req.query;
+    const cars = await Car.findAll({
       order: [['createdAt', 'DESC']],
       offset: startIndex,
       limit: endIndex - startIndex,
+      raw: true,
+    });
+
+    const carsBrandAndModel = await Car.findAll({
+      attributes: ['brand', 'model'],
+      order: [['createdAt', 'DESC']],
       raw: true,
     });
 
@@ -148,8 +199,11 @@ router.route('/').get(async (req, res) => {
         photos: carPhotos.map((photo) => ({ img: photo.img })),
       };
     });
-
-    res.json(carsWithPhotos);
+    const responseData = {
+      carsWithPhotos,
+      carsBrandAndModel,
+    };
+    res.json(responseData);
   } catch (error) {
     res.json({ error: error.message });
   }
