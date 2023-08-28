@@ -8,6 +8,7 @@ const app = express();
 const authRoute = require('./routes/auth.routes');
 const usersRoute = require('./routes/users.route');
 const carRouter = require('./routes/cars.routes');
+const phoneRouter = require('./routes/phone.routes');
 
 config(app);
 const corsOptions = {
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'img')));
 app.use('/api/auth', authRoute);
 app.use('/api/users', usersRoute);
 app.use('/api/cars', carRouter);
+app.use('/api/phone', phoneRouter);
 
 const PORT = process.env.PORT || 4000;
 

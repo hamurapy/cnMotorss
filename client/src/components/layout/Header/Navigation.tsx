@@ -41,12 +41,14 @@ const pages = [
     title: "Контакты",
   },
 ];
-
 function Navigation() {
+  const { phoneNumber } = useSelector((store) => store);
+  // console.log(phoneNumber);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
   const { admin } = useSelector((store: RootState) => store.auth.user);
+
 
   useEffect(() => {
     dispatch(check());
