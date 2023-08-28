@@ -28,8 +28,9 @@ router.route('/filter').get(async (req, res) => {
   try {
     const {
       priceFrom, priceTo, yearFrom, yearTo, brand, model, engine,
-      transmission, driveUnit, litersFrom, litersTo, mileageFrom, mileageTo,
+      transmission, driveUnit, litersFrom, litersTo, mileageFrom, mileageTo, startIndex, endIndex,
     } = req.query;
+    console.log(req.query);
     const filters = {};
 
     if (priceFrom && priceTo) {
@@ -107,13 +108,14 @@ router.route('/filter').get(async (req, res) => {
     if (model) {
       filters.model = model;
     }
-
     const cars = await Car.findAll({
       where: filters,
+      offset: startIndex,
+      limit: endIndex - startIndex,
       order: [['createdAt', 'DESC']],
       raw: true,
     });
-
+    console.log(cars, '<<<<<<<<<<<<<<<<<<<<');
     const carIds = cars.map((car) => car.id);
 
     const photos = await PhotoCar.findAll({
@@ -144,7 +146,7 @@ router.route('/filter').get(async (req, res) => {
         photos: carPhotos.map((photo) => ({ img: photo.img })),
       };
     });
-
+    console.log(carsWithPhotos);
     res.json(carsWithPhotos);
   } catch (error) {
     res.json({ error: error.message });
@@ -161,6 +163,12 @@ router.route('/').get(async (req, res) => {
       raw: true,
     });
 
+    const carsBrandAndModel = await Car.findAll({
+      attributes: ['brand', 'model'],
+      order: [['createdAt', 'DESC']],
+      raw: true,
+    });
+
     const carIds = cars.map((car) => car.id);
 
     const photos = await PhotoCar.findAll({
@@ -191,8 +199,11 @@ router.route('/').get(async (req, res) => {
         photos: carPhotos.map((photo) => ({ img: photo.img })),
       };
     });
-
-    res.json(carsWithPhotos);
+    const responseData = {
+      carsWithPhotos,
+      carsBrandAndModel,
+    };
+    res.json(responseData);
   } catch (error) {
     res.json({ error: error.message });
   }
