@@ -6,6 +6,7 @@ import LogoSlider from './LogoSlider'
 import Welcome from './Welcome'
 import Questions from './Questions'
 import { Car } from '../catalog/catalog.types'
+import PhoneNumber from '../phoneNumber/PhoneNumber'
 
 
 function Homepage({ cars}: {cars: Car[]}): JSX.Element {
@@ -18,6 +19,7 @@ function Homepage({ cars}: {cars: Car[]}): JSX.Element {
     <Advantage/>
     <LogoSlider/>
     <Questions/>
+    <PhoneNumber />
     </>
   )
 }
