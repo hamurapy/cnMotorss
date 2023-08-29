@@ -4,6 +4,7 @@ import authReducer from '@/components/screens/auth/auth.slice'
 import userReducer from '@/components/screens/auth/user.slice';
 import carsSlice from '@/components/screens/account/types/cars.slice';
 import phoneSlice from '@/components/screens/phoneNumber/phoneSlice';
+import filtersReducer from '@/redux/filters.slice';
 
 
 const store = configureStore({
@@ -12,6 +13,7 @@ const store = configureStore({
     user: userReducer,
     cars: carsSlice,
     phone: phoneSlice,
+    filters: filtersReducer,
   },
 });
 

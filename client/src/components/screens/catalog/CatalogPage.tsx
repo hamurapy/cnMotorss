@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Car, CarId } from "./catalog.types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useAppDispatch } from "../../../store";
 import Link from "next/link";
 import { deleteCar } from "../account/types/cars.slice";
@@ -11,6 +11,7 @@ import classNames from "classnames";
 import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { setFilter } from "@/redux/filters.slice";
 
 export default function CatalogPage({
   cars,
@@ -26,19 +27,19 @@ export default function CatalogPage({
   const initialPage = parseInt(router.query.page as string) || 1;
 
   const [currentPage, setCurrentPage] = useState(initialPage);
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
-  const [minYear, setMinYear] = useState("");
-  const [maxYear, setMaxYear] = useState("");
-  const [engineFilter, setEngineFilter] = useState("");
-  const [transmission, setTransmission] = useState("");
-  const [driveUnit, setDriveUnit] = useState("");
-  const [minLiters, setMinLiters] = useState("");
-  const [maxLiters, setMaxLiters] = useState("");
-  const [minMileage, setMinMileage] = useState("");
-  const [maxMileage, setMaxMileage] = useState("");
-  const [brandFilter, setBrandFilter] = useState(""); // Add this line
-  const [modelFilter, setModelFilter] = useState(""); // Add this line
+  // const [minPrice, setMinPrice] = useState("");
+  // const [maxPrice, setMaxPrice] = useState("");
+  // const [minYear, setMinYear] = useState("");
+  // const [maxYear, setMaxYear] = useState("");
+  // const [engineFilter, setEngineFilter] = useState("");
+  // const [transmission, setTransmission] = useState("");
+  // const [driveUnit, setDriveUnit] = useState("");
+  // const [minLiters, setMinLiters] = useState("");
+  // const [maxLiters, setMaxLiters] = useState("");
+  // const [minMileage, setMinMileage] = useState("");
+  // const [maxMileage, setMaxMileage] = useState("");
+  // const [brandFilter, setBrandFilter] = useState(""); // Add this line
+  // const [modelFilter, setModelFilter] = useState(""); // Add this line
   const [displayedCars, setDisplayedCars] = useState(
     cars.slice(0, itemsPerPage)
   );
@@ -52,12 +53,12 @@ export default function CatalogPage({
   const [maxPriceText, setMaxPriceText] = useState("");
   const [maxPriceBtn, setMaxPriceBtn] = useState(false);
 
-  const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const res = await fetch(
-      `http://localhost:4000/api/cars?priceFrom=${minPrice}&priceTo=${maxPrice}&yearFrom=${minYear}&yearTo=${maxYear}&brand=${brandFilter}&model=${modelFilter}&engine=${engineFilter}&transmission=${transmission}&driveUnit=${driveUnit}&litersFrom=${minLiters}&litersTo=${maxLiters}&mileageFrom=${minMileage}&mileageTo=${maxMileage}`
-    );
-  };
+  // const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   const res = await fetch(
+  //     `http://localhost:4000/api/cars?priceFrom=${minPrice}&priceTo=${maxPrice}&yearFrom=${minYear}&yearTo=${maxYear}&brand=${brandFilter}&model=${modelFilter}&engine=${engineFilter}&transmission=${transmission}&driveUnit=${driveUnit}&litersFrom=${minLiters}&litersTo=${maxLiters}&mileageFrom=${minMileage}&mileageTo=${maxMileage}`
+  //   );
+  // };
 
   useEffect(() => {
     if (router.query.page) {
@@ -66,9 +67,9 @@ export default function CatalogPage({
     }
   }, [router.query.page]);
 
-  const handleGoToCarDetails = (carId: string) => {
-    router.push(`/car/${carId}?page=${currentPage}`);
-  };
+  // const handleGoToCarDetails = (carId: string) => {
+  //   router.push(`/car/${carId}?page=${currentPage}`);
+  // };
 
   const totalPages = Math.ceil(carsBrandAndModel.length / itemsPerPage);
   const pageButtonsToShow = 5;
@@ -114,53 +115,87 @@ export default function CatalogPage({
   };
 
   const handleMinYearChange = (e: any) => {
-    setMinYear(e.target.value);
+    // setMinYear(e.target.value);
+    const value = e.target.value;
+    dispatch(setFilter({ filterName: "minYear", value }));
   };
 
   const handleMaxYearChange = (e: any) => {
-    setMaxYear(e.target.value);
+     const value = e.target.value;
+  dispatch(setFilter({ filterName: "maxYear", value }));
   };
 
   const handleEngineFilterChange = (e: any) => {
-    setEngineFilter(e.target.value);
+    const value = e.target.value;
+    dispatch(setFilter({ filterName: "engineFilter", value }));
   };
 
   const handleTransmissionChange = (e: any) => {
-    setTransmission(e.target.value);
+    // setTransmission(e.target.value);
+    const value = e.target.value;
+    dispatch(setFilter({ filterName: "transmission", value }));
   };
 
   const handleDriveUnitChange = (e: any) => {
-    setDriveUnit(e.target.value);
+    // setDriveUnit(e.target.value);
+    const value = e.target.value;
+    dispatch(setFilter({ filterName: "driveUnit", value }));
   };
 
   const handleMinLitersChange = (e: any) => {
-    setMinLiters(e.target.value);
+    // setMinLiters(e.target.value);
+    const value = e.target.value;
+    dispatch(setFilter({ filterName: "minLiters", value }));
   };
 
   const handleMaxLitersChange = (e: any) => {
-    setMaxLiters(e.target.value);
+    // setMaxLiters(e.target.value);
+    const value = e.target.value;
+    dispatch(setFilter({ filterName: "maxLiters", value }));
   };
 
   const handleMinMileageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMinMileage(e.target.value);
-    setMinMileageText(e.target.value + " км");
-    if (e.target.value !== "") {
-      setMinMileageBtn(true);
-    }
+    // setMinMileage(e.target.value);
+    // setMinMileageText(e.target.value + " км");
+    // if (e.target.value !== "") {
+    //   setMinMileageBtn(true);
+    // }
+    const value = e.target.value;
+  const text = value !== "" ? value + " км" : "";
+  const showButton = value !== "";
+
+  dispatch(setFilter({ filterName: "minMileage", value }));
+  dispatch(setFilter({ filterName: "minMileageText", value: text }));
+  dispatch(setFilter({ filterName: "minMileageBtn", value: showButton }));
   };
 
+  // const clearMinMileage = () => {
+  //   setMinMileage("");
+  //   setMinMileageText("");
+  //   setMinMileageBtn(false);
+  // };
   const clearMinMileage = () => {
-    setMinMileage("");
-    setMinMileageText("");
-    setMinMileageBtn(false);
+    dispatch(setFilter({ filterName: "minMileage", value: "" }));
+    dispatch(setFilter({ filterName: "minMileageText", value: "" }));
+    dispatch(setFilter({ filterName: "minMileageBtn", value: false }));
   };
 
   const handleMaxMileageChange = (e: any) => {
-    setMaxMileage(e.target.value);
-    setMaxMileageText(e.target.value + " км");
-    if (e.target.value !== "") {
-      setMaxMileageBtn(true);
-    }
+    // setMaxMileage(e.target.value);
+    // setMaxMileageText(e.target.value + " км");
+    // if (e.target.value !== "") {
+    //   setMaxMileageBtn(true);
+    // }
+    const handleMaxMileageChange = (e: any) => {
+      const value = e.target.value;
+      dispatch(setFilter({ filterName: "maxMileage", value }));
+      dispatch(setFilter({ filterName: "maxMileageText", value: value + " км" }));
+      if (value !== "") {
+        dispatch(setFilter({ filterName: "maxMileageBtn", value: true }));
+      } else {
+        dispatch(setFilter({ filterName: "maxMileageBtn", value: false }));
+      }
+    };
   };
 
   const clearMaxMileage = () => {
@@ -199,8 +234,8 @@ export default function CatalogPage({
 
   const handleBrandChange = (e: any) => {
     const selectedBrand = e.target.value;
-    setBrandFilter(selectedBrand);
-    setModelFilter("");
+    dispatch(setFilter({ filterName: "brand", value: selectedBrand }));
+    dispatch(setFilter({ filterName: "model", value: "" }));
   };
 
   const handleModelChange = (e: any) => {

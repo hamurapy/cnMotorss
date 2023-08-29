@@ -115,7 +115,7 @@ router.route('/filter').get(async (req, res) => {
       order: [['createdAt', 'DESC']],
       raw: true,
     });
-    console.log(cars, '<<<<<<<<<<<<<<<<<<<<');
+
     const carIds = cars.map((car) => car.id);
 
     const photos = await PhotoCar.findAll({

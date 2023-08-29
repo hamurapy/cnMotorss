@@ -11,6 +11,9 @@ import AddRoadIcon from "@mui/icons-material/AddRoad";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 import SpeedIcon from "@mui/icons-material/Speed";
 import CurrencyRubleIcon from "@mui/icons-material/CurrencyRuble";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 export const getStaticPaths = async () => {
   const res = await fetch('http://localhost:4000/api/cars/ss'); 
@@ -40,6 +43,29 @@ export async function getStaticProps(context: { params: { id: number } }) {
 }
 
 export default function CarPage({ car }: { car: Car }): JSX.Element {
+  const router = useRouter();
+  const filters = useSelector((state: RootState) => state.filters);
+  const goBackToCatalog = () => {
+    const queryParams = new URLSearchParams({
+      
+  maxPrice: filters.maxPrice,
+  minYear: filters.minYear,
+  maxYear: filters.maxYear,
+  brandFilter: filters.brandFilter,
+  modelFilter: filters.modelFilter,
+  engineFilter:filters.engineFilter,
+  transmission:filters.transmission,
+  driveUnit:filters.driveUnit,
+  minLiters:filters.minLiters,
+  maxLiters:filters.maxLiters,
+  minMileage:filters.minMileage,
+  maxMileage:filters.maxMileage,
+    });
+
+    const catalogUrl = `/catalog?${queryParams.toString()}`;
+    router.push(catalogUrl);
+  };
+  
   return (
     <Layout title={car.brand} description={""} keywords={""}>
       <div className="contentBlock">
@@ -135,6 +161,7 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
         ) : (
           <></>
         )}
+        <button onClick={goBackToCatalog}>Назад к каталогу</button>
       </div>
     </Layout>
   );
