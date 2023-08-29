@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import authReducer from '@/components/screens/auth/auth.slice'
 import userReducer from '@/components/screens/auth/user.slice';
 import carsSlice from '@/components/screens/account/types/cars.slice';
-import phoneSlice from '@/components/screens/phoneNumber/phoneSlice';
+import phoneReducer from '@/components/screens/phoneNumber/phone.slice';
 
 
 const store = configureStore({
@@ -11,7 +11,7 @@ const store = configureStore({
     auth: authReducer,
     user: userReducer,
     cars: carsSlice,
-    phone: phoneSlice,
+    phone: phoneReducer,
   },
 });
 

@@ -18,6 +18,7 @@ import { RootState, useAppDispatch } from "@/store";
 import { useSelector } from "react-redux";
 import { check, logout } from "@/components/screens/auth/auth.slice";
 import styles from "./menu.module.css";
+import PhoneNumber from "@/components/screens/phoneNumber/PhoneNumber";
 
 const pages = [
   {
@@ -41,14 +42,12 @@ const pages = [
     title: "Контакты",
   },
 ];
-function Navigation() {
-  const { phoneNumber } = useSelector((store) => store);
-  // console.log(phoneNumber);
+
+function Navigation(): JSX.Element {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
   const { admin } = useSelector((store: RootState) => store.auth.user);
-
 
   useEffect(() => {
     dispatch(check());
@@ -59,7 +58,7 @@ function Navigation() {
     router.push("/");
   };
 
-  const isActive = (href) => {
+  const isActive = (href: string) => {
     return router.pathname === href ? "active" : "";
   };
 
@@ -91,9 +90,7 @@ function Navigation() {
             </div>
             <div className={styles.phone}>
               <LocalPhoneIcon sx={{ fontSize: 30 }} />
-              <Link className={styles.phoneLink} href="tel: +79215555578">
-                +7 (921) 555-55-78
-              </Link>
+              <PhoneNumber />
             </div>
             <Box
               sx={{

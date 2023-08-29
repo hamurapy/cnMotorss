@@ -243,7 +243,6 @@ function FormAddCar(): JSX.Element {
             <label>Коробка</label>
             <select {...register("transmission", { required: true })}>
               <option value="">Выберите</option>
-              <option value="">Коробка</option>
               <option value="Механика">Механика</option>
               <option value="Автомат">Автомат</option>
               <option value="Робот">Робот</option>
