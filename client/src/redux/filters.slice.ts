@@ -24,6 +24,7 @@ const filtersSlice = createSlice({
       const { filterName, value } = action.payload;
       state[filterName] = value;
     },
+    
   },
 });
 

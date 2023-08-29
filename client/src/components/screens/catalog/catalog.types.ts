@@ -28,3 +28,19 @@ export type CarsState = {
 };
 
 export type CarId = Car['id'];
+
+export interface FiltersState {
+  minPrice: string;
+  maxPrice: string;
+  minYear: string;
+  maxYear: string;
+  brandFilter: string;
+  modelFilter: string;
+  engineFilter: string;
+  transmission: string;
+  driveUnit: string;
+  minLiters: string;
+  maxLiters: string;
+  minMileage: string;
+  maxMileage: string;
+}

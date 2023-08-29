@@ -12,7 +12,7 @@ export async function getStaticProps() {
   const data = await res.json();
   const carsWithPhotos = data.carsWithPhotos;
   const carsBrandAndModel = data.carsBrandAndModel;
-  
+
   return {
     props: {
       carsWithPhotos,
