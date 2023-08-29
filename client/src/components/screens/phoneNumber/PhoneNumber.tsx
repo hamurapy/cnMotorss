@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Phone } from './type';
 import { RootState, useAppDispatch } from '@/store';
-import { loadPhones } from '../account/redux/api';
+import { loadPhones } from '@/components/screens/account/types/api.cars';
 
 export default function PhoneList() {
   const dispatch = useAppDispatch();

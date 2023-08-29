@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { Phone, PhonesState } from './type';
-import * as api from '../account/redux/api';
+import * as api from '@/components/screens/account/types/api.cars';
 
 const initialState: PhonesState = {
     phones: [],

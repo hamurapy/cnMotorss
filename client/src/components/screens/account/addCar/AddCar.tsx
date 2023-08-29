@@ -54,7 +54,7 @@ function FormAddCar(): JSX.Element {
     formData.append("transmission", data.transmission);
     formData.append("description", data.description);
 
-    dispatch(addCar(formData));
+    dispatch(addCar(formData))
 
     setBrand("");
     setBrandBtn(false);
