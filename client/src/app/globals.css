@@ -142,6 +142,9 @@ input, textarea {
   transition: 1s;
   outline: 0;
 }
+textarea{
+  white-space: pre-wrap;
+}
 select {
   position: relative;
   width: 100%;
@@ -297,6 +300,9 @@ button:hover{
   background: var(--light-red-color);
   width: 100%; 
   margin: 0 auto 0; 
+}
+.css-av538e-MuiButtonBase-root-MuiIconButton-root{
+  border: 1px solid #000;
 }
 /* Mobile Styles */
 @media screen and (max-width: 1024px) {

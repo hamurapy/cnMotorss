@@ -1,19 +1,28 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { Phone } from './type';
-import { RootState, useAppDispatch } from '@/store';
-import { loadPhones } from '@/components/screens/account/types/api.cars';
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { RootState, useAppDispatch } from "@/store";
+import { loadPhone } from "./phone.slice";
+import Link from "next/link";
 
-export default function PhoneList() {
+export default function PhoneNumber() {
   const dispatch = useAppDispatch();
-  const phones = useSelector((state: RootState) => state.phone.phones);
-console.log(phones);
+
+  useEffect(() => {
+    dispatch(loadPhone());
+  }, [dispatch]);
+
+  const phones = useSelector((state: RootState) => state.phone.phoneList);
+  const phone = phones.map((phone) => phone.phoneNumber);
+
+  console.log(phone);
 
   return (
-    <div>
+    <>
       {phones.map((phone) => (
-        <p key={phone.phoneNumber}>{phone.phoneNumber}</p>
+        <Link key={phone.phoneNumber} href={`tel: ${phone.phoneNumber}`}>
+          {phone.phoneNumber}
+        </Link>
       ))}
-    </div>
+    </>
   );
-};
+}

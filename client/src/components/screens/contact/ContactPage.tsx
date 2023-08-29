@@ -1,8 +1,8 @@
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import styles from "./contact.module.css";
+import PhoneNumber from "../phoneNumber/PhoneNumber";
 
 function ContactPage(): JSX.Element {
   return (
@@ -25,9 +25,9 @@ function ContactPage(): JSX.Element {
             </p>
             <div className={styles.phone}>
               <LocalPhoneIcon sx={{ fontSize: 35 }} />
-              <Link className={styles.phoneLink} href="tel: +79215555578">
-                +7 (921) 555-55-78
-              </Link>
+              <div className={styles.phoneLink}>
+                <PhoneNumber />
+              </div>
             </div>
           </div>
         </div>
