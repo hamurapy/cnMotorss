@@ -1,28 +1,27 @@
 import React from "react";
-import PhoneType from "../../phoneNumber/types/phone.type";
 import { useAppDispatch } from "@/store";
 import { updatePhone } from "../../phoneNumber/phone.slice";
+import { PhoneType } from "../../phoneNumber/types/phone.type";
 
 const PhoneCard = ({ phone }: { phone: PhoneType }) => {
   const dispatch = useAppDispatch();
   const [phoneNumber, setPhoneNumber] = React.useState("");
 
-  const handlePhoneChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setPhoneNumber(e.target.value);
-  };
-
   const handlePhone = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    dispatch(updatePhone({ id: phone.id, phoneNumber: phone.phoneNumber }));
+    dispatch(updatePhone({ id: phone.id, phoneNumber: phoneNumber }));
+  };
+  
+  const handlePhoneChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setPhoneNumber(e.target.value);
   };
 
   return (
     <>
       <div>{phone.phoneNumber}</div>
-      {/* <button type="button">Редактировать</button> */}
       <form onSubmit={handlePhone}>
         <input
-          type="tel"
+          type="number"
           id="phoneNumber"
           name="phoneNumber"
           value={phoneNumber}

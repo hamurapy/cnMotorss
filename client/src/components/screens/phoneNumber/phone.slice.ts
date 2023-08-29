@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import type PhoneState from './types/phone.state';
 import * as apiPhone from './api.phone';
-import PhoneType from './types/phone.type';
+import { PhoneState, PhoneType } from './types/phone.type';
+
 
 const initialState: PhoneState = {
   phoneList: [],
@@ -12,13 +12,9 @@ export const loadPhone = createAsyncThunk('phone/loadPhone', async () => {
   return phones;
 });
 
-export const updatePhone = createAsyncThunk(
-  'phone/updatePhone',
-  async (updatePhone: PhoneType) => {
-    await apiPhone.updatePhone(updatePhone);
-    return { updatePhone };
-  },
-);
+export const updatePhone = createAsyncThunk('phone/updatePhone', (phone: PhoneType) => {
+  return apiPhone.updatePhone(phone);
+});
 
 const phonesSlice = createSlice({
   name: 'phone',

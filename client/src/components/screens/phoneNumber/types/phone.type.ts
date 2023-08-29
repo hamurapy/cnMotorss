@@ -1,6 +1,8 @@
-type PhoneType = {
+export type PhoneType = {
   id: number;
   phoneNumber: string;
 };
 
-export default PhoneType;
+export type PhoneState = {
+  phoneList: PhoneType[];
+};
