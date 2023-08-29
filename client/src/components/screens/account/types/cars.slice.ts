@@ -5,6 +5,7 @@ import * as api from './api.cars';
 const initialState: CarsState = {
   cars: [],
   error: 'error',
+  status: '' 
 };
 
 export const loadCars = createAsyncThunk('load/loadCars', async () => {
@@ -33,11 +34,16 @@ const carsSlice = createSlice({
       .addCase(loadCars.fulfilled, (state, action) => {
         state.cars = action.payload;
       })
+      .addCase(addCar.pending, (state) => {
+        state.status = 'loading';
+      })
       .addCase(addCar.fulfilled, (state, action) => {
         state.cars.push(action.payload);
+        state.status = '201'
       })
       .addCase(addCar.rejected, (state, action) => {
         state.error = action.error.message;
+        state.status = '500'
       })
       .addCase(updateCar.fulfilled, (state, action) => {
         state.cars = state.cars.map((car) =>

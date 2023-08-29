@@ -37,8 +37,8 @@ export default function CatalogPage({
   const [maxLiters, setMaxLiters] = useState("");
   const [minMileage, setMinMileage] = useState("");
   const [maxMileage, setMaxMileage] = useState("");
-  const [brandFilter, setBrandFilter] = useState(""); // Add this line
-  const [modelFilter, setModelFilter] = useState(""); // Add this line
+  const [brandFilter, setBrandFilter] = useState("");
+  const [modelFilter, setModelFilter] = useState("");
   const [displayedCars, setDisplayedCars] = useState(
     cars.slice(0, itemsPerPage)
   );
@@ -469,49 +469,35 @@ export default function CatalogPage({
           * Цены на сайте указаны в национальной валюте Китая
         </p>
         <ul className={styles.carsBlock}>
-          {displayedCars.map((car) => (
-            <li className={styles.listItem} key={car.id}>
-              <Link href={`/car/${car.id}?page=${currentPage}`}>
-                <div className={styles.cardBlock}>
-                  <div className={styles.photoBlock}>
-                    <CarSlider photos={car.photos} />{" "}
-                  </div>
-                  <div className={styles.infoBlock}>
-                    <div className={styles.model}>
-                      {car.brand} {car.model}
-                    </div>
-                    <div className={styles.price}>{car.price} ₽</div>
-                    <div className={styles.year}>{car.year}</div>
-                    <div className={classNames(styles.leftItem, styles.engine)}>
-                      {car.liters} л/{car.power} л.с./{car.engine}
-                    </div>
-                    <div
-                      className={classNames(
-                        styles.centerItem,
-                        styles.driveUnit
-                      )}
-                    >
-                      {car.driveUnit}
-                    </div>
-                    <div className={styles.mileage}>{car.mileage} км</div>
-                    <div
-                      className={classNames(
-                        styles.leftItem,
-                        styles.transmission
-                      )}
-                    >
-                      {car.transmission}
-                    </div>
-                    <div
-                      className={classNames(styles.centerItem, styles.color)}
-                    >
-                      {car.color}
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </li>
-          ))}
+        {displayedCars.map((car) => (
+  <li className={styles.listItem} key={car.id}>
+      <div className={styles.cardBlock} style={{ cursor: 'pointer' }} onClick={() => window.open(`/car/${car.id}?page=${currentPage}`, '_blank')}>
+        <div className={styles.photoBlock}>
+          <CarSlider photos={car.photos} />
+        </div>
+        <div className={styles.infoBlock}>
+          <div className={styles.model}>
+            {car.brand} {car.model} 
+          </div>
+          <div className={styles.price}>{car.price} ₽</div>
+          <div className={styles.year}>{car.year}</div>
+          <div className={classNames(styles.leftItem, styles.engine)}>
+            {car.liters} л/{car.power} л.с./{car.engine}
+          </div>
+          <div className={classNames(styles.centerItem, styles.driveUnit)}>
+            {car.driveUnit}
+          </div>
+          <div className={styles.mileage}>{car.mileage} км</div>
+          <div className={classNames(styles.leftItem, styles.transmission)}>
+            {car.transmission}
+          </div>
+          <div className={classNames(styles.centerItem, styles.color)}>
+            {car.color}
+          </div>
+        </div>
+      </div>
+  </li>
+))}
         </ul>
         <div className={styles.pagination}>
           <button
