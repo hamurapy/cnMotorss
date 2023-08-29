@@ -12,4 +12,36 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const phones = await Phone.findOne({
+      raw: true,
+      where: { id },
+    });
+    res.status(200).json(phones);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { phoneNumber } = req.body;
+  try {
+    if (phoneNumber) {
+      await Phone.update(
+        {
+          phoneNumber,
+        },
+        { where: { id } },
+      );
+      const updatePhone = await Phone.findOne({ where: { id }, raw: true });
+      res.status(200).json(updatePhone);
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = router;

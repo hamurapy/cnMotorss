@@ -13,18 +13,18 @@ import SpeedIcon from "@mui/icons-material/Speed";
 import CurrencyRubleIcon from "@mui/icons-material/CurrencyRuble";
 
 export const getStaticPaths = async () => {
-  const res = await fetch('http://localhost:4000/api/cars/ss'); 
+  const res = await fetch("http://localhost:4000/api/cars/ss");
   const carIds = await res.json();
 
-  const paths = carIds.map((id: any) => { 
+  const paths = carIds.map((id: any) => {
     return {
-      params:  {id: id.toString()}
+      params: { id: id.toString() },
     };
   });
 
   return {
     paths,
-    fallback: false
+    fallback: false,
   };
 };
 
@@ -41,7 +41,7 @@ export async function getStaticProps(context: { params: { id: number } }) {
 
 export default function CarPage({ car }: { car: Car }): JSX.Element {
   return (
-    <Layout title={car.brand} description={""} keywords={""}>
+    <Layout title={`${car.brand} ${car.model}`} description={""} keywords={""}>
       <div className="contentBlock">
         <h1>
           {car.brand} {car.model}
@@ -130,7 +130,12 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
         {car.description ? (
           <>
             <p className={styles.carDescription}>Описание:</p>
-            <p className={styles.description}>{car.description}</p>
+            <p
+              className={styles.description}
+              style={{ whiteSpace: "pre-wrap" }}
+            >
+              {car.description}
+            </p>
           </>
         ) : (
           <></>

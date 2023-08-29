@@ -1,13 +1,7 @@
 import { Car, CarId } from '@/components/screens/catalog/catalog.types';
-import { Phone } from '../../phoneNumber/type';
 
 export async function loadCars(): Promise<Car[]> {
   const res = await fetch('http://localhost:4000/api/cars');
-  return res.json();
-}
-
-export async function loadPhones(): Promise<Phone[]> {
-  const res = await fetch('http://localhost:4000/api/phone');
   return res.json();
 }
 

@@ -39,7 +39,7 @@
 .phone svg path{
   fill: var(--light-red-color);
 }
-.phoneLink{
+.phoneLink a{
   font-family: var(--font);
   color: var(--text-color);
   padding-top: 2px;
