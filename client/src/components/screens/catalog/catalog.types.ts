@@ -25,6 +25,7 @@ export type CarWithOutId = Omit<Car, 'id'> & {img: string;};
 export type CarsState = {
   cars: Car[];
   error: string | undefined;
+  status: string
 };
 
 export type CarId = Car['id'];

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CarWithOutId } from "../../catalog/catalog.types";
-import { useAppDispatch } from "@/store";
+import { RootState, useAppDispatch } from "@/store";
 import { addCar } from "../types/cars.slice";
 import CloseIcon from "@mui/icons-material/Close";
 import styles from "./addCar.module.css";
+import { useSelector } from "react-redux";
 
 function FormAddCar(): JSX.Element {
   const [brand, setBrand] = useState("");
@@ -23,8 +24,12 @@ function FormAddCar(): JSX.Element {
   const [price, setPrice] = useState("");
   const [priceText, setPriceText] = useState("");
   const [priceBtn, setPriceBtn] = useState(false);
+  const [status, setStatus] = useState()
 
   const dispatch = useAppDispatch();
+  const addCarStatus = useSelector((state: RootState) => state.cars.status);
+  console.log(addCarStatus, 123123123123123);
+  
 
   const {
     register,
@@ -54,7 +59,7 @@ function FormAddCar(): JSX.Element {
     formData.append("transmission", data.transmission);
     formData.append("description", data.description);
 
-    dispatch(addCar(formData));
+    dispatch(addCar(formData))
 
     setBrand("");
     setBrandBtn(false);
@@ -366,6 +371,7 @@ function FormAddCar(): JSX.Element {
         </div>
         <div className="btnPosition">
           <button type="submit">Добавить авто</button>
+          <p>{status}</p>
         </div>
       </form>
     </>
