@@ -13,7 +13,7 @@ function Cars({ cars }: { cars: Car[] }): JSX.Element {
         {cars
           .map((car) => (
             <li key={car.id}>
-              <Link href={`/car/${car.id}`}>
+              <div style={{ cursor: 'pointer' }} onClick={() => window.open(`/car/${car.id}`, '_blank')}>
                 <CarSlider photos={car.photos} />
                 <div className={styles.infoBlock}>
                   <span className={styles.price}>{car.price} ₽</span>
@@ -24,7 +24,7 @@ function Cars({ cars }: { cars: Car[] }): JSX.Element {
                     {car.year}/{car.mileage} км
                   </span>
                 </div>
-              </Link>
+              </div>
             </li>
           ))
           .slice(0, 8)}
