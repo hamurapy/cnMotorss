@@ -24,6 +24,102 @@ router.route('/ss').get(async (req, res) => {
   }
 });
 
+router.route('/filterIds').get(async (req, res) => {
+  try {
+    const {
+      priceFrom, priceTo, yearFrom, yearTo, brand, model, engine,
+      transmission, driveUnit, litersFrom, litersTo, mileageFrom, mileageTo,
+    } = req.query;
+    const filters = {};
+
+    if (priceFrom && priceTo) {
+      filters.price = {
+        [Op.between]: [priceFrom, priceTo],
+      };
+    } else if (priceFrom) {
+      filters.price = {
+        [Op.gte]: priceFrom,
+      };
+    } else if (priceTo) {
+      filters.price = {
+        [Op.lte]: priceTo,
+      };
+    }
+
+    if (yearFrom && yearTo) {
+      filters.year = {
+        [Op.between]: [yearFrom, yearTo],
+      };
+    } else if (yearFrom) {
+      filters.year = {
+        [Op.gte]: yearFrom,
+      };
+    } else if (yearTo) {
+      filters.year = {
+        [Op.lte]: yearTo,
+      };
+    }
+
+    if (mileageFrom && mileageTo) {
+      filters.mileage = {
+        [Op.between]: [mileageFrom, mileageTo],
+      };
+    } else if (mileageFrom) {
+      filters.mileage = {
+        [Op.gte]: mileageFrom,
+      };
+    } else if (mileageTo) {
+      filters.mileage = {
+        [Op.lte]: mileageTo,
+      };
+    }
+
+    if (litersFrom && litersTo) {
+      filters.liters = {
+        [Op.between]: [litersFrom, litersTo],
+      };
+    } else if (litersFrom) {
+      filters.liters = {
+        [Op.gte]: litersFrom,
+      };
+    } else if (litersTo) {
+      filters.liters = {
+        [Op.lte]: litersTo,
+      };
+    }
+
+    if (driveUnit) {
+      filters.driveUnit = driveUnit;
+    }
+
+    if (transmission) {
+      filters.transmission = transmission;
+    }
+
+    if (engine) {
+      filters.engine = engine;
+    }
+
+    if (brand) {
+      filters.brand = brand;
+    }
+
+    if (model) {
+      filters.model = model;
+    }
+    const cars = await Car.findAll({
+      where: filters,
+      order: [['createdAt', 'DESC']],
+      raw: true,
+    });
+
+    const carIds = cars.map((car) => car.id);
+    res.json(carIds);
+  } catch (error) {
+    res.json({ error: error.message });
+  }
+});
+
 router.route('/filter').get(async (req, res) => {
   try {
     const {
@@ -115,7 +211,7 @@ router.route('/filter').get(async (req, res) => {
       order: [['createdAt', 'DESC']],
       raw: true,
     });
-    console.log(cars, '<<<<<<<<<<<<<<<<<<<<');
+
     const carIds = cars.map((car) => car.id);
 
     const photos = await PhotoCar.findAll({
@@ -371,7 +467,6 @@ router.put('/:carId', upload.array('img'), async (req, res) => {
           carId: car.id,
           img: file,
         },
-        { transaction: t },
       );
     });
 
