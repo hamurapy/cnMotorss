@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Car, CarId } from "./catalog.types";
-import { useSelector } from "react-redux";
-import { useAppDispatch } from "../../../store";
-import Link from "next/link";
-import { deleteCar } from "../account/types/cars.slice";
-import { RootState } from "@/store";
+// import { useSelector } from "react-redux";
+// import { useAppDispatch } from "../../../store";
+// import Link from "next/link";
+// import { deleteCar } from "../account/types/cars.slice";
+// import { RootState } from "@/store";
 import CarSlider from "../home/CarSlider";
 import styles from "./catalog.module.css";
 import classNames from "classnames";
 import CloseIcon from "@mui/icons-material/Close";
-import Image from "next/image";
+// import Image from "next/image";
 import { useRouter } from "next/router";
 
 export default function CatalogPage({
@@ -19,8 +19,9 @@ export default function CatalogPage({
   cars: Car[];
   carsBrandAndModel: Car[];
 }) {
-  const { admin } = useSelector((store: RootState) => store.auth.user);
-  const dispatch = useAppDispatch();
+  
+  // const { admin } = useSelector((store: RootState) => store.auth.user);
+  // const dispatch = useAppDispatch();
   const itemsPerPage = 20; //--------поменять
   const router = useRouter();
   const initialPage = parseInt(router.query.page as string) || 1;
@@ -42,7 +43,7 @@ export default function CatalogPage({
   const [displayedCars, setDisplayedCars] = useState(
     cars.slice(0, itemsPerPage)
   );
-
+  const [noMatchingCars, setNoMatchingCars] = useState(false);
   const [minMileageText, setMinMileageText] = useState("");
   const [minMileageBtn, setMinMileageBtn] = useState(false);
   const [maxMileageText, setMaxMileageText] = useState("");
@@ -51,26 +52,32 @@ export default function CatalogPage({
   const [minPriceBtn, setMinPriceBtn] = useState(false);
   const [maxPriceText, setMaxPriceText] = useState("");
   const [maxPriceBtn, setMaxPriceBtn] = useState(false);
-
-  const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const res = await fetch(
-      `http://localhost:4000/api/cars?priceFrom=${minPrice}&priceTo=${maxPrice}&yearFrom=${minYear}&yearTo=${maxYear}&brand=${brandFilter}&model=${modelFilter}&engine=${engineFilter}&transmission=${transmission}&driveUnit=${driveUnit}&litersFrom=${minLiters}&litersTo=${maxLiters}&mileageFrom=${minMileage}&mileageTo=${maxMileage}`
-    );
-  };
+  const [totalPages, setTotalPages] = useState(
+    Math.ceil(carsBrandAndModel.length / itemsPerPage)
+  );
 
   useEffect(() => {
-    if (router.query.page) {
-      const newPage = parseInt(router.query.page as string);
-      setCurrentPage(newPage);
+    window.scrollTo(0, 0);
+  }, [currentPage]);
+  
+  const fetchFilteredCarIds = async () => {
+    try {
+      const res = await fetch(
+        `http://localhost:4000/api/cars/filterIds?priceFrom=${minPrice}&priceTo=${maxPrice}&yearFrom=${minYear}&yearTo=${maxYear}&brand=${brandFilter}&model=${modelFilter}&engine=${engineFilter}&transmission=${transmission}&driveUnit=${driveUnit}&litersFrom=${minLiters}&litersTo=${maxLiters}&mileageFrom=${minMileage}&mileageTo=${maxMileage}`
+      );
+      const data = await res.json();
+      setTotalPages(Math.ceil(data.length / itemsPerPage));
+      
+      return data;
+    } catch (error) {
+      console.error("Error fetching filtered car IDs:", error);
+      return []; 
     }
-  }, [router.query.page]);
-
-  const handleGoToCarDetails = (carId: string) => {
-    router.push(`/car/${carId}?page=${currentPage}`);
   };
-
-  const totalPages = Math.ceil(carsBrandAndModel.length / itemsPerPage);
+  
+  
+  
+  // const totalPages = Math.ceil(carsBrandAndModel.length / itemsPerPage);
   const pageButtonsToShow = 5;
   const pageButtonStart = Math.max(
     currentPage - Math.floor(pageButtonsToShow / 2),
@@ -87,18 +94,7 @@ export default function CatalogPage({
     );
     return res.json();
   };
-
-  const handlePageChange = async (page: number) => {
-    if (page < 1 || page > totalPages) {
-      return;
-    }
-    const startIndex = (page - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const res = await fetchCars(startIndex, endIndex);
-    setDisplayedCars(res);
-    setCurrentPage(page);
-    router.push(`/catalog?page=${page}`);
-  };
+ 
 
   const handleSearchAndPageChange = async (
     e: React.FormEvent<HTMLFormElement>,
@@ -107,12 +103,25 @@ export default function CatalogPage({
     e.preventDefault();
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
+    const filteredCarIds = await fetchFilteredCarIds()
+    const res = await fetchCars(startIndex, endIndex);
+
+    setDisplayedCars(res);
+    setCurrentPage(page);
+    setNoMatchingCars(res.length === 0);
+  };
+
+    const handlePageChange = async (page: number) => {
+    if (page < 1 || page > totalPages) {
+      return;
+    }
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
     const res = await fetchCars(startIndex, endIndex);
     setDisplayedCars(res);
     setCurrentPage(page);
-    router.push(`/catalog?page=${page}`);
   };
-
+  
   const handleMinYearChange = (e: any) => {
     setMinYear(e.target.value);
   };
@@ -468,10 +477,13 @@ export default function CatalogPage({
         <p className={styles.china}>
           * Цены на сайте указаны в национальной валюте Китая
         </p>
+        {noMatchingCars ? (
+  <p className={styles.noCarsFound}>Таких машин не найдено</p>
+) : (
         <ul className={styles.carsBlock}>
         {displayedCars.map((car) => (
   <li className={styles.listItem} key={car.id}>
-      <div className={styles.cardBlock} style={{ cursor: 'pointer' }} onClick={() => window.open(`/car/${car.id}?page=${currentPage}`, '_blank')}>
+      <div className={styles.cardBlock} style={{ cursor: 'pointer' }} onClick={() => window.open(`/car/${car.id}`, '_blank')}>
         <div className={styles.photoBlock}>
           <CarSlider photos={car.photos} />
         </div>
@@ -499,6 +511,7 @@ export default function CatalogPage({
   </li>
 ))}
         </ul>
+        )}
         <div className={styles.pagination}>
           <button
             onClick={() => handlePageChange(currentPage - 1)}
@@ -530,7 +543,11 @@ export default function CatalogPage({
             Следующая
           </button>
         </div>
+        
       </div>
+      
     </div>
+    
   );
+  
 }
