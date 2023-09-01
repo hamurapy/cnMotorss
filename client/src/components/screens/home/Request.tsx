@@ -1,16 +1,14 @@
 import React from "react";
 import styles from "./home.module.css";
+import ApplicationForm from "./ApplicationForm";
 
 function Request(): JSX.Element {
   return (
     <section className={styles.request}>
       <h2>Отправить заявку</h2>
-      <form className={styles.requestForm}>
-        <input type="text" placeholder="Ваше Имя" />
-        <input type="text" placeholder="Ваш E-mail" />
-        <input type="text" placeholder="Ваш телефон" />
-        <button>Отправить</button>
-      </form>
+      <div className={styles.requestForm}>
+        <ApplicationForm />
+      </div>
     </section>
   );
 }

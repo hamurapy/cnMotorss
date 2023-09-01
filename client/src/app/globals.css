@@ -167,6 +167,7 @@ select {
   background: url(arrow.png) no-repeat right 5px center / 11px auto;
   outline: 0;
 }
+
 ::-webkit-input-placeholder { /* WebKit browsers */
   color: #1e1e1e;
 }

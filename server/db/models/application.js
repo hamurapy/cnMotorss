@@ -20,7 +20,40 @@ module.exports = (sequelize, DataTypes) => {
     message: {
       type: DataTypes.TEXT,
     },
+    carID: {
+      type: DataTypes.INTEGER,
+    },
+    carPhoto: {
+      type: DataTypes.TEXT,
+    },
     car: {
+      type: DataTypes.TEXT,
+    },
+    year: {
+      type: DataTypes.INTEGER,
+    },
+    color: {
+      type: DataTypes.TEXT,
+    },
+    mileage: {
+      type: DataTypes.INTEGER,
+    },
+    wheel: {
+      type: DataTypes.TEXT,
+    },
+    engine: {
+      type: DataTypes.TEXT,
+    },
+    driveUnit: {
+      type: DataTypes.TEXT,
+    },
+    transmission: {
+      type: DataTypes.TEXT,
+    },
+    price: {
+      type: DataTypes.INTEGER,
+    },
+    status: {
       type: DataTypes.TEXT,
     },
   }, {

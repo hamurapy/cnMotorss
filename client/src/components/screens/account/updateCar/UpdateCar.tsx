@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { RootState, useAppDispatch } from "@/store";
-import { loadCars } from "../types/cars.slice";
+import { loadCars } from "@/components/screens/account/types/cars.slice";
 import { useSelector } from "react-redux";
 import UpdateCard from "./UpdateCard";
 import styles from "./updateCar.module.css";

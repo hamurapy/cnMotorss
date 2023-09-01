@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { Car, CarId } from "../../catalog/catalog.types";
 import { useAppDispatch } from "@/store";
 import { deleteCar, updateCar } from "../types/cars.slice";
-import CloseIcon from "@mui/icons-material/Close";
 import styles from "./updateCar.module.css";
 
 function UpdateForm({ car }: { car: Car }): JSX.Element {
@@ -38,7 +37,6 @@ function UpdateForm({ car }: { car: Car }): JSX.Element {
     formDataObj.append("transmission", formData.transmission);
     formDataObj.append("description", formData.description);
     formDataObj.append("id", car.id);
-    console.log(formDataObj);
 
     dispatch(
       updateCar(formDataObj, setModal(!modal), window.location.reload())

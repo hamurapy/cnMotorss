@@ -24,12 +24,10 @@ function FormAddCar(): JSX.Element {
   const [price, setPrice] = useState("");
   const [priceText, setPriceText] = useState("");
   const [priceBtn, setPriceBtn] = useState(false);
-  const [status, setStatus] = useState()
+  const [status, setStatus] = useState();
 
   const dispatch = useAppDispatch();
   const addCarStatus = useSelector((state: RootState) => state.cars.status);
-  console.log(addCarStatus, 123123123123123);
-  
 
   const {
     register,
@@ -59,7 +57,7 @@ function FormAddCar(): JSX.Element {
     formData.append("transmission", data.transmission);
     formData.append("description", data.description);
 
-    dispatch(addCar(formData))
+    dispatch(addCar(formData));
 
     setBrand("");
     setBrandBtn(false);
