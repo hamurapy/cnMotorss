@@ -31,10 +31,17 @@
   transition: 1s;
   box-shadow: none;
 }
-.formHeader button{
+.formHeader form{
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+.formHeader form button{
   width: 50%;
 }
-.formHeader button:hover{
+.formHeader form button:hover{
   width: 50%;
 } 
 @keyframes showLeft {
@@ -133,13 +140,20 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 5%;
+  border-radius: 8px;
   box-sizing: border-box;
   background: transparent;
   margin: 2% auto;
   border: var(--input-border-hover);
 }
-.requestForm input, .requestForm button{
+.requestForm form{
+  background: transparent;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.requestForm form input, .requestForm form button{
   width: 24%;
 }
 
@@ -233,10 +247,10 @@
   .formHeader{
     width: 50%;
   }
-  .formHeader input{
+  .formHeader form input{
     width: 100%;
   }
-  .carsBlock li, .requestForm input, .requestForm button, .advantageItem{
+  .carsBlock li, .requestForm form input, .requestForm form button, .advantageItem{
     width: 48%;
   }
 }
@@ -244,12 +258,12 @@
   .formHeader{
     width: 100%;
   }
-  .carsBlock li, .requestForm input, .requestForm button, .advantageItem{
+  .carsBlock li, .requestForm form input, .requestForm form button, .advantageItem{
     width: 100%;
   }
 }
 @media screen and (max-width: 375px) {
-  .formHeader button{
+  .formHeader form button{
     width: 100%;
   }
 }

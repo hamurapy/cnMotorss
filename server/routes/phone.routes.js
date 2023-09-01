@@ -28,7 +28,6 @@ router.get('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
   const { phoneNumber } = req.body;
-  console.log(req.body, 11111111111111);
   try {
     const phone = await Phone.update(
       { phoneNumber },

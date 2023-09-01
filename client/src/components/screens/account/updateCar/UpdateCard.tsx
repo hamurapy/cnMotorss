@@ -31,7 +31,6 @@ function carCard({ car }: { car: Car }): JSX.Element {
           </div>
 
           <div className={styles.infoBlock}>
-            {/* <div className={styles.options}> */}
             <div className={styles.sideInfo}>
               <div className={styles.listIcon}>
                 <LocalGasStationIcon />
@@ -77,8 +76,6 @@ function carCard({ car }: { car: Car }): JSX.Element {
                 <p>{car.year}</p>
               </div>
             </div>
-            {/* </div>
-            <div className={styles.options}> */}
             <div className={styles.sideInfo}>
               <div className={styles.listIcon}>
                 <TimeToLeaveIcon />
@@ -135,7 +132,6 @@ function carCard({ car }: { car: Car }): JSX.Element {
           ) : (
             <></>
           )}
-          {/* </div> */}
         </div>
         <div className={styles.btnBlock}>
           <UpdateForm car={car} />

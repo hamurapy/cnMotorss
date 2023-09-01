@@ -24,6 +24,7 @@ function FormAddCar(): JSX.Element {
   const [price, setPrice] = useState("");
   const [priceText, setPriceText] = useState("");
   const [priceBtn, setPriceBtn] = useState(false);
+
   const [status, setStatus] = useState('')
 
   const dispatch = useAppDispatch();
@@ -42,7 +43,7 @@ useEffect(() => {
     setStatus("Ошибка при добавлении авто");
   }
 }, [addCarStatus]);
-
+  
   const {
     register,
     handleSubmit,
@@ -70,10 +71,26 @@ useEffect(() => {
     formData.append("driveUnit", data.driveUnit);
     formData.append("transmission", data.transmission);
     formData.append("description", data.description);
-  
-    
-     dispatch(addCar(formData));
 
+    dispatch(addCar(formData));
+
+    setBrand("");
+    setBrandBtn(false);
+    setModel("");
+    setModelBtn(false);
+    setColor("");
+    setColorBtn(false);
+    setMileage("");
+    setMileageText("");
+    setMileageBtn(false);
+    setPower("");
+    setPowerText("");
+    setPowerBtn(false);
+    setPrice("");
+    setPriceText("");
+    setPriceBtn(false);
+
+    reset();
   };
   
 
