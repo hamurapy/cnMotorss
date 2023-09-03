@@ -35,6 +35,8 @@ html{
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px var(--box-shadow);
   background-color: #c3c3c3;
+  position: absolute;
+  z-index: 999999;
 }
 body{
   background-color:  var(--main-bg-color);
@@ -168,30 +170,30 @@ select {
   outline: 0;
 }
 
-::-webkit-input-placeholder { /* WebKit browsers */
+::-webkit-input-placeholder { 
   color: #1e1e1e;
 }
-::placeholder { /* WebKit browsers */
-  color: #1e1e1e;
-}
-
-:-ms-input-placeholder { /* Internet Explorer 10+ */
+::placeholder { 
   color: #1e1e1e;
 }
 
-::-ms-input-placeholder { /* Microsoft Edge */
+:-ms-input-placeholder { 
   color: #1e1e1e;
 }
 
-::-moz-placeholder { /* Mozilla Firefox 19+ */
+::-ms-input-placeholder { 
+  color: #1e1e1e;
+}
+
+::-moz-placeholder { 
   color: #1e1e1e;
   opacity: 1;
 }
 
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+:-moz-placeholder { 
   color: #1e1e1e;
   opacity: 1;
-}
+} 
 input:hover, textarea:hover, select:hover{
   border: var(--input-border-hover);
 }
@@ -217,7 +219,7 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
+} 
 .btnPosition{
   width:100%;
   display: flex;
@@ -305,6 +307,68 @@ button:hover{
 .css-av538e-MuiButtonBase-root-MuiIconButton-root{
   border: 1px solid #000;
 }
+.accountNav{
+  position: absolute;
+  top: 4rem;
+  right: 0;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  transition: 1s;
+}
+.accountNav li{
+  background: #e8e8e8;
+  transition: 1s;
+}
+.accountNav li:hover{
+  background: #cecece;
+}
+.accountNav li:first-child{
+  border-radius: 8px 8px 0 0;
+}
+.accountNav li:nth-child(2){
+  border-radius: 0 0 8px 8px;
+}
+.accountNav-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.accountNav-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 500ms, transform 500ms;
+
+}
+.accountNav-exit {
+  opacity: 1;
+}
+.accountNav-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 500ms, transform 500ms;
+}
+
+/* Mui Tab styles*/
+.css-13xfq8m-MuiTabPanel-root{
+  padding: 2rem 0;
+}
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root{
+  padding: 0.5rem 0.5rem;
+  border: 0;
+}
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
+  color:  var(--light-red-color);
+}
+.css-1aquho2-MuiTabs-indicator{
+  background-color:  var(--light-red-color);
+}
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root:hover{
+  background-color: transparent;
+  border: 0;
+  color:  var(--dark-red-color);
+}
+.css-heg063-MuiTabs-flexContainer {
+  flex-wrap: wrap;
+}
 /* Mobile Styles */
 @media screen and (max-width: 1024px) {
   .contentBlock{
@@ -343,5 +407,15 @@ button:hover{
   }
   section {
     padding: 4rem 1rem;
+  }
+  .css-1h9z7r5-MuiButtonBase-root-MuiTab-root, .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected{
+    padding: 0.5rem 0.5rem;
+    width: 100%;
+    border: var(--input-border);
+    margin-bottom: -1px;
+    max-width: 100%;
+  }
+  .css-1aquho2-MuiTabs-indicator{
+    display: none;
   }
 }

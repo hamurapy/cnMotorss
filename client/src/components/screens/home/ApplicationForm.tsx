@@ -1,7 +1,8 @@
-import { useAppDispatch } from "@/store";
+import { RootState, useAppDispatch } from "@/store";
 import React, { useState } from "react";
 import { addApplications } from "../account/application/application.slice";
 import { sentApplication } from "@/components/screens/telegram/telegramHome/telegram.slice";
+import { useSelector } from "react-redux";
 
 function ApplicationForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -25,6 +26,7 @@ function ApplicationForm(): JSX.Element {
       name,
       email,
       phone,
+      status: "Новая",
     };
     dispatch(addApplications(newApplication));
     dispatch(sentApplication({ application: newApplication }));

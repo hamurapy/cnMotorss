@@ -6,6 +6,9 @@ import PhoneNumber from "../phoneNumber/PhoneNumber";
 import { useAppDispatch } from "@/store";
 import { addApplications } from "../account/application/application.slice";
 import { sentApplication } from "../telegram/telegramContact/contact.slice";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 
 function ContactPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -34,6 +37,7 @@ function ContactPage(): JSX.Element {
       email,
       phone,
       message,
+      status: "Новая",
     };
     dispatch(addApplications(newApplication));
     dispatch(sentApplication({ application: newApplication }));

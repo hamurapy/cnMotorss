@@ -9,7 +9,6 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Logo from "../Logo";
 import Link from "next/link";
@@ -19,6 +18,7 @@ import { useSelector } from "react-redux";
 import { check, logout } from "@/components/screens/auth/auth.slice";
 import styles from "./menu.module.css";
 import PhoneNumber from "@/components/screens/phoneNumber/PhoneNumber";
+import { CSSTransition } from "react-transition-group";
 
 const pages = [
   {
@@ -46,6 +46,7 @@ const pages = [
 function Navigation(): JSX.Element {
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const [show, setShow] = useState(false);
 
   const { admin } = useSelector((store: RootState) => store.auth.user);
 
@@ -78,6 +79,10 @@ function Navigation(): JSX.Element {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleShow = () => {
+    setShow((prev) => !prev);
   };
 
   return (
@@ -161,41 +166,31 @@ function Navigation(): JSX.Element {
             </Box>
             {admin ? (
               <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Личный кабинет">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="CN" src="/favicon.png" />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{ mt: "45px" }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
+                <IconButton onClick={handleShow} sx={{ p: 0 }}>
+                  <Avatar alt="CN" src="/favicon.png" />
+                </IconButton>
+                <CSSTransition
+                  in={show}
+                  timeout={500}
+                  className="accountNav"
+                  unmountOnExit
                 >
-                  <MenuItem>
-                    <Link className={styles.accountBtn} href="/account">
-                      Личный кабинет
-                    </Link>
-                  </MenuItem>
-                  <MenuItem>
-                    <button
-                      className={styles.accountBtn}
-                      onClick={handleLogout}
-                    >
-                      Выйти
-                    </button>
-                  </MenuItem>
-                </Menu>
+                  <div className="accountNav">
+                    <MenuItem>
+                      <Link className={styles.accountBtn} href="/account">
+                        Личный кабинет
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <button
+                        className={styles.accountBtn}
+                        onClick={handleLogout}
+                      >
+                        Выйти
+                      </button>
+                    </MenuItem>
+                  </div>
+                </CSSTransition>
               </Box>
             ) : (
               <></>

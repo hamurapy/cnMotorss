@@ -11,6 +11,8 @@ import classNames from "classnames";
 import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 export default function CatalogPage({
   cars,
@@ -469,42 +471,52 @@ export default function CatalogPage({
           * Цены на сайте указаны в национальной валюте Китая
         </p>
         <ul className={styles.carsBlock}>
-        {displayedCars.map((car) => (
-  <li className={styles.listItem} key={car.id}>
-      <div className={styles.cardBlock} style={{ cursor: 'pointer' }} onClick={() => window.open(`/car/${car.id}?page=${currentPage}`, '_blank')}>
-        <div className={styles.photoBlock}>
-          <CarSlider photos={car.photos} />
-        </div>
-        <div className={styles.infoBlock}>
-          <div className={styles.model}>
-            {car.brand} {car.model} 
-          </div>
-          <div className={styles.price}>{car.price} ₽</div>
-          <div className={styles.year}>{car.year}</div>
-          <div className={classNames(styles.leftItem, styles.engine)}>
-            {car.liters} л/{car.power} л.с./{car.engine}
-          </div>
-          <div className={classNames(styles.centerItem, styles.driveUnit)}>
-            {car.driveUnit}
-          </div>
-          <div className={styles.mileage}>{car.mileage} км</div>
-          <div className={classNames(styles.leftItem, styles.transmission)}>
-            {car.transmission}
-          </div>
-          <div className={classNames(styles.centerItem, styles.color)}>
-            {car.color}
-          </div>
-        </div>
-      </div>
-  </li>
-))}
+          {displayedCars.map((car) => (
+            <li className={styles.listItem} key={car.id}>
+              <div
+                className={styles.cardBlock}
+                style={{ cursor: "pointer" }}
+                onClick={() =>
+                  window.open(`/car/${car.id}?page=${currentPage}`, "_blank")
+                }
+              >
+                <div className={styles.photoBlock}>
+                  <CarSlider photos={car.photos} />
+                </div>
+                <div className={styles.infoBlock}>
+                  <div className={styles.model}>
+                    {car.brand} {car.model}
+                  </div>
+                  <div className={styles.price}>{car.price} ₽</div>
+                  <div className={styles.year}>{car.year}</div>
+                  <div className={classNames(styles.leftItem, styles.engine)}>
+                    {car.liters} л/{car.power} л.с./{car.engine}
+                  </div>
+                  <div
+                    className={classNames(styles.centerItem, styles.driveUnit)}
+                  >
+                    {car.driveUnit}
+                  </div>
+                  <div className={styles.mileage}>{car.mileage} км</div>
+                  <div
+                    className={classNames(styles.leftItem, styles.transmission)}
+                  >
+                    {car.transmission}
+                  </div>
+                  <div className={classNames(styles.centerItem, styles.color)}>
+                    {car.color}
+                  </div>
+                </div>
+              </div>
+            </li>
+          ))}
         </ul>
         <div className={styles.pagination}>
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
           >
-            Предыдущая
+            <NavigateBeforeIcon />
           </button>
           {Array.from(
             { length: pageButtonEnd - pageButtonStart + 1 },
@@ -527,7 +539,7 @@ export default function CatalogPage({
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
           >
-            Следующая
+            <NavigateNextIcon />
           </button>
         </div>
       </div>

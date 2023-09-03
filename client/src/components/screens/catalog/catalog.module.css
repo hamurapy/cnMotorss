@@ -263,6 +263,49 @@ p.carDescription{
   border-top: 1px solid var(--shadow);
 }
 
+/* Pagination */
+.pagination{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pagination button{
+  border: var(--input-border);
+  box-sizing: border-box;
+  background: transparent;
+  color: var(--text-color);
+  margin: 0.1rem;
+  transition: 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pagination button:hover{
+  border: var(--input-border-hover);
+  color: var(--light-red-color);
+}
+.pagination .activePage{
+  border: var(--input-border-hover);
+  color: var(--light-red-color);
+}
+.pagination button:disabled{
+  color: var(--item-color);
+  pointer-events: none;
+}
+/* Modal */
+.modalBlock{
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  visibility: visible;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /* Mobile */
 @media screen and (max-width: 768px) {
   .side, .sidePhoto{
