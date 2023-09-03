@@ -17,7 +17,6 @@ function SingleCarSlider({ photos }: { photos: CarPhotos }): JSX.Element {
       key={index}
       src={`http://localhost:4000${photo.img}`}
       alt="Car"
-      // layout="fill"
       width={0}
       height={0}
       sizes="100vw"
@@ -25,7 +24,7 @@ function SingleCarSlider({ photos }: { photos: CarPhotos }): JSX.Element {
       priority={true}
     />
   ));
-  console.log(carsArray);
+
   return (
     <>
       <Swiper

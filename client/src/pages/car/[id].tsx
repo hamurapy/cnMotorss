@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "@/app/layout";
 import { Car } from "@/components/screens/catalog/catalog.types";
 import styles from "@/components/screens/catalog/catalog.module.css";
@@ -11,6 +11,9 @@ import AddRoadIcon from "@mui/icons-material/AddRoad";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 import SpeedIcon from "@mui/icons-material/Speed";
 import CurrencyRubleIcon from "@mui/icons-material/CurrencyRuble";
+import { useAppDispatch } from "@/store";
+import { addApplications } from "@/components/screens/account/application/application.slice";
+import { sentApplication } from "@/components/screens/telegram/telegramCar/telegramCar.slice";
 
 export const getStaticPaths = async () => {
   const res = await fetch("http://localhost:4000/api/cars/ss");
@@ -40,6 +43,47 @@ export async function getStaticProps(context: { params: { id: number } }) {
 }
 
 export default function CarPage({ car }: { car: Car }): JSX.Element {
+  const dispatch = useAppDispatch();
+  const [modal, setModal] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const handleName: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setName(e.target.value);
+  };
+  const handleEmail: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setEmail(e.target.value);
+  };
+  const handlePhone: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setPhone(e.target.value);
+  };
+  const handleModal = (): void => {
+    setModal((prev) => !prev);
+  };
+
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e): void => {
+    e.preventDefault();
+    const newApplication = {
+      name,
+      email,
+      phone,
+      carID: car.id,
+      car: `${car.brand} ${car.model}`,
+      carPhoto: car.photos[0].img,
+      year: car.year,
+      color: car.color,
+      mileage: car.mileage,
+      wheel: car.wheel,
+      engine: `${car.liters} л/${car.power} л.с./${car.engine}`,
+      driveUnit: car.driveUnit,
+      transmission: car.transmission,
+      price: car.price,
+    };
+    dispatch(addApplications(newApplication));
+    dispatch(sentApplication({ application: newApplication }));
+  };
+
   return (
     <Layout title={`${car.brand} ${car.model}`} description={""} keywords={""}>
       <div className="contentBlock">
@@ -51,6 +95,9 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
             <SingleCarSlider photos={car.photos} />
           </div>
           <div className={styles.side}>
+            <button type="button" onClick={handleModal}>
+              Оформить заявку
+            </button>
             <div className={styles.sideInfo}>
               <div className={styles.listIcon}>
                 <CalendarTodayIcon />
@@ -141,6 +188,37 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
           <></>
         )}
       </div>
+      {modal && (
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={name}
+            placeholder="Ваше Имя"
+            onChange={handleName}
+          />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            placeholder="Ваш Email"
+            onChange={handleEmail}
+          />
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            value={phone}
+            placeholder="Ваш телефон"
+            onChange={handlePhone}
+          />
+          <div className="btnPosition">
+            <button type="submit">Отправить</button>
+          </div>
+        </form>
+      )}
     </Layout>
   );
 }

@@ -1,0 +1,177 @@
+.applicationBlock{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.appCard{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  box-sizing: border-box;
+  box-shadow: none;
+  padding: 1rem;
+  border: var(--input-border);
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: 0.5s;
+}
+.appCard:hover{
+  border: var(--input-border-hover);
+  box-shadow: var(--box-shadow);
+}
+/* .appLine{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+} */
+/* .appID {
+  width: 4%;
+}
+.appBtn{
+  width: 10%;
+  text-align: center;
+}
+.appName, .appEmail, .appPhone, .appDate{
+  width: 19%;
+}
+.appMessage{
+  width: 100%;
+}
+.appLine p{
+  padding-top: 1rem;
+  color: #8a8a8a;
+  border-top: 1px solid #0000000f;
+  width: 100%;
+  margin-top: 1rem;
+} */
+
+/* Table */
+.respTab {
+  font-weight: normal;
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+}
+.respTab th, .respTab td {
+  padding: 0.5rem 1rem;
+  font-family: var(--font);   
+  vertical-align: middle;
+  text-align: center;
+  font-size: 1.1rem;
+}
+.respTab th {
+  color: #FFF;
+  font-weight: 500;
+  border: var(--input-border); 
+  text-align: center;   
+}
+.respTab td span {
+  color: #FFF;
+  display: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: var(--font);   
+  text-transform: uppercase;       
+  padding: 5px 10px;
+  position: absolute;
+  padding: 0.7rem 1rem 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 30%;
+  text-align: center;
+}
+td.message{
+  text-align: left;
+  white-space: normal;
+  text-align: justify;
+}
+.respTab tr td svg{
+  cursor: pointer;
+}
+.respTab tr td svg path{
+  fill: #323232;
+  transition: 0.5s;
+}
+.respTab tr td svg:hover path{
+  fill: var(--light-red-color)
+}
+
+.sideInfo{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+.listInfo{
+  width: 100%;
+  text-align: left;
+}
+.sideInfo .listIcon{
+  width: 20px;
+  margin-right: 1rem;
+  padding-top: 5px;
+  box-sizing: border-box;
+  transition: 0.5s;
+}
+.sideInfo .listIcon svg path{
+  transition: 0.5s;
+}
+.sideInfo:hover .listIcon svg path{
+  fill: var(--light-red-color);
+}
+.sideInfo p.listName{
+  width: 100%;
+  font-size: 1rem;
+  color: var(--item-color);
+  margin: 0;
+}
+.coverImg{
+  width: 100%;
+  margin-bottom: -20px;
+}
+td.imgBlock{
+  vertical-align: top;
+  padding: 0;
+  overflow: hidden;
+}
+@media(max-width: 1024px) {
+  .respTab thead {
+      display: none;
+  }
+  .respTab tr {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+  }
+  .respTab td {
+      margin: 0 -1px -1px 0;
+      padding-left: 32%;
+      position: relative;
+      width: 100%;
+      text-align: left;
+  }
+  .respTab td.option, .respTab td.message{
+    padding-left: 0.5rem;
+  }
+  .respTab td span {
+      display: block;
+  }
+}
+@media(max-width: 320px) {
+  .respTab td {
+    padding-left: 42%;
+  }
+  .respTab td span{
+    width: 40%;
+  }
+}
+
+

@@ -26,6 +26,7 @@ import { logout } from "../../auth/auth.slice";
 import AccountInfo from "../accountInfo/AccountInfo";
 import AddCar from "../addCar/AddCar";
 import UpdateCar from "../updateCar/UpdateCar";
+import Application from "../application/Application";
 
 const drawerWidth = 240;
 
@@ -190,7 +191,7 @@ function AccountPage(props: Props): JSX.Element {
         <Toolbar />
         {activeTab === 1 && <AccountInfo />}
         {activeTab === 2 && "222"}
-        {activeTab === 3 && "333"}
+        {activeTab === 3 && <Application />}
         {activeTab === 4 && <AddCar />}
         {activeTab === 5 && <UpdateCar />}
       </Box>

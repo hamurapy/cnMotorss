@@ -4,7 +4,10 @@ import authReducer from '@/components/screens/auth/auth.slice'
 import userReducer from '@/components/screens/auth/user.slice';
 import carsSlice from '@/components/screens/account/types/cars.slice';
 import phoneReducer from '@/components/screens/phoneNumber/phone.slice';
-
+import applicationReducer from '@/components/screens/account/application/application.slice'
+import applicationFormReducer from '@/components/screens/telegram/telegramHome/telegram.slice'
+import applicationContactReducer from '@/components/screens/telegram/telegramContact/contact.slice'
+import telegramCarReducer from '@/components/screens/telegram/telegramCar/telegramCar.slice'
 
 const store = configureStore({
   reducer: {
@@ -12,6 +15,10 @@ const store = configureStore({
     user: userReducer,
     cars: carsSlice,
     phone: phoneReducer,
+    application: applicationReducer,
+    applicationForm: applicationFormReducer,
+    applicationContact: applicationContactReducer,
+    applicationCar: telegramCarReducer
   },
 });
 
