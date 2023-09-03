@@ -2,6 +2,7 @@ import { Car } from '@/components/screens/catalog/catalog.types';
 import Homepage from '@/components/screens/home/HomePage'
 import Layout from '@/app/layout';
 
+
 export default function Home({ carsWithPhotos } : { carsWithPhotos: Car[] }):JSX.Element {
   return (
     <Layout title={'Продажа авто с пробегом'} description={''} keywords={''}>
