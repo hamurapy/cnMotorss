@@ -8,10 +8,9 @@ const initialState: CarsState = {
   status: '' 
 };
 
-export const loadCars = createAsyncThunk('load/loadCars', async () => {
-  const cars = await api.loadCars();
-  return cars;
-});
+export const loadCars = createAsyncThunk('cars/load', () =>
+  api.loadCarsFetch()
+);
 
 export const addCar = createAsyncThunk('add/car', (car: FormData) =>
   api.addCarFetch(car)

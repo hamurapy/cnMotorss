@@ -36,7 +36,22 @@ useEffect(() => {
     setTimeout(() => {
       setStatus("");
       reset();
-      window.location.reload()
+      setBrand('')
+      setBrandBtn(false)
+      setModel('')
+      setModelBtn(false)
+      setColor('')
+      setColorBtn(false)
+      setMileage('')
+      setMileageText('')
+      setMileageBtn(false)
+      setPower('')
+      setPowerText('')
+      setPowerBtn(false)
+      setPrice('')
+      setPriceText('')
+      setPriceBtn(false)
+      // window.location.reload()
     }, 2000);
   } else if (addCarStatus === "500") {
     setStatus("Ошибка при добавлении авто");
@@ -51,6 +66,11 @@ useEffect(() => {
   } = useForm<CarWithOutId>();
 
   const onSubmit: SubmitHandler<CarWithOutId> = async (data) => {
+    if (!data.brand || !data.model || !data.color || !data.liters || !data.wheel || !data.engine || !data.year || !data.mileage || !data.power || !data.price || !data.driveUnit || !data.transmission) {
+      alert('Не все поля заполнены');
+      return;
+    }
+    
     const formData = new FormData();
   
     Object.keys(data.img).forEach((key: any) => {
@@ -177,7 +197,7 @@ useEffect(() => {
             <label>Марка</label>
             <div className={styles.coverInput}>
               <input
-                {...register("brand", { required: true })}
+                {...register("brand")}
                 value={brand}
                 onChange={handleBrandChange}
               />
@@ -192,7 +212,7 @@ useEffect(() => {
             <label>Модель</label>
             <div className={styles.coverInput}>
               <input
-                {...register("model", { required: true })}
+                {...register("model")}
                 value={model}
                 onChange={handleModelChange}
               />
@@ -213,7 +233,7 @@ useEffect(() => {
                 readOnly
               />
               <input
-                {...register("mileage", { required: true })}
+                {...register("mileage")}
                 className={styles.coverBottom}
                 type="number"
                 value={mileage}
@@ -228,7 +248,7 @@ useEffect(() => {
           </div>
           <div className={styles.formOption}>
             <label>Год выпуска</label>
-            <select {...register("year", { required: true })}>
+            <select {...register("year")}>
               <option value="">Выберите</option>
               {years
                 .map((value) => (
@@ -243,7 +263,7 @@ useEffect(() => {
         <div className={styles.lineForm}>
           <div className={styles.formOption}>
             <label>Коробка</label>
-            <select {...register("transmission", { required: true })}>
+            <select {...register("transmission")}>
               <option value="">Выберите</option>
               <option value="Механика">Механика</option>
               <option value="Автомат">Автомат</option>
@@ -252,7 +272,7 @@ useEffect(() => {
           </div>
           <div className={styles.formOption}>
             <label>Руль</label>
-            <select {...register("wheel", { required: true })}>
+            <select {...register("wheel")}>
               <option value="">Выберите</option>
               <option value="Правый">Правый</option>
               <option value="Левый">Левый</option>
@@ -260,7 +280,7 @@ useEffect(() => {
           </div>
           <div className={styles.formOption}>
             <label>Привод</label>
-            <select {...register("driveUnit", { required: true })}>
+            <select {...register("driveUnit")}>
               <option value="">Выберите</option>
               <option value="Передний">Передний</option>
               <option value="Задний">Задний</option>
@@ -272,7 +292,7 @@ useEffect(() => {
             <label>Цвет</label>
             <div className={styles.coverInput}>
               <input
-                {...register("color", { required: true })}
+                {...register("color")}
                 value={color}
                 onChange={handleColorChange}
               />
@@ -287,7 +307,7 @@ useEffect(() => {
         <div className={styles.lineForm}>
           <div className={styles.formOption}>
             <label>Объем, л</label>
-            <select {...register("liters", { required: true })}>
+            <select {...register("liters")}>
               <option value="">Выберите</option>
               {[
                 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4,
@@ -311,7 +331,7 @@ useEffect(() => {
                 readOnly
               />
               <input
-                {...register("power", { required: true })}
+                {...register("power")}
                 className={styles.coverBottom}
                 type="number"
                 value={power}
@@ -326,7 +346,7 @@ useEffect(() => {
           </div>
           <div className={styles.formOption}>
             <label>Двигатель</label>
-            <select {...register("engine", { required: true })}>
+            <select {...register("engine")}>
               <option value="">Выберите</option>
               <option value="Бензин">Бензин</option>
               <option value="Дизель">Дизель</option>
@@ -345,7 +365,7 @@ useEffect(() => {
                 readOnly
               />
               <input
-                {...register("price", { required: true })}
+                {...register("price")}
                 className={styles.coverBottom}
                 type="number"
                 value={price}
@@ -369,18 +389,7 @@ useEffect(() => {
         <div className="btnPosition">
           <button type="submit">Добавить авто</button>
           <p>{status}</p>
-          {errors.brand && <p className={styles.error}>Не все поля заполнены</p>}
-          {errors.model && <p className={styles.error}>Не все поля заполнены</p>}
-          {errors.color && <p className={styles.error}>Не все поля заполнены</p>}
-          {errors.liters && <p className={styles.error}>Не все поля заполнены</p>}
-          {errors.wheel && <p className={styles.error}>Не все поля заполнены</p>}
-          {errors.engine && <p className={styles.error}>Не все поля заполнены</p>}
-          {errors.year && <p className={styles.error}>Не все поля заполнены</p>}
-          {errors.mileage && <p className={styles.error}>Не все поля заполнены</p>}
-          {errors.power && <p className={styles.error}>Не все поля заполнены</p>}
-          {errors.price && <p className={styles.error}>Не все поля заполнены</p>}
-          {errors.driveUnit && <p className={styles.error}>Не все поля заполнены</p>}
-          {errors.transmission && <p className={styles.error}>Не все поля заполнены</p>}
+          {/* {errors.brand && <p className={styles.error}>Не все поля заполнены</p> || errors.model && <p className={styles.error}>Не все поля заполнены</p> || errors.color && <p className={styles.error}>Не все поля заполнены</p> || errors.liters && <p className={styles.error}>Не все поля заполнены</p> || errors.wheel && <p className={styles.error}>Не все поля заполнены</p> || errors.engine && <p className={styles.error}>Не все поля заполнены</p> || errors.year && <p className={styles.error}>Не все поля заполнены</p> || errors.mileage && <p className={styles.error}>Не все поля заполнены</p> || errors.power && <p className={styles.error}>Не все поля заполнены</p> || errors.price && <p className={styles.error}>Не все поля заполнены</p> || errors.driveUnit && <p className={styles.error}>Не все поля заполнены</p> || errors.transmission && <p className={styles.error}>Не все поля заполнены</p>} */}
         </div>
       </form>
     </>

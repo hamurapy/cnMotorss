@@ -9,6 +9,7 @@ const authRoute = require('./routes/auth.routes');
 const usersRoute = require('./routes/users.route');
 const carRouter = require('./routes/cars.routes');
 const phoneRouter = require('./routes/phone.routes');
+const updtRouter = require('./routes/updateCar.routes');
 
 config(app);
 const corsOptions = {
@@ -22,6 +23,7 @@ app.use(cors(corsOptions));
 app.use(express.static(path.join(__dirname, 'img')));
 
 app.use('/api/auth', authRoute);
+app.use('/api/upd', updtRouter);
 app.use('/api/users', usersRoute);
 app.use('/api/cars', carRouter);
 app.use('/api/phone', phoneRouter);
