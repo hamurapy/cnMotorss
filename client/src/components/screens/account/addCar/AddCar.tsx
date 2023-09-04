@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CarWithOutId } from "../../catalog/catalog.types";
 import { RootState, useAppDispatch } from "@/store";
@@ -24,11 +24,26 @@ function FormAddCar(): JSX.Element {
   const [price, setPrice] = useState("");
   const [priceText, setPriceText] = useState("");
   const [priceBtn, setPriceBtn] = useState(false);
-  const [status, setStatus] = useState();
+
+  const [status, setStatus] = useState('')
 
   const dispatch = useAppDispatch();
   const addCarStatus = useSelector((state: RootState) => state.cars.status);
 
+
+useEffect(() => {
+  if (addCarStatus === "201") {
+    setStatus("Авто успешно добавлено");
+    setTimeout(() => {
+      setStatus("");
+      reset();
+      window.location.reload()
+    }, 2000);
+  } else if (addCarStatus === "500") {
+    setStatus("Ошибка при добавлении авто");
+  }
+}, [addCarStatus]);
+  
   const {
     register,
     handleSubmit,
@@ -36,13 +51,13 @@ function FormAddCar(): JSX.Element {
     reset,
   } = useForm<CarWithOutId>();
 
-  const onSubmit: SubmitHandler<CarWithOutId> = (data) => {
+  const onSubmit: SubmitHandler<CarWithOutId> = async (data) => {
     const formData = new FormData();
-
+  
     Object.keys(data.img).forEach((key: any) => {
       formData.append("img", data.img[key]);
     });
-
+  
     formData.append("brand", data.brand);
     formData.append("model", data.model);
     formData.append("color", data.color);
@@ -77,6 +92,7 @@ function FormAddCar(): JSX.Element {
 
     reset();
   };
+  
 
   const handleBrandChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBrand(e.target.value);
@@ -363,13 +379,25 @@ function FormAddCar(): JSX.Element {
         <div className={styles.imageOption}>
           <label>Описание</label>
           <textarea
-            {...register("description", { required: true })}
+            {...register("description")}
             placeholder="Описание машины"
           />
         </div>
         <div className="btnPosition">
           <button type="submit">Добавить авто</button>
           <p>{status}</p>
+          {errors.brand && <p className={styles.error}>Не все поля заполнены</p>}
+          {errors.model && <p className={styles.error}>Не все поля заполнены</p>}
+          {errors.color && <p className={styles.error}>Не все поля заполнены</p>}
+          {errors.liters && <p className={styles.error}>Не все поля заполнены</p>}
+          {errors.wheel && <p className={styles.error}>Не все поля заполнены</p>}
+          {errors.engine && <p className={styles.error}>Не все поля заполнены</p>}
+          {errors.year && <p className={styles.error}>Не все поля заполнены</p>}
+          {errors.mileage && <p className={styles.error}>Не все поля заполнены</p>}
+          {errors.power && <p className={styles.error}>Не все поля заполнены</p>}
+          {errors.price && <p className={styles.error}>Не все поля заполнены</p>}
+          {errors.driveUnit && <p className={styles.error}>Не все поля заполнены</p>}
+          {errors.transmission && <p className={styles.error}>Не все поля заполнены</p>}
         </div>
       </form>
     </>

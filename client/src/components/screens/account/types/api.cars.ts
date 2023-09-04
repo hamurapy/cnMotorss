@@ -10,7 +10,9 @@ export const addCarFetch = async (obj: FormData): Promise<Car> => {
     method: 'POST',
     body: obj,
   });
-  return res.json();
+  const data = await res.json();
+  // console.log(data, '00000000000');
+  return data
 };
 
 export const updateCarFetch = async (obj: FormData): Promise<Car> => {

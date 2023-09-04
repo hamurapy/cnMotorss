@@ -34,16 +34,19 @@ const carsSlice = createSlice({
       .addCase(loadCars.fulfilled, (state, action) => {
         state.cars = action.payload;
       })
-      .addCase(addCar.pending, (state) => {
-        state.status = 'loading';
-      })
       .addCase(addCar.fulfilled, (state, action) => {
+        console.log(action, 1111);
+        if (!action.payload.id){
+          state.status = '500';
+        }else{
+          state.status = '201';
+        } 
         state.cars.push(action.payload);
-        state.status = '201'
       })
       .addCase(addCar.rejected, (state, action) => {
+        console.log(action, 22222);
         state.error = action.error.message;
-        state.status = '500'
+        
       })
       .addCase(updateCar.fulfilled, (state, action) => {
         state.cars = state.cars.map((car) =>
