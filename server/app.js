@@ -16,6 +16,7 @@ const applicationRouter = require('./routes/application.routes');
 const telegramBotRouter = require('./routes/telegramBot.routes');
 const telegramContactRouter = require('./routes/telegramContact.routes');
 const telegramCarRouter = require('./routes/telegramCar.routes');
+const editorRouter = require('./routes/editor.routes');
 
 
 config(app);
@@ -38,6 +39,7 @@ app.use('/api/application', applicationRouter);
 app.use('/api/telegramBot', telegramBotRouter);
 app.use('/api/telegramBotContact', telegramContactRouter);
 app.use('/api/telegramBotCar', telegramCarRouter);
+app.use('/api/editor', editorRouter);
 
 const PORT = process.env.PORT || 4000;
 

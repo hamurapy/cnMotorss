@@ -11,6 +11,8 @@ import classNames from "classnames";
 import CloseIcon from "@mui/icons-material/Close";
 // import Image from "next/image";
 import { useRouter } from "next/router";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 export default function CatalogPage({
   cars,
@@ -19,7 +21,6 @@ export default function CatalogPage({
   cars: Car[];
   carsBrandAndModel: Car[];
 }) {
-  
   // const { admin } = useSelector((store: RootState) => store.auth.user);
   // const dispatch = useAppDispatch();
   const itemsPerPage = 20; //--------поменять
@@ -59,7 +60,7 @@ export default function CatalogPage({
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage]);
-  
+
   const fetchFilteredCarIds = async () => {
     try {
       const res = await fetch(
@@ -67,16 +68,14 @@ export default function CatalogPage({
       );
       const data = await res.json();
       setTotalPages(Math.ceil(data.length / itemsPerPage));
-      
+
       return data;
     } catch (error) {
       console.error("Error fetching filtered car IDs:", error);
-      return []; 
+      return [];
     }
   };
-  
-  
-  
+
   // const totalPages = Math.ceil(carsBrandAndModel.length / itemsPerPage);
   const pageButtonsToShow = 5;
   const pageButtonStart = Math.max(
@@ -94,7 +93,6 @@ export default function CatalogPage({
     );
     return res.json();
   };
- 
 
   const handleSearchAndPageChange = async (
     e: React.FormEvent<HTMLFormElement>,
@@ -103,7 +101,7 @@ export default function CatalogPage({
     e.preventDefault();
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const filteredCarIds = await fetchFilteredCarIds()
+    const filteredCarIds = await fetchFilteredCarIds();
     const res = await fetchCars(startIndex, endIndex);
 
     setDisplayedCars(res);
@@ -111,7 +109,7 @@ export default function CatalogPage({
     setNoMatchingCars(res.length === 0);
   };
 
-    const handlePageChange = async (page: number) => {
+  const handlePageChange = async (page: number) => {
     if (page < 1 || page > totalPages) {
       return;
     }
@@ -121,7 +119,7 @@ export default function CatalogPage({
     setDisplayedCars(res);
     setCurrentPage(page);
   };
-  
+
   const handleMinYearChange = (e: any) => {
     setMinYear(e.target.value);
   };
@@ -478,46 +476,62 @@ export default function CatalogPage({
           * Цены на сайте указаны в национальной валюте Китая
         </p>
         {noMatchingCars ? (
-  <p className={styles.noCarsFound}>Таких машин не найдено</p>
-) : (
-        <ul className={styles.carsBlock}>
-        {displayedCars.map((car) => (
-  <li className={styles.listItem} key={car.id}>
-      <div className={styles.cardBlock} style={{ cursor: 'pointer' }} onClick={() => window.open(`/car/${car.id}`, '_blank')}>
-        <div className={styles.photoBlock}>
-          <CarSlider photos={car.photos} />
-        </div>
-        <div className={styles.infoBlock}>
-          <div className={styles.model}>
-            {car.brand} {car.model} 
-          </div>
-          <div className={styles.price}>{car.price} ₽</div>
-          <div className={styles.year}>{car.year}</div>
-          <div className={classNames(styles.leftItem, styles.engine)}>
-            {car.liters} л/{car.power} л.с./{car.engine}
-          </div>
-          <div className={classNames(styles.centerItem, styles.driveUnit)}>
-            {car.driveUnit}
-          </div>
-          <div className={styles.mileage}>{car.mileage} км</div>
-          <div className={classNames(styles.leftItem, styles.transmission)}>
-            {car.transmission}
-          </div>
-          <div className={classNames(styles.centerItem, styles.color)}>
-            {car.color}
-          </div>
-        </div>
-      </div>
-  </li>
-))}
-        </ul>
+          <p className={styles.noCarsFound}>Таких машин не найдено</p>
+        ) : (
+          <ul className={styles.carsBlock}>
+            {displayedCars.map((car) => (
+              <li className={styles.listItem} key={car.id}>
+                <div
+                  className={styles.cardBlock}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => window.open(`/car/${car.id}`, "_blank")}
+                >
+                  <div className={styles.photoBlock}>
+                    <CarSlider photos={car.photos} />
+                  </div>
+                  <div className={styles.infoBlock}>
+                    <div className={styles.model}>
+                      {car.brand} {car.model}
+                    </div>
+                    <div className={styles.price}>{car.price} ₽</div>
+                    <div className={styles.year}>{car.year}</div>
+                    <div className={classNames(styles.leftItem, styles.engine)}>
+                      {car.liters} л/{car.power} л.с./{car.engine}
+                    </div>
+                    <div
+                      className={classNames(
+                        styles.centerItem,
+                        styles.driveUnit
+                      )}
+                    >
+                      {car.driveUnit}
+                    </div>
+                    <div className={styles.mileage}>{car.mileage} км</div>
+                    <div
+                      className={classNames(
+                        styles.leftItem,
+                        styles.transmission
+                      )}
+                    >
+                      {car.transmission}
+                    </div>
+                    <div
+                      className={classNames(styles.centerItem, styles.color)}
+                    >
+                      {car.color}
+                    </div>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
         )}
         <div className={styles.pagination}>
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
           >
-            Предыдущая
+            <NavigateBeforeIcon />
           </button>
           {Array.from(
             { length: pageButtonEnd - pageButtonStart + 1 },
@@ -540,14 +554,10 @@ export default function CatalogPage({
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
           >
-            Следующая
+            <NavigateNextIcon />
           </button>
         </div>
-        
       </div>
-      
     </div>
-    
   );
-  
 }

@@ -8,6 +8,7 @@ import applicationReducer from '@/components/screens/account/application/applica
 import applicationFormReducer from '@/components/screens/telegram/telegramHome/telegram.slice'
 import applicationContactReducer from '@/components/screens/telegram/telegramContact/contact.slice'
 import telegramCarReducer from '@/components/screens/telegram/telegramCar/telegramCar.slice'
+import editorReducer from '@/components/screens/account/editors/editor.slice'
 
 const store = configureStore({
   reducer: {
@@ -18,7 +19,8 @@ const store = configureStore({
     application: applicationReducer,
     applicationForm: applicationFormReducer,
     applicationContact: applicationContactReducer,
-    applicationCar: telegramCarReducer
+    applicationCar: telegramCarReducer,
+    editor: editorReducer
   },
 });
 

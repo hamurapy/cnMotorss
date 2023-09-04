@@ -124,6 +124,23 @@
   border: 1px solid var(--light-red-color);
   color: var(--light-red-color);
 }
+/* Home catalog */
+.catBlock{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: inherit;
+}
+.itemLeft, .itemRight{
+  width: 50%;
+}
+.itemRight{
+ text-align: right;
+}
+.itemCenter{
+  width: 100%;
+  text-align: right;
+}
 
 /* Request Section */
 .request{

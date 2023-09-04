@@ -29,9 +29,10 @@ router.post('/', async (req, res) => {
     driveUnit,
     transmission,
     price,
+    status,
   } = req.body;
   try {
-    if (name && email && phone && !message
+    if (name && email && phone && status && !message
       && !carID && !car && !carPhoto && !year
       && !color && !mileage && !wheel && !engine
       && !driveUnit && !transmission && !price) {
@@ -39,9 +40,10 @@ router.post('/', async (req, res) => {
         name,
         email,
         phone,
+        status,
       });
       res.status(200).json(application);
-    } else if (name && email && phone && message
+    } else if (name && email && phone && status && message
       && !carID && !car && !carPhoto && !year
       && !color && !mileage && !wheel && !engine
       && !driveUnit && !transmission && !price) {
@@ -50,9 +52,10 @@ router.post('/', async (req, res) => {
         email,
         phone,
         message,
+        status,
       });
       res.status(200).json(application);
-    } else if (name && email && phone && !message
+    } else if (name && email && phone && status && !message
       && carID && car && carPhoto && year
       && color && mileage && wheel && engine
       && driveUnit && transmission && price) {
@@ -71,6 +74,7 @@ router.post('/', async (req, res) => {
         driveUnit,
         transmission,
         price,
+        status,
       });
       res.status(200).json(application);
     }

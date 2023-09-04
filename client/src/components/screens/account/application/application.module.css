@@ -65,15 +65,18 @@
   vertical-align: middle;
   text-align: center;
   font-size: 1.1rem;
+  border-bottom: var(--input-border);
 }
 .respTab th {
   color: #FFF;
   font-weight: 500;
   border: var(--input-border); 
   text-align: center;   
+  background: #bababa;
 }
 .respTab td span {
   color: #FFF;
+  background: #bababa;
   display: none;
   font-size: 0.9rem;
   font-weight: 500;
@@ -86,7 +89,7 @@
   top: 0;
   left: 0;
   height: 100%;
-  width: 30%;
+  width: 40%;
   text-align: center;
 }
 td.message{
@@ -142,6 +145,67 @@ td.imgBlock{
   padding: 0;
   overflow: hidden;
 }
+.respTab tr td .iconExist svg path{
+  fill: var(--light-red-color);
+}
+.respTab tr td .iconDisabled svg path{
+  fill: #bbbbbb;
+  pointer-events: none;
+}
+/* Pagination */
+.paginationBlock{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.paginationBlock button{
+  border: var(--input-border);
+  box-sizing: border-box;
+  background: transparent;
+  color: var(--text-color);
+  margin: 0.1rem;
+  transition: 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.paginationBlock button:hover{
+  border: var(--input-border-hover);
+  color: var(--light-red-color);
+}
+.paginationBlock button:disabled{
+  color: var(--item-color);
+  pointer-events: none;
+}
+.paginationBlock span{
+  margin: 0 1.5rem;
+}
+.paginationBlock .paginationSelect{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  white-space: nowrap;
+}
+.paginationBlock .paginationSelect select{
+  border: 0;
+  margin-left: 5px;
+  width: 60px;
+}
+
+/* Editor Form */
+.editorForm{
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.editorForm input, .editorForm button{
+  width: 24%;
+}
 @media(max-width: 1024px) {
   .respTab thead {
       display: none;
@@ -150,10 +214,12 @@ td.imgBlock{
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
+      margin-bottom: 2rem;
+      border-top:var(--input-border); 
   }
   .respTab td {
       margin: 0 -1px -1px 0;
-      padding-left: 32%;
+      padding-left: 42%;
       position: relative;
       width: 100%;
       text-align: left;
@@ -163,6 +229,14 @@ td.imgBlock{
   }
   .respTab td span {
       display: block;
+  }
+  .smallForm{
+    width: 100%;
+  }
+}
+@media(max-width: 768px) {
+  .editorForm input, .editorForm button{
+    width: 100%;
   }
 }
 @media(max-width: 320px) {
@@ -174,4 +248,8 @@ td.imgBlock{
   }
 }
 
-
+@media(max-width: 425px) {
+  .paginationBlock .paginationSelect{
+    width: 100%;
+  }
+}
