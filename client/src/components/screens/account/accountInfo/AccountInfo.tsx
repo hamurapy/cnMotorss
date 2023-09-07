@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "@/store";
 import PhoneCard from "./PhoneCard";
+import Image from "next/image";
 import styles from "./accountInfo.module.css";
 
 function AccountInfo(): JSX.Element {
@@ -17,8 +18,20 @@ function AccountInfo(): JSX.Element {
   return (
     <>
       <h3>Аккаунт</h3>
-      <div>{user.name}</div>
-      <div>{user.email}</div>
+      <div className={styles.accountBlock}>
+        <div className={styles.accountPhotoBlock}>
+          <Image
+            src="/favicon.png"
+            width={100}
+            height={100}
+            alt="CN MOTORS"
+            draggable={false}
+            priority={true}
+          />
+        </div>
+        <div className={styles.accountItemBlock}>Имя: {user.name}</div>
+        <div className={styles.accountItemBlock}>E-mail: {user.email}</div>
+      </div>
       <button className={styles.editBtn} type="button" onClick={handleOpen}>
         Редактировать
       </button>
@@ -36,7 +49,7 @@ function AccountInfo(): JSX.Element {
       )}
       {user.admin && (
         <>
-          <p>Телефон</p>
+          <h3>Телефон</h3>
           <div>
             {phones.map((phone) => (
               <PhoneCard key={phone.id} phone={phone} />

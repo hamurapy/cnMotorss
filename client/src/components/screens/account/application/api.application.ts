@@ -27,6 +27,7 @@ export const addApplications = async (
       driveUnit: newApplications.driveUnit,
       transmission: newApplications.transmission,
       price: newApplications.price,
+      status: newApplications.status,
     }),
     credentials: 'include',
   });

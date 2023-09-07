@@ -1,13 +1,15 @@
-import { useAppDispatch } from "@/store";
+import { RootState, useAppDispatch } from "@/store";
 import React, { useState } from "react";
 import { addApplications } from "../account/application/application.slice";
 import { sentApplication } from "@/components/screens/telegram/telegramHome/telegram.slice";
+import { useSelector } from "react-redux";
 
 function ApplicationForm(): JSX.Element {
   const dispatch = useAppDispatch();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [isApplicationSent, setIsApplicationSent] = useState(false);
 
   const handleName: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setName(e.target.value);
@@ -25,12 +27,18 @@ function ApplicationForm(): JSX.Element {
       name,
       email,
       phone,
+      status: "Новая",
     };
     dispatch(addApplications(newApplication));
     dispatch(sentApplication({ application: newApplication }));
+    setIsApplicationSent(true);
   };
 
   return (
+    <div>
+      {isApplicationSent ? (
+        <div>Заявка отправлена</div> 
+      ) : (
     <form onSubmit={handleSubmit}>
       <input
         type="text"
@@ -38,6 +46,7 @@ function ApplicationForm(): JSX.Element {
         name="name"
         value={name}
         placeholder="Ваше Имя"
+        required
         onChange={handleName}
       />
       <input
@@ -46,6 +55,7 @@ function ApplicationForm(): JSX.Element {
         name="email"
         value={email}
         placeholder="Ваш Email"
+        required
         onChange={handleEmail}
       />
       <input
@@ -54,10 +64,13 @@ function ApplicationForm(): JSX.Element {
         name="phone"
         value={phone}
         placeholder="Ваш телефон"
+        required
         onChange={handlePhone}
       />
       <button type="submit">Отправить заявку</button>
     </form>
+    )}
+    </div>
   );
 }
 

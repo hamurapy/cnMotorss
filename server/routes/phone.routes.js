@@ -12,18 +12,18 @@ router.get('/', async (req, res) => {
   }
 });
 
-// router.get('/:id', async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const phones = await Phone.findOne({
-//       raw: true,
-//       where: { id },
-//     });
-//     res.status(200).json(phones);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// });
+router.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const phones = await Phone.findOne({
+      raw: true,
+      where: { id },
+    });
+    res.status(200).json(phones);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
@@ -34,7 +34,8 @@ router.put('/:id', async (req, res) => {
       { where: { id } },
     );
 
-    return res.status(200).json(phone);
+    // return res.status(200).json(phone);
+    return res.status(200).json(phone[1][0]);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

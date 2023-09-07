@@ -20,13 +20,15 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Logo from "@/components/layout/Logo";
-import { useAppDispatch } from "@/store";
+import { RootState, useAppDispatch } from "@/store";
 import { useRouter } from "next/router";
 import { logout } from "../../auth/auth.slice";
 import AccountInfo from "../accountInfo/AccountInfo";
 import AddCar from "../addCar/AddCar";
 import UpdateCar from "../updateCar/UpdateCar";
 import Application from "../application/Application";
+import Editors from "../editors/Editors";
+import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
@@ -42,6 +44,8 @@ function AccountPage(props: Props): JSX.Element {
 
   const dispatch = useAppDispatch();
   const router = useRouter();
+
+  const { user } = useSelector((store: RootState) => store.auth);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -89,17 +93,31 @@ function AccountPage(props: Props): JSX.Element {
       <Toolbar />
       <Divider />
       <List>
-        {menu.map((item) => (
-          <ListItem key={item.id} disablePadding>
-            <ListItemButton
-              onClick={() => handleTabClick(item.id)}
-              className={`${activeTab === item.id ? "active" : ""}`}
-            >
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {user.admin
+          ? menu.map((item) => (
+              <ListItem key={item.id} disablePadding>
+                <ListItemButton
+                  onClick={() => handleTabClick(item.id)}
+                  className={`${activeTab === item.id ? "active" : ""}`}
+                >
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.text} />
+                </ListItemButton>
+              </ListItem>
+            ))
+          : menu
+              .map((item) => (
+                <ListItem key={item.id} disablePadding>
+                  <ListItemButton
+                    onClick={() => handleTabClick(item.id)}
+                    className={`${activeTab === item.id ? "active" : ""}`}
+                  >
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.text} />
+                  </ListItemButton>
+                </ListItem>
+              ))
+              .splice(1, 1)}
       </List>
       <Divider />
       <List>
@@ -190,7 +208,7 @@ function AccountPage(props: Props): JSX.Element {
       >
         <Toolbar />
         {activeTab === 1 && <AccountInfo />}
-        {activeTab === 2 && "222"}
+        {user.admin && activeTab === 2 && <Editors />}
         {activeTab === 3 && <Application />}
         {activeTab === 4 && <AddCar />}
         {activeTab === 5 && <UpdateCar />}

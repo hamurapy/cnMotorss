@@ -8,10 +8,9 @@ const initialState: CarsState = {
   status: '' 
 };
 
-export const loadCars = createAsyncThunk('load/loadCars', async () => {
-  const cars = await api.loadCars();
-  return cars;
-});
+export const loadCars = createAsyncThunk('cars/load', () =>
+  api.loadCarsFetch()
+);
 
 export const addCar = createAsyncThunk('add/car', (car: FormData) =>
   api.addCarFetch(car)
@@ -35,7 +34,6 @@ const carsSlice = createSlice({
         state.cars = action.payload;
       })
       .addCase(addCar.fulfilled, (state, action) => {
-        console.log(action, 1111);
         if (!action.payload.id){
           state.status = '500';
         }else{
@@ -44,7 +42,6 @@ const carsSlice = createSlice({
         state.cars.push(action.payload);
       })
       .addCase(addCar.rejected, (state, action) => {
-        console.log(action, 22222);
         state.error = action.error.message;
         
       })

@@ -3,7 +3,7 @@ import Link from "next/link";
 import styles from "./home.module.css";
 import { Car } from "../catalog/catalog.types";
 import CarSlider from "./CarSlider";
-
+import classNames from "classnames";
 
 function Cars({ cars }: { cars: Car[] }): JSX.Element {
   return (
@@ -13,14 +13,19 @@ function Cars({ cars }: { cars: Car[] }): JSX.Element {
         {cars
           .map((car) => (
             <li key={car.id}>
-              <div style={{ cursor: 'pointer' }} onClick={() => window.open(`/car/${car.id}`, '_blank')}>
+              <div
+                style={{ cursor: "pointer" }}
+                onClick={() => window.open(`/car/${car.id}`, "_blank")}
+              >
                 <CarSlider photos={car.photos} />
-                <div className={styles.infoBlock}>
-                  <span className={styles.price}>{car.price} ₽</span>
-                  <span className={styles.model}>
+                <div className={classNames(styles.infoBlock, styles.catBlock)}>
+                  <span className={classNames(styles.model, styles.itemLeft)}>
                     {car.brand} {car.model}
                   </span>
-                  <span className={styles.items}>
+                  <span className={classNames(styles.price, styles.itemRight)}>
+                    {car.price} ₽
+                  </span>
+                  <span className={classNames(styles.items, styles.itemCenter)}>
                     {car.year}/{car.mileage} км
                   </span>
                 </div>

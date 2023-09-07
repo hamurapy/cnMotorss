@@ -6,6 +6,9 @@ import PhoneNumber from "../phoneNumber/PhoneNumber";
 import { useAppDispatch } from "@/store";
 import { addApplications } from "../account/application/application.slice";
 import { sentApplication } from "../telegram/telegramContact/contact.slice";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 
 function ContactPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -13,6 +16,7 @@ function ContactPage(): JSX.Element {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+  const [isApplicationSent, setIsApplicationSent] = useState(false);
 
   const handleName: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setName(e.target.value);
@@ -34,9 +38,11 @@ function ContactPage(): JSX.Element {
       email,
       phone,
       message,
+      status: "Новая",
     };
     dispatch(addApplications(newApplication));
     dispatch(sentApplication({ application: newApplication }));
+    setIsApplicationSent(true);
   };
 
   return (
@@ -66,6 +72,9 @@ function ContactPage(): JSX.Element {
           </div>
         </div>
         <div className={styles.side}>
+        {isApplicationSent ? (
+            <div>Заявка отправлена</div> 
+          ) : (
           <form className={styles.contactForm} onSubmit={handleSubmit}>
             <input
               type="text"
@@ -73,6 +82,7 @@ function ContactPage(): JSX.Element {
               name="name"
               value={name}
               placeholder="Ваше Имя"
+              required
               onChange={handleName}
             />
             <input
@@ -81,6 +91,7 @@ function ContactPage(): JSX.Element {
               name="email"
               value={email}
               placeholder="Ваш Email"
+              required
               onChange={handleEmail}
             />
             <input
@@ -89,6 +100,7 @@ function ContactPage(): JSX.Element {
               name="phone"
               value={phone}
               placeholder="Ваш телефон"
+              required
               onChange={handlePhone}
             />
             <textarea
@@ -96,12 +108,14 @@ function ContactPage(): JSX.Element {
               name="message"
               value={message}
               placeholder="Ваше сообщениие"
+              required
               onChange={handleMessage}
             />
             <div className="btnPosition">
               <button type="submit">Отправить</button>
             </div>
           </form>
+          )}
         </div>
       </div>
     </div>

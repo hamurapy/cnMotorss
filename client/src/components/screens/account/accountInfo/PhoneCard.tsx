@@ -6,12 +6,7 @@ import styles from "./accountInfo.module.css";
 
 const PhoneCard = ({ phone }: { phone: PhoneType }) => {
   const dispatch = useAppDispatch();
-  const [phoneNumber, setPhoneNumber] = React.useState("");
-  const [modalPhone, setModalPhone] = useState(false);
-
-  const handleOpenPhone = () => {
-    setModalPhone((prev) => !prev);
-  };
+  const [phoneNumber, setPhoneNumber] = React.useState(phone.phoneNumber);
 
   const handlePhone = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -22,53 +17,24 @@ const PhoneCard = ({ phone }: { phone: PhoneType }) => {
     setPhoneNumber(e.target.value);
   };
 
-  function formatPhoneNumber(phone: string) {
-    const cleaned = ("" + phone).replace(/\D/g, "");
-    const match = cleaned.match(/^(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})$/);
-    if (match) {
-      return (
-        "+" +
-        match[1] +
-        " (" +
-        match[2] +
-        ") " +
-        match[3] +
-        "-" +
-        match[4] +
-        "-" +
-        match[5]
-      );
-    }
-    return null;
-  }
-
   return (
     <>
-      <div>{phone.phoneNumber}</div>
-      <button type="button" onClick={handleOpenPhone}>
-        Редактировать
-      </button>
-      {modalPhone && (
-        <form className={styles.smallForm} onSubmit={handlePhone}>
-          <span>* Введите номер без пробелов и скобок</span>
-          <div className={styles.plus}>
-            <span>+</span>
-            <input
-              type="number"
-              id="phoneNumber"
-              name="phoneNumber"
-              value={phoneNumber}
-              onChange={handlePhoneChange}
-              placeholder="Введите номер"
-            />
-          </div>
-          <div className="btnPosition">
-            <button type="submit" onClick={handleOpenPhone}>
-              Изменить
-            </button>
-          </div>
-        </form>
-      )}
+      <form className={styles.smallForm} onSubmit={handlePhone}>
+        <div className={styles.plus}>
+          <span>+</span>
+          <input
+            type="number"
+            id="phoneNumber"
+            name="phoneNumber"
+            value={phoneNumber}
+            onChange={handlePhoneChange}
+            placeholder="Введите номер"
+          />
+        </div>
+        <div className="btnPosition">
+          <button type="submit">Сохранить</button>
+        </div>
+      </form>
     </>
   );
 };

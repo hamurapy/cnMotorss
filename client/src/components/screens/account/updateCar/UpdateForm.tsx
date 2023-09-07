@@ -1,16 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Car, CarId } from "../../catalog/catalog.types";
 import { useAppDispatch } from "@/store";
 import { deleteCar, updateCar } from "../types/cars.slice";
 import styles from "./updateCar.module.css";
 
+
 function UpdateForm({ car }: { car: Car }): JSX.Element {
   const [modal, setModal] = useState(true);
   const [modalDelete, setModalDelete] = useState(false);
   const [selectedCarId, setSelectedCarId] = useState<number | null>(null);
+  const [showSuccessNotification, setShowSuccessNotification] = useState(false);
 
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (showSuccessNotification) {
+      const timeoutId = setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [showSuccessNotification]);
 
   const { handleSubmit, register, setValue } = useForm({
     defaultValues: car,
@@ -38,11 +49,17 @@ function UpdateForm({ car }: { car: Car }): JSX.Element {
     formDataObj.append("description", formData.description);
     formDataObj.append("id", car.id);
 
-    dispatch(
-      updateCar(formDataObj, setModal(!modal), window.location.reload())
-    );
-  };
-
+  dispatch(updateCar(formDataObj)).then(() => {
+    // Устанавливаем флаг, чтобы показать уведомление
+    setShowSuccessNotification(true);
+    setModal(!modal);
+  })
+  .catch((error) => {
+    // Обработка ошибок, если необходимо
+    console.error("Ошибка при обновлении машины:", error);
+  });
+};
+  
   const handleModal = (): void => {
     setModal((prev) => !prev);
   };
@@ -86,7 +103,7 @@ function UpdateForm({ car }: { car: Car }): JSX.Element {
         <div className="cont_form">
           <form className={styles.updateForm} onSubmit={handleSubmit(onSubmit)}>
             <div className={styles.imageOption}>
-              <label>Редактировать изображения</label>
+              <label>Добавить изображения</label>
               <input
                 className={styles.inputFile}
                 type="file"
@@ -220,6 +237,11 @@ function UpdateForm({ car }: { car: Car }): JSX.Element {
               </button>
             </div>
           </form>
+        </div>
+      )}
+       {showSuccessNotification && (
+        <div className={styles.successNotification}>
+          Машина успешно обновлена
         </div>
       )}
       {modalDelete && selectedCarId === car.id && (

@@ -32,6 +32,7 @@ export const getStaticPaths = async () => {
 };
 
 export async function getStaticProps(context: { params: { id: number } }) {
+  
   const id = context.params.id;
   const res = await fetch(`http://localhost:4000/api/cars/${id}`);
   const cars = await res.json();
@@ -48,7 +49,24 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [notificationVisible, setNotificationVisible] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
 
+  const showNotification = (message:string) => {
+    setNotificationMessage(message);
+    setNotificationVisible(true);
+  
+    setTimeout(() => {
+      setNotificationVisible(false);
+      setNotificationMessage("");
+      setName("");
+      setEmail("");
+      setPhone("");
+    }, 3000); 
+  };
+  const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+  };
   const handleName: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setName(e.target.value);
   };
@@ -79,146 +97,172 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
       driveUnit: car.driveUnit,
       transmission: car.transmission,
       price: car.price,
+      status: "Новая",
     };
+    
+    showNotification("Заявка успешно отправлена!");
     dispatch(addApplications(newApplication));
     dispatch(sentApplication({ application: newApplication }));
+    setModal((prev) => !prev);
+    
   };
 
   return (
-    <Layout title={`${car.brand} ${car.model}`} description={""} keywords={""}>
-      <div className="contentBlock">
-        <h1>
-          {car.brand} {car.model}
-        </h1>
-        <div className={styles.twoColumn}>
-          <div className={styles.sidePhoto}>
-            <SingleCarSlider photos={car.photos} />
+    <>
+      <Layout
+        title={`${car.brand} ${car.model}`}
+        description={""}
+        keywords={""}
+      >
+        <div className="contentBlock">
+          <h1>
+            {car.brand} {car.model}
+          </h1>
+          <div className={styles.twoColumn}>
+            <div className={styles.sidePhoto}>
+              <SingleCarSlider photos={car.photos} />
+            </div>
+            <div className={styles.side}>
+              <div className={styles.sideInfo}>
+                <div className={styles.listIcon}>
+                  <CalendarTodayIcon />
+                </div>
+                <div className={styles.listInfo}>
+                  <p className={styles.listName}>Год выпуска</p>
+                  <p>{car.year}</p>
+                </div>
+              </div>
+              <div className={styles.sideInfo}>
+                <div className={styles.listIcon}>
+                  <WaterDropIcon />
+                </div>
+                <div className={styles.listInfo}>
+                  <p className={styles.listName}>Цвет</p>
+                  <p>{car.color}</p>
+                </div>
+              </div>
+              <div className={styles.sideInfo}>
+                <div className={styles.listIcon}>
+                  <LocalGasStationIcon />
+                </div>
+                <div className={styles.listInfo}>
+                  <p className={styles.listName}>Двигатель</p>
+                  <p>
+                    {car.liters} л/{car.power} л.с./{car.engine}
+                  </p>
+                </div>
+              </div>
+              <div className={styles.sideInfo}>
+                <div className={styles.listIcon}>
+                  <TimeToLeaveIcon />
+                </div>
+                <div className={styles.listInfo}>
+                  <p className={styles.listName}>Привод</p>
+                  <p>{car?.transmission}</p>
+                </div>
+              </div>
+              <div className={styles.sideInfo}>
+                <div className={styles.listIcon}>
+                  <SportsSoccerIcon />
+                </div>
+                <div className={styles.listInfo}>
+                  <p className={styles.listName}>Руль</p>
+                  <p>{car.wheel}</p>
+                </div>
+              </div>
+              <div className={styles.sideInfo}>
+                <div className={styles.listIcon}>
+                  <AddRoadIcon />
+                </div>
+                <div className={styles.listInfo}>
+                  <p className={styles.listName}>Пробег</p>
+                  <p>{car.mileage} км</p>
+                </div>
+              </div>
+              <div className={styles.sideInfo}>
+                <div className={styles.listIcon}>
+                  <SpeedIcon />
+                </div>
+                <div className={styles.listInfo}>
+                  <p className={styles.listName}>Коробка</p>
+                  <p>{car.driveUnit}</p>
+                </div>
+              </div>
+              <div className={styles.sideInfo}>
+                <div className={styles.listIcon}>
+                  <CurrencyRubleIcon />
+                </div>
+                <div className={styles.listInfo}>
+                  <p className={styles.carPrice}>Цена</p>
+                  <p>{car.price} ₽</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className={styles.side}>
-            <button type="button" onClick={handleModal}>
-              Оформить заявку
-            </button>
-            <div className={styles.sideInfo}>
-              <div className={styles.listIcon}>
-                <CalendarTodayIcon />
+          {car.description ? (
+            <>
+              <p className={styles.carDescription}>Описание:</p>
+              <p
+                className={styles.description}
+                style={{ whiteSpace: "pre-wrap" }}
+              >
+                {car.description}
+              </p>
+            </>
+          ) : (
+            <></>
+          )}
+          {notificationVisible ?  (
+  <div className={styles.notification}>
+    <p>{notificationMessage}</p>
+  </div> 
+) : <div className="btnPosition">
+<button type="button" onClick={handleModal}>
+  Оформить заявку
+</button>
+</div>}
+        </div>
+        
+      </Layout>
+      {modal && (
+        <div className={styles.modalBlock} onClick={handleModal}>
+          <div className={styles.modalContent} onClick={handleModalClick}>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={name}
+                placeholder="Ваше Имя"
+                onChange={handleName}
+
+              />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={email}
+                placeholder="Ваш Email"
+                onChange={handleEmail}
+
+              />
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={phone}
+                placeholder="Ваш телефон"
+                onChange={handlePhone}
+
+              />
+              <div className="btnPosition">
+                <button type="submit">Отправить</button>
               </div>
-              <div className={styles.listInfo}>
-                <p className={styles.listName}>Год выпуска</p>
-                <p>{car.year}</p>
-              </div>
-            </div>
-            <div className={styles.sideInfo}>
-              <div className={styles.listIcon}>
-                <WaterDropIcon />
-              </div>
-              <div className={styles.listInfo}>
-                <p className={styles.listName}>Цвет</p>
-                <p>{car.color}</p>
-              </div>
-            </div>
-            <div className={styles.sideInfo}>
-              <div className={styles.listIcon}>
-                <LocalGasStationIcon />
-              </div>
-              <div className={styles.listInfo}>
-                <p className={styles.listName}>Двигатель</p>
-                <p>
-                  {car.liters} л/{car.power} л.с./{car.engine}
-                </p>
-              </div>
-            </div>
-            <div className={styles.sideInfo}>
-              <div className={styles.listIcon}>
-                <TimeToLeaveIcon />
-              </div>
-              <div className={styles.listInfo}>
-                <p className={styles.listName}>Привод</p>
-                <p>{car?.transmission}</p>
-              </div>
-            </div>
-            <div className={styles.sideInfo}>
-              <div className={styles.listIcon}>
-                <SportsSoccerIcon />
-              </div>
-              <div className={styles.listInfo}>
-                <p className={styles.listName}>Руль</p>
-                <p>{car.wheel}</p>
-              </div>
-            </div>
-            <div className={styles.sideInfo}>
-              <div className={styles.listIcon}>
-                <AddRoadIcon />
-              </div>
-              <div className={styles.listInfo}>
-                <p className={styles.listName}>Пробег</p>
-                <p>{car.mileage} км</p>
-              </div>
-            </div>
-            <div className={styles.sideInfo}>
-              <div className={styles.listIcon}>
-                <SpeedIcon />
-              </div>
-              <div className={styles.listInfo}>
-                <p className={styles.listName}>Коробка</p>
-                <p>{car.driveUnit}</p>
-              </div>
-            </div>
-            <div className={styles.sideInfo}>
-              <div className={styles.listIcon}>
-                <CurrencyRubleIcon />
-              </div>
-              <div className={styles.listInfo}>
-                <p className={styles.carPrice}>Цена</p>
-                <p>{car.price} ₽</p>
-              </div>
-            </div>
+            </form>
           </div>
         </div>
-        {car.description ? (
-          <>
-            <p className={styles.carDescription}>Описание:</p>
-            <p
-              className={styles.description}
-              style={{ whiteSpace: "pre-wrap" }}
-            >
-              {car.description}
-            </p>
-          </>
-        ) : (
-          <></>
-        )}
-      </div>
-      {modal && (
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={name}
-            placeholder="Ваше Имя"
-            onChange={handleName}
-          />
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            placeholder="Ваш Email"
-            onChange={handleEmail}
-          />
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={phone}
-            placeholder="Ваш телефон"
-            onChange={handlePhone}
-          />
-          <div className="btnPosition">
-            <button type="submit">Отправить</button>
-          </div>
-        </form>
       )}
-    </Layout>
+     
+    </>
   );
 }
