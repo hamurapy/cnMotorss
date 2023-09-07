@@ -25,7 +25,7 @@ function FormAddCar(): JSX.Element {
   const [priceText, setPriceText] = useState("");
   const [priceBtn, setPriceBtn] = useState(false);
 
-  const [status, setStatus] = useState('')
+  const [status, setStatus] = useState()
 
   const dispatch = useAppDispatch();
   const addCarStatus = useSelector((state: RootState) => state.cars.status);
