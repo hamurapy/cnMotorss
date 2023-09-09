@@ -25,40 +25,39 @@ function FormAddCar(): JSX.Element {
   const [priceText, setPriceText] = useState("");
   const [priceBtn, setPriceBtn] = useState(false);
 
-  const [status, setStatus] = useState('')
+  const [status, setStatus] = useState("");
 
   const dispatch = useAppDispatch();
   const addCarStatus = useSelector((state: RootState) => state.cars.status);
 
+  useEffect(() => {
+    if (addCarStatus === "201") {
+      setStatus("Авто успешно добавлено");
+      setTimeout(() => {
+        setStatus("");
+        reset();
+        setBrand("");
+        setBrandBtn(false);
+        setModel("");
+        setModelBtn(false);
+        setColor("");
+        setColorBtn(false);
+        setMileage("");
+        setMileageText("");
+        setMileageBtn(false);
+        setPower("");
+        setPowerText("");
+        setPowerBtn(false);
+        setPrice("");
+        setPriceText("");
+        setPriceBtn(false);
+        // window.location.reload()
+      }, 2000);
+    } else if (addCarStatus === "500") {
+      setStatus("Ошибка при добавлении авто");
+    }
+  }, [addCarStatus]);
 
-useEffect(() => {
-  if (addCarStatus === "201") {
-    setStatus("Авто успешно добавлено");
-    setTimeout(() => {
-      setStatus("");
-      reset();
-      setBrand('')
-      setBrandBtn(false)
-      setModel('')
-      setModelBtn(false)
-      setColor('')
-      setColorBtn(false)
-      setMileage('')
-      setMileageText('')
-      setMileageBtn(false)
-      setPower('')
-      setPowerText('')
-      setPowerBtn(false)
-      setPrice('')
-      setPriceText('')
-      setPriceBtn(false)
-      // window.location.reload()
-    }, 2000);
-  } else if (addCarStatus === "500") {
-    setStatus("Ошибка при добавлении авто");
-  }
-}, [addCarStatus]);
-  
   const {
     register,
     handleSubmit,
@@ -67,17 +66,30 @@ useEffect(() => {
   } = useForm<CarWithOutId>();
 
   const onSubmit: SubmitHandler<CarWithOutId> = async (data) => {
-    if (!data.brand || !data.model || !data.color || !data.liters || !data.wheel || !data.engine || !data.year || !data.mileage || !data.power || !data.price || !data.driveUnit || !data.transmission) {
-      alert('Не все поля заполнены');
+    if (
+      !data.brand ||
+      !data.model ||
+      !data.color ||
+      !data.liters ||
+      !data.wheel ||
+      !data.engine ||
+      !data.year ||
+      !data.mileage ||
+      !data.power ||
+      !data.price ||
+      !data.driveUnit ||
+      !data.transmission
+    ) {
+      alert("Не все поля заполнены");
       return;
     }
-    
+
     const formData = new FormData();
-  
+
     Object.keys(data.img).forEach((key: any) => {
       formData.append("img", data.img[key]);
     });
-  
+
     formData.append("brand", data.brand);
     formData.append("model", data.model);
     formData.append("color", data.color);
@@ -112,7 +124,6 @@ useEffect(() => {
 
     reset();
   };
-  
 
   const handleBrandChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBrand(e.target.value);
@@ -207,6 +218,7 @@ useEffect(() => {
             type="file"
             {...register("img", { required: true })}
             multiple
+            required
           />
         </div>
         <div className={styles.lineForm}>
@@ -217,6 +229,7 @@ useEffect(() => {
                 {...register("brand")}
                 value={brand}
                 onChange={handleBrandChange}
+                required
               />
               {brandBtn && (
                 <div className={styles.clear}>
@@ -232,6 +245,7 @@ useEffect(() => {
                 {...register("model")}
                 value={model}
                 onChange={handleModelChange}
+                required
               />
               {modelBtn && (
                 <div className={styles.clear}>
@@ -255,6 +269,7 @@ useEffect(() => {
                 type="number"
                 value={mileage}
                 onChange={handleMileageChange}
+                required
               />
               {mileageBtn && (
                 <div className={styles.clear}>
@@ -265,7 +280,7 @@ useEffect(() => {
           </div>
           <div className={styles.formOption}>
             <label>Год выпуска</label>
-            <select {...register("year")}>
+            <select {...register("year")} required>
               <option value="">Выберите</option>
               {years
                 .map((value) => (
@@ -280,7 +295,7 @@ useEffect(() => {
         <div className={styles.lineForm}>
           <div className={styles.formOption}>
             <label>Коробка</label>
-            <select {...register("transmission")}>
+            <select {...register("transmission")} required>
               <option value="">Выберите</option>
               <option value="Механика">Механика</option>
               <option value="Автомат">Автомат</option>
@@ -289,7 +304,7 @@ useEffect(() => {
           </div>
           <div className={styles.formOption}>
             <label>Руль</label>
-            <select {...register("wheel")}>
+            <select {...register("wheel")} required>
               <option value="">Выберите</option>
               <option value="Правый">Правый</option>
               <option value="Левый">Левый</option>
@@ -297,7 +312,7 @@ useEffect(() => {
           </div>
           <div className={styles.formOption}>
             <label>Привод</label>
-            <select {...register("driveUnit")}>
+            <select {...register("driveUnit")} required>
               <option value="">Выберите</option>
               <option value="Передний">Передний</option>
               <option value="Задний">Задний</option>
@@ -312,6 +327,7 @@ useEffect(() => {
                 {...register("color")}
                 value={color}
                 onChange={handleColorChange}
+                required
               />
               {colorBtn && (
                 <div className={styles.clear}>
@@ -324,7 +340,7 @@ useEffect(() => {
         <div className={styles.lineForm}>
           <div className={styles.formOption}>
             <label>Объем, л</label>
-            <select {...register("liters")}>
+            <select {...register("liters")} required>
               <option value="">Выберите</option>
               {[
                 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4,
@@ -353,6 +369,7 @@ useEffect(() => {
                 type="number"
                 value={power}
                 onChange={handlePowerChange}
+                required
               />
               {powerBtn && (
                 <div className={styles.clear}>
@@ -363,7 +380,7 @@ useEffect(() => {
           </div>
           <div className={styles.formOption}>
             <label>Двигатель</label>
-            <select {...register("engine")}>
+            <select {...register("engine")} required>
               <option value="">Выберите</option>
               <option value="Бензин">Бензин</option>
               <option value="Дизель">Дизель</option>
@@ -387,6 +404,7 @@ useEffect(() => {
                 type="number"
                 value={price}
                 onChange={handlePriceChange}
+                required
               />
               {priceBtn && (
                 <div className={styles.clear}>
@@ -405,9 +423,9 @@ useEffect(() => {
         </div>
         <div className="btnPosition">
           <button type="submit">Добавить авто</button>
-          <p>{status}</p>
           {/* {errors.brand && <p className={styles.error}>Не все поля заполнены</p> || errors.model && <p className={styles.error}>Не все поля заполнены</p> || errors.color && <p className={styles.error}>Не все поля заполнены</p> || errors.liters && <p className={styles.error}>Не все поля заполнены</p> || errors.wheel && <p className={styles.error}>Не все поля заполнены</p> || errors.engine && <p className={styles.error}>Не все поля заполнены</p> || errors.year && <p className={styles.error}>Не все поля заполнены</p> || errors.mileage && <p className={styles.error}>Не все поля заполнены</p> || errors.power && <p className={styles.error}>Не все поля заполнены</p> || errors.price && <p className={styles.error}>Не все поля заполнены</p> || errors.driveUnit && <p className={styles.error}>Не все поля заполнены</p> || errors.transmission && <p className={styles.error}>Не все поля заполнены</p>} */}
         </div>
+        <div className="app">{status}</div>
       </form>
     </>
   );

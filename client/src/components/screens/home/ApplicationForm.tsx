@@ -35,42 +35,41 @@ function ApplicationForm(): JSX.Element {
   };
 
   return (
-    <div>
-      {isApplicationSent ? (
-        <div>Заявка отправлена</div> 
-      ) : (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        value={name}
-        placeholder="Ваше Имя"
-        required
-        onChange={handleName}
-      />
-      <input
-        type="email"
-        id="email"
-        name="email"
-        value={email}
-        placeholder="Ваш Email"
-        required
-        onChange={handleEmail}
-      />
-      <input
-        type="tel"
-        id="phone"
-        name="phone"
-        value={phone}
-        placeholder="Ваш телефон"
-        required
-        onChange={handlePhone}
-      />
-      <button type="submit">Отправить заявку</button>
-    </form>
-    )}
-    </div>
+    <>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={name}
+          placeholder="Ваше Имя"
+          required
+          onChange={handleName}
+        />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={email}
+          placeholder="Ваш Email"
+          required
+          onChange={handleEmail}
+        />
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          value={phone}
+          placeholder="Ваш телефон"
+          required
+          onChange={handlePhone}
+        />
+        <button type="submit">Отправить</button>
+        {isApplicationSent && (
+          <div className="app">Заявка успешно отправлена!</div>
+        )}
+      </form>
+    </>
   );
 }
 

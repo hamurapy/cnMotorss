@@ -22,6 +22,7 @@ router.post('/login', async (req, res) => {
         if (user.admin) {
           user = {
             id: user.id,
+            name: user.name,
             email: user.email,
             admin: true,
           };

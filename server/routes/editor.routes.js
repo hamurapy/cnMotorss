@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const bcrypt = require('bcrypt');
 const { User } = require('../db/models');
 
 router.get('/', async (req, res) => {
@@ -34,10 +35,14 @@ router.post('/', async (req, res) => {
   } = req.body;
   try {
     if (name && email && password && !admin) {
+      const hashedPassword = await bcrypt.hash(
+        password,
+        Number(process.env.SALT_ROUNDS) || 11,
+      );
       const editor = await User.create({
         name,
         email,
-        password,
+        password: hashedPassword,
         admin,
       });
       res.status(200).json(editor);
