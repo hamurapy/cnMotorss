@@ -31,10 +31,8 @@ router.put('/:id', async (req, res) => {
   try {
     const phone = await Phone.update(
       { phoneNumber },
-      { where: { id } },
+      { where: { id }, returning: true },
     );
-
-    // return res.status(200).json(phone);
     return res.status(200).json(phone[1][0]);
   } catch (error) {
     return res.status(500).json({ message: error.message });

@@ -476,7 +476,7 @@ export default function CatalogPage({
           * Цены на сайте указаны в национальной валюте Китая
         </p>
         {noMatchingCars ? (
-          <p className={styles.noCarsFound}>Таких машин не найдено</p>
+          <p className={styles.noCarsFound}>К сожалению, ничего не найдено.</p>
         ) : (
           <ul className={styles.carsBlock}>
             {displayedCars.map((car) => (

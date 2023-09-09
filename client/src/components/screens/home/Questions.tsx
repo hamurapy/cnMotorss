@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import styles from "./home.module.css";
 import PhoneNumber from "../phoneNumber/PhoneNumber";

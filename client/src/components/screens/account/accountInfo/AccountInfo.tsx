@@ -4,6 +4,7 @@ import { RootState, useAppDispatch } from "@/store";
 import PhoneCard from "./PhoneCard";
 import Image from "next/image";
 import styles from "./accountInfo.module.css";
+import EditIcon from "@mui/icons-material/Edit";
 
 function AccountInfo(): JSX.Element {
   const { user } = useSelector((store: RootState) => store.auth);
@@ -26,15 +27,19 @@ function AccountInfo(): JSX.Element {
             height={100}
             alt="CN MOTORS"
             draggable={false}
-            priority={true}
+            priority={false}
           />
         </div>
-        <div className={styles.accountItemBlock}>Имя: {user.name}</div>
-        <div className={styles.accountItemBlock}>E-mail: {user.email}</div>
+        <div className={styles.accountItemsBlock}>
+          <div className={styles.accountItemBlock}>Имя: {user.name}</div>
+          <div className={styles.accountItemBlock}>
+            E-mail: {user.email} <EditIcon onClick={handleOpen} />
+          </div>
+        </div>
       </div>
-      <button className={styles.editBtn} type="button" onClick={handleOpen}>
+      {/* <button className={styles.editBtn} type="button" onClick={handleOpen}>
         Редактировать
-      </button>
+      </button> */}
       {modal && (
         <div className={styles.smallForm}>
           <form>

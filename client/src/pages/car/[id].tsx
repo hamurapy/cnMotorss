@@ -32,7 +32,6 @@ export const getStaticPaths = async () => {
 };
 
 export async function getStaticProps(context: { params: { id: number } }) {
-  
   const id = context.params.id;
   const res = await fetch(`http://localhost:4000/api/cars/${id}`);
   const cars = await res.json();
@@ -52,17 +51,18 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
   const [notificationVisible, setNotificationVisible] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
 
-  const showNotification = (message:string) => {
+  const showNotification = (message: string) => {
     setNotificationMessage(message);
     setNotificationVisible(true);
-  
+
     setTimeout(() => {
       setNotificationVisible(false);
       setNotificationMessage("");
       setName("");
       setEmail("");
       setPhone("");
-    }, 3000); 
+      setModal((prev) => !prev);
+    }, 3000);
   };
   const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
@@ -99,12 +99,10 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
       price: car.price,
       status: "Новая",
     };
-    
+
     showNotification("Заявка успешно отправлена!");
     dispatch(addApplications(newApplication));
     dispatch(sentApplication({ application: newApplication }));
-    setModal((prev) => !prev);
-    
   };
 
   return (
@@ -212,17 +210,12 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
           ) : (
             <></>
           )}
-          {notificationVisible ?  (
-  <div className={styles.notification}>
-    <p>{notificationMessage}</p>
-  </div> 
-) : <div className="btnPosition">
-<button type="button" onClick={handleModal}>
-  Оформить заявку
-</button>
-</div>}
+          <div className="btnPosition">
+            <button type="button" onClick={handleModal}>
+              Оформить заявку
+            </button>
+          </div>
         </div>
-        
       </Layout>
       {modal && (
         <div className={styles.modalBlock} onClick={handleModal}>
@@ -235,7 +228,7 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
                 value={name}
                 placeholder="Ваше Имя"
                 onChange={handleName}
-
+                required
               />
               <input
                 type="email"
@@ -244,7 +237,7 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
                 value={email}
                 placeholder="Ваш Email"
                 onChange={handleEmail}
-
+                required
               />
               <input
                 type="tel"
@@ -253,16 +246,16 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
                 value={phone}
                 placeholder="Ваш телефон"
                 onChange={handlePhone}
-
+                required
               />
               <div className="btnPosition">
                 <button type="submit">Отправить</button>
               </div>
+              <div className="app">{notificationMessage}</div>
             </form>
           </div>
         </div>
       )}
-     
     </>
   );
 }

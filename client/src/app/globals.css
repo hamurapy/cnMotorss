@@ -369,6 +369,17 @@ button:hover{
 .css-heg063-MuiTabs-flexContainer {
   flex-wrap: wrap;
 }
+.css-10hburv-MuiTypography-root{
+  font-family: var(--font);
+}
+.app{
+  width: 100%;
+  text-align: right;
+  color: #10c201;
+  font-weight: 300;
+  font-family: var(--font);
+  font-size: 1rem;
+}
 /* Mobile Styles */
 @media screen and (max-width: 1024px) {
   .contentBlock{
@@ -376,6 +387,11 @@ button:hover{
   }
   section {
     padding: 6rem 2rem;
+  }
+}
+@media screen and (max-width: 912px){
+  .carPhoto{
+    margin-top: 2rem;
   }
 }
 @media screen and (max-width: 768px) {
@@ -397,10 +413,13 @@ button:hover{
     display: flex;
     flex-wrap: wrap;
   }
+  .carPhoto{
+    margin-top: 5rem;
+  }
 }
 @media screen and (max-width: 425px) {
   .carPhoto{
-    margin-top: 6rem;
+    margin-top: 5rem;
   }
   form button, input{
     width: 100%;
