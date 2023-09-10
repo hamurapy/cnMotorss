@@ -23,7 +23,7 @@ function Cars({ cars }: { cars: Car[] }): JSX.Element {
                     {car.brand} {car.model}
                   </span>
                   <span className={classNames(styles.price, styles.itemRight)}>
-                    {car.price} ₽
+                    {car.price} ¥
                   </span>
                   <span className={classNames(styles.items, styles.itemCenter)}>
                     {car.year}/{car.mileage} км

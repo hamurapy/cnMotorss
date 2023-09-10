@@ -56,6 +56,10 @@ p {
   line-height: 1.5;
   margin-bottom: 1rem;
 }
+hr{
+  border: 0.03rem solid #cccccc;
+  margin: 1rem 0;
+}
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -224,6 +228,10 @@ input[type=number]::-webkit-outer-spin-button {
   width:100%;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+}
+.carId{
+  margin: 0 1rem;
 }
 button{
   border: 1px solid var(--light-red-color);
@@ -380,6 +388,28 @@ button:hover{
   font-family: var(--font);
   font-size: 1rem;
 }
+
+/* Account */
+.accountContent{
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 300;
+}
+.accountWrap{
+  width: 80%;
+  padding: 6rem 3rem;
+  box-sizing: border-box;
+  position: relative;
+  margin-left: 20%;
+  z-index: 2;
+}
+.accountmenu a.activeBtn{
+  background: #660101;
+  color:#660101;
+  border: 1px solid #000;
+}
+
 /* Mobile Styles */
 @media screen and (max-width: 1024px) {
   .contentBlock{
@@ -388,10 +418,18 @@ button:hover{
   section {
     padding: 6rem 2rem;
   }
+  .accountWrap{
+    width: 75%;
+    margin-left: 25%;
+  }
 }
 @media screen and (max-width: 912px){
   .carPhoto{
     margin-top: 2rem;
+  }
+  .accountWrap {
+    width: 100%;
+    margin-left: 0;
   }
 }
 @media screen and (max-width: 768px) {
@@ -406,6 +444,10 @@ button:hover{
   }
   input{
     width: 45%;
+  }
+  .accountWrap {
+    width: 100%;
+    margin-left: 0;
   }
 }
 @media screen and (max-width: 540px) {

@@ -4,6 +4,8 @@ module.exports = {
     const phoneData = [
       {
         phoneNumber: '79123456789',
+        yandex: '111',
+        google: '222',
       },
     ];
 

@@ -1,9 +1,11 @@
 /* Account Info Section */
 .smallForm{
   width: 30%;
+  margin: 2rem 0;
 }
-.smallForm span{
+.smallForm label{
   font-size: 0.8rem;
+  font-weight: 300;
 }
 .plus{
   width: 100%;
@@ -36,7 +38,6 @@
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
-  margin-bottom: 2rem;
 }
 .telBlock svg, .accountItemBlock svg{
   margin-left: 5px;

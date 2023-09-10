@@ -11,9 +11,10 @@ import AddRoadIcon from "@mui/icons-material/AddRoad";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 import SpeedIcon from "@mui/icons-material/Speed";
 import CurrencyRubleIcon from "@mui/icons-material/CurrencyRuble";
-import { useAppDispatch } from "@/store";
+import { RootState, useAppDispatch } from "@/store";
 import { addApplications } from "@/components/screens/account/application/application.slice";
 import { sentApplication } from "@/components/screens/telegram/telegramCar/telegramCar.slice";
+import { useSelector } from "react-redux";
 
 export const getStaticPaths = async () => {
   const res = await fetch("http://localhost:4000/api/cars/ss");
@@ -43,6 +44,8 @@ export async function getStaticProps(context: { params: { id: number } }) {
 }
 
 export default function CarPage({ car }: { car: Car }): JSX.Element {
+  const { user } = useSelector((store: RootState) => store.auth);
+
   const dispatch = useAppDispatch();
   const [modal, setModal] = useState(false);
   const [name, setName] = useState("");
@@ -109,13 +112,27 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
     <>
       <Layout
         title={`${car.brand} ${car.model}`}
-        description={""}
-        keywords={""}
+        description={`Продажа авто с пробегом с собственных стоянок в Китае. У нас вы можете купить ${car.brand} ${car.model} с пробегом в России.`}
+        keywords={
+          "авто продажа машин с пробегом, бу продажа машин с пробегом, продажа машин с пробегом цены, россия продажа машина пробег, продажа машин с пробегом в москве, продажа легковых машин с пробегом, купить машину с пробегом недорого, купить машина бу с пробегом, купить машину с пробегом в москве, купить машину с пробегом без посредников, купить машину с пробегом с фото, машины купить недорого с пробегом"
+        }
       >
         <div className="contentBlock">
-          <h1>
-            {car.brand} {car.model}
-          </h1>
+          <div className={styles.twoColumn}>
+            <div className={styles.sidePhoto}>
+              <h1>
+                {car.brand} {car.model}
+              </h1>
+            </div>
+            <div className={styles.side}>
+              <div className="btnPosition">
+                {user && <div className="carId">ID: {car.id}</div>}
+                <button type="button" onClick={handleModal}>
+                  Оформить заявку
+                </button>
+              </div>
+            </div>
+          </div>
           <div className={styles.twoColumn}>
             <div className={styles.sidePhoto}>
               <SingleCarSlider photos={car.photos} />
@@ -192,7 +209,7 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
                 </div>
                 <div className={styles.listInfo}>
                   <p className={styles.carPrice}>Цена</p>
-                  <p>{car.price} ₽</p>
+                  <p>{car.price} ¥</p>
                 </div>
               </div>
             </div>
@@ -210,11 +227,6 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
           ) : (
             <></>
           )}
-          <div className="btnPosition">
-            <button type="button" onClick={handleModal}>
-              Оформить заявку
-            </button>
-          </div>
         </div>
       </Layout>
       {modal && (

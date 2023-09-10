@@ -66,10 +66,6 @@ function EditorCard({ editor }: { editor: EditorType }): JSX.Element {
           {editor.email}
         </td>
         <td>
-          <span>Пароль</span>
-          {editor.password}
-        </td>
-        <td>
           <span>Редактировать</span>
           <EditIcon sx={{ fontSize: 25 }} onClick={handleEdit} />
         </td>

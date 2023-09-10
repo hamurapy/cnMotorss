@@ -23,7 +23,7 @@ function LoginPage(): JSX.Element {
     if ("email" in user) {
       router.push("/account");
     }
-  }, [user]);
+  }, [router, user]);
 
   return (
     <div className="contentBlock">

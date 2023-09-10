@@ -178,7 +178,7 @@ export default function CatalogPage({
 
   const handleMinPriceChange = (e: any) => {
     setMinPrice(e.target.value);
-    setMinPriceText(e.target.value + " ₽");
+    setMinPriceText(e.target.value + " ¥");
     if (e.target.value !== "") {
       setMinPriceBtn(true);
     }
@@ -192,7 +192,7 @@ export default function CatalogPage({
 
   const handleMaxPriceChange = (e: any) => {
     setMaxPrice(e.target.value);
-    setMaxPriceText(e.target.value + " ₽");
+    setMaxPriceText(e.target.value + " ¥");
     if (e.target.value !== "") {
       setMaxPriceBtn(true);
     }
@@ -432,7 +432,7 @@ export default function CatalogPage({
                 <input
                   className={styles.coverBottom}
                   id="min-price-filter"
-                  placeholder="Цена от, ₽"
+                  placeholder="Цена от, ¥"
                   type="number"
                   value={minPrice}
                   onChange={handleMinPriceChange}
@@ -493,7 +493,7 @@ export default function CatalogPage({
                     <div className={styles.model}>
                       {car.brand} {car.model}
                     </div>
-                    <div className={styles.price}>{car.price} ₽</div>
+                    <div className={styles.price}>{car.price} ¥</div>
                     <div className={styles.year}>{car.year}</div>
                     <div className={classNames(styles.leftItem, styles.engine)}>
                       {car.liters} л/{car.power} л.с./{car.engine}
