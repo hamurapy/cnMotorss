@@ -50,12 +50,10 @@ function UpdateForm({ car }: { car: Car }): JSX.Element {
 
     dispatch(updateCar(formDataObj))
       .then(() => {
-        // Устанавливаем флаг, чтобы показать уведомление
         setShowSuccessNotification(true);
         setModal(!modal);
       })
       .catch((error) => {
-        // Обработка ошибок, если необходимо
         console.error("Ошибка при обновлении машины:", error);
       });
   };
@@ -72,7 +70,6 @@ function UpdateForm({ car }: { car: Car }): JSX.Element {
   const delCar = (carId: CarId): void => {
     dispatch(deleteCar(Number(carId)));
     setModalDelete(false);
-    // window.location.reload()
   };
 
   const closeModal = (): void => {
@@ -214,7 +211,7 @@ function UpdateForm({ car }: { car: Car }): JSX.Element {
                 </select>
               </div>
               <div className={styles.formOption}>
-                <label>Цена, ₽</label>
+                <label>Цена, ¥</label>
                 <div className={styles.coverInput}>
                   <input
                     {...register("price")}

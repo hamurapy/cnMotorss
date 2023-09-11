@@ -1,0 +1,25 @@
+User-agent: *
+Disallow: /account
+Disallow: /editors
+Disallow: /application
+Disallow: /add-car
+Disallow: /edit-car
+Disallow: /admin
+Allow: /public/
+
+User-agent: Yandex
+Disallow: /account
+Disallow: /editors
+Disallow: /application
+Disallow: /add-car
+Disallow: /edit-car
+Disallow: /admin
+Allow: /public/
+Host: https://cnmotors.ru/
+Sitemap: https://cnmotors.ru/sitemap.xml
+ 
+User-agent: Googlebot-Image
+Allow: /public/
+ 
+User-agent: YandexImages
+Allow: /public/

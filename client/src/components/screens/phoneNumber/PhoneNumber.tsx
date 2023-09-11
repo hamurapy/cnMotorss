@@ -12,7 +12,6 @@ export default function PhoneNumber() {
   }, [dispatch]);
 
   const phones = useSelector((state: RootState) => state.phone.phoneList);
-  const phone = phones.map((phone) => phone.phoneNumber);
 
   function formatPhoneNumber(phone: string) {
     const cleaned = ("" + phone).replace(/\D/g, "");

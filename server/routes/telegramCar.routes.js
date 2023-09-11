@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
         && year && color && mileage && wheel && engine && driveUnit && transmission && price) {
         await bot.sendMessage(
           -905522359,
-          `Имя: ${name}${EOL}Email: ${email}${EOL}Телефон: ${phone}${EOL}Модель: ${car}${EOL}Год выпуска: ${year}${EOL}Цвет: ${color}${EOL}Пробег: ${mileage} км${EOL}Руль: ${wheel}${EOL}Двигатель: ${engine}${EOL}Привод: ${driveUnit}${EOL}Коробка: ${transmission}${EOL}Цена: ${price} ₽${EOL} `,
+          `Имя: ${name}${EOL}Email: ${email}${EOL}Телефон: ${phone}${EOL}Модель: ${car}${EOL}Год выпуска: ${year}${EOL}Цвет: ${color}${EOL}Пробег: ${mileage} км${EOL}Руль: ${wheel}${EOL}Двигатель: ${engine}${EOL}Привод: ${driveUnit}${EOL}Коробка: ${transmission}${EOL}Цена: ${price} ¥${EOL} `,
         );
       } else {
         res.status(400).json({ message: 'Не все поля заполнены' });

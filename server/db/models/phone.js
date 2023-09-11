@@ -11,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
     phoneNumber: {
       type: DataTypes.TEXT,
     },
+    yandex: {
+      type: DataTypes.TEXT,
+    },
+    google: {
+      type: DataTypes.TEXT,
+    },
   }, {
     sequelize,
     modelName: 'Phone',

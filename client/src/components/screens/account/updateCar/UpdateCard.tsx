@@ -82,7 +82,7 @@ function carCard({ car }: { car: Car }): JSX.Element {
               </div>
               <div className={styles.listInfo}>
                 <p className={styles.listName}>Привод</p>
-                <p>{car?.transmission}</p>
+                <p>{car.driveUnit}</p>
               </div>
             </div>
             <div className={styles.sideInfo}>
@@ -100,7 +100,7 @@ function carCard({ car }: { car: Car }): JSX.Element {
               </div>
               <div className={styles.listInfo}>
                 <p className={styles.listName}>Коробка</p>
-                <p>{car.driveUnit}</p>
+                <p>{car.transmission}</p>
               </div>
             </div>
             <div className={styles.sideInfo}>
@@ -118,7 +118,7 @@ function carCard({ car }: { car: Car }): JSX.Element {
               </div>
               <div className={styles.listInfo}>
                 <p className={styles.listName}>Цена</p>
-                <p>{car.price} ₽</p>
+                <p>{car.price} ¥</p>
               </div>
             </div>
           </div>

@@ -11,6 +11,12 @@ module.exports = {
       phoneNumber: {
         type: Sequelize.TEXT,
       },
+      yandex: {
+        type: Sequelize.TEXT,
+      },
+      google: {
+        type: Sequelize.TEXT,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

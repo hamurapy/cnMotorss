@@ -126,16 +126,10 @@ function ApplicationCard({ app }: { app: ApplicationType }): JSX.Element {
         </td>
         <td>
           <span>Статус</span>
-          <select onChange={updateApplication}>
-            <option value="Новая" selected={app?.status === "Новая"}>
-              Новая
-            </option>
-            <option value="В процессе" selected={app?.status === "В процессе"}>
-              В процессе
-            </option>
-            <option value="Обработана" selected={app?.status === "Обработана"}>
-              Обработана
-            </option>
+          <select onChange={updateApplication} value={app?.status}>
+            <option value="Новая">Новая</option>
+            <option value="В процессе">В процессе</option>
+            <option value="Обработана">Обработана</option>
           </select>
         </td>
         <td>
@@ -269,7 +263,7 @@ function ApplicationCard({ app }: { app: ApplicationType }): JSX.Element {
                         </div>
                         <div className={styles.listInfo}>
                           <p className={styles.listName}>Цена</p>
-                          <p>{app?.price} ₽</p>
+                          <p>{app?.price} ¥</p>
                         </div>
                       </div>
                     </td>

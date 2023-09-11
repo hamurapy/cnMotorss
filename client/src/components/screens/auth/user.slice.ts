@@ -1,45 +1,71 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { UserAuthId, UserState } from './types/user.types';
-import * as apiUsers from './user.api';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import * as apiUser from './user.api';
+import { UserState, UserAuth } from './types/user.types';
 
-export const initialState: UserState = {
+
+const initialState: UserState = {
   users: [],
-  error: undefined,
+  error: undefined 
 };
 
-export const getUsers = createAsyncThunk('users/getAsyncUsers', () =>
-  apiUsers.loadUsers(),
+export const loadUser = createAsyncThunk('user/loadUser', async () => {
+  const users = await apiUser.loadUsers();
+  return users;
+});
+
+export const updateUserName = createAsyncThunk(
+  'user/updateUserName',
+  (updateUserName: UserAuth) =>
+    apiUser.updateUserName(updateUserName),
 );
 
-export const putUser = createAsyncThunk(
-  'admins/putAsyncUsers',
-  (id: UserAuthId) => apiUsers.editStatus(id),
+export const updateUserEmail = createAsyncThunk(
+  'user/updateUserEmail',
+  (updateUserEmail: UserAuth) =>
+    apiUser.updateUserEmail(updateUserEmail),
 );
 
-const userSlice = createSlice({
-  name: 'users',
+export const updateUserPassword = createAsyncThunk(
+  'user/updateUserPassword',
+  (updateUserPassword: UserAuth) =>
+    apiUser.updateUserPassword(updateUserPassword),
+);
+
+const usersSlice = createSlice({
+  name: 'user',
   initialState,
   reducers: {},
-  extraReducers: (buider) => {
-    buider
-      .addCase(getUsers.fulfilled, (state, action) => {
-        state.users = action.payload;
-      })
-      .addCase(getUsers.rejected, (state, action) => {
-        state.error = action.error.message;
-      })
-      .addCase(putUser.fulfilled, (state, action) => {
-        state.users.map((user) => {
-          if (user.id === action.payload.id) {
-            user.status = !user.status;
-          }
-          return user;
-        });
-      })
-      .addCase(putUser.rejected, (state, action) => {
-        state.error = action.error.message;
-      });
+
+  extraReducers: (builder) => {
+    builder
+    .addCase(loadUser.fulfilled, (state, action) => {
+      state.users = action.payload;
+    })
+    .addCase(updateUserName.fulfilled, (state, action) => {
+      state.users = state.users.map((user) =>
+      user.id === action.payload.id ? action.payload : user,
+      );
+    })
+    .addCase(updateUserName.rejected, (state, action) => {
+      state.error = action.error.message;
+    })
+    .addCase(updateUserEmail.fulfilled, (state, action) => {
+      state.users = state.users.map((user) =>
+      user.id === action.payload.id ? action.payload : user,
+      );
+    })
+    .addCase(updateUserEmail.rejected, (state, action) => {
+      state.error = action.error.message;
+    })
+    .addCase(updateUserPassword.fulfilled, (state, action) => {
+      state.users = state.users.map((user) =>
+      user.id === action.payload.id ? action.payload : user,
+      );
+    })
+    .addCase(updateUserPassword.rejected, (state, action) => {
+      state.error = action.error.message;
+    });
   },
 });
 
-export default userSlice.reducer;
+export default usersSlice.reducer;
