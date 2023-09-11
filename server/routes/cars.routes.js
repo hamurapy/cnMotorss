@@ -3,6 +3,8 @@ const router = require('express').Router();
 const multer = require('multer');
 const { Op } = require('sequelize');
 require('regenerator-runtime/runtime');
+const path = require('path');
+const fs = require('fs');
 const { sequelize } = require('../db/models');
 const { Car, PhotoCar } = require('../db/models');
 
@@ -333,8 +335,28 @@ router.route('/:id').get(async (req, res) => {
 router.delete('/:carId', async (req, res) => {
   const { carId } = req.params;
   try {
-    await PhotoCar.destroy({ where: { carId } });
+    // Найти фотографии, связанные с машиной
+    const photos = await PhotoCar.findAll({
+      where: { carId },
+      attributes: ['img'],
+    });
+
+    photos.forEach((photo) => {
+      const filePath = path.join(__dirname, '../public', photo.img);
+      if (fs.existsSync(filePath)) {
+        fs.unlink(filePath, (error) => {
+          if (error) {
+            console.log('Failed to delete photo', photo.img, error);
+          } else {
+            console.log('Successfully deleted photo', photo.img);
+          }
+        });
+      }
+    });
+
     await Car.destroy({ where: { id: carId } });
+    await PhotoCar.destroy({ where: { carId } });
+
     res.status(200).json(Number(carId));
   } catch (error) {
     res.status(500).json({ message: error.message });
