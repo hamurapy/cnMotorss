@@ -67,15 +67,7 @@ function ApplicationCard({ app }: { app: ApplicationType }): JSX.Element {
   };
 
   const phone = app.phone;
-  const strippedPhone = phone?.replace(/\D/g, "");
-  const formattedPhone = `+7(${strippedPhone?.slice(
-    0,
-    3
-  )})${strippedPhone?.slice(3, 6)}-${strippedPhone?.slice(
-    6,
-    8
-  )}-${strippedPhone?.slice(8, 10)}`;
-  const hrefPhone = strippedPhone?.replace(/\(|\)|\s/g, "");
+
 
   return (
     <>
@@ -94,7 +86,7 @@ function ApplicationCard({ app }: { app: ApplicationType }): JSX.Element {
         </td>
         <td>
           <span>Телефон</span>
-          <Link href={`tel:${hrefPhone}`}>{formattedPhone}</Link>
+          <Link href={`tel:${phone}`}>{phone}</Link>
         </td>
         <td>
           <span>Сообщение</span>
