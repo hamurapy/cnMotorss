@@ -1,0 +1,70 @@
+.accountmenu{
+  width: 20%;
+  background: #e5e5e5;
+  padding: 6rem 1rem;
+  height: 100vh;
+  box-sizing: border-box;
+  box-shadow: var(--box-shadow);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  transition: all .5s;
+}
+.accountmenu a{
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 300;
+  width: 100%;
+  padding: 1rem 0;
+  box-sizing: border-box;
+  background: transparent;
+  transition: 1s;
+  border-radius: 5px;
+}
+.accountmenu a:hover{
+  background: #d0d0d0;
+}
+.accountmenu a svg{
+  margin: 0 10px;
+}
+.accountmenu a svg path{
+  fill: #434343;
+  transition: 1s;
+}
+.accountmenu a:hover svg path{
+  fill: var(--light-red-color);
+}
+.accountmenuIcon{
+  position: fixed;
+  top: 6rem;
+  left: 0;
+  border-radius: 0 5px 5px 0;
+  padding: 0.8rem 0.5rem 0.3rem;
+  display: none;
+  z-index: 999;
+  background: #e5e5e5;
+  box-sizing: border-box;
+  box-shadow: var(--box-shadow);
+  transition: all .5s;
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 1024px) {
+  .accountmenu{
+    width: 25%;
+  }
+}
+@media screen and (max-width: 912px) {
+  .accountmenu{
+    width: 60%;
+  }
+  .accountmenu{
+    left: -60%;
+  }
+  .accountmenuIcon{
+    display: block;
+  }
+}

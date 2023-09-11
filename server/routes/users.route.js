@@ -3,10 +3,15 @@ const { User } = require('../db/models');
 
 router.get('/', async (req, res) => {
   try {
-    const users = await User.findAll({ order: [['id', 'ASC']] });
-    res.json(users);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+    if (req.session.userId) {
+      const user = await User.findAll({
+        where: { id: req.session.userId },
+        attributes: { exclude: ['password'] },
+      });
+      res.json(user);
+    }
+  } catch ({ message }) {
+    res.json(message);
   }
 });
 
@@ -21,27 +26,24 @@ router.get('/:id', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
+  const { id } = req.params;
   const {
     name,
     email,
     password,
-    admin,
   } = req.body;
-  const { id } = req.params;
   try {
-    const user = await User.findOne({ where: { id } });
-    if (req.session.userId) {
-      user.name = name;
-      user.email = email;
-      user.password = password;
-      user.admin = admin;
-      user.save();
-      res.json(user);
-    } else {
-      res.status(403).json({ message: 'Не удалось обновить данные' });
-    }
+    const user = await User.update(
+      {
+        name,
+        email,
+        password,
+      },
+      { where: { id }, returning: true },
+    );
+    return res.status(200).json(user[1][0]);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 });
 

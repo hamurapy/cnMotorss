@@ -48,7 +48,7 @@ function Navigation(): JSX.Element {
   const router = useRouter();
   const [show, setShow] = useState(false);
 
-  const { admin } = useSelector((store: RootState) => store.auth.user);
+  const { user } = useSelector((store: RootState) => store.auth);
 
   useEffect(() => {
     dispatch(check());
@@ -87,7 +87,7 @@ function Navigation(): JSX.Element {
 
   return (
     <div className={styles.nav}>
-      <AppBar position="static">
+      <AppBar position="static" style={{ backgroundColor: "#000" }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <div className={styles.logoBlock}>
@@ -164,9 +164,13 @@ function Navigation(): JSX.Element {
                 </MenuItem>
               ))}
             </Box>
-            {admin ? (
+            {user.name ? (
               <Box sx={{ flexGrow: 0 }}>
-                <IconButton onClick={handleShow} sx={{ p: 0 }}>
+                <IconButton
+                  onClick={handleShow}
+                  sx={{ p: 0 }}
+                  style={{ border: "1px" }}
+                >
                   <Avatar alt="CN" src="/favicon.png" />
                 </IconButton>
                 <CSSTransition

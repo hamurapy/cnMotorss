@@ -126,7 +126,6 @@ router.route('/filter').get(async (req, res) => {
       priceFrom, priceTo, yearFrom, yearTo, brand, model, engine,
       transmission, driveUnit, litersFrom, litersTo, mileageFrom, mileageTo, startIndex, endIndex,
     } = req.query;
-    console.log(req.query);
     const filters = {};
 
     if (priceFrom && priceTo) {
@@ -242,7 +241,6 @@ router.route('/filter').get(async (req, res) => {
         photos: carPhotos.map((photo) => ({ img: photo.img })),
       };
     });
-    console.log(carsWithPhotos);
     res.json(carsWithPhotos);
   } catch (error) {
     res.json({ error: error.message });

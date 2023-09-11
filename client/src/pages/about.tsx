@@ -1,13 +1,21 @@
-import React from 'react'
-import About from '@/components/screens/about/About'
-import Layout from '@/app/layout'
+import React from "react";
+import About from "@/components/screens/about/About";
+import Layout from "@/app/layout";
 
-function AboutUs():JSX.Element {
+function AboutUs(): JSX.Element {
   return (
-    <Layout title={'О нас'} description={''} keywords={''}>
-    <About/>
+    <Layout
+      title={"О нас"}
+      description={
+        "У нас вы можете приобрести любой представленный на сайте автомобиль, узнать его состояние и полную историю. Наша компания уже более 10 лет ведет деятельность на рынке Китая."
+      }
+      keywords={
+        "авто продажа машин с пробегом, бу продажа машин с пробегом, продажа машин с пробегом цены, россия продажа машина пробег, продажа машин с пробегом в москве, продажа легковых машин с пробегом, купить машину с пробегом недорого, купить машина бу с пробегом, купить машину с пробегом в москве, купить машину с пробегом без посредников, купить машину с пробегом с фото, машины купить недорого с пробегом"
+      }
+    >
+      <About />
     </Layout>
-  )
+  );
 }
 
-export default AboutUs
+export default AboutUs;

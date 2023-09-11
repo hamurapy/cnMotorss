@@ -72,9 +72,6 @@ function ContactPage(): JSX.Element {
           </div>
         </div>
         <div className={styles.side}>
-        {isApplicationSent ? (
-            <div>Заявка отправлена</div> 
-          ) : (
           <form className={styles.contactForm} onSubmit={handleSubmit}>
             <input
               type="text"
@@ -114,8 +111,10 @@ function ContactPage(): JSX.Element {
             <div className="btnPosition">
               <button type="submit">Отправить</button>
             </div>
+            {isApplicationSent && (
+              <div className="app">Ваше сообщение отправлено!</div>
+            )}
           </form>
-          )}
         </div>
       </div>
     </div>

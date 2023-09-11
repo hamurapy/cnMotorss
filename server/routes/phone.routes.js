@@ -27,14 +27,12 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
-  const { phoneNumber } = req.body;
+  const { phoneNumber, yandex, google } = req.body;
   try {
     const phone = await Phone.update(
-      { phoneNumber },
-      { where: { id } },
+      { phoneNumber, yandex, google },
+      { where: { id }, returning: true },
     );
-
-    // return res.status(200).json(phone);
     return res.status(200).json(phone[1][0]);
   } catch (error) {
     return res.status(500).json({ message: error.message });

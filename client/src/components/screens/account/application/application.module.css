@@ -159,6 +159,11 @@ td.imgBlock{
   align-items: center;
   width: 100%;
   flex-wrap: wrap;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
 }
 .paginationBlock button{
   border: var(--input-border);
@@ -219,7 +224,7 @@ td.imgBlock{
   }
   .respTab td {
       margin: 0 -1px -1px 0;
-      padding-left: 42%;
+      padding-left: 50%;
       position: relative;
       width: 100%;
       text-align: left;

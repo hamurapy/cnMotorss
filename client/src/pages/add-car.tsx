@@ -1,11 +1,11 @@
 import Layout from "@/app/layout";
-import AccountInfoPage from "@/components/screens/account/accountInfo/AccountInfoPage";
+import AddCarPage from "@/components/screens/account/addCar/AddCarPage";
 import { RootState } from "@/store";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-function AccountInfo(): JSX.Element {
+function AddCar(): JSX.Element {
   const { user } = useSelector((store: RootState) => store.auth);
 
   const router = useRouter();
@@ -19,12 +19,12 @@ function AccountInfo(): JSX.Element {
   return (
     <>
       {user && (
-        <Layout title={"Информация об аккаунте"} description={""} keywords={""}>
-          <AccountInfoPage />
+        <Layout title={"Добавить авто"} description={""} keywords={""}>
+          <AddCarPage />
         </Layout>
       )}
     </>
   );
 }
 
-export default AccountInfo;
+export default AddCar;

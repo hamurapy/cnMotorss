@@ -5,7 +5,6 @@ import { useAppDispatch } from "@/store";
 import { deleteCar, updateCar } from "../types/cars.slice";
 import styles from "./updateCar.module.css";
 
-
 function UpdateForm({ car }: { car: Car }): JSX.Element {
   const [modal, setModal] = useState(true);
   const [modalDelete, setModalDelete] = useState(false);
@@ -49,17 +48,16 @@ function UpdateForm({ car }: { car: Car }): JSX.Element {
     formDataObj.append("description", formData.description);
     formDataObj.append("id", car.id);
 
-  dispatch(updateCar(formDataObj)).then(() => {
-    // Устанавливаем флаг, чтобы показать уведомление
-    setShowSuccessNotification(true);
-    setModal(!modal);
-  })
-  .catch((error) => {
-    // Обработка ошибок, если необходимо
-    console.error("Ошибка при обновлении машины:", error);
-  });
-};
-  
+    dispatch(updateCar(formDataObj))
+      .then(() => {
+        setShowSuccessNotification(true);
+        setModal(!modal);
+      })
+      .catch((error) => {
+        console.error("Ошибка при обновлении машины:", error);
+      });
+  };
+
   const handleModal = (): void => {
     setModal((prev) => !prev);
   };
@@ -72,7 +70,6 @@ function UpdateForm({ car }: { car: Car }): JSX.Element {
   const delCar = (carId: CarId): void => {
     dispatch(deleteCar(Number(carId)));
     setModalDelete(false);
-    // window.location.reload()
   };
 
   const closeModal = (): void => {
@@ -214,7 +211,7 @@ function UpdateForm({ car }: { car: Car }): JSX.Element {
                 </select>
               </div>
               <div className={styles.formOption}>
-                <label>Цена, ₽</label>
+                <label>Цена, ¥</label>
                 <div className={styles.coverInput}>
                   <input
                     {...register("price")}
@@ -239,10 +236,8 @@ function UpdateForm({ car }: { car: Car }): JSX.Element {
           </form>
         </div>
       )}
-       {showSuccessNotification && (
-        <div className={styles.successNotification}>
-          Машина успешно обновлена
-        </div>
+      {showSuccessNotification && (
+        <div className="app">Машина успешно обновлена</div>
       )}
       {modalDelete && selectedCarId === car.id && (
         <div className={styles.modalOverlay}>

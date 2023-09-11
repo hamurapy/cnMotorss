@@ -1,9 +1,11 @@
 /* Account Info Section */
 .smallForm{
   width: 30%;
+  margin: 2rem 0;
 }
-.smallForm span{
+.smallForm label{
   font-size: 0.8rem;
+  font-weight: 300;
 }
 .plus{
   width: 100%;
@@ -32,6 +34,44 @@
   border: 1px solid var(--dark-red-color);
 }
 
+.telBlock{
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.telBlock svg, .accountItemBlock svg{
+  margin-left: 5px;
+  transition: 1s;
+  cursor: pointer;
+}
+.telBlock svg:hover path{
+  fill: var(--light-red-color);
+}
+.accountItemBlock svg:hover path{
+  fill: var(--light-red-color);
+}
+.telIcon svg{
+  margin-top: 3px;
+  margin-right: 0.5rem;
+}
+.telIcon svg path{
+  fill: var(--light-red-color);
+}
+.accountBlock{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.accountItemsBlock{
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+.accountItemBlock{
+  display: flex;
+  align-items: center;
+}
 /* Mobile Styles */
 @media screen and (max-width: 1024px) {
   .smallForm{

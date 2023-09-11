@@ -23,7 +23,7 @@ function LoginPage(): JSX.Element {
     if ("email" in user) {
       router.push("/account");
     }
-  }, [user]);
+  }, [router, user]);
 
   return (
     <div className="contentBlock">
@@ -43,6 +43,7 @@ function LoginPage(): JSX.Element {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="email"
+            required
           />
           <input
             id="password"
@@ -50,6 +51,7 @@ function LoginPage(): JSX.Element {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Пароль"
+            required
           />
           <div className="btnPosition">
             <button type="submit">Войти</button>
