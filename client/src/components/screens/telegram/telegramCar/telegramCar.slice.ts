@@ -45,16 +45,7 @@ const AppSlice = createSlice({
         state.transmission = action.payload.transmission;
         state.price = action.payload.price;  
         })
-        // .addCase(loadApplication.pending, (state, action) => {
-        //     state.loading = true;
-        //     state.loadError = undefined;
-        // })
-        // .addCase(loadApplication.rejected, (state, action) => {
-        //    state.loadError = action.error.message;
-        //    state.loading = false;
-        // })
     },
 });
-// export const { resetLoadError } = AppSlice.actions;
 
 export default AppSlice.reducer;

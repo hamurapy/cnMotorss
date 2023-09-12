@@ -323,9 +323,19 @@ p.carDescription{
   justify-content: center;
   align-items: center;
 }
+.modalContent{
+  width: 50%;
+}
+
 /* Mobile */
 @media screen and (max-width: 768px) {
   .side, .sidePhoto{
+    width: 100%;
+  }
+  .modalContent{
+    width: 84%;
+  }
+  .modalContent form input{
     width: 100%;
   }
 }
