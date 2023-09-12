@@ -4,8 +4,11 @@ module.exports = {
     const phoneData = [
       {
         phoneNumber: '79123456789',
-        yandex: '111',
-        google: '222',
+        adres: 'г. Уcсурийск, ул. Резервная д.6Г',
+        whatsapp: '99999999',
+        telegram: '99999999',
+        yandex: 'yandex',
+        google: 'google',
       },
     ];
 

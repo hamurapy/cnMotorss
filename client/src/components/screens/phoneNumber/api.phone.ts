@@ -15,6 +15,36 @@ export async function updatePhone(phone: PhoneType): Promise<PhoneType> {
   return data;
 }
 
+export async function updateAdres(adres: PhoneType): Promise<PhoneType> {
+  const res = await fetch(`http://localhost:4000/api/phone/${adres.id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/JSON' },
+    body: JSON.stringify({ adres: adres.adres }),
+  });
+  const data = await res.json();
+  return data;
+}
+
+export async function updateWhatsapp(whatsapp: PhoneType): Promise<PhoneType> {
+  const res = await fetch(`http://localhost:4000/api/phone/${whatsapp.id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/JSON' },
+    body: JSON.stringify({ whatsapp: whatsapp.whatsapp }),
+  });
+  const data = await res.json();
+  return data;
+}
+
+export async function updateTelegram(telegram: PhoneType): Promise<PhoneType> {
+  const res = await fetch(`http://localhost:4000/api/phone/${telegram.id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/JSON' },
+    body: JSON.stringify({ telegram: telegram.telegram }),
+  });
+  const data = await res.json();
+  return data;
+}
+
 export async function updateYandex(yandex: PhoneType): Promise<PhoneType> {
   const res = await fetch(`http://localhost:4000/api/phone/${yandex.id}`, {
     method: 'PUT',

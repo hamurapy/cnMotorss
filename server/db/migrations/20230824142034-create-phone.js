@@ -11,6 +11,15 @@ module.exports = {
       phoneNumber: {
         type: Sequelize.TEXT,
       },
+      adres: {
+        type: Sequelize.TEXT,
+      },
+      whatsapp: {
+        type: Sequelize.TEXT,
+      },
+      telegram: {
+        type: Sequelize.TEXT,
+      },
       yandex: {
         type: Sequelize.TEXT,
       },

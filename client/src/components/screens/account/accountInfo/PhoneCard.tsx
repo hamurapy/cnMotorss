@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useAppDispatch } from "@/store";
 import {
+  updateAdres,
   updateGoogle,
   updatePhone,
+  updateTelegram,
+  updateWhatsapp,
   updateYandex,
 } from "../../phoneNumber/phone.slice";
 import { PhoneType } from "../../phoneNumber/types/phone.type";
@@ -10,13 +13,22 @@ import styles from "./accountInfo.module.css";
 import EditIcon from "@mui/icons-material/Edit";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import GoogleIcon from "@mui/icons-material/Google";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import TelegramIcon from "@mui/icons-material/Telegram";
 
 const PhoneCard = ({ phone }: { phone: PhoneType }) => {
   const dispatch = useAppDispatch();
   const [phoneNumber, setPhoneNumber] = React.useState(phone.phoneNumber);
+  const [adres, setAdres] = React.useState(phone.adres);
+  const [whatsapp, setWhatsapp] = React.useState(phone.whatsapp);
+  const [telegram, setTelegram] = React.useState(phone.telegram);
   const [yandex, setYandex] = React.useState(phone.yandex);
   const [google, setGoogle] = React.useState(phone.google);
   const [modalPhone, setModalPhone] = React.useState(false);
+  const [modalAdres, setModalAdres] = React.useState(false);
+  const [modalWhatsapp, setModalWhatsapp] = React.useState(false);
+  const [modalTelegram, setModalTelegram] = React.useState(false);
   const [modalYandex, setModalYandex] = React.useState(false);
   const [modalGoogle, setModalGoogle] = React.useState(false);
 
@@ -24,6 +36,24 @@ const PhoneCard = ({ phone }: { phone: PhoneType }) => {
     e.preventDefault();
     dispatch(updatePhone({ id: phone.id, phoneNumber: phoneNumber }));
     setModalPhone((prev) => !prev);
+  };
+
+  const handleAdres = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    dispatch(updateAdres({ id: phone.id, adres: adres }));
+    setModalAdres((prev) => !prev);
+  };
+
+  const handleWhatsapp = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    dispatch(updateWhatsapp({ id: phone.id, whatsapp: whatsapp }));
+    setModalWhatsapp((prev) => !prev);
+  };
+
+  const handleTelegram = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    dispatch(updateTelegram({ id: phone.id, telegram: telegram }));
+    setModalTelegram((prev) => !prev);
   };
 
   const handleYandex = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -42,6 +72,22 @@ const PhoneCard = ({ phone }: { phone: PhoneType }) => {
     setPhoneNumber(e.target.value);
   };
 
+  const handleAdresChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setAdres(e.target.value);
+  };
+
+  const handleWhatsappChange: React.ChangeEventHandler<HTMLInputElement> = (
+    e
+  ) => {
+    setWhatsapp(e.target.value);
+  };
+
+  const handleTelegramChange: React.ChangeEventHandler<HTMLInputElement> = (
+    e
+  ) => {
+    setTelegram(e.target.value);
+  };
+
   const handleYandexChange: React.ChangeEventHandler<HTMLInputElement> = (
     e
   ) => {
@@ -56,6 +102,18 @@ const PhoneCard = ({ phone }: { phone: PhoneType }) => {
 
   const handleModalPhone = (): void => {
     setModalPhone((prev) => !prev);
+  };
+
+  const handleModalAdres = (): void => {
+    setModalAdres((prev) => !prev);
+  };
+
+  const handleModalWhatsapp = (): void => {
+    setModalWhatsapp((prev) => !prev);
+  };
+
+  const handleModalTelegram = (): void => {
+    setModalTelegram((prev) => !prev);
   };
 
   const handleModalYandex = (): void => {
@@ -90,6 +148,31 @@ const PhoneCard = ({ phone }: { phone: PhoneType }) => {
     <>
       <div className={styles.telBlock}>
         <div className={styles.telIcon}>
+          <LocationOnIcon sx={{ fontSize: 30 }} />
+        </div>
+        {phone.adres}
+        <EditIcon onClick={handleModalAdres} />
+      </div>
+      {modalAdres && (
+        <form className={styles.smallForm} onSubmit={handleAdres}>
+          <label>Введите адрес</label>
+          <div className={styles.plus}>
+            <input
+              type="text"
+              id="adres"
+              name="adres"
+              value={adres}
+              onChange={handleAdresChange}
+              placeholder="Введите адрес"
+            />
+          </div>
+          <div className="btnPosition">
+            <button type="submit">Сохранить</button>
+          </div>
+        </form>
+      )}
+      <div className={styles.telBlock}>
+        <div className={styles.telIcon}>
           <LocalPhoneIcon sx={{ fontSize: 30 }} />
         </div>
         {formatPhoneNumber(phone.phoneNumber)}
@@ -107,6 +190,56 @@ const PhoneCard = ({ phone }: { phone: PhoneType }) => {
               value={phoneNumber}
               onChange={handlePhoneChange}
               placeholder="Введите номер"
+            />
+          </div>
+          <div className="btnPosition">
+            <button type="submit">Сохранить</button>
+          </div>
+        </form>
+      )}
+      <div className={styles.telBlock}>
+        <div className={styles.telIcon}>
+          <WhatsAppIcon sx={{ fontSize: 30 }} />
+        </div>
+        {phone.whatsapp}
+        <EditIcon onClick={handleModalWhatsapp} />
+      </div>
+      {modalWhatsapp && (
+        <form className={styles.smallForm} onSubmit={handleWhatsapp}>
+          <label>Введите номер Whatsapp</label>
+          <div className={styles.plus}>
+            <input
+              type="text"
+              id="whatsapp"
+              name="whatsapp"
+              value={whatsapp}
+              onChange={handleWhatsappChange}
+              placeholder="Введите номер Whatsapp"
+            />
+          </div>
+          <div className="btnPosition">
+            <button type="submit">Сохранить</button>
+          </div>
+        </form>
+      )}
+      <div className={styles.telBlock}>
+        <div className={styles.telIcon}>
+          <TelegramIcon sx={{ fontSize: 30 }} />
+        </div>
+        {phone.telegram}
+        <EditIcon onClick={handleModalTelegram} />
+      </div>
+      {modalTelegram && (
+        <form className={styles.smallForm} onSubmit={handleTelegram}>
+          <label>Введите Telegram</label>
+          <div className={styles.plus}>
+            <input
+              type="text"
+              id="telegram"
+              name="telegram"
+              value={telegram}
+              onChange={handleTelegramChange}
+              placeholder="Введите Telegram"
             />
           </div>
           <div className="btnPosition">
