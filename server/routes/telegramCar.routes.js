@@ -10,13 +10,13 @@ router.post('/', async (req, res) => {
       transmission, price,
     } = req.body;
     if (name && email && phone) {
-      const bot = new TelegramBot('6328390230:AAFWXVDHLrzRCNl4d5UHVTuGJTlZW_8P27c', {
+      const bot = new TelegramBot('6580918652:AAFFx24e8BefGyS5esgLGwouw2T5dvHYwOo', {
         polling: true,
       });
       if (name && email && phone && car
         && year && color && mileage && wheel && engine && driveUnit && transmission && price) {
         await bot.sendMessage(
-          -905522359,
+          -4055179270,
           `Имя: ${name}${EOL}Email: ${email}${EOL}Телефон: ${phone}${EOL}Модель: ${car}${EOL}Год выпуска: ${year}${EOL}Цвет: ${color}${EOL}Пробег: ${mileage} км${EOL}Руль: ${wheel}${EOL}Двигатель: ${engine}${EOL}Привод: ${driveUnit}${EOL}Коробка: ${transmission}${EOL}Цена: ${price} ¥${EOL} `,
         );
       } else {

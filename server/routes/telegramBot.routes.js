@@ -8,12 +8,12 @@ router.post('/', async (req, res) => {
       name, email, phone,
     } = req.body;
     if (name && email && phone) {
-      const bot = new TelegramBot('6328390230:AAFWXVDHLrzRCNl4d5UHVTuGJTlZW_8P27c', {
+      const bot = new TelegramBot('6580918652:AAFFx24e8BefGyS5esgLGwouw2T5dvHYwOo', {
         polling: true,
       });
       if (name && email && phone) {
         await bot.sendMessage(
-          -905522359,
+          -4055179270,
           `Имя: ${name}${EOL}Email: ${email}${EOL}Телефон: ${phone}${EOL}`,
         );
       } else {
