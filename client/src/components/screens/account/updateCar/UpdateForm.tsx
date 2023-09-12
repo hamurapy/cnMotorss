@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Car, CarId } from "../../catalog/catalog.types";
 import { useAppDispatch } from "@/store";
-import { deleteCar, updateCar } from "../types/cars.slice";
+import { updateCar } from "../types/cars.slice";
 import styles from "./updateCar.module.css";
 
 function UpdateForm({ car }: { car: Car }): JSX.Element {
   const [modal, setModal] = useState(true);
-  const [modalDelete, setModalDelete] = useState(false);
-  const [selectedCarId, setSelectedCarId] = useState<number | null>(null);
   const [showSuccessNotification, setShowSuccessNotification] = useState(false);
 
   const dispatch = useAppDispatch();
@@ -46,7 +44,7 @@ function UpdateForm({ car }: { car: Car }): JSX.Element {
     formDataObj.append("driveUnit", formData.driveUnit);
     formDataObj.append("transmission", formData.transmission);
     formDataObj.append("description", formData.description);
-    formDataObj.append("id", car.id);
+    formDataObj.append("id", car.id.toString());
 
     dispatch(updateCar(formDataObj))
       .then(() => {
@@ -60,20 +58,6 @@ function UpdateForm({ car }: { car: Car }): JSX.Element {
 
   const handleModal = (): void => {
     setModal((prev) => !prev);
-  };
-
-  const handleModalDelete = (carId: number): void => {
-    setSelectedCarId(carId);
-    setModalDelete(true);
-  };
-
-  const delCar = (carId: CarId): void => {
-    dispatch(deleteCar(Number(carId)));
-    setModalDelete(false);
-  };
-
-  const closeModal = (): void => {
-    setModalDelete(false);
   };
 
   const startYear = 1927;
@@ -94,7 +78,6 @@ function UpdateForm({ car }: { car: Car }): JSX.Element {
           >
             Редактировать
           </button>
-          <button onClick={() => handleModalDelete(car.id)}>Удалить</button>
         </>
       ) : (
         <div className="cont_form">
@@ -238,17 +221,6 @@ function UpdateForm({ car }: { car: Car }): JSX.Element {
       )}
       {showSuccessNotification && (
         <div className="app">Машина успешно обновлена</div>
-      )}
-      {modalDelete && selectedCarId === car.id && (
-        <div className={styles.modalOverlay}>
-          <div className={styles.modalContent}>
-            <p>Вы уверены, что хотите удалить эту машину из каталога?</p>
-            <div className={styles.modalBtns}>
-              <button onClick={() => delCar(car.id)}>Да</button>
-              <button onClick={closeModal}>Нет</button>
-            </div>
-          </div>
-        </div>
       )}
     </>
   );

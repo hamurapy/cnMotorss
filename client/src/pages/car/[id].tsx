@@ -15,6 +15,7 @@ import { RootState, useAppDispatch } from "@/store";
 import { addApplications } from "@/components/screens/account/application/application.slice";
 import { sentApplication } from "@/components/screens/telegram/telegramCar/telegramCar.slice";
 import { useSelector } from "react-redux";
+import Link from "next/link";
 
 export const getStaticPaths = async () => {
   const res = await fetch("http://localhost:4000/api/cars/ss");
@@ -78,26 +79,26 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
   };
   const handlePhone: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const inputValue = e.target.value;
-  
-    const numericValue = inputValue.replace(/\D/g, '');
-  
-    let formattedValue = '';
+
+    const numericValue = inputValue.replace(/\D/g, "");
+
+    let formattedValue = "";
     if (numericValue.length >= 1) {
       formattedValue += numericValue.substring(0, 1);
     }
     if (numericValue.length >= 2) {
-      formattedValue += '(' + numericValue.substring(1, 4);
+      formattedValue += "(" + numericValue.substring(1, 4);
     }
     if (numericValue.length >= 5) {
-      formattedValue += ')' + numericValue.substring(4, 7);
+      formattedValue += ")" + numericValue.substring(4, 7);
     }
     if (numericValue.length >= 8) {
-      formattedValue += '-' + numericValue.substring(7, 9);
+      formattedValue += "-" + numericValue.substring(7, 9);
     }
     if (numericValue.length >= 10) {
-      formattedValue += '-' + numericValue.substring(9, 11);
+      formattedValue += "-" + numericValue.substring(9, 11);
     }
-  
+
     setPhone(formattedValue);
   };
   const handleModal = (): void => {
@@ -147,10 +148,18 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
             </div>
             <div className={styles.side}>
               <div className="btnPosition">
-                {user && <div className="carId">ID: {car.id}</div>}
-                <button type="button" onClick={handleModal}>
-                  Оформить заявку
-                </button>
+                {user ? (
+                  <>
+                    <div className="carId">ID: {car.id}</div>
+                    <Link href={`/update/${car.id}`} className={styles.btnLink}>
+                      Редактировать
+                    </Link>
+                  </>
+                ) : (
+                  <button type="button" onClick={handleModal}>
+                    Оформить заявку
+                  </button>
+                )}
               </div>
             </div>
           </div>

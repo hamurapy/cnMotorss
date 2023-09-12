@@ -1,144 +1,86 @@
-import React from "react";
-import { Car } from "../../catalog/catalog.types";
-import CarSlider from "../../home/CarSlider";
-import UpdateForm from "./UpdateForm";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import WaterDropIcon from "@mui/icons-material/WaterDrop";
-import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
-import TimeToLeaveIcon from "@mui/icons-material/TimeToLeave";
-import AddRoadIcon from "@mui/icons-material/AddRoad";
-import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
-import SpeedIcon from "@mui/icons-material/Speed";
-import CurrencyRubleIcon from "@mui/icons-material/CurrencyRuble";
-import GasMeterIcon from "@mui/icons-material/GasMeter";
-import EvStationIcon from "@mui/icons-material/EvStation";
-import styles from "./updateCar.module.css";
+import React, { useState } from "react";
+import { Car, CarId } from "../../catalog/catalog.types";
+import styles from "@/components/screens/account/application/application.module.css";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import EditIcon from "@mui/icons-material/Edit";
+import Link from "next/link";
+import { deleteCar } from "../types/cars.slice";
+import { useAppDispatch } from "@/store";
 
-function carCard({ car }: { car: Car }): JSX.Element {
+function CarCard({ car }: { car: Car }): JSX.Element {
+  const [modalDelete, setModalDelete] = useState(false);
+  const [selectedCarId, setSelectedCarId] = useState<number | null>(null);
+
+  const dispatch = useAppDispatch();
+
+  const handleModalDelete = (carId: number): void => {
+    setSelectedCarId(carId);
+    setModalDelete(true);
+  };
+
+  const delCar = (carId: CarId): void => {
+    dispatch(deleteCar(Number(carId)));
+    setModalDelete(false);
+  };
+
+  const closeModal = (): void => {
+    setModalDelete(false);
+  };
+
   return (
-    <li className={styles.listItem} key={car.id}>
-      <div className={styles.cardBlock}>
-        <div className={styles.cardBlock}>
-          <div className={styles.model}>
-            {car.brand} {car.model}
-          </div>
-          <div className={styles.model}>ID: {car.id}</div>
-        </div>
-
-        <div className={styles.cardBlock}>
-          <div className={styles.photoBlock}>
-            <CarSlider photos={car.photos} />
-          </div>
-
-          <div className={styles.infoBlock}>
-            <div className={styles.sideInfo}>
-              <div className={styles.listIcon}>
-                <LocalGasStationIcon />
-              </div>
-              <div className={styles.listInfo}>
-                <p className={styles.listName}>Двигатель</p>
-                <p>{car.engine}</p>
-              </div>
-            </div>
-            <div className={styles.sideInfo}>
-              <div className={styles.listIcon}>
-                <GasMeterIcon />
-              </div>
-              <div className={styles.listInfo}>
-                <p className={styles.listName}>Объем, л</p>
-                <p>{car.liters}</p>
-              </div>
-            </div>
-            <div className={styles.sideInfo}>
-              <div className={styles.listIcon}>
-                <EvStationIcon />
-              </div>
-              <div className={styles.listInfo}>
-                <p className={styles.listName}>Мощность</p>
-                <p>{car.power}</p>
-              </div>
-            </div>
-            <div className={styles.sideInfo}>
-              <div className={styles.listIcon}>
-                <AddRoadIcon />
-              </div>
-              <div className={styles.listInfo}>
-                <p className={styles.listName}>Пробег</p>
-                <p>{car.mileage} км</p>
-              </div>
-            </div>
-            <div className={styles.sideInfo}>
-              <div className={styles.listIcon}>
-                <CalendarTodayIcon />
-              </div>
-              <div className={styles.listInfo}>
-                <p className={styles.listName}>Год выпуска</p>
-                <p>{car.year}</p>
-              </div>
-            </div>
-            <div className={styles.sideInfo}>
-              <div className={styles.listIcon}>
-                <TimeToLeaveIcon />
-              </div>
-              <div className={styles.listInfo}>
-                <p className={styles.listName}>Привод</p>
-                <p>{car.driveUnit}</p>
-              </div>
-            </div>
-            <div className={styles.sideInfo}>
-              <div className={styles.listIcon}>
-                <SportsSoccerIcon />
-              </div>
-              <div className={styles.listInfo}>
-                <p className={styles.listName}>Руль</p>
-                <p>{car.wheel}</p>
-              </div>
-            </div>
-            <div className={styles.sideInfo}>
-              <div className={styles.listIcon}>
-                <SpeedIcon />
-              </div>
-              <div className={styles.listInfo}>
-                <p className={styles.listName}>Коробка</p>
-                <p>{car.transmission}</p>
-              </div>
-            </div>
-            <div className={styles.sideInfo}>
-              <div className={styles.listIcon}>
-                <WaterDropIcon />
-              </div>
-              <div className={styles.listInfo}>
-                <p className={styles.listName}>Цвет</p>
-                <p>{car.color}</p>
-              </div>
-            </div>
-            <div className={styles.sideInfo}>
-              <div className={styles.listIcon}>
-                <CurrencyRubleIcon />
-              </div>
-              <div className={styles.listInfo}>
-                <p className={styles.listName}>Цена</p>
-                <p>{car.price} ¥</p>
-              </div>
+    <>
+      <tr>
+        <td>
+          <span>ID</span>
+          {car.id}
+        </td>
+        <td>
+          <span>Марка</span>
+          {car.brand}
+        </td>
+        <td>
+          <span>Модель</span>
+          {car.model}
+        </td>
+        <td>
+          <span>Цвет</span>
+          {car.color}
+        </td>
+        <td>
+          <span>Год выпуска</span>
+          {car.year}
+        </td>
+        <td>
+          <span>Цена</span>
+          {car.price} ¥
+        </td>
+        <td>
+          <span>Редактировать</span>
+          <Link href={`/update/${car.id}`}>
+            <EditIcon sx={{ fontSize: 30 }} />
+          </Link>
+        </td>
+        <td>
+          <span>Удалить</span>
+          <DeleteForeverIcon
+            onClick={() => handleModalDelete(car.id)}
+            sx={{ fontSize: 30 }}
+          />
+        </td>
+      </tr>
+      {modalDelete && selectedCarId === car.id && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <p>Вы уверены, что хотите удалить эту машину из каталога?</p>
+            <div className={styles.modalBtns}>
+              <button onClick={() => delCar(car.id)}>Да</button>
+              <button onClick={closeModal}>Нет</button>
             </div>
           </div>
-          {car.description ? (
-            <>
-              <div className={styles.options}>
-                <p className={styles.carDescription}>Описание:</p>
-                <p className={styles.description}>{car.description}</p>
-              </div>
-            </>
-          ) : (
-            <></>
-          )}
         </div>
-        <div className={styles.btnBlock}>
-          <UpdateForm car={car} />
-        </div>
-      </div>
-    </li>
+      )}
+    </>
   );
 }
 
-export default carCard;
+export default CarCard;

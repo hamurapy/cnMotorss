@@ -22,33 +22,6 @@
   border: var(--input-border-hover);
   box-shadow: var(--box-shadow);
 }
-/* .appLine{
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-} */
-/* .appID {
-  width: 4%;
-}
-.appBtn{
-  width: 10%;
-  text-align: center;
-}
-.appName, .appEmail, .appPhone, .appDate{
-  width: 19%;
-}
-.appMessage{
-  width: 100%;
-}
-.appLine p{
-  padding-top: 1rem;
-  color: #8a8a8a;
-  border-top: 1px solid #0000000f;
-  width: 100%;
-  margin-top: 1rem;
-} */
 
 /* Table */
 .respTab {
@@ -211,7 +184,52 @@ td.imgBlock{
 .editorForm input, .editorForm button{
   width: 24%;
 }
+/* Search Form */
+.searchForm{
+  flex-wrap: nowrap;
+  margin-bottom: 2rem
+}
+.searchForm input{
+  width: 100%;
+}
+.searchForm button{
+  display: flex; 
+  margin-left: 1rem;
+}
+
+/* Modal */
+.modalOverlay{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.modalContent{
+  width: 40%;
+  margin: auto;
+  background: #fff;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 1px 1px 10px 8px rgba(0, 0, 0, 0.1);
+}
+.modalBtns{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.modalBtns button{
+  width: 30%;
+}
 @media(max-width: 1024px) {
+  .modalContent{
+    width: 60%;
+  }
   .respTab thead {
       display: none;
   }
@@ -242,6 +260,29 @@ td.imgBlock{
 @media(max-width: 768px) {
   .editorForm input, .editorForm button{
     width: 100%;
+  }
+  .searchForm button {
+    width: 10%;
+  }
+}
+@media screen and (max-width: 540px) {
+  .searchForm button {
+    width: 15%;
+  }
+}
+@media(max-width: 425px) {
+  .searchForm button {
+    width: 21%;
+  }
+}
+@media(max-width: 375px) {
+  .searchForm{
+    flex-wrap: wrap;
+  }
+  .searchForm input, .searchForm button {
+    width: 100%;
+    margin-left: 0;
+    justify-content: center;
   }
 }
 @media(max-width: 320px) {
