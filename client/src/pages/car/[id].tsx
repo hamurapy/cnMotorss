@@ -148,7 +148,7 @@ export default function CarPage({ car }: { car: Car }): JSX.Element {
             </div>
             <div className={styles.side}>
               <div className="btnPosition">
-                {user ? (
+                {user.name ? (
                   <>
                     <div className="carId">ID: {car.id}</div>
                     <Link href={`/update/${car.id}`} className={styles.btnLink}>
