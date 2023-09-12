@@ -3,7 +3,7 @@ import { RootState, useAppDispatch } from "@/store";
 import { loadCars } from "@/components/screens/account/types/cars.slice";
 import { useSelector } from "react-redux";
 import UpdateCard from "./UpdateCard";
-import styles from "./updateCar.module.css";
+import styles from "@/components/screens/account/application/application.module.css";
 import AccountMenu from "../AccountMenu";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -88,19 +88,31 @@ export default function UpdateCar(): JSX.Element {
               <SearchIcon />
             </button>
           </form>
-          <ul className={styles.carsBlock}>
-            {filteredCars.length > 0 ? (
-              currentCars.map((car) => {
-                return <UpdateCard key={car.id} car={car} />;
-              })
-            ) : (
-              <div
-                style={{ width: "100%", textAlign: "center", margin: "2rem" }}
-              >
-                Машин в каталоге нет
-              </div>
-            )}
-          </ul>
+          <table className={styles.respTab}>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Марка</th>
+                <th>Модель</th>
+                <th>Цвет</th>
+                <th>Год выпуска</th>
+                <th>Цена</th>
+                <th>Редактировать</th>
+                <th>Удалить</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredCars.length > 0 ? (
+                currentCars.map((car) => {
+                  return <UpdateCard key={car.id} car={car} />;
+                })
+              ) : (
+                <tr>
+                  <td colSpan={9}>Машин в каталоге нет</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
           {filteredCars.length > 9 && (
             <div className={styles.paginationBlock}>
               <div className={styles.paginationSelect}>

@@ -404,11 +404,6 @@ button:hover{
   margin-left: 20%;
   z-index: 2;
 }
-.accountmenu a.activeBtn{
-  background: #660101;
-  color:#660101;
-  border: 1px solid #000;
-}
 
 /* Mobile Styles */
 @media screen and (max-width: 1024px) {

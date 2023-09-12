@@ -11,6 +11,23 @@
   font-size: 0.8rem;
   text-align: right;
 }
+.btnLink{
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--light-red-color);
+  background: var(--light-red-color);
+  color: var(--main-bg-color);
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 300;
+  font-family: var(--font);
+  text-transform: uppercase;
+  transition: 1s;
+}
+.btnLink:hover{
+  background: transparent;
+  border: 1px solid var(--light-red-color);
+  color: var(--light-red-color);
+}
 /* Filter */
 .brand {
   width: 100%;

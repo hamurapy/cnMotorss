@@ -1,6 +1,7 @@
 import React, { FC, PropsWithChildren } from "react";
 import { IMeta } from "./meta.interface";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 function getTitle(title: string) {
   return `${title} | CN MOTORS`;
@@ -11,12 +12,16 @@ const Meta: FC<PropsWithChildren<IMeta>> = ({
   description,
   keywords,
 }) => {
+  const router = useRouter();
+  const url = router.asPath;
+
   return (
     <>
       <Head>
         <title>{getTitle(title)}</title>
         {description ? (
           <>
+            <link rel="canonical" href={`http://localhost:3000/${url}`} />
             <meta name="keywords" content={keywords} />
             <meta name="description" content={description} />
             <meta name="og:title" content={title} />
