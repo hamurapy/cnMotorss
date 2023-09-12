@@ -29,16 +29,7 @@ const AppSlice = createSlice({
         state.phone = action.payload.phone;   
         state.message = action.payload.message;  
         })
-        // .addCase(loadApplication.pending, (state, action) => {
-        //     state.loading = true;
-        //     state.loadError = undefined;
-        // })
-        // .addCase(loadApplication.rejected, (state, action) => {
-        //    state.loadError = action.error.message;
-        //    state.loading = false;
-        // })
     },
 });
-// export const { resetLoadError } = AppSlice.actions;
 
 export default AppSlice.reducer;
