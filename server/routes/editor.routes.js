@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
     if (name && email && password && !admin) {
       const hashedPassword = await bcrypt.hash(
         password,
-        Number(process.env.SALT_ROUNDS) || 11,
+        Number(process.env.SALT_ROUNDS) || 8,
       );
       const editor = await User.create({
         name,
@@ -61,11 +61,15 @@ router.put('/:id', async (req, res) => {
     admin,
   } = req.body;
   try {
+    const hashedPassword = await bcrypt.hash(
+      password,
+      Number(process.env.SALT_ROUNDS) || 11,
+    );
     const editor = await User.update(
       {
         name,
         email,
-        password,
+        password: hashedPassword,
         admin,
       },
       { where: { id }, returning: true },

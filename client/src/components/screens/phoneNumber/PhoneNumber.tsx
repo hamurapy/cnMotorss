@@ -13,7 +13,7 @@ export default function PhoneNumber() {
 
   const phones = useSelector((state: RootState) => state.phone.phoneList);
 
-  function formatPhoneNumber(phone: string) {
+  function formatPhoneNumber(phone: string | undefined) {
     const cleaned = ("" + phone).replace(/\D/g, "");
     const match = cleaned.match(/^(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})$/);
     if (match) {

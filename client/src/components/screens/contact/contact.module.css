@@ -27,14 +27,16 @@
   display: flex;
   flex-direction: column;
   padding: 2rem 2rem 2rem 0;
+  font-weight: 300;
 }
 
 /* Phone */
 .phone{
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   font-family: var(--font);
   font-size: var(--font-size);
+  margin: 0.5rem 0;
 }
 .phone svg path{
   fill: var(--light-red-color);
