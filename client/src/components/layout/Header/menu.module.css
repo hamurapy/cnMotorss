@@ -1,0 +1,83 @@
+.nav{
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+  box-sizing: border-box;
+}
+.menuLink{
+  font-family: var(--font);
+  text-transform: uppercase;
+}
+.menuLink:after {
+  content: '';
+  display: block;
+  height: 1px; 
+  background: var(--light-red-color);
+  width: 0; 
+  margin: 0 auto 0; 
+  transition: 1s; 
+}
+.menuLink:hover:after {
+  width: 100%; 
+  transition: ease-out 1s; 
+}
+.phone{
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  font-family: var(--font);
+  font-size: var(--font-size);
+  width: 33%;
+}
+.phone svg path{
+  fill: var(--light-red-color);
+}
+.logoBlock{
+  width: 33%;
+}
+.accountBtn{
+  width: 100%;
+  font-family: var(--font);
+  background: transparent;
+  padding: 0.5em;
+  margin: 0;
+  border: 0;
+  font-size: 1rem;
+  font-weight: 300;
+  color: #000;
+}
+.accountBtn:hover{
+  background: transparent;
+  border: 0;
+  color: #000;
+}
+
+@media screen and (max-width: 1280px) {
+  .phone{
+    justify-content: flex-start;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .phone{
+    justify-content: flex-start;
+  }
+}
+@media screen and (max-width: 820px){
+  .phone{
+    justify-content: center;
+    width: 45%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .phone{
+    justify-content: center;
+    width: 60%;
+  }
+}
+@media screen and (max-width: 540px) {
+  .phone{
+    justify-content: flex-start;
+    width: 100%;
+    order: 3;
+  }
+}

@@ -1,0 +1,286 @@
+/* Welcome  Section */
+.header {
+  background-image: url(header.jpg);
+  background-size: cover;
+  color: var(--main-bg-color);
+  padding: 130px 0 60px 0;
+}
+.container{
+  width: 83%;
+  margin: auto;
+}
+.headerTitle{
+  font-family: var(--font);
+  color: var(--main-bg-color);
+  text-align: justify;
+  font-weight: bold;
+  font-size: 2.7rem;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+.formHeader{
+  width: 35%;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  animation: showLeft 1s;
+  transition: 1s;
+  box-shadow: none;
+}
+.formHeader form{
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+.formHeader form button{
+  width: 50%;
+}
+.formHeader form button:hover{
+  width: 50%;
+} 
+@keyframes showLeft {
+  from {left:-100%;}
+  to {left:0;}
+} 
+
+/* Catalog Section */
+.carsBlock{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  list-style: none;
+}
+.carsBlock li{
+  width: 24%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  margin-bottom: 2.5rem;
+}
+.imgBlock {
+  padding: 30%;
+  position: relative;
+  overflow: hidden;
+}
+.imgBlock img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: 1s;
+}
+.infoBlock{
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  flex-direction: column;
+  text-align: left;
+}
+.infoBlock span.price{
+  box-sizing: border-box;
+  padding: 0.5rem 0 0;
+  color: var(--text-color); 
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+.infoBlock span.model{
+  box-sizing: border-box;
+  padding: 0.5rem 0 0;
+  color: var(--text-color); 
+  font-weight: 300;
+  font-size: 1.2rem;
+}
+.infoBlock span.items{
+  box-sizing: border-box;
+  padding: 0.5rem 0 0;
+  color: var(--item-color);
+  font-weight: 300;
+  font-size: 1.2rem;
+}
+.btnLink{
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--light-red-color);
+  background: var(--light-red-color);
+  color: var(--main-bg-color);
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 300;
+  font-family: var(--font);
+  text-transform: uppercase;
+  transition: 1s;
+}
+.btnLink:hover{
+  background: transparent;
+  border: 1px solid var(--light-red-color);
+  color: var(--light-red-color);
+}
+/* Home catalog */
+.catBlock{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: inherit;
+}
+.itemLeft, .itemRight{
+  width: 50%;
+}
+.itemRight{
+ text-align: right;
+}
+.itemCenter{
+  width: 100%;
+  text-align: right;
+}
+
+/* Request Section */
+.request{
+  background-image: url(request.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.request h2{
+  color: var(--main-bg-color);
+}
+.requestForm{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background: transparent;
+  margin: 2% auto;
+  border: var(--input-border-hover);
+}
+.requestForm form{
+  background: transparent;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: none;
+}
+.requestForm form input, .requestForm form button{
+  width: 24%;
+}
+
+/* Advantage Section */
+.advantage{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 4rem;
+}
+.advantageItem{
+  width: 23%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.advantageItem svg{
+  width: 50px;
+  height: 50px;
+  margin-top: 2rem;
+  border: 1px solid var(--light-red-color);
+  border-radius: 50%;
+  padding: 1rem;
+  background: var(--main-bg-color);
+  transition: 1s;
+}
+.advantageItem svg path, .advantageItem svg circle{
+  fill: var(--light-red-color);
+  transition: 1s;
+}
+.advantageItem:hover svg{
+  background: var(--light-red-color);
+}
+.advantageItem:hover svg path, .advantageItem:hover svg circle{
+  fill: var(--main-bg-color);
+}
+
+/* Logo Slider Section */
+.grey{
+  background: #f3f3f3;
+  padding: 6rem 0;
+}
+.logoItem img {
+  width: 150px;
+  animation: scroll 120s linear infinite;
+  margin: 0 3em;
+}
+.logoTrack {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.logoSlider {
+  width: 100%;
+  box-sizing: border-box;
+}
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translatex(-1000%);
+  }
+}
+
+/* Questions Section*/
+.phone{
+  display: flex;
+  justify-content: center;
+  font-family: var(--font);
+  font-size: var(--font-size);
+  align-items: center;
+}
+.phone svg path{
+  fill: var(--light-red-color);
+}
+.phone a{
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 1024px) {
+  .container{
+    width: 95%;
+  }
+}
+@media screen and (max-width: 820px) {
+  .formHeader{
+    width: 50%;
+  }
+  .formHeader form input{
+    width: 100%;
+  }
+  .carsBlock li, .requestForm form input, .requestForm form button, .advantageItem{
+    width: 48%;
+  }
+}
+@media screen and (max-width: 425px) {
+  .formHeader{
+    width: 100%;
+  }
+  .carsBlock li, .requestForm form input, .requestForm form button, .advantageItem{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 375px) {
+  .formHeader form button{
+    width: 100%;
+  }
+}

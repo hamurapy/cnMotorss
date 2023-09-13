@@ -1,0 +1,390 @@
+.catalogBlock {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.china {
+  width: 96%;
+  color: var(--item-color);
+  margin: 1rem 0 0.5rem;
+  font-size: 0.8rem;
+  text-align: right;
+}
+.btnLink{
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--light-red-color);
+  background: var(--light-red-color);
+  color: var(--main-bg-color);
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 300;
+  font-family: var(--font);
+  text-transform: uppercase;
+  transition: 1s;
+}
+.btnLink:hover{
+  background: transparent;
+  border: 1px solid var(--light-red-color);
+  color: var(--light-red-color);
+}
+/* Filter */
+.brand {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.brand select {
+  width: 32%;
+}
+.filterOptions .inputLeft {
+  width: 50%;
+  border-radius: 5px 0 0 5px;
+}
+.filterOptions .inputLeft:hover {
+  z-index: 2;
+}
+.filterOptions .inputRight {
+  width: 50%;
+  border-radius: 0 5px 5px 0;
+  margin-left: -1px;
+}
+.filterOptions {
+  width: 32%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+.filterLeft, .filterRight{
+  width: 50%;
+  position: relative;
+  height: 58px;
+}
+.coverTop{
+  width: 100%;
+  pointer-events: none;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.coverBottom{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.clear{
+  position: absolute;
+  top: 18px;
+  right: 3px;
+  z-index: 3;
+  cursor: pointer;
+}
+.clear svg path{
+  fill:#474747;
+}
+.filterLeft .coverTop, .filterLeft .coverBottom{ 
+  border-radius: 5px 0 0 5px;
+}
+.filterRight .coverTop, .filterRight .coverBottom{ 
+  border-radius: 0 5px 5px 0; margin-left: -1px;
+}
+.filterLeft:hover,  .filterRight:hover{
+  z-index: 10;
+}
+.filterBtn{
+  width: 32%;
+  margin: 0.7rem 0 0.5rem;
+}
+/* Cards */
+.carsBlock {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+}
+.listItem {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: none;
+  transition: 1s;
+  position: relative;
+  z-index: 1;
+}
+.listItem:before {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  left: 16px;
+  display: block;
+  height: 1px;
+  content: " ";
+  opacity: 1;
+  border-top: var(--input-border);
+}
+.listItem:hover {
+  position: relative;
+  box-shadow: 0 5px 20px 0 var(--shadow);
+  z-index: 3;
+}
+.listItem:hover+.listItem:before,.listItem:hover.listItem:before {
+  opacity: 0;
+}
+.cardBlock {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Photo */
+.photoBlock {
+  width: 30%;
+  box-sizing: border-box;
+  margin-right: 1.5rem;
+}
+
+/* Model, Price, Year */
+.infoBlock {
+  width: 65%;
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.model{
+  width: 50%;
+  color: var(--text-color);
+  font-size: var(--font-size);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.carsBlock li:hover .model{
+  color: var(--light-red-color);
+}
+.price{
+  width: 30%;
+  color: var(--text-color);
+  font-size: var(--font-size);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.year{
+  width: 20%;
+  color: var(--text-color);
+  font-size: var(--font-size);
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
+/* Items */
+.leftItem{
+  width: 50%;
+  color: var(--item-color);
+  font-size: 1.1rem;
+}
+.centerItem{
+  width: 30%;
+  color: var(--item-color);
+  font-size: 1.1rem;
+}
+.mileage{
+  width: 20%;
+  color: var(--item-color);
+  font-size: 1.1rem;
+  text-align: right;
+}
+
+/* Single Car */
+.twoColumn{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.sidePhoto{
+  width: 54%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-self: flex-start;
+  font-family: var(--font);
+  font-size: var(--font-size);
+  margin-bottom: 1rem;
+}
+.imgBlock {
+  padding: 40%;
+  position: relative;
+  overflow: hidden;
+}
+.imgBlock img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  transition: 1s;
+}
+.side{
+  width: 42%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-self: flex-start;
+  font-family: var(--font);
+  font-size: var(--font-size);
+  margin-bottom: 1rem;
+}
+.sideInfo{
+  display: flex;
+  box-sizing: border-box;
+}
+.sideInfo .listIcon{
+  width: 50px;
+  margin-right: 1rem;
+  padding-top: 5px;
+  box-sizing: border-box;
+}
+.sideInfo p, .description{
+  margin-bottom: 0.8rem;
+}
+.sideInfo p.listName{
+  width: 100%;
+  font-size: 1rem;
+  color: var(--item-color);
+  margin-bottom: 0;
+}
+.sideInfo p{
+  width: 100%;
+  font-size: 1.1rem;
+}
+p.carPrice{
+  width: 30%;
+  color: var(--light-red-color);
+  font-size: 1rem;
+}
+p.carDescription{
+  font-size: var(--font-size);
+  font-weight: 300;
+  color: var(--item-color);
+  text-align: justify;
+  margin-bottom: 1rem;
+  border-top: 1px solid var(--shadow);
+}
+
+/* Pagination */
+.pagination{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pagination button{
+  border: var(--input-border);
+  box-sizing: border-box;
+  background: transparent;
+  color: var(--text-color);
+  margin: 0.1rem;
+  transition: 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pagination button:hover{
+  border: var(--input-border-hover);
+  color: var(--light-red-color);
+}
+.pagination .activePage{
+  border: var(--input-border-hover);
+  color: var(--light-red-color);
+}
+.pagination button:disabled{
+  color: var(--item-color);
+  pointer-events: none;
+}
+/* Modal */
+.modalBlock{
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  visibility: visible;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modalContent{
+  width: 50%;
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+  .side, .sidePhoto{
+    width: 100%;
+  }
+  .modalContent{
+    width: 84%;
+  }
+  .modalContent form input{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 540px) {
+  .carsBlock li, .filter select, .filterOptions, .brand select, .filterBtn {
+    width: 100%;
+  }
+  .photoBlock, .infoBlock{
+    width: 100%;
+    margin: 0;
+  }
+  .price{
+    width: 50%;
+    text-align: right;
+  } 
+  .model, .price{
+    order: -1;
+  }
+  .engine{
+    order: 1;
+    width: 70%;
+  }
+  .year{
+    order: 2;
+    color: var(--item-color);
+    font-size: 1.1rem;
+    width: 30%;
+    margin-bottom: 0;
+  }
+  .transmission{
+    order: 3;
+    width: 70%;
+  }
+  .mileage{
+    order: 4;
+    width: 30%;
+  }
+  .driveUnit{
+    order: 5;
+    width: 70%;
+  }
+  .color{
+    order: 6;
+    width: 30%;
+    text-align: right;
+  }
+}
+@media screen and (max-width: 320px) {
+  .engine, .year, .transmission, .mileage, .driveUnit, .color{
+    width: 50%;
+  }
+}

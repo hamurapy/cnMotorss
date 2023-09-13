@@ -1,0 +1,30 @@
+.adminBlock{
+  width: 100%;
+  text-align: center;
+}
+.adminBlock img{
+  width: 100px;
+  margin: 0 auto 2rem;
+}
+.adminBlock form{
+  width: 30%;
+  margin: auto;
+}
+.error{
+  width: 100%;
+  text-align: center;
+  color: #a20201;
+}
+@media screen and (max-width: 768px) {
+  .adminBlock form{
+    width: 50%;
+  }
+  .adminBlock form input{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 425px) {
+  .adminBlock form{
+    width: 100%;
+  }
+}

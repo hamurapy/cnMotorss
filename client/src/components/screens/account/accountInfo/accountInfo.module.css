@@ -1,0 +1,90 @@
+/* Account Info Section */
+.smallForm{
+  width: 30%;
+  margin: 2rem 0;
+}
+.smallForm label{
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+.plus{
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.plus span{
+  margin-right: 5px;
+}
+.editBtn{
+  width: auto;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid var(--light-red-color);
+  background: var(--light-red-color);
+  color: var(--main-bg-color);
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: 300;
+  font-family: var(--font);
+  transition: 1s;
+  margin: 1rem 0;
+}
+.editBtn:hover{
+  width: auto;
+  background: var(--dark-red-color);
+  border: 1px solid var(--dark-red-color);
+}
+
+.telBlock{
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.telBlock svg, .accountItemBlock svg{
+  margin-left: 5px;
+  transition: 1s;
+  cursor: pointer;
+}
+.telBlock svg:hover path{
+  fill: var(--light-red-color);
+}
+.accountItemBlock svg:hover path{
+  fill: var(--light-red-color);
+}
+.telIcon svg{
+  margin-top: 3px;
+  margin-right: 0.5rem;
+}
+.telIcon svg path{
+  fill: var(--light-red-color);
+}
+.accountBlock{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.accountItemsBlock{
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+.accountItemBlock{
+  display: flex;
+  align-items: center;
+}
+/* Mobile Styles */
+@media screen and (max-width: 1024px) {
+  .smallForm{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .smallForm{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 540px) {
+  .smallForm{
+    width: 100%;
+  }
+}

@@ -1,0 +1,441 @@
+/* Filter */
+.brand {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.brand select {
+  width: 32%;
+}
+.filterOptions .inputLeft {
+  width: 50%;
+  border-radius: 5px 0 0 5px;
+}
+.filterOptions .inputLeft:hover {
+  z-index: 2;
+}
+.filterOptions .inputRight {
+  width: 50%;
+  border-radius: 0 5px 5px 0;
+  margin-left: -1px;
+}
+.filterOptions {
+  width: 32%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+.filterLeft, .filterRight{
+  width: 50%;
+  position: relative;
+  height: 58px;
+}
+.coverTop{
+  width: 100%;
+  pointer-events: none;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.coverBottom{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.clear{
+  position: absolute;
+  top: 18px;
+  right: 3px;
+  z-index: 3;
+  cursor: pointer;
+}
+.clear svg path{
+  fill:#474747;
+}
+.filterLeft .coverTop, .filterLeft .coverBottom{ 
+  border-radius: 5px 0 0 5px;
+}
+.filterRight .coverTop, .filterRight .coverBottom{ 
+  border-radius: 0 5px 5px 0; margin-left: -1px;
+}
+.filterLeft:hover,  .filterRight:hover{
+  z-index: 10;
+}
+.filterBtn{
+  width: 32%;
+  margin: 0.7rem 0 0.5rem;
+}
+
+/* Cards */
+.carsBlock {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+}
+.listItem {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: none;
+  transition: 1s;
+  position: relative;
+  z-index: 1;
+}
+.listItem:before {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  left: 16px;
+  display: block;
+  height: 1px;
+  content: " ";
+  opacity: 1;
+  border-top: var(--input-border);
+}
+.listItem:hover {
+  position: relative;
+  box-shadow: 0 5px 20px 0 var(--shadow);
+  z-index: 3;
+}
+.listItem:hover+.listItem:before,.listItem:hover.listItem:before {
+  opacity: 0;
+}
+
+/* Single Card */
+.cardBlock {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.model{
+  color: var(--text-color);
+  font-size: var(--font-size);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.carsBlock li:hover .model{
+  color: var(--light-red-color);
+}
+.photoBlock {
+  width: 22%;
+  box-sizing: border-box;
+}
+.infoBlock {
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.sideInfo{
+  width: 19%;
+  display: flex;
+  box-sizing: border-box;
+  border: 1px solid #0000000f;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  transition: 0.5s;
+}
+.sideInfo:hover{
+  border: var(--input-border-hover);
+}
+.sideInfo .listIcon{
+  width: 20px;
+  margin-right: 1rem;
+  padding-top: 5px;
+  box-sizing: border-box;
+  transition: 0.5s;
+}
+.sideInfo .listIcon svg path{
+  transition: 0.5s;
+}
+.sideInfo:hover .listIcon svg path{
+  fill: var(--light-red-color);
+}
+.sideInfo p.listName{
+  width: 100%;
+  font-size: 1rem;
+  color: var(--item-color);
+  margin: 0;
+}
+.options{
+  width: 100%;
+}
+.sideInfo p, .description{
+  width: 100%;
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+}
+p.carDescription{
+  font-weight: 300;
+  color: var(--item-color);
+  font-size: 1rem;
+  text-align: justify;
+  margin-bottom: 1rem;
+  border-top: 1px solid #0000000f;
+}
+
+/* Buttons */
+.btnBlock{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+.editBtn{
+  background: transparent;
+  color:  var(--light-red-color);
+  margin: 0.5rem;
+}
+.editBtn:hover{
+  color:  #fff;
+}
+
+/* Modal */
+.modalOverlay{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.modalContent{
+  width: 40%;
+  margin: auto;
+  background: #fff;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 1px 1px 10px 8px rgba(0, 0, 0, 0.1);
+}
+.modalBtns{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.modalBtns button{
+  width: 30%;
+}
+
+/* Form */
+.updateForm{
+  border: 1px solid #0000000f;
+  box-shadow: none;
+}
+.lineForm {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.formOption{
+  width: 24%;
+}
+.imageOption{
+  width: 100%;
+}
+.formOption label, .imageOption label{
+  font-weight: 300;
+  color: var(--item-color);
+  font-size: 1rem;
+  text-align: justify;
+}
+.lineForm input, .lineForm select{
+  width: 100%;
+  color: var(--text-color);
+}
+.lineForm input::-webkit-input-placeholder{
+  color: var(--text-color);
+}
+.lineForm input::-moz-placeholder{
+  color: var(--text-color);
+}
+.lineForm input:-moz-placeholder{
+  color: var(--text-color);
+}
+.lineForm input:-ms-input-placeholder{
+  color: var(--text-color);
+}
+input.inputFile::-webkit-file-upload-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--light-red-color);
+  background: var(--light-red-color);
+  color: var(--main-bg-color);
+  margin-right: 10px;
+  outline: none;
+  border-radius: 5px;
+  transition: 1s;
+}
+input.inputFile::-webkit-file-upload-button:hover {
+  background: var(--dark-red-color);
+  border: 1px solid var(--dark-red-color);
+}
+.coverInput{
+  width: 100%;
+  position: relative;
+  height: 58px;
+}
+.coverInput .coverTop{
+  width: 100%;
+  pointer-events: none;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.coverInput .coverBottom{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.coverInput .clear{
+  position: absolute;
+  top: 18px;
+  right: 3px;
+  z-index: 3;
+  cursor: pointer;
+}
+.coverInput .clear svg path{
+  fill:#474747;
+}
+
+/* Pagination */
+.paginationBlock{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+}
+.paginationBlock button{
+  border: var(--input-border);
+  box-sizing: border-box;
+  background: transparent;
+  color: var(--text-color);
+  margin: 0.1rem;
+  transition: 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.paginationBlock button:hover{
+  border: var(--input-border-hover);
+  color: var(--light-red-color);
+}
+.paginationBlock button:disabled{
+  color: var(--item-color);
+  pointer-events: none;
+}
+.paginationBlock span{
+  margin: 0 1.5rem;
+}
+.paginationBlock .paginationSelect{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  white-space: nowrap;
+}
+.paginationBlock .paginationSelect select{
+  border: 0;
+  margin-left: 5px;
+  width: 60px;
+}
+
+.searchForm{
+  flex-wrap: nowrap;
+  margin-bottom: 2rem
+}
+.searchForm input{
+  width: 100%;
+}
+.searchForm button{
+  display: flex; 
+  margin-left: 1rem;
+}
+
+/* Mobile */
+@media screen and (max-width: 1024px) {
+  .modalContent{
+    width: 60%;
+  }
+  .formOption, .sideInfo{
+    width: 49%;
+  }
+  .photoBlock, .infoBlock {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  input.inputFile{
+    width: 100%;
+  }
+  .sidePhoto, .btnBlock button{
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+  .searchForm button {
+    width: 10%;
+  }
+}
+@media screen and (max-width: 540px) {
+  .carsBlock li, .filter select, .filterOptions, .brand select, .filterBtn {
+    width: 100%;
+  }
+  .formOption, input.inputFile{
+    width: 100%;
+  }
+  .photoBlock, .infoBlock{
+    width: 100%;
+    margin: 0;
+  }
+  .searchForm button {
+    width: 15%;
+  }
+}
+@media(max-width: 425px) {
+  .paginationBlock .paginationSelect{
+    width: 100%;
+  }
+  .searchForm button {
+    width: 21%;
+  }
+}
+@media(max-width: 375px) {
+  .searchForm{
+    flex-wrap: wrap;
+  }
+  .searchForm input, .searchForm button {
+    width: 100%;
+    margin-left: 0;
+    justify-content: center;
+  }
+}
