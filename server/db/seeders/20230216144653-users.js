@@ -5,9 +5,9 @@ module.exports = {
   up: async (queryInterface) => {
     const usersData = [
       {
-        name: 'admin',
-        email: 'vova@mail.ru',
-        password: await bcrypt.hash('123', 8),
+        name: 'cnmotors',
+        email: 'khan.iv1909@gmail.com',
+        password: await bcrypt.hash('Khaniv19092001', 8),
         admin: true,
         createdAt: new Date(),
         updatedAt: new Date(),

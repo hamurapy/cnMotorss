@@ -6,9 +6,10 @@ import PhoneNumber from "../phoneNumber/PhoneNumber";
 import { useAppDispatch } from "@/store";
 import { addApplications } from "../account/application/application.slice";
 import { sentApplication } from "../telegram/telegramContact/contact.slice";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { TextareaAutosize } from "@mui/base/TextareaAutosize";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import AdresCard from "./AdresCard";
+import WhatsappCard from "./WhatsappCard";
+import TelegramCard from "./TelegramCard";
 
 function ContactPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -89,6 +90,16 @@ function ContactPage(): JSX.Element {
               <div className={styles.phoneLink}>
                 <PhoneNumber />
               </div>
+            </div>
+            <div className={styles.phone}>
+              <LocationOnIcon sx={{ fontSize: 35 }} />
+              <div className={styles.phoneLink}>
+                <AdresCard />
+              </div>
+            </div>
+            <div className="socialIcons">
+              <WhatsappCard />
+              <TelegramCard />
             </div>
           </div>
         </div>

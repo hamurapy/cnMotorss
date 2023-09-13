@@ -16,6 +16,18 @@ export const updatePhone = createAsyncThunk('phone/updatePhone', (phone: PhoneTy
   return apiPhone.updatePhone(phone);
 });
 
+export const updateAdres = createAsyncThunk('phone/updateAdres', (adres: PhoneType) => {
+  return apiPhone.updateAdres(adres);
+});
+
+export const updateWhatsapp = createAsyncThunk('phone/updateWhatsapp', (whatsapp: PhoneType) => {
+  return apiPhone.updateWhatsapp(whatsapp);
+});
+
+export const updateTelegram = createAsyncThunk('phone/updateTelegram', (telegram: PhoneType) => {
+  return apiPhone.updateTelegram(telegram);
+});
+
 export const updateYandex = createAsyncThunk('phone/updateYandex', (yandex: PhoneType) => {
   return apiPhone.updateYandex(yandex);
 });
@@ -34,6 +46,22 @@ const phonesSlice = createSlice({
       state.phoneList = action.payload;
     })
     .addCase(updatePhone.fulfilled, (state, action) => {
+      state.phoneList = state.phoneList.map((phone) =>
+        phone.id === action.payload.id ? action.payload : phone,
+      );
+    })
+      
+    .addCase(updateAdres.fulfilled, (state, action) => {
+      state.phoneList = state.phoneList.map((phone) =>
+        phone.id === action.payload.id ? action.payload : phone,
+      );
+    })
+    .addCase(updateWhatsapp.fulfilled, (state, action) => {
+      state.phoneList = state.phoneList.map((phone) =>
+        phone.id === action.payload.id ? action.payload : phone,
+      );
+    })
+    .addCase(updateTelegram.fulfilled, (state, action) => {
       state.phoneList = state.phoneList.map((phone) =>
         phone.id === action.payload.id ? action.payload : phone,
       );

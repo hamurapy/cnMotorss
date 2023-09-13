@@ -404,7 +404,34 @@ button:hover{
   margin-left: 20%;
   z-index: 2;
 }
-
+/* Social Icons */
+.socialIcons{
+  width: 18%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+.socialIcons svg path{
+  fill: var(--light-red-color);
+  transition: 1s;
+}
+.socialIcons svg:hover path{
+  fill: var(--dark-red-color);
+}
+.social{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.socialItem{
+  width: 33%;
+}
+.socialItem .socialIcons{
+    width: 12%;
+}
 /* Mobile Styles */
 @media screen and (max-width: 1024px) {
   .contentBlock{
@@ -443,6 +470,9 @@ button:hover{
   .accountWrap {
     width: 100%;
     margin-left: 0;
+  }
+  .socialItem{
+    width: 100%;
   }
 }
 @media screen and (max-width: 540px) {

@@ -16,6 +16,15 @@ import styles from "./accountInfo.module.css";
 function AccountInfo(): JSX.Element {
   const users = useSelector((state: RootState) => state.user.users);
   const phones = useSelector((state: RootState) => state.phone.phoneList);
+
+  const [modalName, setModalName] = useState(false);
+  const [modalEmail, setModalEmail] = useState(false);
+  const [modalPassword, setModalPassword] = useState(false);
+
+  const [name, setName] = useState(users[0]?.name);
+  const [email, setEmail] = useState(users[0]?.email);
+  const [password, setPassword] = useState(users[0]?.password);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -24,19 +33,11 @@ function AccountInfo(): JSX.Element {
 
   useEffect(() => {
     if (users.length > 0) {
-      setName(users[0]?.name || "");
-      setEmail(users[0]?.email || "");
-      setPassword(users[0]?.password || "");
+      setName(users[0]?.name);
+      setEmail(users[0]?.email);
+      setPassword(users[0]?.password);
     }
   }, [users]);
-
-  const [modalName, setModalName] = useState(false);
-  const [modalEmail, setModalEmail] = useState(false);
-  const [modalPassword, setModalPassword] = useState(false);
-
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   const handleOpenName = (): void => {
     setModalName((prev) => !prev);
@@ -116,11 +117,9 @@ function AccountInfo(): JSX.Element {
                 />
               </div>
               <div className={styles.accountItemsBlock}>
+                <div className={styles.accountItemBlock}>Имя: {user.name}</div>
                 <div className={styles.accountItemBlock}>
-                  Имя: {user.name} <EditIcon onClick={handleOpenName} />
-                </div>
-                <div className={styles.accountItemBlock}>
-                  E-mail: {user.email} <EditIcon onClick={handleOpenEmail} />
+                  E-mail: {user.email}
                 </div>
                 <div className={styles.accountItemBlock}>
                   Пароль: *** <EditIcon onClick={handleOpenPassword} />
