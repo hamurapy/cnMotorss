@@ -1,7 +1,7 @@
 import { AuthApiError, PayloadAuth, UserAuth } from './types/user.types';
 
 export const requestLogin = async (user: UserAuth): Promise<UserAuth> => {
-  const response = await fetch('http://localhost:4000/api/auth/login', {
+  const response = await fetch(`${process.env.PORT_BACKEND}/api/auth/login`, {
     method: 'POST',
     credentials: 'include',
     body: JSON.stringify(user),
@@ -19,7 +19,7 @@ export const requestLogin = async (user: UserAuth): Promise<UserAuth> => {
 export const requestRegistr = async (
   newUser: UserAuth,
 ): Promise<PayloadAuth> => {
-  const response = await fetch('http://localhost:4000/api/auth/registration', {
+  const response = await fetch(`${process.env.PORT_BACKEND}/api/auth/registration`, {
     method: 'POST',
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
@@ -38,7 +38,7 @@ export const requestRegistr = async (
 };
 
 export const requestLogout = async (): Promise<PayloadAuth> => {
-  const response = await fetch('http://localhost:4000/api/auth/logout', {
+  const response = await fetch(`${process.env.PORT_BACKEND}/api/auth/logout`, {
     method: 'DELETE',
     credentials: 'include',
   });
@@ -53,7 +53,7 @@ export const requestLogout = async (): Promise<PayloadAuth> => {
 };
 
 export const checkUser = async (): Promise<UserAuth> => {
-  const response = await fetch('http://localhost:4000/api/auth/user', {
+  const response = await fetch(`${process.env.PORT_BACKEND}/api/auth/user`, {
     method: 'GET',
     credentials: 'include',
   });
@@ -67,7 +67,7 @@ export const checkUser = async (): Promise<UserAuth> => {
 };
 
 export const requestUpdate = async (user: UserAuth): Promise<UserAuth> => {
-  const response = await fetch(`http://localhost:4000/api/users/${user.id}`, {
+  const response = await fetch(`${process.env.PORT_BACKEND}/api/users/${user.id}`, {
     method: 'PUT',
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },

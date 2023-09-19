@@ -1,7 +1,7 @@
 import type FormApplicationType from "./telegram.types";
 
 export async function appApplication({application}: {application: FormApplicationType}): Promise<void> {
-    const res = await fetch('http://localhost:4000/api/telegramBot', {
+    const res = await fetch(`${process.env.PORT_BACKEND}/api/telegramBot`, {
       method: 'POST',
       body: JSON.stringify(application),
       headers: {

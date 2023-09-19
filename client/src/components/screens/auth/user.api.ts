@@ -1,7 +1,7 @@
 import { UserAuth, UserAuthId } from './types/user.types';
 
 export const loadUsers = async (): Promise<UserAuth[]> => {
-  const res = await fetch('http://localhost:4000/api/users', {
+  const res = await fetch(`${process.env.PORT_BACKEND}/api/users`, {
     credentials: 'include',
   });
   const data = await res.json();
@@ -9,7 +9,7 @@ export const loadUsers = async (): Promise<UserAuth[]> => {
 };
 
 export const editStatus = async (id: UserAuthId): Promise<UserAuth> => {
-  const res = await fetch(`http://localhost:4000/api/admins/${id}`, {
+  const res = await fetch(`${process.env.PORT_BACKEND}/api/admins/${id}`, {
     method: 'PUT',
     credentials: 'include',
   });
@@ -23,7 +23,7 @@ export function updateUsers(updateUser: UserAuth): any {
 }
 
 export const updateUserName = async (updateUserName: UserAuth): Promise<UserAuth> => {
-  const res = await fetch(`http://localhost:4000/api/users/${updateUserName.id}`, {
+  const res = await fetch(`${process.env.PORT_BACKEND}/api/users/${updateUserName.id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/JSON' },
     body: JSON.stringify({
@@ -35,7 +35,7 @@ export const updateUserName = async (updateUserName: UserAuth): Promise<UserAuth
 };
 
 export const updateUserEmail = async (updateUserEmail: UserAuth): Promise<UserAuth> => {
-  const res = await fetch(`http://localhost:4000/api/users/${updateUserEmail.id}`, {
+  const res = await fetch(`${process.env.PORT_BACKEND}/api/users/${updateUserEmail.id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/JSON' },
     body: JSON.stringify({
@@ -47,7 +47,7 @@ export const updateUserEmail = async (updateUserEmail: UserAuth): Promise<UserAu
 };
 
 export const updateUserPassword = async (updateUserPassword: UserAuth): Promise<UserAuth> => {
-  const res = await fetch(`http://localhost:4000/api/users/${updateUserPassword.id}`, {
+  const res = await fetch(`${process.env.PORT_BACKEND}/api/users/${updateUserPassword.id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/JSON' },
     body: JSON.stringify({

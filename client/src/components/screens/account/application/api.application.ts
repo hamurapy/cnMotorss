@@ -1,14 +1,14 @@
 import { ApplicationId, ApplicationType } from "./types/application.type";
 
 export async function loadApplication(): Promise<ApplicationType[]> {
-  const res = await fetch('http://localhost:4000/api/application');
+  const res = await fetch(`${process.env.PORT_BACKEND}/api/application`);
   return res.json();
 }
 
 export const addApplications = async (
   newApplications: ApplicationType,
 ): Promise<ApplicationType> => {
-  const res = await fetch('http://localhost:4000/api/application', {
+  const res = await fetch(`${process.env.PORT_BACKEND}/api/application`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/JSON' },
     body: JSON.stringify({
@@ -35,7 +35,7 @@ export const addApplications = async (
 };
 
 export const updateApplication = async (updateApplication: ApplicationType): Promise<ApplicationType> => {
-  const res = await fetch(`http://localhost:4000/api/application/${updateApplication.id}`, {
+  const res = await fetch(`${process.env.PORT_BACKEND}/api/application/${updateApplication.id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/JSON' },
     body: JSON.stringify({
@@ -49,7 +49,7 @@ export const updateApplication = async (updateApplication: ApplicationType): Pro
 export const deleteApplications = async (
   id: ApplicationId,
 ): Promise<number> => {
-  const res = await fetch(`http://localhost:4000/api/application/${id}`, {
+  const res = await fetch(`${process.env.PORT_BACKEND}/api/application/${id}`, {
     method: 'DELETE',
     credentials: 'include',
   });

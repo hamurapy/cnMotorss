@@ -18,7 +18,7 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 
 export const getStaticPaths = async () => {
-  const res = await fetch("http://localhost:4000/api/cars/ss");
+  const res = await fetch(`${process.env.PORT_BACKEND}/api/cars/ss`);
   const carIds = await res.json();
 
   const paths = carIds.map((id: any) => {
@@ -35,7 +35,7 @@ export const getStaticPaths = async () => {
 
 export async function getStaticProps(context: { params: { id: number } }) {
   const id = context.params.id;
-  const res = await fetch(`http://localhost:4000/api/cars/${id}`);
+  const res = await fetch(`${process.env.PORT_BACKEND}/api/cars/${id}`);
   const cars = await res.json();
   return {
     props: {

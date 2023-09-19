@@ -1,7 +1,7 @@
 import type telegramCarType from "./telegramCar.types";
 
 export async function appApplication({application}: {application: telegramCarType}): Promise<void> {
-    const res = await fetch('http://localhost:4000/api/telegramBotCar', {
+    const res = await fetch(`${process.env.PORT_BACKEND}/api/telegramBotCar`, {
       method: 'POST',
       body: JSON.stringify(application),
       headers: {

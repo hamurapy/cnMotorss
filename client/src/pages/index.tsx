@@ -27,7 +27,7 @@ export async function getStaticProps() {
   const endIndex = 20;
 
   const res = await fetch(
-    `http://localhost:4000/api/cars?startIndex=${startIndex}&endIndex=${endIndex}`
+    `${process.env.PORT_BACKEND}/api/cars?startIndex=${startIndex}&endIndex=${endIndex}`
   );
   const data = await res.json();
   const carsWithPhotos = data.carsWithPhotos;

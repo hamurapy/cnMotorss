@@ -7,36 +7,6 @@ function getTitle(title: string) {
   return `${title} | CN MOTORS`;
 }
 
-// export async function getStaticProps() {
-//   const res = await fetch(`http://localhost:4000/api/phone/`);
-
-//   const data = await res.json();
-//   const yandex = data[0].yandex;
-//   const google = data[0].google;
-
-//   return {
-//     props: {
-//       yandex,
-//       google,
-//     },
-//   };
-// }
-
-// export async function getServerSideProps() {
-//   // Fetch data from external API
-//   const res = await fetch(`http://localhost:4000/api/phone/`);
-//   const data = await res.json();
-//   const yandex = data[0].yandex;
-//   const google = data[0].google;
-//   // Pass data to the page via props
-//   return {
-//     props: {
-//       yandex,
-//       google,
-//     },
-//   };
-// }
-
 const Meta: FC<PropsWithChildren<IMeta>> = ({
   title,
   description,

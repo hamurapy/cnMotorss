@@ -1,14 +1,14 @@
 import { EditorId, EditorType } from "./types/editor.type";
 
 export async function loadEditor(): Promise<EditorType[]> {
-  const res = await fetch('http://localhost:4000/api/editor');
+  const res = await fetch(`${process.env.PORT_BACKEND}/api/editor`);
   return res.json();
 }
 
 export const addEditors = async (
   newEditor: EditorType,
 ): Promise<EditorType> => {
-  const res = await fetch('http://localhost:4000/api/editor', {
+  const res = await fetch(`${process.env.PORT_BACKEND}/api/editor`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/JSON' },
     body: JSON.stringify({
@@ -23,7 +23,7 @@ export const addEditors = async (
 };
 
 export const updateEditor = async (updateEditor: EditorType): Promise<EditorType> => {
-  const res = await fetch(`http://localhost:4000/api/editor/${updateEditor.id}`, {
+  const res = await fetch(`${process.env.PORT_BACKEND}/api/editor/${updateEditor.id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/JSON' },
     body: JSON.stringify({
@@ -40,7 +40,7 @@ export const updateEditor = async (updateEditor: EditorType): Promise<EditorType
 export const deleteEditors = async (
   id: EditorId,
 ): Promise<number> => {
-  const res = await fetch(`http://localhost:4000/api/editor/${id}`, {
+  const res = await fetch(`${process.env.PORT_BACKEND}/api/editor/${id}`, {
     method: 'DELETE',
     credentials: 'include',
   });

@@ -64,7 +64,7 @@ export default function CatalogPage({
   const fetchFilteredCarIds = async () => {
     try {
       const res = await fetch(
-        `http://localhost:4000/api/cars/filterIds?priceFrom=${minPrice}&priceTo=${maxPrice}&yearFrom=${minYear}&yearTo=${maxYear}&brand=${brandFilter}&model=${modelFilter}&engine=${engineFilter}&transmission=${transmission}&driveUnit=${driveUnit}&litersFrom=${minLiters}&litersTo=${maxLiters}&mileageFrom=${minMileage}&mileageTo=${maxMileage}`
+        `${process.env.PORT_BACKEND}/api/cars/filterIds?priceFrom=${minPrice}&priceTo=${maxPrice}&yearFrom=${minYear}&yearTo=${maxYear}&brand=${brandFilter}&model=${modelFilter}&engine=${engineFilter}&transmission=${transmission}&driveUnit=${driveUnit}&litersFrom=${minLiters}&litersTo=${maxLiters}&mileageFrom=${minMileage}&mileageTo=${maxMileage}`
       );
       const data = await res.json();
       setTotalPages(Math.ceil(data.length / itemsPerPage));
@@ -89,7 +89,7 @@ export default function CatalogPage({
 
   const fetchCars = async (startIndex: number, endIndex: number) => {
     const res = await fetch(
-      `http://localhost:4000/api/cars/filter?priceFrom=${minPrice}&priceTo=${maxPrice}&yearFrom=${minYear}&yearTo=${maxYear}&brand=${brandFilter}&model=${modelFilter}&engine=${engineFilter}&transmission=${transmission}&driveUnit=${driveUnit}&litersFrom=${minLiters}&litersTo=${maxLiters}&mileageFrom=${minMileage}&mileageTo=${maxMileage}&startIndex=${startIndex}&endIndex=${endIndex}`
+      `${process.env.PORT_BACKEND}/api/cars/filter?priceFrom=${minPrice}&priceTo=${maxPrice}&yearFrom=${minYear}&yearTo=${maxYear}&brand=${brandFilter}&model=${modelFilter}&engine=${engineFilter}&transmission=${transmission}&driveUnit=${driveUnit}&litersFrom=${minLiters}&litersTo=${maxLiters}&mileageFrom=${minMileage}&mileageTo=${maxMileage}&startIndex=${startIndex}&endIndex=${endIndex}`
     );
     return res.json();
   };

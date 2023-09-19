@@ -15,7 +15,7 @@ function SingleCarSlider({ photos }: { photos: CarPhotos }): JSX.Element {
   const carsArray = photos.map((photo, index) => (
     <Image
       key={index}
-      src={`http://localhost:4000${photo.img}`}
+      src={`${process.env.PORT_BACKEND}${photo.img}`}
       alt="Car"
       width={0}
       height={0}
@@ -42,7 +42,7 @@ function SingleCarSlider({ photos }: { photos: CarPhotos }): JSX.Element {
             <div className={styles.imgBlock}>
               <Image
                 onClick={() => setToggler(!toggler)}
-                src={`http://localhost:4000${photo.img}`}
+                src={`${process.env.PORT_BACKEND}${photo.img}`}
                 alt="Car"
                 width={0}
                 height={0}

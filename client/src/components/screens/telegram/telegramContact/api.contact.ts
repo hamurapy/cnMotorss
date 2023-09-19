@@ -1,7 +1,7 @@
 import type ContactApplicationType from "./contact.types";
 
 export async function appApplication({application}: {application: ContactApplicationType}): Promise<void> {
-    const res = await fetch('http://localhost:4000/api/telegramBotContact', {
+    const res = await fetch(`${process.env.PORT_BACKEND}/api/telegramBotContact`, {
       method: 'POST',
       body: JSON.stringify(application),
       headers: {

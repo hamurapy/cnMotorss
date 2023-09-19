@@ -158,7 +158,7 @@ function ApplicationCard({ app }: { app: ApplicationType }): JSX.Element {
                       <div className={styles.coverImg}>
                         <Image
                           src={
-                            (app && `http://localhost:4000/${app.carPhoto}`) ||
+                            (app && `${process.env.PORT_BACKEND}/${app.carPhoto}`) ||
                             ""
                           }
                           alt="Продажа авто с пробегом"

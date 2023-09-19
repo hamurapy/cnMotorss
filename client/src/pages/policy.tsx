@@ -32,7 +32,7 @@ function Policy(): JSX.Element {
           Сайт – продажа автомобилей с пробегом из Китая, расположенный в сети
           Интернет по адресу:
           <Link href="/" rel="noreferrer noopener">
-            http://localhost:4000/
+            https://cnmotorscar.ru
           </Link>
           .
         </p>
@@ -80,7 +80,7 @@ function Policy(): JSX.Element {
           Администрация Сайта уведомляет об этом Пользователя путём размещения
           новой редакции Политики конфиденциальности на Сайте
           <Link href="/" rel="noreferrer noopener">
-            http://localhost:4000/
+          https://cnmotorscar.ru
           </Link>
         </p>
         <p>

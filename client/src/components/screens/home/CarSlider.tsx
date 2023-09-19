@@ -24,7 +24,7 @@ function CarSlider({ photos }: { photos: CarPhotos }): JSX.Element {
             <SwiperSlide key={index}>
               <div className={styles.imgBlock}>
                 <Image
-                  src={`http://localhost:4000${photo.img}`}
+                  src={`${process.env.PORT_BACKEND}${photo.img}`}
                   alt=""
                   priority={true}
                   width={0}
